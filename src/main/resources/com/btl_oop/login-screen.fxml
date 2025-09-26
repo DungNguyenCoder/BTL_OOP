@@ -6,64 +6,70 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1743.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <ImageView fitHeight="1321.0" fitWidth="921.0" pickOnBounds="true" preserveRatio="true" x="960.0" y="171.0">
-            <image>
-                <Image url="@../img/img_login.png" />
-            </image>
-        </ImageView>
-        <ImageView fitHeight="166.0" fitWidth="411.0" pickOnBounds="true" preserveRatio="true" x="311.0" y="144.0">
-            <image>
-                <Image url="@../img/Main_Logo.png" />
-            </image>
-        </ImageView>
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up To Romdol" textAlignment="CENTER" x="270.0" y="495.0">
-            <font>
-                <Font name="System Bold" size="50.0" />
-            </font>
-        </Text>
-        <VBox layoutX="137.0" layoutY="611.0" prefHeight="425.0" prefWidth="685.0" spacing="10.0">
-            <children>
-                <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
-                    <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email" x="15.0" y="17.0">
-                            <font>
-                                <Font size="25.0" />
-                            </font>
-                        </Text>
-                        <TextField prefHeight="80.0" prefWidth="264.0" text="Email">
-                            <font>
-                                <Font size="20.0" />
-                            </font>
-                        </TextField>
-                    </children>
-                </VBox>
-                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
-                    <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password" x="15.0" y="17.0">
-                            <font>
-                                <Font size="25.0" />
-                            </font>
-                        </Text>
-                        <PasswordField prefHeight="80.0" prefWidth="264.0" />
-                    </children>
-                </VBox>
-            </children>
-        </VBox>
-        <Button layoutX="137.0" layoutY="1024.0" mnemonicParsing="false" prefHeight="104.0" prefWidth="684.0" text="Sign In" textFill="#2f3436">
-            <font>
-                <Font name="System Bold" size="25.0" />
-            </font>
-        </Button>
-        <Text layoutX="610.0" layoutY="1194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Forgot Your Password">
-            <font>
-                <Font size="22.0" />
-            </font>
-        </Text>
-    </children>
-</AnchorPane>
+
+<Pane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1743.0" prefWidth="1920.0">
+          <children>
+              <ImageView fitHeight="1321.0" fitWidth="921.0" pickOnBounds="true" preserveRatio="true" x="960.0" y="171.0">
+                  <image>
+                      <Image url="@../img/img_login.png" />
+                  </image>
+              </ImageView>
+              <ImageView fitHeight="166.0" fitWidth="411.0" pickOnBounds="true" preserveRatio="true" x="311.0" y="144.0">
+                  <image>
+                      <Image url="@../img/Main_Logo.png" />
+                  </image>
+              </ImageView>
+              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up To Romdol" textAlignment="CENTER" x="270.0" y="495.0">
+                  <font>
+                      <Font name="System Bold" size="50.0" />
+                  </font>
+              </Text>
+              <VBox layoutX="137.0" layoutY="611.0" prefHeight="425.0" prefWidth="685.0" spacing="10.0">
+                  <children>
+                      <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                          <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email" x="15.0" y="17.0">
+                                  <font>
+                                      <Font size="25.0" />
+                                  </font>
+                              </Text>
+                              <TextField prefHeight="80.0" prefWidth="264.0" text="Email">
+                                  <font>
+                                      <Font size="20.0" />
+                                  </font>
+                              </TextField>
+                          </children>
+                      </VBox>
+                      <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                          <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password" x="15.0" y="17.0">
+                                  <font>
+                                      <Font size="25.0" />
+                                  </font>
+                              </Text>
+                              <PasswordField prefHeight="80.0" prefWidth="264.0" />
+                          </children>
+                      </VBox>
+                  </children>
+              </VBox>
+              <Button layoutX="137.0" layoutY="1024.0" mnemonicParsing="false" prefHeight="104.0" prefWidth="684.0" text="Sign In" textFill="#2f3436">
+                  <font>
+                      <Font name="System Bold" size="25.0" />
+                  </font>
+              </Button>
+              <Text layoutX="610.0" layoutY="1194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Forgot Your Password">
+                  <font>
+                      <Font size="22.0" />
+                  </font>
+              </Text>
+          </children>
+      </AnchorPane>
+   </children>
+</Pane>
