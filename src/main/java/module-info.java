@@ -10,7 +10,8 @@ module com.btl_oop {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires com.google.gson;
 
-    opens com.btl_oop to javafx.fxml;
+    opens com.btl_oop to javafx.fxml, com.google.gson;
     exports com.btl_oop;
 }
