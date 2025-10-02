@@ -1,5 +1,7 @@
-package com.btl_oop;
+package com.btl_oop.Controller;
 
+import com.btl_oop.Models.User;
+import com.btl_oop.Utils.AppConfig;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import javafx.fxml.FXML;
@@ -21,7 +23,7 @@ public class LoginController {
 
     @FXML
     private void initialize() {
-        try (InputStreamReader reader = new InputStreamReader(getClass().getResourceAsStream("/com/btl_oop/users.json"))) {
+        try (InputStreamReader reader = new InputStreamReader(getClass().getResourceAsStream(AppConfig.PATH_USERS_DATA))) {
 
             Gson gson = new Gson();
             Type type = new TypeToken<Map<String, List<User>>>(){}.getType();

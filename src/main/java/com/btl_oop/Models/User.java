@@ -1,4 +1,4 @@
-package com.btl_oop;
+package com.btl_oop.Models;
 
 public class User {
     private String username;

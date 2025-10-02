@@ -11,12 +11,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Polygon?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #f3f3f9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.btl_oop.RegisterController"> <!-- nền ngoài màu xám nhạt -->
+<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #f3f3f9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.btl_oop.Controller.RegisterController"> <!-- nền ngoài màu xám nhạt -->
 
     <!-- Ảnh nền -->
     <ImageView fx:id="img_register" fitHeight="729.0" fitWidth="1750.0" layoutX="-22.0" preserveRatio="false">
         <image>
-            <Image url="@../img/img_register.png" />
+            <Image url="@../../img/img_register.png" />
         </image>
         <clip>
             <Polygon points="1677.667,0.0 ,1677.667,351.333, 0.333,565.333 ,0.0,0.0" />
