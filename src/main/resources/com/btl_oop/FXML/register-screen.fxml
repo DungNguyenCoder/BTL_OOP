@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Polygon?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #f3f3f9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.btl_oop.Controller.RegisterController"> <!-- nền ngoài màu xám nhạt -->
+<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #f3f3f9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.btl_oop.RegisterController"> <!-- nền ngoài màu xám nhạt -->
 
     <!-- Ảnh nền -->
     <ImageView fx:id="img_register" fitHeight="729.0" fitWidth="1750.0" layoutX="-22.0" preserveRatio="false">
@@ -25,14 +25,18 @@
     </ImageView>
 
     <!-- Form container (màu trắng) -->
-    <VBox alignment="CENTER" layoutX="478.0" layoutY="219.0" prefHeight="350.0" prefWidth="350.0" spacing="15.0" style="-fx-background-color: white;                  -fx-background-radius: 10;                  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 15, 0, 0, 5);">
+    <VBox alignment="CENTER" layoutX="475.0" layoutY="193.0" prefHeight="400.0" prefWidth="350.0" spacing="15.0" style="-fx-background-color: white;                  -fx-background-radius: 10;                  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 15, 0, 0, 5);">
 
         <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="   Sign up " />
 
-        <TextField fx:id="firstNameField" maxWidth="300" promptText="First Name" />
+        <TextField fx:id="nameField" maxWidth="300" promptText="Name" />
         <TextField fx:id="emailField" maxWidth="300" promptText="Email Address" />
+      <TextField fx:id="phoneNumberField" maxWidth="300.0" promptText="Phone Number" />
+      <TextField fx:id="usernameField" maxWidth="300.0" promptText="Username" />
         <PasswordField fx:id="passwordField" maxWidth="300" promptText="Password" />
+      <PasswordField fx:id="confirmPasswordField" maxWidth="300.0" promptText="Confirm Password" />
         <CheckBox fx:id="agreeCheck" maxWidth="300" text="I agree to the Terms of Service and Privacy Policy" wrapText="true" />
-        <Button fx:id="registerButton" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 300;" text="CREATE AN ACCOUNT" />
+        <Button fx:id="registerButton" onAction="#onRegisterButtonClicked" prefHeight="26.0" prefWidth="156.0" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 300;" text="CREATE AN ACCOUNT" />
+      <Button fx:id="backToSignInButton" mnemonicParsing="false" onAction="#onBackToLoginClicked" prefHeight="26.0" prefWidth="156.0" text="BACK TO SIGN IN" />
     </VBox>
 </AnchorPane>

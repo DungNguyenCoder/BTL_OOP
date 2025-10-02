@@ -2,6 +2,8 @@ module com.btl_oop {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
+    requires com.google.gson;
+
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
@@ -14,8 +16,4 @@ module com.btl_oop {
 
     opens com.btl_oop to javafx.fxml, com.google.gson;
     exports com.btl_oop;
-    exports com.btl_oop.Controller;
-    opens com.btl_oop.Controller to com.google.gson, javafx.fxml;
-    exports com.btl_oop.Models;
-    opens com.btl_oop.Models to com.google.gson, javafx.fxml;
 }
