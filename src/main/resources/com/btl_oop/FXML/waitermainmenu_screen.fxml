@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@../css/mainmenu_style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.btl_oop.Controller.WaiterMainMenuController">
+
+   <!-- Header -->
+   <top>
+      <HBox spacing="20" styleClass="header" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="20" left="20" right="20" top="20" />
+         </padding>
+         <children>
+            <VBox spacing="5">
+               <Label styleClass="title" text="Restaurant POS" />
+               <Label styleClass="subtitle" text="Welcome,@username" />
+            </VBox>
+            <Pane fx:id="headerHbox" HBox.hgrow="ALWAYS" />
+            <HBox spacing="10">
+               <children>
+                  <Button fx:id="waiterSwitchRoleButton" styleClass="btn-active" text="👨‍🍳Waiter" />
+                  <Button fx:id="kitchenSwitchRoleButton" styleClass="btn-normal" text="🍴Kitchen" />
+                  <Button fx:id="ManagerSwitchRoleButton" styleClass="btn-normal" text="👔Manager" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
+
+   <!-- Center -->
+   <center>
+      <VBox spacing="20">
+         <padding>
+            <Insets bottom="20" left="20" right="20" top="20" />
+         </padding>
+
+         <!-- Status row -->
+         <HBox spacing="15" HBox.hgrow="ALWAYS">
+            <children>
+               <VBox fx:id="statusVBox" alignment="CENTER" styleClass="status-card" HBox.hgrow="ALWAYS">
+                  <Label styleClass="status-title" text="✔Available" />
+                  <Label fx:id="countAvailableTableLabel" styleClass="status-value-green" text="20" />
+                  <Label styleClass="status-desc" text="Ready for guests" />
+               </VBox>
+               <VBox alignment="CENTER" styleClass="status-card" HBox.hgrow="ALWAYS">
+                  <Label styleClass="status-title" text="👤Occupied" />
+                  <Label fx:id="countOccupiedTableLabel" styleClass="status-value-blue" text="0" />
+                  <Label styleClass="status-desc" text="Active tables" />
+               </VBox>
+               <VBox alignment="CENTER" styleClass="status-card" HBox.hgrow="ALWAYS">
+                  <Label styleClass="status-title" text="❗Cleaning" />
+                  <Label fx:id="countCleaningTableLabel" styleClass="status-value-red" text="0" />
+                  <Label styleClass="status-desc" text="Need attention" />
+               </VBox>
+               <VBox alignment="CENTER" styleClass="status-card" HBox.hgrow="ALWAYS">
+                  <Label styleClass="status-title" text="🍽Active Orders" />
+                  <Label fx:id="countActivateOrdersTableLabel" styleClass="status-value-orange" text="0" />
+                  <Label styleClass="status-desc" text="In progress" />
+               </VBox>
+               <VBox alignment="CENTER" styleClass="status-card" HBox.hgrow="ALWAYS">
+                  <Label styleClass="status-title" text="📊Total Orders" />
+                  <Label fx:id="countTotalOrdersTableLabel" styleClass="status-value-purple" text="0" />
+                  <Label styleClass="status-desc" text="Today" />
+               </VBox>
+            </children>
+         </HBox>
+
+         <!-- Table grid -->
+         <GridPane hgap="15" vgap="15" VBox.vgrow="ALWAYS">
+            <columnConstraints>
+               <ColumnConstraints percentWidth="25" />
+               <ColumnConstraints percentWidth="25" />
+               <ColumnConstraints percentWidth="25" />
+               <ColumnConstraints percentWidth="25" />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints percentHeight="50" />
+               <RowConstraints percentHeight="50" />
+            </rowConstraints>
+
+            <!-- 8 tables -->
+            <VBox alignment="CENTER" spacing="10" styleClass="table-box" GridPane.columnIndex="0" GridPane.rowIndex="0">
+               <Label styleClass="table-title" text="Table 1" />
+               <Button fx:id="table1StatusButton" styleClass="table-btn" text="✔Available" />
+            </VBox>
+            <VBox alignment="CENTER" spacing="10" styleClass="table-box" GridPane.columnIndex="1" GridPane.rowIndex="0">
+               <Label styleClass="table-title" text="Table 2" />
+               <Button fx:id="table2StatusButton" styleClass="table-btn" text="✔Available" />
+            </VBox>
+            <VBox alignment="CENTER" spacing="10" styleClass="table-box" GridPane.columnIndex="2" GridPane.rowIndex="0">
+               <Label styleClass="table-title" text="Table 3" />
+               <Button fx:id="table3StatusButton" styleClass="table-btn" text="✔Available" />
+            </VBox>
+            <VBox alignment="CENTER" spacing="10" styleClass="table-box" GridPane.columnIndex="3" GridPane.rowIndex="0">
+               <Label styleClass="table-title" text="Table 4" />
+               <Button fx:id="table4StatusButton" styleClass="table-btn" text="✔Available" />
+            </VBox>
+
+            <VBox alignment="CENTER" spacing="10" styleClass="table-box" GridPane.columnIndex="0" GridPane.rowIndex="1">
+               <Label styleClass="table-title" text="Table 5" />
+               <Button fx:id="table5StatusButton" styleClass="table-btn" text="✔Available" />
+            </VBox>
+            <VBox alignment="CENTER" spacing="10" styleClass="table-box" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <Label styleClass="table-title" text="Table 6" />
+               <Button fx:id="table6StatusButton" styleClass="table-btn" text="✔Available" />
+            </VBox>
+            <VBox fx:id="tableGrid" alignment="CENTER" spacing="10" styleClass="table-box" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <Label styleClass="table-title" text="Table 7" />
+               <Button fx:id="table7StatusButton" styleClass="table-btn" text="✔Available" />
+            </VBox>
+            <VBox alignment="CENTER" spacing="10" styleClass="table-box" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <Label styleClass="table-title" text="Table 8" />
+               <Button fx:id="table8StatusButton" styleClass="table-btn" text="✔Available" />
+            </VBox>
+         </GridPane>
+      </VBox>
+   </center>
+
+   <!-- Footer -->
+   <bottom>
+      <HBox alignment="CENTER" spacing="20" styleClass="footer">
+         <padding>
+            <Insets bottom="20" left="20" right="20" top="20" />
+         </padding>
+         <children>
+            <Button fx:id="kitchenStatusButton" text="👨‍🍳Kitchen Status" />
+            <Button fx:id="refreshButton" text="🔄Refresh" />
+            <Button fx:id="settingButton" text="⚙Settings" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>
