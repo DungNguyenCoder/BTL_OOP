@@ -1,0 +1,41 @@
+/* Form container */
+.signup-form {
+    -fx-background-color: white;
+    -fx-background-radius: 0 10 10 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 15, 0, 0, 5);
+    -fx-padding: 20;
+}
+
+/* Tiêu đề */
+.form-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+/* Input fields */
+.text-field, .password-field {
+    -fx-max-width: 300;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-padding: 8;
+}
+
+/* Button chính */
+.signup-button {
+    -fx-background-color: #e63946;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-pref-width: 300;
+    -fx-background-radius: 8;
+}
+.signup-button:hover {
+    -fx-background-color: #f77f00;
+}
+
+.pizza-bg {
+    -fx-background-image: url("../img/img_register.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-radius: 10 0 0 10;
+}

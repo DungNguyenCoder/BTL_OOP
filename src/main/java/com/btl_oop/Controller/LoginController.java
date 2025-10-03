@@ -1,13 +1,22 @@
 package com.btl_oop.Controller;
 
-import com.btl_oop.Models.User;
+import com.btl_oop.HelloApplication;
+import com.btl_oop.Model.Entity.User;
+import com.btl_oop.Model.Store.UserStore;
 import com.btl_oop.Utils.AppConfig;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -19,31 +28,15 @@ public class LoginController {
     @FXML
     private PasswordField _password;
 
-    private List<User> users;
-
-    @FXML
-    private void initialize() {
-        try (InputStreamReader reader = new InputStreamReader(getClass().getResourceAsStream(AppConfig.PATH_USERS_DATA))) {
-
-            Gson gson = new Gson();
-            Type type = new TypeToken<Map<String, List<User>>>(){}.getType();
-            Map<String, List<User>> data = gson.fromJson(reader, type);
-            users = data.get("users");
-
-            System.out.println("Load data from file");
-        } catch (Exception e) {
-            System.out.println("Load file error");
-            e.printStackTrace();
-        }
-    }
-
     @FXML
     private void onLogin() {
+        List<User> users = UserStore.getAllUsers();
+
         String user = _email.getText();
         String pass = _password.getText();
 
         User found = users.stream()
-                .filter(u -> u.getUsername().equals(user))
+                .filter(u -> u.getEmail().equals(user))
                 .findFirst()
                 .orElse(null);
 
@@ -57,5 +50,15 @@ public class LoginController {
         } else {
             System.out.println("Wrong password");
         }
+    }
+
+    @FXML
+    void onClickRegister(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource(AppConfig.PATH_REGISTER_SCREEN));
+        Parent loginRoot = loader.load();
+        Scene loginScene = new Scene(loginRoot);
+        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(loginScene);
+        stage.show();
     }
 }

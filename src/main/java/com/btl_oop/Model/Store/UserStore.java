@@ -41,8 +41,8 @@ public class UserStore {
                 parent.mkdirs();
             }
             try (FileWriter writer = new FileWriter(file)) {
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            gson.toJson(userList, writer);
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                gson.toJson(userList, writer);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -111,4 +111,3 @@ public class UserStore {
     }
 
 }
-

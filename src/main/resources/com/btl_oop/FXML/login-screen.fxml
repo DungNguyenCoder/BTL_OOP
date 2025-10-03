@@ -34,7 +34,7 @@
 
         <Button onAction="#onLogin" prefWidth="300" style="-fx-background-color: #2f3436; -fx-text-fill: white;" text="Sign In" />
 
-        <Text style="-fx-font-size: 12px; -fx-text-fill: #888;" text="Already a Member? LOG IN" />
+        <Text onMouseClicked="#onClickRegister" style="-fx-font-size: 12px; -fx-text-fill: #888;" text="Already a Member? LOG IN" />
     </VBox>
 
     <ImageView fitHeight="600.0" fitWidth="450.0" preserveRatio="true">

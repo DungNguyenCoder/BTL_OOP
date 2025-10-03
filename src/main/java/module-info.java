@@ -3,8 +3,6 @@ module com.btl_oop {
     requires javafx.fxml;
     requires javafx.web;
     requires com.google.gson;
-
-
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires net.synedra.validatorfx;
@@ -12,8 +10,15 @@ module com.btl_oop {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
-    requires com.google.gson;
 
+    opens com.btl_oop.Controller to javafx.fxml;
+    opens com.btl_oop.Model.Entity to com.google.gson, javafx.fxml;
+    opens com.btl_oop.Model.Store to com.google.gson, javafx.fxml;
+    opens com.btl_oop.Utils to javafx.fxml;
     opens com.btl_oop to javafx.fxml, com.google.gson;
+
     exports com.btl_oop;
+    exports com.btl_oop.Controller;
+    exports com.btl_oop.Model.Entity;
+    exports com.btl_oop.Model.Store;
 }

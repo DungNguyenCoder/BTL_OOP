@@ -1,6 +1,16 @@
-{
-  "users": [
-    { "username": "admin@gmail.com", "password": "123" },
-    { "username": "dung@gmail.com", "password": "456" }
-  ]
-}
+[
+  {
+    "username": "linh123",
+    "password": "123456",
+    "name": "Phạm Mai Linh",
+    "numberPhone": "0385276198",
+    "email": "plinh7009@gmail.com"
+  },
+  {
+    "username": "DungNguyen",
+    "password": "Dung_2005",
+    "name": "Nguyen Manh Dung",
+    "numberPhone": "0397365829",
+    "email": "dungnickchinh1909@gmail.com"
+  }
+]
