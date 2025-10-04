@@ -7,39 +7,42 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
+<HBox prefHeight="600.0" xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.btl_oop.Controller.LoginController"
+      stylesheets="@../css/login_style.css">
 
-<HBox prefHeight="600.0" prefWidth="900.0" spacing="30.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.btl_oop.Controller.LoginController">
-    <VBox alignment="CENTER" prefWidth="450.0" spacing="20.0" style="-fx-background-color: #f8f9fb;">
-        <padding>
-            <Insets bottom="50" left="30" right="30" top="50" />
-        </padding>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../img/Main_Logo.png" />
-         </image>
-      </ImageView>
-        <Text style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Sign up to Romdol" />
+    <!-- Form bên trái -->
+    <VBox alignment="CENTER" spacing="20.0" styleClass="login-form" HBox.hgrow="ALWAYS">
 
-        <VBox spacing="5">
-            <Label text="Email" />
-            <TextField fx:id="_email" promptText="johndoe@email.com" />
+        <ImageView styleClass="logo-image">
+            <image>
+                <Image url="@../img/Main_Logo.png" />
+            </image>
+        </ImageView>
+
+        <Text styleClass="form-title" text="Sign up to Romdol" />
+
+        <!-- Form container để các control thẳng hàng -->
+        <VBox spacing="15" alignment="CENTER">
+
+            <VBox spacing="5" alignment="CENTER">
+                <TextField fx:id="_email" promptText="Email" styleClass="input-field"/>
+            </VBox>
+            <VBox spacing="5" alignment="CENTER">
+                <PasswordField fx:id="_password" promptText="Password" styleClass="input-field"/>
+            </VBox>
+
+            <Button styleClass="login-button" onAction="#onLogin" text="Sign In" />
+
+            <Text styleClass="register-link" onMouseClicked="#onClickRegister"
+                  text="Already a Member? LOG IN" />
         </VBox>
-        <VBox spacing="5">
-            <Label text="Password" />
-            <PasswordField fx:id="_password" promptText="••••••••" />
-        </VBox>
-
-        <Button onAction="#onLogin" prefWidth="300" style="-fx-background-color: #2f3436; -fx-text-fill: white;" text="Sign In" />
-
-        <Text onMouseClicked="#onClickRegister" style="-fx-font-size: 12px; -fx-text-fill: #888;" text="Already a Member? LOG IN" />
     </VBox>
-
-    <ImageView fitHeight="600.0" fitWidth="450.0" preserveRatio="true">
-        <image>
-            <Image url="@../img/img_login.png" />
-        </image>
-    </ImageView>
+    <!-- Ảnh nền bên phải (chiếm 60%) -->
+    <AnchorPane styleClass="pizza-bg"  HBox.hgrow="ALWAYS" />
 </HBox>

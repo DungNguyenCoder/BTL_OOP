@@ -14,7 +14,7 @@ public class HelloApplication extends Application {
         //FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(AppConfig.PATH_LOGIN_SCREEN));
         //Scene scene = new Scene(fxmlLoader.load());
         FXMLLoader fxmlLoader = new FXMLLoader(
-                HelloApplication.class.getResource("/com/btl_oop/FXML/waitermainmenu_screen.fxml")
+                HelloApplication.class.getResource("/com/btl_oop/FXML/login-screen.fxml")
         );
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Hello!");
