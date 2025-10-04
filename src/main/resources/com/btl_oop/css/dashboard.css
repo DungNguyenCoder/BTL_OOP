@@ -1,0 +1,137 @@
+/* ===== Global Styles ===== */
+.root {
+    -fx-font-family: 'Segoe UI', 'Roboto', sans-serif;
+    -fx-background-color: #f6f6fa;
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+    -fx-background-color: #ffffff;
+    -fx-padding: 20 0 20 0;
+    -fx-pref-width: 230;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 8, 0, 0, 2);
+}
+
+.sidebar .title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222;
+    -fx-padding: 0 0 20 20;
+}
+
+.sidebar .menu-button {
+    -fx-padding: 12 20;
+    -fx-alignment: CENTER_LEFT;
+    -fx-text-fill: #666;
+    -fx-background-color: transparent;
+    -fx-font-size: 14px;
+}
+
+.sidebar .menu-button:hover {
+    -fx-background-color: #f2f2f2;
+}
+
+.sidebar .menu-button-active {
+    -fx-background-color: #e9f5ee;
+    -fx-text-fill: #00a86b;
+    -fx-font-weight: bold;
+    -fx-border-width: 0 0 0 4;
+    -fx-border-color: #00a86b;
+}
+
+/* ===== Top Header ===== */
+.header {
+    -fx-padding: 20;
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.03), 5, 0, 0, 1);
+}
+
+.header .title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.header .subtitle {
+    -fx-font-size: 12px;
+    -fx-text-fill: #888;
+}
+
+/* ===== Stats Cards ===== */
+.stats-container {
+    -fx-padding: 15 20;
+    -fx-spacing: 15;
+}
+
+.stat-card {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 4, 0, 0, 2);
+    -fx-alignment: CENTER;
+}
+
+.stat-card .value {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222;
+}
+
+.stat-card .label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #888;
+}
+
+/* ===== Orders Section ===== */
+.order-scroll {
+    -fx-background-color: transparent;
+}
+
+.order-item {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10;
+    -fx-padding: 15;
+    -fx-spacing: 15;
+    -fx-alignment: CENTER_LEFT;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.03), 4, 0, 0, 1);
+}
+
+.order-item:hover {
+    -fx-background-color: #f9f9f9;
+}
+
+.order-info {
+    -fx-spacing: 5;
+}
+
+.order-id {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.order-status-delivered {
+    -fx-text-fill: #00a86b;
+    -fx-font-weight: bold;
+}
+
+.order-status-inprogress {
+    -fx-text-fill: #ff8c00;
+    -fx-font-weight: bold;
+}
+
+.order-price {
+    -fx-text-fill: #222;
+    -fx-font-size: 14px;
+}
+
+.details-button {
+    -fx-background-color: #f2f2f2;
+    -fx-text-fill: #333;
+    -fx-font-size: 13px;
+    -fx-padding: 6 12;
+    -fx-background-radius: 6;
+}
+
+.details-button:hover {
+    -fx-background-color: #ddd;
+}
