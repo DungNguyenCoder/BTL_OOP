@@ -1,0 +1,42 @@
+/* Input fields */
+.input-field {
+    -fx-pref-width: 300;
+    -fx-max-width: 300;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-padding: 8;
+}
+.form-title {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold !important;
+}
+.form-subtitle {
+    -fx-font-size: 10px;
+    -fx-font-weight: bold !important;
+}
+/* Button */
+.login-button {
+    -fx-background-color: #e63946;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-pref-width: 300;
+    -fx-background-radius: 8;
+}
+.login-button:hover {
+    -fx-background-color: #f77f00;
+}
+
+/* Link */
+.register-link {
+    -fx-font-size: 12px;
+    -fx-text-fill: #888;
+}
+
+/* Ảnh nền */
+.pizza-bg {
+    -fx-background-image: url("../img/img_login.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-radius: 0 0 0 0;
+}
