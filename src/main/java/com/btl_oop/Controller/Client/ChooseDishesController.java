@@ -1,4 +1,4 @@
-package com.btl_oop;
+package com.btl_oop.Controller.Client;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

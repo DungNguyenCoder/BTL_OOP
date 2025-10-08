@@ -24,8 +24,8 @@
         <Text style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Sign up to Romdol" />
 
         <VBox spacing="5">
-            <Label text="Email" />
-            <TextField fx:id="_email" promptText="johndoe@email.com" />
+            <Label text="Username" />
+            <TextField fx:id="_usernameField" promptText="johndoe@email.com" />
         </VBox>
         <VBox spacing="5">
             <Label text="Password" />

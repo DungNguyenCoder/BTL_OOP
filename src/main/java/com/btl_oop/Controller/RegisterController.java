@@ -1,18 +1,14 @@
 package com.btl_oop.Controller;
 
-import com.btl_oop.HelloApplication;
 import com.btl_oop.Model.Entity.User;
 import com.btl_oop.Model.Store.UserStore;
+import com.btl_oop.Utils.AlertUtils;
 import com.btl_oop.Utils.AppConfig;
+import com.btl_oop.Utils.SceneUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.regex.Pattern;
@@ -60,19 +56,19 @@ public class RegisterController {
 
         String validationError = validateInputs(username, password, confirmPassword, name, phoneNumber, email);
         if (validationError != null) {
-            showAlert(Alert.AlertType.ERROR, "Registration Error", validationError);
+            AlertUtils.showError(validationError);
             return;
         }
 
         if (UserStore.userExists(username)) {
-            showAlert(Alert.AlertType.ERROR, "Registration Error", "Tài khoản đã tồn tại!");
+            AlertUtils.showError("Tài khoản đã tồn tại!");
             return;
         }
 
         User newUser = new User(username, password, name, phoneNumber, email);
         UserStore.addUser(newUser);
 
-        showAlert(Alert.AlertType.INFORMATION, "Success", "Đăng ký thành công!");
+        AlertUtils.showInfo("Đăng ký thành công!");
 
         try {
             backToLogin(event);
@@ -118,12 +114,7 @@ public class RegisterController {
     }
 
     private void backToLogin(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource(AppConfig.PATH_LOGIN_SCREEN));
-        Parent loginRoot = loader.load();
-        Scene loginScene = new Scene(loginRoot);
-        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(loginScene);
-        stage.show();
+        SceneUtils.switchTo(event, AppConfig.PATH_LOGIN_SCREEN);
     }
 
     private void showAlert(Alert.AlertType type, String title, String message) {

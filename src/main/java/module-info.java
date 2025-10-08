@@ -11,7 +11,6 @@ module com.btl_oop {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
 
-    opens com.btl_oop.Controller to javafx.fxml;
     opens com.btl_oop.Model.Entity to com.google.gson, javafx.fxml;
     opens com.btl_oop.Model.Store to com.google.gson, javafx.fxml;
     opens com.btl_oop.Utils to javafx.fxml;
@@ -21,4 +20,7 @@ module com.btl_oop {
     exports com.btl_oop.Controller;
     exports com.btl_oop.Model.Entity;
     exports com.btl_oop.Model.Store;
+    opens com.btl_oop.Controller to com.google.gson, javafx.fxml;
+    exports com.btl_oop.Controller.Client;
+    opens com.btl_oop.Controller.Client to com.google.gson, javafx.fxml;
 }
