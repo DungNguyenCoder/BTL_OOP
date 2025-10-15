@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.btl_oop.Controller.PurchaseItem"
+      styleClass="order-container" stylesheets="@../css/purchase.css" spacing="20">
+
+    <HBox styleClass="header">
+        <Label text="Order Details" styleClass="title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label text="Order #077324" styleClass="order-number"/>
+    </HBox>
+
+    <VBox styleClass="item-section" spacing="12.0">
+        <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+        </padding>
+    </VBox>
+
+    <Separator/>
+
+    <VBox spacing="15" styleClass="pricing-section">
+        <HBox>
+            <Label text="Subtotal:" styleClass="pricing-label"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="12.99" styleClass="pricing-value"/>
+        </HBox>
+
+        <HBox>
+            <Label text="Tax (10%):" styleClass="pricing-label"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="1.30" styleClass="pricing-value"/>
+        </HBox>
+
+        <HBox styleClass="total-row">
+            <Label text="Total:" styleClass="total-label"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="14.29" styleClass="total-value"/>
+        </HBox>
+
+        <HBox styleClass="prep-time-row">
+            <Label text="Estimated prep time:" styleClass="prep-label"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="15 minutes" styleClass="prep-value"/>
+        </HBox>
+    </VBox>
+
+    <VBox spacing="10" styleClass="instructions-section">
+        <HBox spacing="5" alignment="CENTER_LEFT">
+            <Label text="✏️      " styleClass="icon"/>
+            <Label text="Special Instructions (Optional)" styleClass="instructions-title"/>
+        </HBox>
+        <TextArea promptText="Any special requests, dietary restrictions, or cooking preferences..."
+                  styleClass="instructions-input" prefRowCount="3" wrapText="true"/>
+    </VBox>
+
+    <Button text="Purchase" styleClass="purchase-btn" maxWidth="Infinity"/>
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+</VBox>

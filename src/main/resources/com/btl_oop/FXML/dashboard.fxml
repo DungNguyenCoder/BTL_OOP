@@ -24,7 +24,6 @@
                </VBox.margin>
             </ImageView>
 
-                <!-- Dashboard -->
                 <Button maxWidth="Infinity" styleClass="menu-button,menu-button-active">
                     <graphic>
                         <HBox alignment="CENTER_LEFT" spacing="12">
@@ -38,7 +37,6 @@
                     </graphic>
                 </Button>
 
-                <!-- Order Management -->
                 <Button maxWidth="Infinity" styleClass="menu-button">
                     <graphic>
                         <HBox alignment="CENTER_LEFT" spacing="12">
@@ -52,7 +50,6 @@
                     </graphic>
                 </Button>
 
-                <!-- Inventory Management -->
                 <Button maxWidth="Infinity" styleClass="menu-button">
                     <graphic>
                         <HBox alignment="CENTER_LEFT" spacing="12">
@@ -66,7 +63,6 @@
                     </graphic>
                 </Button>
 
-                <!-- Sales Reports -->
                 <Button maxWidth="Infinity" styleClass="menu-button">
                     <graphic>
                         <HBox alignment="CENTER_LEFT" spacing="12">
@@ -80,7 +76,6 @@
                     </graphic>
                 </Button>
 
-                <!-- Customer Feedback -->
                 <Button maxWidth="Infinity" styleClass="menu-button">
                     <graphic>
                         <HBox alignment="CENTER_LEFT" spacing="12">
@@ -94,7 +89,6 @@
                     </graphic>
                 </Button>
 
-                <!-- Customer Detail -->
                 <Button maxWidth="Infinity" styleClass="menu-button">
                     <graphic>
                         <HBox alignment="CENTER_LEFT" spacing="12">
@@ -114,7 +108,6 @@
     <center>
         <VBox BorderPane.alignment="CENTER">
             <children>
-                <!-- Header -->
                 <HBox alignment="CENTER_LEFT" styleClass="header">
                     <children>
                         <VBox>
@@ -142,7 +135,6 @@
                     </children>
                 </HBox>
 
-                <!-- Stats Cards -->
                 <HBox styleClass="stats-container">
                     <children>
                         <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
@@ -172,7 +164,6 @@
                     </children>
                 </HBox>
 
-                <!-- Orders List -->
                 <ScrollPane fitToWidth="true" styleClass="order-scroll" VBox.vgrow="ALWAYS">
                     <content>
                         <VBox fx:id="orderContainer" spacing="12.0">
