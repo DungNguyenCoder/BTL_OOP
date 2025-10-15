@@ -1,0 +1,152 @@
+/* ===== Global ===== */
+.root {
+    -fx-font-family: "Segoe UI", "Roboto", "Arial";
+    -fx-background-color: #ffffff;
+}
+
+/* ===== Header (Top bar) ===== */
+.top-bar {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1px 0 1px 0;
+}
+
+.header {
+    -fx-background-color: #ffffff;
+    -fx-spacing: 15px;
+}
+
+.header-text-table {
+    -fx-font-size: 20px;
+    -fx-text-fill: #333333;
+    -fx-background-color: #ffffff;
+}
+
+/* Back button */
+.back-button {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-border-width: none;
+    -fx-text-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.table-description {
+    -fx-font-size: 14px;
+    -fx-text-fill: #666666;
+}
+
+/* Toggle Buttons (Waiter, Kitchen, Manager) */
+.header-admin-box {
+    -fx-background-color: white;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 30, 0, 4, 4);
+}
+
+.header-admin-box-button {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #333333;
+    -fx-font-size: 14px;
+    -fx-border-radius: 50px;
+    -fx-padding: 10px;
+    -fx-cursor: hand;
+}
+
+.header-admin-box-button-selected {
+    -fx-background-color: #030213;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 13px;
+    -fx-border-radius: 50px;
+    -fx-padding: 10px;
+    -fx-cursor: hand;
+}
+
+/* Search bar */
+.header-search {
+    -fx-background-color: #f0f0f0;
+    -fx-border-radius: 100px;
+    -fx-alignment: center-left;
+}
+
+
+/* ===== Left Menu ===== */
+.category-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 0 1px 1px 0;
+}
+
+.category-item {
+    -fx-border-radius: 100%;
+    -fx-padding: 15px;
+    -fx-cursor: hand;
+    -fx-background-color: #f5f5f5;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+}
+
+.category-item-selected {
+    -fx-border-radius: 100%;
+    -fx-padding: 15px;
+    -fx-cursor: hand;
+    -fx-background-color: #030213;
+    -fx-font-size: 14px;
+    -fx-text-fill: #ffffff;
+}
+
+/* ===== Center Titles ===== */
+
+.center-tiles {
+    -fx-border-width: 0;
+    -fx-border-color: transparent;
+    -fx-border-style: none;
+    -fx-background-color: transparent;
+}
+
+.center-tiles-item {
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-border-color: #e0e0e0;
+    -fx-background-color: #ffffff;
+}
+
+.center-tiles-item-title{
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.center-tiles-item-price {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.center-tiles-item-description {
+    -fx-font-size: 14px;
+    -fx-text-fill: #666666;
+}
+
+.center-tiles-item-button {
+    -fx-background-color: #030212;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-border-radius: 50px;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+}
+/* ===== ScrollPane ===== */
+
+
+/* ===== Card (VBox trong TilePane) ===== */
+
+
+/* Card Title */
+
+
+/* Card Description */
+
+/* Add to Order Button */
