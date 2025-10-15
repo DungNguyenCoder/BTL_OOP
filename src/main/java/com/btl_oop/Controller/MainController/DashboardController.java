@@ -1,5 +1,6 @@
-package com.btl_oop.Controller;
+package com.btl_oop.Controller.MainController;
 
+import com.btl_oop.Controller.ComponentController.FeedbackCardController;
 import com.btl_oop.Model.CustomerFeedback;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,7 +35,7 @@ public class DashboardController {
                 "2 days ago",
                 "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 4.5,
-                "/com/btl_oop/img/food_asian_bowl.png"
+                "/com/btl_oop/img/img/food_asian_bowl.png"
         ));
 
         allFeedbacks.add(new CustomerFeedback(
@@ -43,7 +44,7 @@ public class DashboardController {
                 "1 day ago",
                 "Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim.",
                 4.0,
-                "/com/btl_oop/img/food_asian_bowl.png"
+                "/com/btl_oop/img/img/food_asian_bowl.png"
         ));
 
         allFeedbacks.add(new CustomerFeedback(
@@ -52,7 +53,7 @@ public class DashboardController {
                 "5 days ago",
                 "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed do eiusmod tempor incididunt.",
                 4.5,
-                "/com/btl_oop/img/food_asian_bowl.png"
+                "/com/btl_oop/img/img/food_asian_bowl.png"
         ));
 
         allFeedbacks.add(new CustomerFeedback(
@@ -61,7 +62,7 @@ public class DashboardController {
                 "3 days ago",
                 "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.",
                 5.0,
-                "/com/btl_oop/img/food_asian_bowl.png"
+                "/com/btl_oop/img/img/food_asian_bowl.png"
         ));
 
         allFeedbacks.add(new CustomerFeedback(
@@ -70,7 +71,7 @@ public class DashboardController {
                 "4 days ago",
                 "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
                 4.0,
-                "/com/btl_oop/img/food_macarons.png"
+                "/com/btl_oop/img/img/food_macarons.png"
         ));
 
         allFeedbacks.add(new CustomerFeedback(
@@ -79,7 +80,7 @@ public class DashboardController {
                 "6 days ago",
                 "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                 4.5,
-                "/com/btl_oop/img/food_asian_bowl.png"
+                "/com/btl_oop/img/img/food_asian_bowl.png"
         ));
     }
 

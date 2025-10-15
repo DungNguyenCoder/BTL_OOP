@@ -1,8 +1,7 @@
-package com.btl_oop.Controller;
+package com.btl_oop.Controller.MainController;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
 
 public class InventoryManagementController {
 

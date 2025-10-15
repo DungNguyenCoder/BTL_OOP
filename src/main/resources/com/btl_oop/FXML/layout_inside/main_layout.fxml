@@ -11,7 +11,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="700.0" prefWidth="1000.0" styleClass="root"
-            stylesheets="@../../css/main_layout.css"
+            stylesheets="@../../css/Main/main_layout.css"
             xmlns="http://javafx.com/javafx/24.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.btl_oop.Controller.MainLayoutController">
@@ -21,7 +21,7 @@
             <children>
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../img/Main_Logo.png" />
+                        <Image url="@../../img/img/Main_Logo.png" />
                     </image>
                     <VBox.margin>
                         <Insets bottom="50.0" left="20.0" />
@@ -34,7 +34,7 @@
                         <HBox alignment="CENTER_LEFT" spacing="12">
                             <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
                                 <image>
-                                    <Image url="@../../img/ic_home.png" />
+                                    <Image url="@../../img/ic_item/ic_home.png" />
                                 </image>
                             </ImageView>
                             <Label text="Dashboard" />
@@ -49,7 +49,7 @@
                         <HBox alignment="CENTER_LEFT" spacing="12">
                             <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
                                 <image>
-                                    <Image url="@../../img/ic_menu.png" />
+                                    <Image url="@../../img/ic_item/ic_menu.png" />
                                 </image>
                             </ImageView>
                             <Label text="Order Management" />
@@ -64,7 +64,7 @@
                         <HBox alignment="CENTER_LEFT" spacing="12">
                             <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
                                 <image>
-                                    <Image url="@../../img/ic_inventory.png" />
+                                    <Image url="@../../img/ic_item/ic_inventory.png" />
                                 </image>
                             </ImageView>
                             <Label text="Inventory Management" />
@@ -79,7 +79,7 @@
                         <HBox alignment="CENTER_LEFT" spacing="12">
                             <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
                                 <image>
-                                    <Image url="@../../img/ic_salereport.png" />
+                                    <Image url="@../../img/ic_item/ic_salereport.png" />
                                 </image>
                             </ImageView>
                             <Label text="Sales Reports" />
@@ -94,7 +94,7 @@
                         <HBox alignment="CENTER_LEFT" spacing="12">
                             <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
                                 <image>
-                                    <Image url="@../../img/ic_feedback.png" />
+                                    <Image url="@../../img/ic_item/ic_feedback.png" />
                                 </image>
                             </ImageView>
                             <Label text="Customer Feedback" />
@@ -109,7 +109,7 @@
                         <HBox alignment="CENTER_LEFT" spacing="12">
                             <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
                                 <image>
-                                    <Image url="@../../img/ic_user.png" />
+                                    <Image url="@../../img/ic_item/ic_user.png" />
                                 </image>
                             </ImageView>
                             <Label text="Customer Detail" />

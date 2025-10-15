@@ -1,4 +1,4 @@
-package com.btl_oop.Controller;
+package com.btl_oop.Controller.ComponentController;
 
 import com.btl_oop.Model.CustomerFeedback;
 import javafx.fxml.FXML;

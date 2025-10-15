@@ -1,4 +1,4 @@
-package com.btl_oop.Controller;
+package com.btl_oop.Controller.LoginController;
 
 import com.btl_oop.Model.Entity.User;
 import com.btl_oop.Model.Store.UserStore;

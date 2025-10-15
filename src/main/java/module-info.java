@@ -24,4 +24,10 @@ module com.btl_oop {
         opens com.btl_oop.Controller to com.google.gson, javafx.fxml;
         exports com.btl_oop.Controller.Order;
         opens com.btl_oop.Controller.Order to com.google.gson, javafx.fxml;
-        }
+    exports com.btl_oop.Controller.MainController;
+    opens com.btl_oop.Controller.MainController to com.google.gson, javafx.fxml;
+        exports com.btl_oop.Controller.LoginController;
+        opens com.btl_oop.Controller.LoginController to com.google.gson, javafx.fxml;
+        exports com.btl_oop.Controller.ComponentController;
+        opens com.btl_oop.Controller.ComponentController to com.google.gson, javafx.fxml;
+}

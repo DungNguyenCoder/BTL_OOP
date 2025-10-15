@@ -1,9 +1,10 @@
-package com.btl_oop.Controller;
+package com.btl_oop.Controller.MainController;
 
+import com.btl_oop.Controller.ComponentController.CustomerDetailDialogController;
+import com.btl_oop.Controller.ComponentController.CustomerListItemController;
 import com.btl_oop.Model.Entity.Customer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;

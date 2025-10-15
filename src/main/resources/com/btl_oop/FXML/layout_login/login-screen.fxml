@@ -11,14 +11,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<HBox prefHeight="600.0" prefWidth="900.0" spacing="30.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.btl_oop.Controller.LoginController">
+<HBox prefHeight="600.0" prefWidth="900.0" spacing="30.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.btl_oop.Controller.LoginController.LoginController">
     <VBox alignment="CENTER" prefWidth="450.0" spacing="20.0" style="-fx-background-color: #f8f9fb;">
         <padding>
             <Insets bottom="50" left="30" right="30" top="50" />
         </padding>
       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../img/Main_Logo.png" />
+            <Image url="@../../img/img/Main_Logo.png" />
          </image>
       </ImageView>
         <Text style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Sign up to Romdol" />
@@ -39,7 +39,7 @@
 
     <ImageView fitHeight="600.0" fitWidth="450.0" preserveRatio="true">
         <image>
-            <Image url="@../../img/img_login.png" />
+            <Image url="@../../img/img/img_login.png" />
         </image>
     </ImageView>
 </HBox>

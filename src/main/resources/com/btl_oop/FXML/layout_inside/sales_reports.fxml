@@ -18,8 +18,8 @@
 
 <VBox xmlns="http://javafx.com/javafx/24.0.1"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.btl_oop.Controller.SalesReportsController"
-      stylesheets="@../../css/sales_reports.css"
+      fx:controller="com.btl_oop.Controller.MainController.SalesReportsController"
+      stylesheets="@../../css/Main/sales_reports.css"
       styleClass="root">
 
     <HBox alignment="CENTER_LEFT" styleClass="header">
@@ -189,7 +189,7 @@
                                         <Region HBox.hgrow="ALWAYS" />
                                         <ImageView fitHeight="20" fitWidth="20">
                                             <image>
-                                                <Image url="@../../img/ic_home.png" />
+                                                <Image url="@../../img/ic_item/ic_home.png" />
                                             </image>
                                         </ImageView>
                                     </children>
@@ -214,7 +214,7 @@
                                         <Region HBox.hgrow="ALWAYS" />
                                         <ImageView fitHeight="20" fitWidth="20">
                                             <image>
-                                                <Image url="@../../img/ic_home.png" />
+                                                <Image url="@../../img/ic_item/ic_home.png" />
                                             </image>
                                         </ImageView>
                                     </children>
@@ -239,7 +239,7 @@
                                         <Region HBox.hgrow="ALWAYS" />
                                         <ImageView fitHeight="20" fitWidth="20">
                                             <image>
-                                                <Image url="@../../img/ic_home.png" />
+                                                <Image url="@../../img/ic_item/ic_home.png" />
                                             </image>
                                         </ImageView>
                                     </children>
@@ -264,7 +264,7 @@
                                         <Region HBox.hgrow="ALWAYS" />
                                         <ImageView fitHeight="20" fitWidth="20">
                                             <image>
-                                                <Image url="@../../img/ic_home.png" />
+                                                <Image url="@../../img/ic_item/ic_home.png" />
                                             </image>
                                         </ImageView>
                                     </children>

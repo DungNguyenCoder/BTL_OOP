@@ -13,8 +13,8 @@
 
 <VBox xmlns="http://javafx.com/javafx/24.0.1"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.btl_oop.Controller.InventoryManagementController"
-      stylesheets="@../../css/inventory.css"
+      fx:controller="com.btl_oop.Controller.MainController.InventoryManagementController"
+      stylesheets="@../../css/Main/inventory.css"
       styleClass="root">
 
     <VBox styleClass="header">
@@ -50,7 +50,7 @@
                                 <children>
                                     <ImageView fitHeight="120" fitWidth="120" preserveRatio="false">
                                         <image>
-                                            <Image url="@../../img/category_snack.png" />
+                                            <Image url="@../../img/category_item/category_snack.png" />
                                         </image>
                                     </ImageView>
                                     <Label text="Snack" styleClass="category-name" />
@@ -61,7 +61,7 @@
                                 <children>
                                     <ImageView fitHeight="120" fitWidth="120" preserveRatio="false">
                                         <image>
-                                            <Image url="@../../img/category_meal.png" />
+                                            <Image url="@../../img/category_item/category_meal.png" />
                                         </image>
                                     </ImageView>
                                     <Label text="Meal" styleClass="category-name" />
@@ -72,7 +72,7 @@
                                 <children>
                                     <ImageView fitHeight="120" fitWidth="120" preserveRatio="false">
                                         <image>
-                                            <Image url="@../../img/category_vegan.png" />
+                                            <Image url="@../../img/category_item/category_vegan.png" />
                                         </image>
                                     </ImageView>
                                     <Label text="Vegan" styleClass="category-name" />
@@ -83,7 +83,7 @@
                                 <children>
                                     <ImageView fitHeight="120" fitWidth="120" preserveRatio="false">
                                         <image>
-                                            <Image url="@../../img/category_dessert.png" />
+                                            <Image url="@../../img/category_item/category_dessert.png" />
                                         </image>
                                     </ImageView>
                                     <Label text="Dessert" styleClass="category-name" />
@@ -94,7 +94,7 @@
                                 <children>
                                     <ImageView fitHeight="120" fitWidth="120" preserveRatio="false">
                                         <image>
-                                            <Image url="@../../img/category_drink.png" />
+                                            <Image url="@../../img/category_item/category_drink.png" />
                                         </image>
                                     </ImageView>
                                     <Label text="Drink" styleClass="category-name" />
@@ -113,7 +113,7 @@
                                 <children>
                                     <ImageView fitHeight="140" fitWidth="200" preserveRatio="false">
                                         <image>
-                                            <Image url="@../../img/product_brownie.png" />
+                                            <Image url="@../../img/img/product_brownie.png" />
                                         </image>
                                     </ImageView>
                                     <VBox styleClass="product-info" spacing="5">
@@ -137,7 +137,7 @@
                                 <children>
                                     <ImageView fitHeight="140" fitWidth="200" preserveRatio="false">
                                         <image>
-                                            <Image url="@../../img/product_burger.png" />
+                                            <Image url="@../../img/img/product_burger.png" />
                                         </image>
                                     </ImageView>
                                     <VBox styleClass="product-info" spacing="5">
@@ -161,7 +161,7 @@
                                 <children>
                                     <ImageView fitHeight="140" fitWidth="200" preserveRatio="false">
                                         <image>
-                                            <Image url="@../../img/product_macarons.png" />
+                                            <Image url="@../../img/img/product_macarons.png" />
                                         </image>
                                     </ImageView>
                                     <VBox styleClass="product-info" spacing="5">
@@ -193,7 +193,7 @@
                                 <children>
                                     <ImageView fitHeight="140" fitWidth="200" preserveRatio="false">
                                         <image>
-                                            <Image url="@../../img/product_brownie_pink.png" />
+                                            <Image url="@../../img/img/product_brownie_pink.png" />
                                         </image>
                                     </ImageView>
                                     <VBox styleClass="product-info" spacing="5">
@@ -217,7 +217,7 @@
                                 <children>
                                     <ImageView fitHeight="140" fitWidth="200" preserveRatio="false">
                                         <image>
-                                            <Image url="@../../img/product_cake.png" />
+                                            <Image url="@../../img/img/product_cake.png" />
                                         </image>
                                     </ImageView>
                                     <VBox styleClass="product-info" spacing="5">
@@ -241,7 +241,7 @@
                                 <children>
                                     <ImageView fitHeight="140" fitWidth="200" preserveRatio="false">
                                         <image>
-                                            <Image url="@../../img/product_drink.png" />
+                                            <Image url="@../../img/img/product_drink.png" />
                                         </image>
                                     </ImageView>
                                     <VBox styleClass="product-info" spacing="5">

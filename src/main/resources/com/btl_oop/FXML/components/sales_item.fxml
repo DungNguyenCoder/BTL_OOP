@@ -7,11 +7,11 @@
 
 <HBox xmlns="http://javafx.com/javafx/24.0.1"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.btl_oop.Controller.SalesItemController"
+      fx:controller="com.btl_oop.Controller.ComponentController.SalesItemController"
       alignment="CENTER_LEFT"
       spacing="15"
       styleClass="sales-row"
-      stylesheets="@../../css/sales_reports.css">
+      stylesheets="@../../css/Main/sales_reports.css">
     <children>
         <Circle fx:id="avatarCircle" radius="20" styleClass="avatar-circle" />
         <Label fx:id="nameLabel" styleClass="sales-name" HBox.hgrow="ALWAYS" />

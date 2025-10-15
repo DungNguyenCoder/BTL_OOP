@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<VBox xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.btl_oop.Controller.OrderItemController">
+<VBox xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.btl_oop.Controller.ComponentController.OrderItemController">
    <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="90.0" spacing="15" styleClass="order-item" stylesheets="@../../css/main_layout.css">
+      <HBox alignment="CENTER_LEFT" prefHeight="90.0" spacing="15" styleClass="order-item" stylesheets="@../../css/Main/main_layout.css">
           <children>
               <ImageView fx:id="avatarImage" fitHeight="60.0" fitWidth="60.0" preserveRatio="true" />
       

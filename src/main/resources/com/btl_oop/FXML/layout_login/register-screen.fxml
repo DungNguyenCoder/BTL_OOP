@@ -3,10 +3,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<HBox stylesheets="@../../css/register_style.css"
+<HBox stylesheets="@../../css/Main/register_style.css"
       xmlns="http://javafx.com/javafx/23.0.1"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.btl_oop.Controller.RegisterController">
+      fx:controller="com.btl_oop.Controller.LoginController.RegisterController">
 
     <!-- Pane bên trái có ảnh nền -->
     <AnchorPane prefWidth="700.0" styleClass="pizza-bg" />

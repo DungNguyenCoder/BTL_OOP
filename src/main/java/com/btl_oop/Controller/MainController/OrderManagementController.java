@@ -1,5 +1,6 @@
-package com.btl_oop.Controller;
+package com.btl_oop.Controller.MainController;
 
+import com.btl_oop.Controller.ComponentController.OrderItemController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;

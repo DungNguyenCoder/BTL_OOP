@@ -1,4 +1,4 @@
-package com.btl_oop.Controller;
+package com.btl_oop.Controller.ComponentController;
 
 import com.btl_oop.Model.CustomerFeedback;
 import javafx.fxml.FXML;
@@ -32,7 +32,7 @@ public class CustomerFeedbackController {
                 "2 days ago",
                 "Very good!",
                 4.5,
-                "/com/btl_oop/img/food_asian_bowl.png"
+                "/com/btl_oop/img/img/food_asian_bowl.png"
         ));
 
         feedbacks.add(new CustomerFeedback(
@@ -41,7 +41,7 @@ public class CustomerFeedbackController {
                 "1 days ago",
                 "Yummy",
                 4.0,
-                "/com/btl_oop/img/food_asian_bowl.png"
+                "/com/btl_oop/img/img/food_asian_bowl.png"
         ));
 
         feedbacks.add(new CustomerFeedback(
@@ -50,7 +50,7 @@ public class CustomerFeedbackController {
                 "5 days ago",
                 "Not real bad",
                 4.5,
-                "/com/btl_oop/img/food_asian_bowl.png"
+                "/com/btl_oop/img/img/food_asian_bowl.png"
         ));
 
         feedbacks.add(new CustomerFeedback(
@@ -59,7 +59,7 @@ public class CustomerFeedbackController {
                 "3 days ago",
                 "This best!",
                 4.5,
-                "/com/btl_oop/img/food_asian_bowl.png"
+                "/com/btl_oop/img/img/food_asian_bowl.png"
         ));
 
         feedbacks.add(new CustomerFeedback(
@@ -68,7 +68,7 @@ public class CustomerFeedbackController {
                 "4 days ago",
                 "omg",
                 4.5,
-                "/com/btl_oop/img/food_macarons.png"
+                "/com/btl_oop/img/img/food_macarons.png"
         ));
 
         feedbacks.add(new CustomerFeedback(
@@ -77,7 +77,7 @@ public class CustomerFeedbackController {
                 "2 days ago",
                 "Express",
                 4.5,
-                "/com/btl_oop/img/food_macarons.png"
+                "/com/btl_oop/img/img/food_macarons.png"
         ));
 
         // Load cards
