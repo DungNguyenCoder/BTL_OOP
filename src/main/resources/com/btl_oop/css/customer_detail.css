@@ -1,0 +1,194 @@
+/* ===== Global Styles ===== */
+.root {
+    -fx-font-family: 'Segoe UI', 'Roboto', sans-serif;
+    -fx-background-color: #f6f6fa;
+}
+
+/* ===== Header ===== */
+.header {
+    -fx-padding: 20 25;
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.03), 5, 0, 0, 1);
+}
+
+.title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222;
+}
+
+/* ===== Content Scroll ===== */
+.content-scroll {
+    -fx-background-color: transparent;
+}
+
+.content-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+/* ===== Details Card ===== */
+.details-card {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 15;
+    -fx-padding: 30;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 8, 0, 0, 3);
+    -fx-max-width: 650;
+}
+
+.section-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #222;
+}
+
+.section-subtitle {
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #222;
+}
+
+/* ===== Avatar ===== */
+.avatar-circle {
+    -fx-stroke: #e0e0e0;
+    -fx-stroke-width: 3;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 6, 0, 0, 2);
+}
+
+/* ===== Customer Info ===== */
+.customer-name {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222;
+}
+
+.customer-email {
+    -fx-font-size: 13px;
+    -fx-text-fill: #666;
+}
+
+/* ===== Status Badge ===== */
+.status-badge {
+    -fx-background-radius: 5;
+    -fx-padding: 4 12;
+    -fx-font-size: 12px;
+    -fx-font-weight: 600;
+}
+
+.status-badge.active {
+    -fx-background-color: #d1fae5;
+    -fx-text-fill: #10b981;
+}
+
+.status-badge.inactive {
+    -fx-background-color: #fee2e2;
+    -fx-text-fill: #ef4444;
+}
+
+/* ===== Edit Button ===== */
+.edit-button {
+    -fx-background-color: #4a90e2;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-padding: 8 25;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(74, 144, 226, 0.3), 4, 0, 0, 2);
+}
+
+.edit-button:hover {
+    -fx-background-color: #357abd;
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+/* ===== Form Fields ===== */
+.field-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #444;
+}
+
+.custom-text-field {
+    -fx-background-color: #f8f8f8;
+    -fx-background-radius: 8;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 8;
+    -fx-border-width: 1;
+    -fx-padding: 12 15;
+    -fx-font-size: 13px;
+    -fx-text-fill: #333;
+}
+
+.custom-text-field:focused {
+    -fx-border-color: #4a90e2;
+    -fx-background-color: white;
+}
+
+.custom-text-field:disabled {
+    -fx-opacity: 0.7;
+}
+
+/* ===== Email Section ===== */
+.email-item {
+    -fx-background-color: #f8f8f8;
+    -fx-background-radius: 10;
+    -fx-padding: 15;
+}
+
+.email-icon {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 3, 0, 0, 1);
+}
+
+.email-address {
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #222;
+}
+
+.email-time {
+    -fx-font-size: 12px;
+    -fx-text-fill: #999;
+}
+
+/* ===== Add Email Button ===== */
+.add-email-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #4a90e2;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-padding: 10 0;
+    -fx-cursor: hand;
+    -fx-border-width: 0;
+    -fx-underline: false;
+}
+
+.add-email-button:hover {
+    -fx-text-fill: #357abd;
+    -fx-underline: true;
+}
+
+/* ===== Scrollbar ===== */
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 8px;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #ccc;
+    -fx-background-radius: 4px;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: #aaa;
+}
+
+.scroll-bar .track {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}

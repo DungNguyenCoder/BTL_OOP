@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<VBox xmlns="http://javafx.com/javafx/24.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.btl_oop.Controller.FeedbackCardController"
+      styleClass="feedback-card"
+      stylesheets="@../../css/customer_feedback.css"
+      prefWidth="400"
+      spacing="15">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20" />
+    </padding>
+
+    <!-- Customer Info & Food Image Section -->
+    <HBox spacing="15" alignment="TOP_LEFT">
+        <children>
+            <!-- Left Side: Customer Info -->
+            <VBox spacing="8" HBox.hgrow="ALWAYS">
+                <children>
+                    <!-- Avatar & Name -->
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <children>
+                            <Circle fx:id="avatarCircle" radius="20" styleClass="avatar" />
+                            <VBox spacing="2">
+                                <children>
+                                    <Label fx:id="nameLabel" styleClass="customer-name" />
+                                    <Label fx:id="timeLabel" styleClass="time-ago" />
+                                </children>
+                            </VBox>
+                        </children>
+                    </HBox>
+
+                    <!-- Review Text -->
+                    <Label fx:id="reviewLabel" styleClass="review-text" wrapText="true" />
+
+                    <!-- Star Rating -->
+                    <HBox fx:id="starsContainer" spacing="3" alignment="CENTER_LEFT">
+                        <!-- Stars will be added dynamically -->
+                    </HBox>
+                </children>
+            </VBox>
+
+            <!-- Right Side: Food Image -->
+            <StackPane styleClass="food-image-container">
+                <children>
+                    <ImageView fx:id="foodImage"
+                               fitWidth="140"
+                               fitHeight="140"
+                               preserveRatio="false"
+                               styleClass="food-image" />
+                </children>
+            </StackPane>
+        </children>
+    </HBox>
+</VBox>

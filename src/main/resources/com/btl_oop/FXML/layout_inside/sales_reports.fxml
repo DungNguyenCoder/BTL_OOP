@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<VBox xmlns="http://javafx.com/javafx/24.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.btl_oop.Controller.SalesReportsController"
+      stylesheets="@../../css/sales_reports.css"
+      styleClass="root">
+
+    <HBox alignment="CENTER_LEFT" styleClass="header">
+        <children>
+            <Label text="Sale Reports" styleClass="title" />
+        </children>
+    </HBox>
+
+    <ScrollPane fitToWidth="true" styleClass="content-scroll" VBox.vgrow="ALWAYS">
+        <content>
+            <VBox spacing="20">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20" />
+                </padding>
+
+                <HBox spacing="20" styleClass="charts-container">
+                    <children>
+                        <VBox styleClass="chart-card" prefWidth="450">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" spacing="10">
+                                    <children>
+                                        <Label text="Pie Chart" styleClass="card-title" />
+                                        <Region HBox.hgrow="ALWAYS" />
+                                        <CheckBox text="Chart" styleClass="chart-option" />
+                                        <CheckBox text="Show Value" selected="true" styleClass="chart-option" />
+                                        <Button styleClass="menu-button" text="⋮" />
+                                    </children>
+                                    <VBox.margin>
+                                        <Insets bottom="20" />
+                                    </VBox.margin>
+                                </HBox>
+
+                                <HBox spacing="20" alignment="CENTER">
+                                    <children>
+                                        <!-- Total Order Chart (Red) -->
+                                        <VBox alignment="CENTER" spacing="10" styleClass="pie-chart-container">
+                                            <children>
+                                                <StackPane prefHeight="120" prefWidth="120">
+                                                    <children>
+                                                        <Circle radius="60" styleClass="donut-bg" />
+                                                        <Circle radius="60" styleClass="donut-segment-red"
+                                                                strokeDashArray="377, 377" strokeDashOffset="94" />
+                                                        <Circle radius="40" fill="WHITE" />
+                                                        <Label text="81%" styleClass="donut-percentage" />
+                                                    </children>
+                                                </StackPane>
+                                                <Label text="Total Order" styleClass="chart-label" />
+                                            </children>
+                                        </VBox>
+
+                                        <!-- Customer Growth Chart (Green) -->
+                                        <VBox alignment="CENTER" spacing="10" styleClass="pie-chart-container">
+                                            <children>
+                                                <StackPane prefHeight="120" prefWidth="120">
+                                                    <children>
+                                                        <Circle radius="60" styleClass="donut-bg" />
+                                                        <Circle radius="60" styleClass="donut-segment-green"
+                                                                strokeDashArray="83, 377" strokeDashOffset="0" />
+                                                        <Circle radius="40" fill="WHITE" />
+                                                        <Label text="22%" styleClass="donut-percentage" />
+                                                    </children>
+                                                </StackPane>
+                                                <Label text="Customer Growth" styleClass="chart-label" />
+                                            </children>
+                                        </VBox>
+
+                                        <!-- Total Revenue Chart (Blue) -->
+                                        <VBox alignment="CENTER" spacing="10" styleClass="pie-chart-container">
+                                            <children>
+                                                <StackPane prefHeight="120" prefWidth="120">
+                                                    <children>
+                                                        <Circle radius="60" styleClass="donut-bg" />
+                                                        <Circle radius="60" styleClass="donut-segment-blue"
+                                                                strokeDashArray="233, 377" strokeDashOffset="58" />
+                                                        <Circle radius="40" fill="WHITE" />
+                                                        <Label text="62%" styleClass="donut-percentage" />
+                                                    </children>
+                                                </StackPane>
+                                                <Label text="Total Revenue" styleClass="chart-label" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+
+                        <!-- Chart Order Card -->
+                        <VBox styleClass="chart-card" HBox.hgrow="ALWAYS">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" spacing="10">
+                                    <children>
+                                        <Label text="Chart Order" styleClass="card-title" />
+                                        <Region HBox.hgrow="ALWAYS" />
+                                        <Button styleClass="save-button">
+                                            <graphic>
+                                                <HBox spacing="6" alignment="CENTER">
+                                                    <children>
+                                                        <Label text="⬇" styleClass="save-icon" />
+                                                        <Label text="Save Report" styleClass="save-text" />
+                                                    </children>
+                                                </HBox>
+                                            </graphic>
+                                        </Button>
+                                    </children>
+                                    <VBox.margin>
+                                        <Insets bottom="5" />
+                                    </VBox.margin>
+                                </HBox>
+
+                                <Label text="Lorem ipsum dolor sit amet, consectetur adipiscing" styleClass="chart-description">
+                                    <VBox.margin>
+                                        <Insets bottom="10" />
+                                    </VBox.margin>
+                                </Label>
+
+                                <!-- Area Chart with Tooltip -->
+                                <StackPane>
+                                    <children>
+                                        <AreaChart fx:id="orderChart" styleClass="area-chart" legendVisible="false"
+                                                   prefHeight="180" animated="false">
+                                            <xAxis>
+                                                <CategoryAxis side="BOTTOM" tickLabelFill="#999" />
+                                            </xAxis>
+                                            <yAxis>
+                                                <NumberAxis side="LEFT" tickLabelFill="#999" />
+                                            </yAxis>
+                                        </AreaChart>
+
+                                        <!-- Tooltip on hover -->
+                                        <VBox fx:id="chartTooltip" styleClass="chart-tooltip" visible="false"
+                                              translateX="200" translateY="50">
+                                            <children>
+                                                <Label text="456 Order" styleClass="tooltip-value" />
+                                                <Label text="Oct 08th, 2020" styleClass="tooltip-date" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </StackPane>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+
+                <!-- Top Sales Representative -->
+                <VBox styleClass="table-card">
+                    <children>
+                        <Label text="Top Sales Representative" styleClass="section-title">
+                            <VBox.margin>
+                                <Insets bottom="20" />
+                            </VBox.margin>
+                        </Label>
+
+                        <!-- Container để add các SalesItem động -->
+                        <VBox fx:id="salesListContainer" spacing="15" />
+                    </children>
+                </VBox>
+
+                <!-- Statistics Cards -->
+                <HBox spacing="15" styleClass="stats-row">
+                    <children>
+                        <!-- Product Sold -->
+                        <VBox styleClass="stat-card-modern" HBox.hgrow="ALWAYS">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" spacing="10">
+                                    <children>
+                                        <Label text="Product sold" styleClass="stat-label-small" />
+                                        <Region HBox.hgrow="ALWAYS" />
+                                        <ImageView fitHeight="20" fitWidth="20">
+                                            <image>
+                                                <Image url="@../../img/ic_home.png" />
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </HBox>
+                                <Label text="25.1k" styleClass="stat-value-large" />
+                                <HBox alignment="CENTER_LEFT" spacing="10">
+                                    <children>
+                                        <Label text="↑ +15%" styleClass="stat-percent positive" />
+                                        <Region HBox.hgrow="ALWAYS" />
+                                        <Label text="View Report" styleClass="view-link-small" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+
+                        <!-- Total Profit -->
+                        <VBox styleClass="stat-card-modern" HBox.hgrow="ALWAYS">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" spacing="10">
+                                    <children>
+                                        <Label text="Total Profit" styleClass="stat-label-small" />
+                                        <Region HBox.hgrow="ALWAYS" />
+                                        <ImageView fitHeight="20" fitWidth="20">
+                                            <image>
+                                                <Image url="@../../img/ic_home.png" />
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </HBox>
+                                <Label text="2,435k" styleClass="stat-value-large" />
+                                <HBox alignment="CENTER_LEFT" spacing="10">
+                                    <children>
+                                        <Label text="↓ -3.5%" styleClass="stat-percent negative" />
+                                        <Region HBox.hgrow="ALWAYS" />
+                                        <Label text="View Report" styleClass="view-link-small" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+
+                        <!-- Total No. of Claim -->
+                        <VBox styleClass="stat-card-modern" HBox.hgrow="ALWAYS">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" spacing="10">
+                                    <children>
+                                        <Label text="Total No. of Claim" styleClass="stat-label-small" />
+                                        <Region HBox.hgrow="ALWAYS" />
+                                        <ImageView fitHeight="20" fitWidth="20">
+                                            <image>
+                                                <Image url="@../../img/ic_home.png" />
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </HBox>
+                                <Label text="3.5M" styleClass="stat-value-large" />
+                                <HBox alignment="CENTER_LEFT" spacing="10">
+                                    <children>
+                                        <Label text="↑ +15%" styleClass="stat-percent positive" />
+                                        <Region HBox.hgrow="ALWAYS" />
+                                        <Label text="View More" styleClass="view-link-small" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+
+                        <!-- New Customer -->
+                        <VBox styleClass="stat-card-modern" HBox.hgrow="ALWAYS">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" spacing="10">
+                                    <children>
+                                        <Label text="New Customer" styleClass="stat-label-small" />
+                                        <Region HBox.hgrow="ALWAYS" />
+                                        <ImageView fitHeight="20" fitWidth="20">
+                                            <image>
+                                                <Image url="@../../img/ic_home.png" />
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </HBox>
+                                <Label text="43.5k" styleClass="stat-value-large" />
+                                <HBox alignment="CENTER_LEFT" spacing="10">
+                                    <children>
+                                        <Label text="↑ +10%" styleClass="stat-percent positive" />
+                                        <Region HBox.hgrow="ALWAYS" />
+                                        <Label text="View More" styleClass="view-link-small" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+
+                <!-- Claims Over the Years Chart -->
+                <VBox styleClass="chart-card">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="15">
+                            <children>
+                                <Label text="Claims Over the Years" styleClass="section-title" />
+                                <Region HBox.hgrow="ALWAYS" />
+                                <HBox spacing="20" styleClass="legend-container">
+                                    <children>
+                                        <HBox spacing="6" alignment="CENTER">
+                                            <children>
+                                                <Circle radius="5" styleClass="legend-dot-approved" />
+                                                <Label text="Approved" styleClass="legend-text" />
+                                            </children>
+                                        </HBox>
+                                        <HBox spacing="6" alignment="CENTER">
+                                            <children>
+                                                <Circle radius="5" styleClass="legend-dot-submitted" />
+                                                <Label text="Submitted" styleClass="legend-text" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </HBox>
+                            </children>
+                            <VBox.margin>
+                                <Insets bottom="15" />
+                            </VBox.margin>
+                        </HBox>
+
+                        <!-- Area Chart with Tooltip -->
+                        <StackPane>
+                            <children>
+                                <AreaChart fx:id="claimsChart" styleClass="claims-chart"
+                                           legendVisible="false" prefHeight="250" animated="true">
+                                    <xAxis>
+                                        <CategoryAxis side="BOTTOM" tickLabelFill="#999" />
+                                    </xAxis>
+                                    <yAxis>
+                                        <NumberAxis side="LEFT" tickLabelFill="#999" />
+                                    </yAxis>
+                                </AreaChart>
+
+
+                            </children>
+                        </StackPane>
+                    </children>
+                </VBox>
+
+            </VBox>
+        </content>
+    </ScrollPane>
+</VBox>

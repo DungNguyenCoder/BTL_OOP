@@ -36,7 +36,7 @@ public class DashboardController {
     public void addOrder(String orderId, String status, String customerName,
                          double totalPrice, String imagePath) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/btl_oop/FXML/orderItem.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/btl_oop/FXML/components/orderItem.fxml"));
             VBox orderItem = loader.load();
 
             OrderItemController controller = loader.getController();

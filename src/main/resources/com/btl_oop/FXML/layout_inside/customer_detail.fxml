@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<VBox xmlns="http://javafx.com/javafx/24.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.btl_oop.Controller.CustomerDetailController"
+      stylesheets="@../../css/customer_detail.css"
+      styleClass="root">
+
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" styleClass="header">
+        <children>
+            <Label text="Customer Details" styleClass="title" />
+        </children>
+    </HBox>
+
+    <!-- Content -->
+    <ScrollPane fitToWidth="true" styleClass="content-scroll" VBox.vgrow="ALWAYS">
+        <content>
+            <VBox spacing="25">
+                <padding>
+                    <Insets top="30" right="30" bottom="30" left="30" />
+                </padding>
+
+                <!-- Details Card -->
+                <VBox styleClass="details-card" spacing="25">
+                    <children>
+                        <!-- Header: Details label -->
+                        <Label text="Details" styleClass="section-title" />
+
+                        <!-- Profile Section -->
+                        <HBox alignment="CENTER_LEFT" spacing="20">
+                            <children>
+                                <!-- Avatar -->
+                                <VBox alignment="CENTER" spacing="10">
+                                    <children>
+                                        <Circle radius="50" styleClass="avatar-circle">
+                                            <fill>
+                                                <javafx.scene.paint.ImagePattern>
+                                                    <image>
+                                                        <Image url="@../../img/Main_Logo.png" />
+                                                    </image>
+                                                </javafx.scene.paint.ImagePattern>
+                                            </fill>
+                                        </Circle>
+                                    </children>
+                                </VBox>
+
+                                <!-- Name & Status -->
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <HBox spacing="12" alignment="CENTER_LEFT">
+                                            <children>
+                                                <Label fx:id="customerNameLabel" text="Jane Cooper" styleClass="customer-name" />
+                                                <Label text="Active" styleClass="status-badge active" />
+                                            </children>
+                                        </HBox>
+                                        <Label fx:id="customerEmailLabel" text="janecooper@gmail.com" styleClass="customer-email" />
+                                    </children>
+                                </VBox>
+
+                                <Region HBox.hgrow="ALWAYS" />
+
+                                <!-- Edit Button -->
+                                <Button text="Edit" styleClass="edit-button" onAction="#handleEdit" />
+                            </children>
+                        </HBox>
+
+                        <!-- Form Fields -->
+                        <VBox spacing="20">
+                            <children>
+                                <!-- Full Name & Nick Name Row -->
+                                <HBox spacing="20">
+                                    <children>
+                                        <!-- Full Name -->
+                                        <VBox spacing="8" HBox.hgrow="ALWAYS">
+                                            <children>
+                                                <Label text="Full Name" styleClass="field-label" />
+                                                <TextField fx:id="fullNameField"
+                                                           promptText="Jane Cooper"
+                                                           styleClass="custom-text-field"
+                                                           editable="false" />
+                                            </children>
+                                        </VBox>
+
+                                        <!-- Nick Name -->
+                                        <VBox spacing="8" HBox.hgrow="ALWAYS">
+                                            <children>
+                                                <Label text="Nick Name" styleClass="field-label" />
+                                                <TextField fx:id="nickNameField"
+                                                           promptText="Cooper"
+                                                           styleClass="custom-text-field"
+                                                           editable="false" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+
+                                <!-- Gender -->
+                                <VBox spacing="8">
+                                    <children>
+                                        <Label text="Gender" styleClass="field-label" />
+                                        <TextField fx:id="genderField"
+                                                   promptText="Female"
+                                                   styleClass="custom-text-field"
+                                                   editable="false" />
+                                    </children>
+                                </VBox>
+
+                                <!-- Language -->
+                                <VBox spacing="8">
+                                    <children>
+                                        <Label text="Language" styleClass="field-label" />
+                                        <TextField fx:id="languageField"
+                                                   promptText="English"
+                                                   styleClass="custom-text-field"
+                                                   editable="false" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </VBox>
+
+                        <!-- Email Address Section -->
+                        <VBox spacing="15">
+                            <children>
+                                <Label text="My email Address" styleClass="section-subtitle" />
+
+                                <!-- Email Item -->
+                                <HBox alignment="CENTER_LEFT" spacing="15" styleClass="email-item">
+                                    <children>
+                                        <ImageView fitHeight="24" fitWidth="24" styleClass="email-icon">
+                                            <image>
+                                                <Image url="@../../img/ic_home.png" />
+                                            </image>
+                                        </ImageView>
+
+                                        <VBox spacing="2" HBox.hgrow="ALWAYS">
+                                            <children>
+                                                <Label fx:id="emailAddressLabel" text="deancrusiegal@gmail.com" styleClass="email-address" />
+                                                <Label fx:id="emailTimeLabel" text="1 month ago" styleClass="email-time" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+
+                                <!-- Add Email Address Button -->
+                                <Button text="+ Add Email Address" styleClass="add-email-button" onAction="#handleAddEmail" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            </VBox>
+        </content>
+    </ScrollPane>
+</VBox>
