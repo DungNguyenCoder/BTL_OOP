@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
+<VBox xmlns="http://javafx.com/javafx/24.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.btl_oop.Controller.DashboardController"
+      stylesheets="@../../css/dashboard.css">
+
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" styleClass="header">
+        <children>
+            <VBox>
+                <children>
+                    <Label styleClass="title" text="Dashboard" />
+                    <Label styleClass="subtitle" text="Hi, Samantha. Welcome back to Sedap Admin!" />
+                </children>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <HBox alignment="CENTER_RIGHT" spacing="15.0">
+                <children>
+                    <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                        <image>
+                            <Image url="@../../img/ic_calendar.png" />
+                        </image>
+                    </ImageView>
+                    <VBox alignment="CENTER_LEFT" spacing="2">
+                        <children>
+                            <Label style="-fx-font-size: 11px; -fx-text-fill: #888;" text="Filter Period" />
+                            <Label style="-fx-font-size: 12px; -fx-font-weight: bold;" text="17 April 2020 - 21 May 2020" />
+                        </children>
+                    </VBox>
+                </children>
+            </HBox>
+        </children>
+    </HBox>
+
+    <!-- Stats Cards -->
+    <HBox styleClass="stats-container">
+        <children>
+            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                <children>
+                    <Label styleClass="value" text="75" />
+                    <Label styleClass="label" text="Total Orders" />
+                </children>
+            </VBox>
+            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                <children>
+                    <Label styleClass="value" text="357" />
+                    <Label styleClass="label" text="Total Delivered" />
+                </children>
+            </VBox>
+            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                <children>
+                    <Label styleClass="value" text="65" />
+                    <Label styleClass="label" text="Total Cancelled" />
+                </children>
+            </VBox>
+            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                <children>
+                    <Label styleClass="value" text="128" />
+                    <Label styleClass="label" text="Total Revenue" />
+                </children>
+            </VBox>
+        </children>
+    </HBox>
+
+    <!-- Customer Review Section (at bottom) -->
+    <ScrollPane fitToWidth="true" styleClass="review-scroll" VBox.vgrow="ALWAYS">
+        <content>
+            <VBox spacing="15">
+                <padding>
+                    <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+                </padding>
+
+                <children>
+                    <!-- Section Header -->
+                    <HBox alignment="CENTER_LEFT">
+                        <children>
+                            <VBox spacing="3" HBox.hgrow="ALWAYS">
+                                <children>
+                                    <Label text="Customer Review" styleClass="section-title"
+                                           style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+                                    <Label text="Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam"
+                                           styleClass="section-subtitle"
+                                           style="-fx-font-size: 12px; -fx-text-fill: #888;"
+                                           wrapText="true" />
+                                </children>
+                            </VBox>
+
+                            <!-- Navigation Buttons -->
+                            <HBox spacing="8">
+                                <children>
+                                    <Button styleClass="nav-button" onAction="#handlePreviousReviews"
+                                            style="-fx-background-color: #f0f0f0; -fx-cursor: hand; -fx-padding: 8 15; -fx-background-radius: 5;">
+                                        <graphic>
+                                            <Label text="‹" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+                                        </graphic>
+                                    </Button>
+                                    <Button styleClass="nav-button" onAction="#handleNextReviews"
+                                            style="-fx-background-color: #f0f0f0; -fx-cursor: hand; -fx-padding: 8 15; -fx-background-radius: 5;">
+                                        <graphic>
+                                            <Label text="›" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+                                        </graphic>
+                                    </Button>
+                                </children>
+                            </HBox>
+                        </children>
+                    </HBox>
+
+                    <!-- Reviews Container -->
+                    <HBox fx:id="reviewsContainer" spacing="15" styleClass="reviews-container">
+                        <!-- Review cards will be loaded dynamically -->
+                    </HBox>
+                </children>
+            </VBox>
+        </content>
+    </ScrollPane>
+</VBox>

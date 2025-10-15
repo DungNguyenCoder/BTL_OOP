@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox xmlns="http://javafx.com/javafx/24.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.btl_oop.Controller.CustomerListItemController"
+      fx:id="customerRow"
+      alignment="CENTER_LEFT"
+      spacing="20"
+      styleClass="customer-row"
+      stylesheets="@../../css/customer_detail.css">
+
+    <padding>
+        <Insets top="15" right="20" bottom="15" left="20" />
+    </padding>
+
+    <!-- Customer Name - 25% width -->
+    <Label fx:id="nameLabel" text="Jane Cooper"
+           styleClass="customer-cell"
+           HBox.hgrow="ALWAYS"
+           minWidth="150" prefWidth="150" maxWidth="Infinity" />
+
+    <!-- Phone/Contact - 20% width -->
+    <Label fx:id="phoneLabel" text="(225) 555-0118"
+           styleClass="customer-cell"
+           HBox.hgrow="ALWAYS"
+           minWidth="120" prefWidth="120" maxWidth="Infinity" />
+
+    <!-- Email - 25% width -->
+    <Label fx:id="emailLabel" text="jane@microsoft.com"
+           styleClass="customer-cell"
+           HBox.hgrow="ALWAYS"
+           minWidth="180" prefWidth="180" maxWidth="Infinity" />
+
+    <!-- Language - 15% width -->
+    <Label fx:id="languageLabel" text="United States"
+           styleClass="customer-cell"
+           HBox.hgrow="ALWAYS"
+           minWidth="100" prefWidth="100" maxWidth="Infinity" />
+
+    <!-- Status - 15% width -->
+    <Label fx:id="statusLabel" text="Active"
+           styleClass="status-badge"
+           minWidth="80" prefWidth="80" maxWidth="80" />
+
+</HBox>

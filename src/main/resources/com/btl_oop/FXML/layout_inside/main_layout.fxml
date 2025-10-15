@@ -11,7 +11,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="700.0" prefWidth="1000.0" styleClass="root"
-            stylesheets="@../../css/dashboard.css"
+            stylesheets="@../../css/main_layout.css"
             xmlns="http://javafx.com/javafx/24.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.btl_oop.Controller.MainLayoutController">

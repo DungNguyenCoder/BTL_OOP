@@ -1,45 +1,13 @@
-/* ===== Global Styles ===== */
+/* Dashboard and Order Management Styles */
 .root {
     -fx-font-family: 'Segoe UI', 'Roboto', sans-serif;
     -fx-background-color: #f6f6fa;
 }
 
-/* ===== Sidebar ===== */
-.sidebar {
-    -fx-background-color: #ffffff;
-    -fx-padding: 20 0 20 0;
-    -fx-pref-width: 230;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 8, 0, 0, 2);
+.dashboard-scroll, .order-scroll {
+    -fx-background-color: #f5f5f5;
 }
 
-.sidebar .title {
-    -fx-font-size: 22px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #222;
-    -fx-padding: 0 0 20 20;
-}
-
-.sidebar .menu-button {
-    -fx-padding: 12 20;
-    -fx-alignment: CENTER_LEFT;
-    -fx-text-fill: #666;
-    -fx-background-color: transparent;
-    -fx-font-size: 14px;
-}
-
-.sidebar .menu-button:hover {
-    -fx-background-color: #f2f2f2;
-}
-
-.sidebar .menu-button-active {
-    -fx-background-color: #e9f5ee;
-    -fx-text-fill: #00a86b;
-    -fx-font-weight: bold;
-    -fx-border-width: 0 0 0 4;
-    -fx-border-color: #00a86b;
-}
-
-/* ===== Top Header ===== */
 .header {
     -fx-padding: 20;
     -fx-background-color: #ffffff;
@@ -56,7 +24,7 @@
     -fx-text-fill: #888;
 }
 
-/* ===== Stats Cards ===== */
+/* Stats Cards */
 .stats-container {
     -fx-padding: 15 20;
     -fx-spacing: 15;
@@ -81,26 +49,17 @@
     -fx-text-fill: #888;
 }
 
-/* ===== Orders Section ===== */
-.order-scroll {
-    -fx-background-color: transparent;
-}
 
+/* Order Items */
 .order-item {
-    -fx-background-color: #ffffff;
+    -fx-background-color: white;
     -fx-background-radius: 10;
     -fx-padding: 15;
-    -fx-spacing: 15;
-    -fx-alignment: CENTER_LEFT;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.03), 4, 0, 0, 1);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0, 0, 2);
 }
 
 .order-item:hover {
-    -fx-background-color: #f9f9f9;
-}
-
-.order-info {
-    -fx-spacing: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 12, 0, 0, 3);
 }
 
 .order-id {
@@ -109,29 +68,54 @@
     -fx-text-fill: #333;
 }
 
-.order-status-delivered {
-    -fx-text-fill: #00a86b;
-    -fx-font-weight: bold;
-}
-
-.order-status-inprogress {
-    -fx-text-fill: #ff8c00;
-    -fx-font-weight: bold;
-}
-
 .order-price {
-    -fx-text-fill: #222;
-    -fx-font-size: 14px;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
 }
 
 .details-button {
-    -fx-background-color: #f2f2f2;
-    -fx-text-fill: #333;
-    -fx-font-size: 13px;
-    -fx-padding: 6 12;
-    -fx-background-radius: 6;
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-padding: 8 20;
+    -fx-cursor: hand;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
 }
 
 .details-button:hover {
-    -fx-background-color: #ddd;
+    -fx-background-color: #0056b3;
+}
+
+/* Reviews Container */
+.reviews-container {
+    -fx-padding: 0;
+}
+
+.section-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.section-subtitle {
+    -fx-font-size: 12px;
+    -fx-text-fill: #888;
+}
+
+.nav-button {
+    -fx-background-color: #f0f0f0;
+    -fx-cursor: hand;
+    -fx-padding: 8 15;
+    -fx-background-radius: 5;
+}
+
+.nav-button:hover {
+    -fx-background-color: #e0e0e0;
+}
+
+.nav-arrow {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
 }

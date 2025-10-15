@@ -1,76 +1,144 @@
 package com.btl_oop.Controller;
 
+import com.btl_oop.Model.CustomerFeedback;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DashboardController {
 
     @FXML
-    private VBox orderContainer;
+    private HBox reviewsContainer;
 
+    private List<CustomerFeedback> allFeedbacks = new ArrayList<>();
+    private int currentStartIndex = 0;
+    private final int REVIEWS_PER_PAGE = 3;
 
     @FXML
     public void initialize() {
         System.out.println("DashboardController initialized!");
-        System.out.println("orderContainer is null? " + (orderContainer == null));
+        loadFeedbackData();
+        displayReviews();
+    }
 
-        if (orderContainer != null) {
-            loadSampleOrders();
-        } else {
-            System.err.println("ERROR: orderContainer is null! Check fx:id in FXML");
+    private void loadFeedbackData() {
+        // Sample feedback data
+        allFeedbacks.add(new CustomerFeedback(
+                "Jone Sena",
+                "#ff9999",
+                "2 days ago",
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                4.5,
+                "/com/btl_oop/img/food_asian_bowl.png"
+        ));
+
+        allFeedbacks.add(new CustomerFeedback(
+                "Sofia",
+                "#99ccff",
+                "1 day ago",
+                "Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim.",
+                4.0,
+                "/com/btl_oop/img/food_asian_bowl.png"
+        ));
+
+        allFeedbacks.add(new CustomerFeedback(
+                "Anandreanvyah",
+                "#333333",
+                "5 days ago",
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed do eiusmod tempor incididunt.",
+                4.5,
+                "/com/btl_oop/img/food_asian_bowl.png"
+        ));
+
+        allFeedbacks.add(new CustomerFeedback(
+                "Michael Chen",
+                "#66cc99",
+                "3 days ago",
+                "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.",
+                5.0,
+                "/com/btl_oop/img/food_asian_bowl.png"
+        ));
+
+        allFeedbacks.add(new CustomerFeedback(
+                "Emma Wilson",
+                "#ffcc66",
+                "4 days ago",
+                "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                4.0,
+                "/com/btl_oop/img/food_macarons.png"
+        ));
+
+        allFeedbacks.add(new CustomerFeedback(
+                "David Park",
+                "#ff99cc",
+                "6 days ago",
+                "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                4.5,
+                "/com/btl_oop/img/food_asian_bowl.png"
+        ));
+    }
+
+    private void displayReviews() {
+        if (reviewsContainer == null) {
+            System.err.println("ERROR: reviewsContainer is null!");
+            return;
+        }
+
+        reviewsContainer.getChildren().clear();
+
+        int endIndex = Math.min(currentStartIndex + REVIEWS_PER_PAGE, allFeedbacks.size());
+
+        for (int i = currentStartIndex; i < endIndex; i++) {
+            CustomerFeedback feedback = allFeedbacks.get(i);
+            addFeedbackCard(feedback);
         }
     }
 
-    private void loadSampleOrders() {
-        addOrder("1001", "Delivered", "Doris Brown", 34.00, "/img/img_login.png");
-        addOrder("1002", "Delivered", "DJ Don", 18.00, "/img/img_login.png");
-        addOrder("1003", "In Progress", "Sara", 26.00, "/img/img_login.png");
-        addOrder("1004", "Delivered", "Yumiko", 39.00, "/img/img_login.png");
-        addOrder("1005", "In Progress", "Olivia", 21.00, "/img/img_login.png");
-        addOrder("1006", "In Progress", "Tony", 48.00, "/img/img_login.png");
-    }
-
-    public void addOrder(String orderId, String status, String customerName,
-                         double totalPrice, String imagePath) {
+    private void addFeedbackCard(CustomerFeedback feedback) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/btl_oop/FXML/components/orderItem.fxml"));
-            VBox orderItem = loader.load();
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/btl_oop/FXML/components/feedback_card.fxml")
+            );
+            VBox card = loader.load();
 
-            OrderItemController controller = loader.getController();
-            controller.setOrderData(orderId, status, customerName, totalPrice, imagePath);
+            FeedbackCardController controller = loader.getController();
+            controller.setData(feedback);
 
-            controller.setOnDetailsClick(() -> {
-                System.out.println("Details clicked for Order: " + orderId);
-                showOrderDetails(orderId);
-            });
-
-            orderContainer.getChildren().add(orderItem);
+            reviewsContainer.getChildren().add(card);
 
         } catch (IOException e) {
             e.printStackTrace();
-            System.err.println("Could not load OrderItem.fxml");
+            System.err.println("Error loading feedback card: " + e.getMessage());
         }
     }
 
-    public void clearOrders() {
-        orderContainer.getChildren().clear();
-    }
-
-    public void removeOrder(int index) {
-        if (index >= 0 && index < orderContainer.getChildren().size()) {
-            orderContainer.getChildren().remove(index);
+    @FXML
+    public void handlePreviousReviews() {
+        if (currentStartIndex > 0) {
+            currentStartIndex -= REVIEWS_PER_PAGE;
+            if (currentStartIndex < 0) {
+                currentStartIndex = 0;
+            }
+            displayReviews();
         }
     }
 
-    private void showOrderDetails(String orderId) {
-        System.out.println("Showing details for order: " + orderId);
+    @FXML
+    public void handleNextReviews() {
+        if (currentStartIndex + REVIEWS_PER_PAGE < allFeedbacks.size()) {
+            currentStartIndex += REVIEWS_PER_PAGE;
+            displayReviews();
+        }
     }
 
-    public void addNewOrder(String orderId, String status, String customerName,
-                            double totalPrice, String imagePath) {
-        addOrder(orderId, status, customerName, totalPrice, imagePath);
+    public void addNewFeedback(CustomerFeedback feedback) {
+        allFeedbacks.add(0, feedback);
+        currentStartIndex = 0;
+        displayReviews();
     }
 }

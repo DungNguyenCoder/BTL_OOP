@@ -14,7 +14,7 @@ public class Customer {
     private LocalDateTime emailAddedDate;
 
     public Customer(int id, String fullName, String nickName, String email,
-                    String gender, String language, String avatarUrl,
+                    String gender,
                     boolean isActive, LocalDateTime emailAddedDate) {
         this.id = id;
         this.fullName = fullName;

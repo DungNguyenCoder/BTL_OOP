@@ -1,6 +1,5 @@
 package com.btl_oop;
 
-import com.btl_oop.Controller.DashboardController;
 import com.btl_oop.Utils.AppConfig;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

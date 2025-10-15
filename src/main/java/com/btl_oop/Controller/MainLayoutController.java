@@ -44,7 +44,7 @@ public class MainLayoutController {
 
     @FXML
     private void loadDashboard() {
-        loadContent("/com/btl_oop/FXML/layout_inside/dashboard.fxml");
+        loadContent("/com/btl_oop/FXML/layout_inside/dashboard_content.fxml");
         setActiveButton(btnDashboard);
     }
 
