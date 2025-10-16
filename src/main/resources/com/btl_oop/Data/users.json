@@ -12,5 +12,12 @@
     "name": "Nguyen Manh Dung",
     "numberPhone": "0397365829",
     "email": "dungnickchinh1909@gmail.com"
+  },
+  {
+    "username": "123456",
+    "password": "123456",
+    "name": "123",
+    "numberPhone": "0123456789",
+    "email": "123@gmail.com"
   }
 ]
