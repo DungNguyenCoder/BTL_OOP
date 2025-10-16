@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
+import javafx.geometry.Insets;
 
 public class ChooseDishesController {
     @FXML
@@ -31,6 +32,7 @@ public class ChooseDishesController {
     }
 
     private void exitApp() {
+        System.out.println("EXIT SUCCESSFULLY");
         System.exit(0);
     }
 
@@ -40,7 +42,8 @@ public class ChooseDishesController {
         System.out.println("Loading appetizers");
         contentArea.getChildren().clear();
         for (int i = 1; i <= 6; i++) {
-            contentArea.getChildren().add(createItem("Appetizer " + i, "12000đ"));
+            VBox itemBox = createItem("Appetizer " + i, "12000đ");
+            contentArea.getChildren().add(itemBox);
         }
         btnAppetizers.setStyle("-fx-background-color: #000000; -fx-text-fill: white;");
     }
@@ -73,29 +76,22 @@ public class ChooseDishesController {
         itemBox.setStyle(
                 "-fx-background-color: #f9f9f9;" +
                         "-fx-border-color: #ccc;" +
-                        "-fx-border-radius: 10;" +
-                        "-fx-background-radius: 10;" +
+                        "-fx-background-radius: 10px;" +
                         "-fx-padding: 20;" +
-                        "-fx-alignment: center;"
+                        "-fx-alignment: center;" +
+                        "-fx-border-radius: 10px;"
         );
-
         Label nameLabel = new Label(name);
         nameLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 16;");
         Label priceLabel = new Label(price);
         priceLabel.setStyle("-fx-text-fill: #2a8a2a; -fx-font-size: 14;");
 
         Button priceButton = new Button("+ Add to order");
-        priceButton.setStyle(
-                "-fx-background-color: #000000;" +
-                        "-fx-text-fill: white;" +
-                        "-fx-font-weight: bold;" +
-                        "-fx-background-radius: 5;" +
-                        "-fx-padding: 8 15 8 15;" +
-                        "-fx-font-size: 14;" +
-                        "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 1);"
-        );
-
+        priceButton.getStyleClass().add("center-tiles-item-button");
         itemBox.getChildren().addAll(nameLabel, priceLabel, priceButton);
+
+        TilePane.setMargin(itemBox, new Insets(10));
+
         return itemBox;
     }
 
