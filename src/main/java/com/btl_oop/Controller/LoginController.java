@@ -46,7 +46,7 @@ public class LoginController {
         
         if (found.getPassword().equals(pass)) {
             AlertUtils.showInfo("Đăng nhập thành công");
-            SceneUtils.switchTo(event, AppConfig.PATH_CLIENT_MENU_SCREEN);
+            SceneUtils.switchTo(event, AppConfig.PATH_ORDER_MENU_SCREEN);
             System.out.println("Login successful");
         } else {
             AlertUtils.showError("Sai mật khẩu");
