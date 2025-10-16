@@ -1,4 +1,4 @@
-package com.btl_oop.Controller;
+package com.btl_oop.Controller.LoginController;
 
 import com.btl_oop.Model.Entity.User;
 import com.btl_oop.Model.Store.UserStore;
@@ -27,7 +27,7 @@ public class LoginController {
 
         if (user.equals("admin") && pass.equals("admin")) {
             AlertUtils.showInfo("Đăng nhập quản trị viên thành công");
-//            SceneUtils.switchTo(event, AppConfig.PATH_ADMIN_SCREEN);
+            SceneUtils.switchTo(event, AppConfig.PATH_ADMIN_SCREEN);
             System.out.println("Login as admin");
             return;
         }

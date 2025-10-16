@@ -1,0 +1,121 @@
+/* Dashboard and Order Management Styles */
+.root {
+    -fx-font-family: 'Segoe UI', 'Roboto', sans-serif;
+    -fx-background-color: #f6f6fa;
+}
+
+.dashboard-scroll, .order-scroll {
+    -fx-background-color: #f5f5f5;
+}
+
+.header {
+    -fx-padding: 20;
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.03), 5, 0, 0, 1);
+}
+
+.header .title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.header .subtitle {
+    -fx-font-size: 12px;
+    -fx-text-fill: #888;
+}
+
+/* Stats Cards */
+.stats-container {
+    -fx-padding: 15 20;
+    -fx-spacing: 15;
+}
+
+.stat-card {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 4, 0, 0, 2);
+    -fx-alignment: CENTER;
+}
+
+.stat-card .value {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222;
+}
+
+.stat-card .label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #888;
+}
+
+
+/* Order Items */
+.order-item {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-padding: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0, 0, 2);
+}
+
+.order-item:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 12, 0, 0, 3);
+}
+
+.order-id {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.order-price {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.details-button {
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-padding: 8 20;
+    -fx-cursor: hand;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.details-button:hover {
+    -fx-background-color: #0056b3;
+}
+
+/* Reviews Container */
+.reviews-container {
+    -fx-padding: 0;
+}
+
+.section-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.section-subtitle {
+    -fx-font-size: 12px;
+    -fx-text-fill: #888;
+}
+
+.nav-button {
+    -fx-background-color: #f0f0f0;
+    -fx-cursor: hand;
+    -fx-padding: 8 15;
+    -fx-background-radius: 5;
+}
+
+.nav-button:hover {
+    -fx-background-color: #e0e0e0;
+}
+
+.nav-arrow {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
