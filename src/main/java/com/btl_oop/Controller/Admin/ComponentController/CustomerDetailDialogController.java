@@ -1,4 +1,4 @@
-package com.btl_oop.Controller.ComponentController;
+package com.btl_oop.Controller.Admin.ComponentController;
 
 import com.btl_oop.Model.Entity.Customer;
 import javafx.fxml.FXML;

@@ -1,6 +1,6 @@
-package com.btl_oop.Controller.MainController;
+package com.btl_oop.Controller.Admin.MainController;
 
-import com.btl_oop.Controller.ComponentController.SalesItemController;
+import com.btl_oop.Controller.Admin.ComponentController.SalesItemController;
 import com.btl_oop.Model.Data.SalesRepresentative;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -60,7 +60,7 @@ public class SalesReportsController {
     private void addSalesItem(SalesRepresentative salesRep) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/com/btl_oop/FXML/components/sales_item.fxml")
+                    getClass().getResource("/com/btl_oop/FXML/Admin/components/sales_item.fxml")
             );
             HBox salesItem = loader.load();
 

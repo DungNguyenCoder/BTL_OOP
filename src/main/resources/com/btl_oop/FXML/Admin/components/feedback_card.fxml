@@ -10,9 +10,9 @@
 
 <VBox xmlns="http://javafx.com/javafx/24.0.1"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.btl_oop.Controller.ComponentController.FeedbackCardController"
+      fx:controller="com.btl_oop.Controller.Admin.ComponentController.FeedbackCardController"
       styleClass="feedback-card"
-      stylesheets="@../../css/Main/customer_feedback.css"
+      stylesheets="@../../../css/Admin/customer_feedback.css"
       prefWidth="400"
       spacing="15">
 

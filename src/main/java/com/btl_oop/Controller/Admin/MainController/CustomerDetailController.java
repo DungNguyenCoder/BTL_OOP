@@ -1,7 +1,7 @@
-package com.btl_oop.Controller.MainController;
+package com.btl_oop.Controller.Admin.MainController;
 
-import com.btl_oop.Controller.ComponentController.CustomerDetailDialogController;
-import com.btl_oop.Controller.ComponentController.CustomerListItemController;
+import com.btl_oop.Controller.Admin.ComponentController.CustomerDetailDialogController;
+import com.btl_oop.Controller.Admin.ComponentController.CustomerListItemController;
 import com.btl_oop.Model.Entity.Customer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -147,7 +147,7 @@ public class CustomerDetailController {
     private void addCustomerRow(Customer customer) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/com/btl_oop/FXML/components/customer_list_item.fxml")
+                    getClass().getResource("/com/btl_oop/FXML/Admin/components/customer_list_item.fxml")
             );
             HBox customerRow = loader.load();
 
@@ -173,7 +173,7 @@ public class CustomerDetailController {
     private void showCustomerDetailDialog(Customer customer) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/com/btl_oop/FXML/layout_inside/customer_detail_dialog.fxml")
+                    getClass().getResource("/com/btl_oop/FXML/Admin/layout_inside/customer_detail_dialog.fxml")
             );
             Parent root = loader.load();
 

@@ -9,8 +9,8 @@
 
 <VBox xmlns="http://javafx.com/javafx/24.0.1"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.btl_oop.Controller.ComponentController.CustomerFeedbackController"
-      stylesheets="@../../css/Main/customer_feedback.css"
+      fx:controller="com.btl_oop.Controller.Admin.ComponentController.CustomerFeedbackController"
+      stylesheets="@../../../css/Admin/customer_feedback.css"
       styleClass="root">
 
     <!-- Header -->

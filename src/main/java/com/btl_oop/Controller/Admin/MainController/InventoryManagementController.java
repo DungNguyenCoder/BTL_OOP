@@ -1,4 +1,4 @@
-package com.btl_oop.Controller.MainController;
+package com.btl_oop.Controller.Admin.MainController;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.FlowPane;

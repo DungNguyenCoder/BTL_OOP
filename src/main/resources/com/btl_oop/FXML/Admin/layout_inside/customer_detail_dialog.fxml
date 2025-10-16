@@ -14,8 +14,8 @@
 
 <VBox xmlns="http://javafx.com/javafx/24.0.1"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.btl_oop.Controller.ComponentController.CustomerDetailDialogController"
-      stylesheets="@../../css/Main/customer_detail.css"
+      fx:controller="com.btl_oop.Controller.Admin.ComponentController.CustomerDetailDialogController"
+      stylesheets="@../../../css/Admin/customer_detail.css"
       styleClass="dialog-root"
       prefWidth="600"
       prefHeight="700">
@@ -142,7 +142,7 @@
                                     <children>
                                         <ImageView fitHeight="24" fitWidth="24" styleClass="email-icon">
                                             <image>
-                                                <Image url="@../../img/ic_item/ic_home.png" />
+                                                <Image url="@../../../img/ic_item/ic_home.png" />
                                             </image>
                                         </ImageView>
 

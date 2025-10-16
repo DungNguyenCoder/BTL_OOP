@@ -1,4 +1,4 @@
-package com.btl_oop.Controller.ComponentController;
+package com.btl_oop.Controller.Admin.ComponentController;
 
 import com.btl_oop.Model.CustomerFeedback;
 import javafx.fxml.FXML;
@@ -89,7 +89,7 @@ public class CustomerFeedbackController {
     private void addFeedbackCard(CustomerFeedback feedback) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/com/btl_oop/FXML/components/feedback_card.fxml")
+                    getClass().getResource("/com/btl_oop/FXML/Admin/components/feedback_card.fxml")
             );
             VBox card = loader.load();
 

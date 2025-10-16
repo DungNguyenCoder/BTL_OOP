@@ -12,8 +12,8 @@
 
 <VBox xmlns="http://javafx.com/javafx/24.0.1"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.btl_oop.Controller.MainController.DashboardController"
-      stylesheets="@../../css/Main/dashboard.css">
+      fx:controller="com.btl_oop.Controller.Admin.MainController.DashboardController"
+      stylesheets="@../../../css/Admin/dashboard.css">
 
     <!-- Header -->
     <HBox alignment="CENTER_LEFT" styleClass="header">
@@ -29,7 +29,7 @@
                 <children>
                     <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
                         <image>
-                            <Image url="@../../img/ic_item/ic_calendar.png" />
+                            <Image url="@../../../img/ic_item/ic_calendar.png" />
                         </image>
                     </ImageView>
                     <VBox alignment="CENTER_LEFT" spacing="2">

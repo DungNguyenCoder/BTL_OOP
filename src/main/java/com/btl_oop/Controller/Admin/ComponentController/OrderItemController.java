@@ -1,4 +1,4 @@
-package com.btl_oop.Controller.ComponentController;
+package com.btl_oop.Controller.Admin.ComponentController;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

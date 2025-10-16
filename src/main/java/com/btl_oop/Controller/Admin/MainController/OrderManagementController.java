@@ -1,6 +1,6 @@
-package com.btl_oop.Controller.MainController;
+package com.btl_oop.Controller.Admin.MainController;
 
-import com.btl_oop.Controller.ComponentController.OrderItemController;
+import com.btl_oop.Controller.Admin.ComponentController.OrderItemController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
@@ -37,7 +37,7 @@ public class OrderManagementController {
     public void addOrder(String orderId, String status, String customerName,
                          double totalPrice, String imagePath) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/btl_oop/FXML/components/orderItem.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/btl_oop/FXML/Admin/components/orderItem.fxml"));
             VBox orderItem = loader.load();
 
             OrderItemController controller = loader.getController();

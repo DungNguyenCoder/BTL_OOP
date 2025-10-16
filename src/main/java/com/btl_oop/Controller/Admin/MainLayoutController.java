@@ -1,4 +1,4 @@
-package com.btl_oop.Controller;
+package com.btl_oop.Controller.Admin;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -97,7 +97,7 @@ public class MainLayoutController {
 
     @FXML
     private void loadDashboard() {
-        loadContent("/com/btl_oop/FXML/layout_inside/dashboard_content.fxml");
+        loadContent("/com/btl_oop/FXML/Admin/layout_inside/dashboard_content.fxml");
         setActiveButton(btnDashboard);
     }
 
@@ -108,13 +108,13 @@ public class MainLayoutController {
             showAccessDenied();
             return;
         }
-        loadContent("/com/btl_oop/FXML/layout_inside/order_management.fxml");
+        loadContent("/com/btl_oop/FXML/Admin/layout_inside/order_management.fxml");
         setActiveButton(btnOrderManagement);
     }
 
     @FXML
     private void loadInventoryManagement() {
-        loadContent("/com/btl_oop/FXML/layout_inside/inventory_management.fxml");
+        loadContent("/com/btl_oop/FXML/Admin/layout_inside/inventory_management.fxml");
         setActiveButton(btnInventoryManagement);
     }
 
@@ -125,13 +125,13 @@ public class MainLayoutController {
             showAccessDenied();
             return;
         }
-        loadContent("/com/btl_oop/FXML/layout_inside/sales_reports.fxml");
+        loadContent("/com/btl_oop/FXML/Admin/layout_inside/sales_reports.fxml");
         setActiveButton(btnSalesReports);
     }
 
     @FXML
     private void loadCustomerFeedback() {
-        loadContent("/com/btl_oop/FXML/layout_inside/customer_feedback.fxml");
+        loadContent("/com/btl_oop/FXML/Admin/layout_inside/customer_feedback.fxml");
         setActiveButton(btnCustomerFeedback);
     }
 
@@ -142,7 +142,7 @@ public class MainLayoutController {
             showAccessDenied();
             return;
         }
-        loadContent("/com/btl_oop/FXML/layout_inside/customer_detail.fxml");
+        loadContent("/com/btl_oop/FXML/Admin/layout_inside/customer_detail.fxml");
         setActiveButton(btnCustomerDetail);
     }
 
