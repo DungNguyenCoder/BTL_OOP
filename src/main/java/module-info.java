@@ -24,4 +24,7 @@ module com.btl_oop {
         opens com.btl_oop.Controller to com.google.gson, javafx.fxml;
         exports com.btl_oop.Controller.Order;
         opens com.btl_oop.Controller.Order to com.google.gson, javafx.fxml;
-        }
+        requires java.sql;
+        requires java.desktop;
+        requires jbcrypt;
+}
