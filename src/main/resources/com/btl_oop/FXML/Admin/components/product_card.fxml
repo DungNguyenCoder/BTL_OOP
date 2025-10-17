@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/24.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.btl_oop.Controller.Admin.ComponentController.ProductCardController"
+      styleClass="product-card"
+      stylesheets="@../../../css/Admin/inventory.css">
+
+    <children>
+        <ImageView fx:id="imageView" fitHeight="140" fitWidth="200" preserveRatio="false"/>
+
+        <VBox styleClass="product-info" spacing="5">
+            <children>
+                <Label fx:id="nameLabel" text="Dish Name" styleClass="product-name"/>
+                <Label fx:id="descriptionLabel"
+                       text="Description"
+                       styleClass="product-description"
+                       wrapText="true"/>
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <children>
+                        <Label text="Edit Info" styleClass="edit-link" onMouseClicked="#handleEdit"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="priceLabel" text="0.00" styleClass="product-price"/>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</VBox>
