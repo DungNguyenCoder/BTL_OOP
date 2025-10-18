@@ -192,4 +192,21 @@ public class EmployeeDAO {
                 rs.getString("Status")
         );
     }
+
+    public boolean isEmployeeExists(String username) {
+        String sql = "SELECT COUNT(*) FROM employee WHERE Username = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1) > 0; // có ít nhất 1 bản ghi trùng username
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

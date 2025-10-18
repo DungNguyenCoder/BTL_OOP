@@ -1,5 +1,7 @@
 package com.btl_oop.Controller;
 
+import com.btl_oop.Model.DAO.EmployeeDAO;
+import com.btl_oop.Model.Entity.Employee;
 import com.btl_oop.Model.Entity.User;
 import com.btl_oop.Model.Store.UserStore;
 import com.btl_oop.Utils.AlertUtils;
@@ -8,51 +10,31 @@ import com.btl_oop.Utils.SceneUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.regex.Pattern;
 
 public class RegisterController {
-
-    @FXML
-    private CheckBox agreeCheck;
-
-    @FXML
-    private Button backToSignInButton;
-
-    @FXML
-    private PasswordField confirmPasswordField;
-
-    @FXML
-    private TextField emailField;
-
-    @FXML
-    private ImageView img_register;
-
-    @FXML
-    private TextField nameField;
-
-    @FXML
-    private PasswordField passwordField;
-
-    @FXML
-    private TextField phoneNumberField;
-
-    @FXML
-    private Button registerButton;
-
-    @FXML
-    private TextField usernameField;
+    @FXML private TextField fullNameField;
+    @FXML private TextField emailField;
+    @FXML private TextField phoneNumberField;
+    @FXML private DatePicker birthdayField;
+    @FXML private TextField usernameField;
+    @FXML private PasswordField passwordField;
+    @FXML private PasswordField confirmPasswordField;
+    @FXML private CheckBox checkOrderRole;
+    @FXML private CheckBox agreeCheck;
 
     @FXML
     public void onRegisterButtonClicked(ActionEvent event) {
-        String name = nameField.getText().trim();
+        String name = fullNameField.getText().trim();
+        String email = emailField.getText().trim();
+        String phoneNumber = phoneNumberField.getText().trim();
+        LocalDate birthday = birthdayField.getValue();
         String username = usernameField.getText().trim();
         String password = passwordField.getText().trim();
         String confirmPassword = confirmPasswordField.getText().trim();
-        String phoneNumber = phoneNumberField.getText().trim();
-        String email = emailField.getText().trim();
 
         String validationError = validateInputs(username, password, confirmPassword, name, phoneNumber, email);
         if (validationError != null) {
@@ -60,27 +42,34 @@ public class RegisterController {
             return;
         }
 
-        if (UserStore.userExists(username)) {
+        //Đang ki
+        EmployeeDAO employeeDAO = new EmployeeDAO();
+        String role = "Manager";
+        if(checkOrderRole.isSelected()) {
+            role = "Waiter";
+        }
+
+        if (employeeDAO.isEmployeeExists(username)) {
             AlertUtils.showError("Tài khoản đã tồn tại!");
             return;
         }
 
-        User newUser = new User(username, password, name, phoneNumber, email);
-        UserStore.addUser(newUser);
+        Employee employee = new Employee(0, username, password, name, email, phoneNumber, birthday, role, "Active");
+        employeeDAO.insertEmployee(employee);
 
         AlertUtils.showInfo("Đăng ký thành công!");
 
         try {
-            backToLogin(event);
+            SceneUtils.switchTo(event, AppConfig.PATH_LOGIN_SCREEN);;
         } catch (IOException e) {
             e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Error", "Không thể chuyển về màn hình đăng nhập: " + e.getMessage());
+            AlertUtils.showError("Không thể chuyển về màn hình đăng nhập: ");
         }
     }
 
     @FXML
     public void onBackToLoginClicked(ActionEvent event) throws IOException {
-        backToLogin(event);
+        SceneUtils.switchTo(event, AppConfig.PATH_LOGIN_SCREEN);
     }
 
     private String validateInputs(String username, String password, String confirmpassword,
@@ -111,20 +100,6 @@ public class RegisterController {
             return "Số điện thoại không hợp lệ!";
         }
         return null;
-    }
-
-    private void backToLogin(ActionEvent event) throws IOException {
-        SceneUtils.switchTo(event, AppConfig.PATH_LOGIN_SCREEN);
-    }
-
-    private void showAlert(Alert.AlertType type, String title, String message) {
-        System.out.println(title + ": " + message);
-
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 
     private boolean isValidEmail(String email) {

@@ -74,7 +74,7 @@ public class DishDAO {
                         rs.getString("Name"),
                         rs.getDouble("Price"),
                         rs.getString("Description"),
-                        rs.getInt("PreparedTime"),
+                        rs.getInt("PrepareTime"),
                         rs.getString("Category"),
                         rs.getString("ImageURL")
                 );

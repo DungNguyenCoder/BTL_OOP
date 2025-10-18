@@ -8,19 +8,12 @@ import com.btl_oop.Model.DAO.EmployeeDAO;
 import com.btl_oop.Model.Entity.Dish;
 import com.btl_oop.Model.Entity.Order;
 import com.btl_oop.Model.Entity.OrderItem;
-import com.btl_oop.Utils.AppConfig;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,7 +109,8 @@ public class OrderSummaryController {
                 return;
             }
 
-            String employeeInput = employeeNameField.getText().trim();
+//            String employeeInput = employeeNameField.getText().trim();
+            String employeeInput = "1";
             if (employeeInput.isEmpty()) {
                 showAlert("Lỗi nhập liệu", "Vui lòng nhập tên hoặc ID nhân viên!");
                 return;
@@ -124,7 +118,6 @@ public class OrderSummaryController {
 
             int employeeId;
             try {
-
                 employeeId = Integer.parseInt(employeeInput);
                 // Kiểm tra ID có tồn tại trong CSDL
                 employeeId = employeeDAO.getEmployeeIdById(employeeId);
@@ -176,7 +169,7 @@ public class OrderSummaryController {
             }
 
             currentOrderId = order.getOrderId();
-            saveToJson(order, items);
+//            saveToJson(order, items);
             showAlert("Thành công", "Đơn hàng đã được lưu thành công!");
 
         } catch (Exception e) {
@@ -213,36 +206,6 @@ public class OrderSummaryController {
         } catch (Exception e) {
             e.printStackTrace();
             showAlert("Lỗi", "Có lỗi xảy ra khi xử lý thanh toán: " + e.getMessage());
-        }
-    }
-
-    private void saveToJson(Order order, List<OrderItem> items) {
-        try {
-            Order jsonOrder = new Order(
-                    order.getOrderId(),
-                    order.getTableId(),
-                    order.getEmployeeId(),
-                    LocalDateTime.now(),
-                    order.getStatus(),
-                    subtotal,
-                    tax,
-                    total
-            );
-
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            String orderJson = gson.toJson(new OrderJsonWrapper(jsonOrder, items));
-
-            File file = new File(AppConfig.PATH_ORDERS_DATA);
-            if (!file.exists()) file.createNewFile();
-
-            try (FileWriter fw = new FileWriter(file, true)) {
-                fw.write(orderJson + "\n");
-            }
-
-            System.out.println("Đơn hàng đã được lưu vào orders.json");
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert("Cảnh báo", "Đã lưu vào CSDL nhưng không thể lưu vào file JSON!");
         }
     }
 
