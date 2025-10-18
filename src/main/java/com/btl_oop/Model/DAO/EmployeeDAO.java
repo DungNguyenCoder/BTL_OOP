@@ -95,6 +95,36 @@ public class EmployeeDAO {
             throw new RuntimeException("Lỗi khi lấy nhân viên với ID: " + employeeId, e);
         }
     }
+    public int getEmployeeIdById(int employeeId) {
+        String sql = "SELECT EmployeeID FROM Employee WHERE EmployeeID = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, employeeId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("EmployeeID");
+                }
+                return 0; // Nhân viên không tồn tại
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Lỗi khi kiểm tra EmployeeID: " + employeeId, e);
+        }
+    }
+    public int getEmployeeIdByName(String fullName) {
+        String sql = "SELECT EmployeeID FROM Employee WHERE FullName = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, fullName);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("EmployeeID");
+                }
+                return 0; // Nhân viên không tồn tại
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Lỗi khi lấy EmployeeID cho FullName: " + fullName, e);
+        }
+    }
 
     public boolean updateEmployee(Employee employee) {
         String sql = "UPDATE Employee SET UserName = ?, Password = ?, FullName = ?, Email = ?, " +

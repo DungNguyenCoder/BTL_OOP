@@ -33,9 +33,32 @@ public class DishDAO {
             throw new RuntimeException(" Failed to ensure Dish table", e);
         }
     }
-
+    public Dish getDishById(int dishId) {
+        String sql = "SELECT * FROM Dish WHERE DishID = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, dishId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return new Dish(
+                            rs.getInt("DishID"),
+                            rs.getString("Name"),
+                            rs.getDouble("Price"),
+                            rs.getString("Description"),
+                            rs.getInt("PrepareTime"),
+                            rs.getString("Category"),
+                            rs.getString("ImageURL")
+                    );
+                }
+                return null;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Không thể lấy Dish với ID: " + dishId, e);
+        }
+    }
 
     //get all list
+
 
     public List<Dish> getAllDish() {
         List<Dish> dishes = new ArrayList<>();

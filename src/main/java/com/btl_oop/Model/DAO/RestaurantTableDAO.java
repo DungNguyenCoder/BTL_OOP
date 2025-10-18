@@ -55,6 +55,21 @@ public class RestaurantTableDAO {
         }
         return tables;
     }
+    public int getTableIdByNumber(int tableNumber) {
+        String sql = "SELECT TableID FROM RestaurantTable WHERE TableNumber = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, tableNumber);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("TableID");
+                }
+                return 0;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Không thể lấy TableID cho TableNumber: " + tableNumber, e);
+        }
+    }
 
 
 }
