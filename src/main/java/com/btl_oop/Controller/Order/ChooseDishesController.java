@@ -1,6 +1,7 @@
 package com.btl_oop.Controller.Order;
 
 import com.btl_oop.Model.Entity.Dish;
+import com.btl_oop.Model.Enum.Category;
 import com.btl_oop.Utils.AppConfig;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -25,25 +26,18 @@ public class ChooseDishesController {
     @FXML private AnchorPane orderPanel;
     @FXML private OrderSummaryController orderSummaryController;
 
-    @FXML private Button btnAppetizers, btnSoups, btnSalads, btnBurgers, btnSteaks, btnChicken, btnSeafood, btnPasta, btnVegetarian, btnSides, btnDessert;
+    @FXML private Button btnSnack, btnMeal, btnVegan, btnDessert, btnDrink;
 
     private Button selectedButton = null;
 
     @FXML
     private void initialize() {
-        handleCategoryClick(btnAppetizers, "Appetizers");
-        btnAppetizers.setOnAction(e -> handleCategoryClick(btnAppetizers, "Appetizers"));
-        btnSoups.setOnAction(e -> handleCategoryClick(btnSoups, "Soups"));
-        btnSalads.setOnAction(e -> handleCategoryClick(btnSalads, "Salads"));
-        btnBurgers.setOnAction(e -> handleCategoryClick(btnBurgers, "Burgers"));
-        btnSteaks.setOnAction(e -> handleCategoryClick(btnSteaks, "Steaks"));
-        btnChicken.setOnAction(e -> handleCategoryClick(btnChicken, "Chicken"));
-        btnSeafood.setOnAction(e -> handleCategoryClick(btnSeafood, "Seafood"));
-        btnPasta.setOnAction(e -> handleCategoryClick(btnPasta, "Pasta"));
-        btnVegetarian.setOnAction(e -> handleCategoryClick(btnVegetarian, "Vegetarian"));
-        btnSides.setOnAction(e -> handleCategoryClick(btnSides, "Sides"));
+        handleCategoryClick(btnSnack, "Snack");
+        btnSnack.setOnAction(e -> handleCategoryClick(btnSnack, "Snack"));
+        btnMeal.setOnAction(e -> handleCategoryClick(btnMeal, "Meal"));
+        btnVegan.setOnAction(e -> handleCategoryClick(btnVegan, "Vegan"));
         btnDessert.setOnAction(e -> handleCategoryClick(btnDessert, "Dessert"));
-
+        btnDrink.setOnAction(e -> handleCategoryClick(btnDrink, "Drink"));
     }
 
     private void handleCategoryClick(Button clickedButton, String categoryName) {
@@ -69,7 +63,13 @@ public class ChooseDishesController {
         List<Dish> allDishes = loadDishesFromJson();
 
         List<Dish> filtered = allDishes.stream()
-                .filter(d -> d.getCategory().getDisplayName().equals(categoryName))
+                .filter(d -> {
+                    String cat = "Snack";
+                    if (d.getCategory() != null) {
+                        cat = d.getCategory().getDisplayName(); // enum -> String
+                    }
+                    return categoryName.equalsIgnoreCase(cat);
+                })
                 .toList();
         String tmp = filtered + " items available";
         availableDish.setText(tmp);

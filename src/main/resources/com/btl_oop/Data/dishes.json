@@ -1,312 +1,47 @@
 [
   {
-    "name": "Buffalo Wings",
-    "price": 12.99,
-    "description": "Crispy chicken wings tossed in buffalo sauce with celery and blue cheese",
-    "prepareTime": 15,
-    "category": "Appetizers"
+    "name": "French Fries",
+    "price": 3.5,
+    "description": "Crispy fries",
+    "prepareTime": 5,
+    "category": "Snack",
+    "imageUrl": "fries.png",
+    "isPopular": true
   },
   {
-    "name": "Buffalo Wings",
-    "price": 12.99,
-    "description": "Crispy chicken wings tossed in buffalo sauce with celery and blue cheese",
-    "prepareTime": 15,
-    "category": "Appetizers"
+    "name": "Chicken Wings",
+    "price": 5.0,
+    "description": "Spicy chicken wings",
+    "prepareTime": 8,
+    "category": "Vegan",
+    "imageUrl": "wings.png",
+    "isPopular": true
   },
   {
-    "name": "Buffalo Wings",
-    "price": 12.99,
-    "description": "Crispy chicken wings tossed in buffalo sauce with celery and blue cheese",
-    "prepareTime": 15,
-    "category": "Appetizers"
+    "name": "Tomato Soup",
+    "price": 4.2,
+    "description": "Fresh tomato soup with herbs",
+    "prepareTime": 7,
+    "category": "Snack",
+    "imageUrl": "tomato_soup.png",
+    "isPopular": false
   },
-  {
-    "name": "Buffalo Wings",
-    "price": 12.99,
-    "description": "Crispy chicken wings tossed in buffalo sauce with celery and blue cheese",
-    "prepareTime": 15,
-    "category": "Appetizers"
-  },
-  {
-    "name": "Buffalo Wings",
-    "price": 12.99,
-    "description": "Crispy chicken wings tossed in buffalo sauce with celery and blue cheese",
-    "prepareTime": 15,
-    "category": "Appetizers"
-  },
-  {
-    "name": "Buffalo Wings",
-    "price": 12.99,
-    "description": "Crispy chicken wings tossed in buffalo sauce with celery and blue cheese",
-    "prepareTime": 15,
-    "category": "Appetizers"
-  },
-  {
-    "name": "Buffalo Wings",
-    "price": 12.99,
-    "description": "Crispy chicken wings tossed in buffalo sauce with celery and blue cheese",
-    "prepareTime": 15,
-    "category": "Appetizers"
-  },
-  {
-    "name": "Buffalo Wings",
-    "price": 12.99,
-    "description": "Crispy chicken wings tossed in buffalo sauce with celery and blue cheese",
-    "prepareTime": 15,
-    "category": "Appetizers"
-  },
-  {
-    "name": "Buffalo Wings",
-    "price": 12.99,
-    "description": "Crispy chicken wings tossed in buffalo sauce with celery and blue cheese",
-    "prepareTime": 15,
-    "category": "Appetizers"
-  },
-  {
-    "name": "Buffalo Wings",
-    "price": 12.99,
-    "description": "Crispy chicken wings tossed in buffalo sauce with celery and blue cheese",
-    "prepareTime": 15,
-    "category": "Appetizers"
-  },
-  {
-    "name": "Buffalo Wings",
-    "price": 12.99,
-    "description": "Crispy chicken wings tossed in buffalo sauce with celery and blue cheese",
-    "prepareTime": 15,
-    "category": "Appetizers"
-  },
-  {
-    "name": "Buffalo Wings",
-    "price": 12.99,
-    "description": "Crispy chicken wings tossed in buffalo sauce with celery and blue cheese",
-    "prepareTime": 15,
-    "category": "Appetizers"
-  },
-  {
-    "name": "Buffalo Wings",
-    "price": 12.99,
-    "description": "Crispy chicken wings tossed in buffalo sauce with celery and blue cheese",
-    "prepareTime": 15,
-    "category": "Appetizers"
-  },
-  {
-    "name": "Buffalo Wings",
-    "price": 12.99,
-    "description": "Crispy chicken wings tossed in buffalo sauce with celery and blue cheese",
-    "prepareTime": 15,
-    "category": "Appetizers"
-  },
-  {
-    "name": "Mozzarella Sticks",
-    "price": 9.49,
-    "description": "Golden-fried mozzarella served with marinara dipping sauce",
-    "prepareTime": 15,
-    "category": "Appetizers"
-  },
-  {
-    "name": "Bruschetta",
-    "price": 8.49,
-    "description": "Toasted bread topped with tomatoes, basil, and olive oil",
-    "prepareTime": 15,
-    "category": "Appetizers"
-  },
-  {
-    "name": "Shrimp Cocktail",
-    "price": 13.49,
-    "description": "Chilled shrimp served with tangy cocktail sauce",
-    "prepareTime": 15,
-    "category": "Appetizers"
-  },
-
-  {
-    "name": "Tomato Basil Soup",
-    "price": 7.99,
-    "description": "Rich tomato soup with fresh basil and cream",
-    "prepareTime": 15,
-    "category": "Soups"
-  },
-  {
-    "name": "Chicken Noodle Soup",
-    "price": 8.49,
-    "description": "Classic chicken broth with noodles, carrots, and celery",
-    "prepareTime": 15,
-    "category": "Soups"
-  },
-  {
-    "name": "Mushroom Cream Soup",
-    "price": 9.29,
-    "description": "Creamy soup with sautéed mushrooms and herbs",
-    "prepareTime": 15,
-    "category": "Soups"
-  },
-
   {
     "name": "Caesar Salad",
-    "price": 9.99,
-    "description": "Fresh romaine lettuce with Caesar dressing and croutons",
-    "prepareTime": 15,
-    "category": "Salads"
+    "price": 6.5,
+    "description": "Classic caesar salad with dressing",
+    "prepareTime": 6,
+    "category": "Meal",
+    "imageUrl": "caesar_salad.png",
+    "isPopular": true
   },
   {
-    "name": "Greek Salad",
-    "price": 10.49,
-    "description": "Cucumbers, tomatoes, feta cheese, and olives with olive oil dressing",
+    "name": "Grilled Steak",
+    "price": 15.0,
+    "description": "Juicy grilled steak cooked to perfection",
     "prepareTime": 15,
-    "category": "Salads"
-  },
-
-  {
-    "name": "Classic Beef Burger",
-    "price": 11.99,
-    "description": "Grilled beef patty with lettuce, tomato, and cheese",
-    "prepareTime": 15,
-    "category": "Burgers"
-  },
-  {
-    "name": "Cheeseburger Deluxe",
-    "price": 12.49,
-    "description": "Beef burger topped with double cheese and crispy bacon",
-    "prepareTime": 15,
-    "category": "Burgers"
-  },
-  {
-    "name": "Chicken Burger",
-    "price": 10.99,
-    "description": "Grilled chicken breast with lettuce and garlic mayo",
-    "prepareTime": 15,
-    "category": "Burgers"
-  },
-
-  {
-    "name": "Ribeye Steak",
-    "price": 24.99,
-    "description": "Juicy ribeye steak grilled to perfection",
-    "prepareTime": 15,
-    "category": "Steaks"
-  },
-  {
-    "name": "Sirloin Steak",
-    "price": 22.49,
-    "description": "Tender sirloin served with garlic butter",
-    "prepareTime": 15,
-    "category": "Steaks"
-  },
-
-  {
-    "name": "Grilled Chicken Breast",
-    "price": 14.99,
-    "description": "Marinated chicken breast grilled with herbs",
-    "prepareTime": 15,
-    "category": "Chicken"
-  },
-  {
-    "name": "Fried Chicken Basket",
-    "price": 13.49,
-    "description": "Crispy fried chicken served with fries",
-    "prepareTime": 15,
-    "category": "Chicken"
-  },
-
-  {
-    "name": "Grilled Salmon",
-    "price": 19.99,
-    "description": "Fresh salmon fillet grilled and served with lemon butter",
-    "prepareTime": 15,
-    "category": "Seafood"
-  },
-  {
-    "name": "Fried Calamari",
-    "price": 15.49,
-    "description": "Lightly breaded calamari rings with marinara sauce",
-    "prepareTime": 15,
-    "category": "Seafood"
-  },
-  {
-    "name": "Garlic Shrimp Pasta",
-    "price": 16.99,
-    "description": "Shrimp sautéed in garlic butter over linguine",
-    "prepareTime": 15,
-    "category": "Seafood"
-  },
-
-  {
-    "name": "Spaghetti Bolognese",
-    "price": 12.99,
-    "description": "Classic spaghetti with rich meat sauce",
-    "prepareTime": 15,
-    "category": "Pasta"
-  },
-  {
-    "name": "Penne Alfredo",
-    "price": 11.99,
-    "description": "Penne pasta in creamy Alfredo sauce",
-    "prepareTime": 15,
-    "category": "Pasta"
-  },
-  {
-    "name": "Lasagna",
-    "price": 13.99,
-    "description": "Layered pasta with meat, cheese, and tomato sauce",
-    "prepareTime": 15,
-    "category": "Pasta"
-  },
-
-  {
-    "name": "Vegetable Stir Fry",
-    "price": 10.49,
-    "description": "Assorted fresh vegetables sautéed in soy sauce",
-    "prepareTime": 15,
-    "category": "Vegetarian"
-  },
-  {
-    "name": "Tofu Curry",
-    "price": 11.49,
-    "description": "Soft tofu in coconut curry sauce with rice",
-    "prepareTime": 15,
-    "category": "Vegetarian"
-  },
-
-  {
-    "name": "French Fries",
-    "price": 4.99,
-    "description": "Crispy golden fries with sea salt",
-    "prepareTime": 15,
-    "category": "Sides"
-  },
-  {
-    "name": "Mashed Potatoes",
-    "price": 5.49,
-    "description": "Creamy mashed potatoes with gravy",
-    "prepareTime": 15,
-    "category": "Sides"
-  },
-  {
-    "name": "Coleslaw",
-    "price": 3.99,
-    "description": "Fresh shredded cabbage with mayo dressing",
-    "prepareTime": 15,
-    "category": "Sides"
-  },
-  {
-    "name": "Chocolate Lava Cake",
-    "price": 7.99,
-    "description": "Warm chocolate cake with a gooey center",
-    "prepareTime": 15,
-    "category": "Dessert"
-  },
-  {
-    "name": "Cheesecake",
-    "price": 6.99,
-    "description": "Classic cheesecake with strawberry topping",
-    "prepareTime": 15,
-    "category": "Dessert"
-  },
-  {
-    "name": "Ice Cream Sundae",
-    "price": 5.99,
-    "description": "Vanilla ice cream topped with chocolate sauce and nuts",
-    "prepareTime": 15,
-    "category": "Dessert"
+    "category": "Snack",
+    "imageUrl": "steak.png",
+    "isPopular": true
   }
 ]

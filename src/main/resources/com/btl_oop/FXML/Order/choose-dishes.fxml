@@ -13,57 +13,27 @@
    <left>
       <VBox prefHeight="200.0" prefWidth="114.0" styleClass="category-box" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnAppetizers" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="294.0" styleClass="category-item" text="Appetizers">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="btnSoups" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="category-item" text="Soup">
+            <Button fx:id="btnSnack" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="category-item" text="Snack">
                <VBox.margin>
                   <Insets bottom="10.0" left="5.0" right="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="btnSalads" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="category-item" text="Salad">
+            <Button fx:id="btnMeal" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="category-item" text="Meal">
                <VBox.margin>
                   <Insets bottom="10.0" left="5.0" right="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="btnBurgers" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="category-item" text="Burgers">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="5.0" right="10.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="btnSteaks" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="category-item" text="Steaks">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="5.0" right="10.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="btnChicken" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="category-item" text="Chicken">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="5.0" right="10.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="btnSeafood" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="category-item" text="Seafood">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="5.0" right="10.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="btnPasta" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="category-item" text="Pasta">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="5.0" right="10.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="btnVegetarian" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="category-item" text="Vegetarian">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="5.0" right="10.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="btnSides" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="category-item" text="Sides">
+            <Button fx:id="btnVegan" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="category-item" text="Vegan">
                <VBox.margin>
                   <Insets bottom="10.0" left="5.0" right="10.0" />
                </VBox.margin>
             </Button>
             <Button fx:id="btnDessert" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="category-item" text="Dessert">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="5.0" right="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="btnDrink" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="category-item" text="Drink">
                <VBox.margin>
                   <Insets bottom="10.0" left="5.0" right="10.0" />
                </VBox.margin>
@@ -77,9 +47,9 @@
    <center>
       <AnchorPane prefHeight="800.0" prefWidth="1670.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox fx:id="appetizersPane" layoutX="9.0" maxWidth="1.7976931348623157E308" prefHeight="946.0" prefWidth="1612.0" styleClass="center-container" visible="true">
+            <VBox layoutX="9.0" maxWidth="1.7976931348623157E308" prefHeight="946.0" prefWidth="1612.0" styleClass="center-container" visible="true">
                <children>
-                  <Label fx:id="title" text="Appetizers" wrapText="true">
+                  <Label fx:id="title" text="Snack" wrapText="true">
                      <font>
                         <Font size="24.0" />
                      </font>

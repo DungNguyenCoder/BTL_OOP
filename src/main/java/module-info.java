@@ -22,6 +22,7 @@ module com.btl_oop {
     exports com.btl_oop.Model.Entity;
     exports com.btl_oop.Model.Store;
     exports com.btl_oop.Model.Data;
+    exports com.btl_oop.Model.Enum;
 
     exports com.btl_oop.Controller.Order;
 
