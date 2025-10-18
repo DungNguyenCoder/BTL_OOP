@@ -69,7 +69,7 @@ public class ChooseDishesController {
         List<Dish> allDishes = loadDishesFromJson();
 
         List<Dish> filtered = allDishes.stream()
-                .filter(d -> d.getCategory().equalsIgnoreCase(categoryName))
+                .filter(d -> d.getCategory().getDisplayName().equals(categoryName))
                 .toList();
         String tmp = filtered + " items available";
         availableDish.setText(tmp);

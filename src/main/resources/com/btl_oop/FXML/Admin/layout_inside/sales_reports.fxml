@@ -189,7 +189,7 @@
                                         <Region HBox.hgrow="ALWAYS" />
                                         <ImageView fitHeight="20" fitWidth="20">
                                             <image>
-                                                <Image url="@../../../img/ic_item/ic_home.png" />
+                                                <Image url="@../../../img/ic_item/ic_sold.png" />
                                             </image>
                                         </ImageView>
                                     </children>
@@ -214,7 +214,7 @@
                                         <Region HBox.hgrow="ALWAYS" />
                                         <ImageView fitHeight="20" fitWidth="20">
                                             <image>
-                                                <Image url="@../../../img/ic_item/ic_home.png" />
+                                                <Image url="@../../../img/ic_item/ic_profit.png" />
                                             </image>
                                         </ImageView>
                                     </children>
@@ -239,7 +239,7 @@
                                         <Region HBox.hgrow="ALWAYS" />
                                         <ImageView fitHeight="20" fitWidth="20">
                                             <image>
-                                                <Image url="@../../../img/ic_item/ic_home.png" />
+                                                <Image url="@../../../img/ic_item/ic_note.png" />
                                             </image>
                                         </ImageView>
                                     </children>
@@ -264,7 +264,7 @@
                                         <Region HBox.hgrow="ALWAYS" />
                                         <ImageView fitHeight="20" fitWidth="20">
                                             <image>
-                                                <Image url="@../../../img/ic_item/ic_home.png" />
+                                                <Image url="@../../../img/ic_item/ic_customer.png" />
                                             </image>
                                         </ImageView>
                                     </children>
