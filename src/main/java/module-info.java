@@ -15,7 +15,8 @@ module com.btl_oop {
         opens com.btl_oop.Model.Store to com.google.gson, javafx.fxml;
         opens com.btl_oop.Utils to javafx.fxml;
         opens com.btl_oop to javafx.fxml, com.google.gson;
-
+        requires java.sql;
+        requires mysql.connector.j;
         exports com.btl_oop;
         exports com.btl_oop.Controller;
         exports com.btl_oop.Model.Entity;
@@ -24,7 +25,7 @@ module com.btl_oop {
         opens com.btl_oop.Controller to com.google.gson, javafx.fxml;
         exports com.btl_oop.Controller.Order;
         opens com.btl_oop.Controller.Order to com.google.gson, javafx.fxml;
-        requires java.sql;
+
         requires java.desktop;
         requires jbcrypt;
 }
