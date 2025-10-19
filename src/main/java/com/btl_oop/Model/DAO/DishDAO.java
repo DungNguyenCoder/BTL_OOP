@@ -1,11 +1,8 @@
 package com.btl_oop.Model.DAO;
 
-import com.almasb.fxgl.physics.CollisionDetectionStrategy;
 import com.btl_oop.Model.Entity.Dish;
 import com.btl_oop.Utils.DBConnection;
 
-
-import javax.swing.plaf.basic.BasicListUI;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -126,7 +123,7 @@ public class DishDAO {
             ps.setString(3, dish.getDescription());
             ps.setInt(4, dish.getPrepareTime());
             ps.setString(5, dish.getCategory());
-            ps.setString(6, dish.getImageURL());
+            ps.setString(6, dish.getImageUrl());
 
             int affected = ps.executeUpdate();
             if (affected == 0) return false;
@@ -152,7 +149,7 @@ public class DishDAO {
            ps.setString(3, dish.getDescription());
            ps.setInt(4,dish.getPrepareTime());
            ps.setString(5, dish.getCategory());
-           ps.setString(6,dish.getImageURL());
+           ps.setString(6,dish.getImageUrl());
            ps.setInt(7, dish.getDishId());
 
            return ps.executeUpdate() >0;

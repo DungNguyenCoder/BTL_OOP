@@ -2,8 +2,6 @@ package com.btl_oop.Controller.LoginController;
 
 import com.btl_oop.Model.DAO.EmployeeDAO;
 import com.btl_oop.Model.Entity.Employee;
-import com.btl_oop.Model.Entity.User;
-import com.btl_oop.Model.Store.UserStore;
 import com.btl_oop.Utils.AlertUtils;
 import com.btl_oop.Utils.AppConfig;
 import com.btl_oop.Utils.SceneUtils;

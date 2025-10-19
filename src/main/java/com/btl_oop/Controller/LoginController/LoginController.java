@@ -2,8 +2,6 @@ package com.btl_oop.Controller.LoginController;
 
 import com.btl_oop.Model.DAO.EmployeeDAO;
 import com.btl_oop.Model.Entity.Employee;
-import com.btl_oop.Model.Entity.User;
-import com.btl_oop.Model.Store.UserStore;
 import com.btl_oop.Utils.AlertUtils;
 import com.btl_oop.Utils.AppConfig;
 import com.btl_oop.Utils.SceneUtils;
@@ -12,10 +10,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
-import java.util.List;
 
 public class LoginController {
     @FXML
@@ -51,7 +47,7 @@ public class LoginController {
 
         if ("ADMIN".equalsIgnoreCase(emp.getRole())) {
             AlertUtils.showInfo("Đăng nhập quản trị viên thành công");
-//            SceneUtils.switchTo(event, AppConfig.PATH_ADMIN_SCREEN);
+            SceneUtils.switchTo(event, AppConfig.PATH_ADMIN_SCREEN);
         } else {
             AlertUtils.showInfo("Đăng nhập nhân viên thành công");
             SceneUtils.switchTo(event, AppConfig.PATH_ORDER_MENU_SCREEN);
