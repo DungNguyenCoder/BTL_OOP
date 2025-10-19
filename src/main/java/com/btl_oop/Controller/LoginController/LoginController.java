@@ -7,6 +7,7 @@ import com.btl_oop.Utils.AppConfig;
 import com.btl_oop.Utils.SceneUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -19,6 +20,8 @@ public class LoginController {
     private TextField _usernameField;
     @FXML
     private PasswordField _password;
+    @FXML private Label signUpTab;
+    @FXML private Label logInTab;
 
     @FXML
     private void onLogin(ActionEvent event) throws IOException {
@@ -57,5 +60,27 @@ public class LoginController {
     @FXML
     private void onClickRegister(MouseEvent event) throws IOException {
         SceneUtils.switchTo(event, AppConfig.PATH_REGISTER_SCREEN);
+    }
+
+    @FXML
+    private void switchToSignUp(MouseEvent event) {
+//        signUpTab.getStyleClass().remove("toggle-inactive");
+//        signUpTab.getStyleClass().add("toggle-active");
+//
+//        logInTab.getStyleClass().remove("toggle-active");
+//        logInTab.getStyleClass().add("toggle-inactive");
+//
+//        System.out.println("Switched to Sign Up mode");
+    }
+
+    @FXML
+    private void switchToLogIn(MouseEvent event) {
+//        logInTab.getStyleClass().remove("toggle-inactive");
+//        logInTab.getStyleClass().add("toggle-active");
+//
+//        signUpTab.getStyleClass().remove("toggle-active");
+//        signUpTab.getStyleClass().add("toggle-inactive");
+//
+//        System.out.println("Switched to Log In mode");
     }
 }

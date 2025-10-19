@@ -2,10 +2,13 @@ package com.btl_oop.Controller.Admin;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.Node;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,6 +35,9 @@ public class MainLayoutController {
 
     @FXML
     private Button btnCustomerDetail;
+
+    @FXML
+    private Button btnLogout;
 
     private Button currentActiveButton;
 
@@ -75,6 +81,27 @@ public class MainLayoutController {
     private void loadCustomerDetail() {
         loadContent("/com/btl_oop/FXML/Admin/layout_inside/customer_detail.fxml");
         setActiveButton(btnCustomerDetail);
+    }
+
+    @FXML
+    private void loadLogout() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/btl_oop/FXML/layout_login/login-screen.fxml"));
+            Parent loginScreen = loader.load();
+
+            Stage currentStage = (Stage) btnLogout.getScene().getWindow();
+
+            Scene loginScene = new Scene(loginScreen);
+
+            currentStage.setScene(loginScene);
+            currentStage.setTitle("Login");
+
+            System.out.println("Logged out successfully!");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error loading login screen: " + e.getMessage());
+        }
     }
 
 
