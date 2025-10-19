@@ -1,5 +1,6 @@
 package com.btl_oop.Controller.Order;
 
+import com.btl_oop.Model.DAO.DishDAO;
 import com.btl_oop.Model.Entity.Dish;
 import com.btl_oop.Model.Enum.Category;
 import com.btl_oop.Utils.AppConfig;
@@ -15,6 +16,7 @@ import javafx.scene.layout.TilePane;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 import java.lang.reflect.Type;
 
@@ -60,19 +62,13 @@ public class ChooseDishesController {
         System.out.println("Loading " + categoryName + "...");
 
         contentArea.getChildren().clear();
-        List<Dish> allDishes = loadDishesFromJson();
+        List<Dish> allDishes = loadDishesFromDatabase();
 
         List<Dish> filtered = allDishes.stream()
-                .filter(d -> {
-                    String cat = "Snack";
-                    if (d.getCategory() != null) {
-                        cat = d.getCategory().getDisplayName(); // enum -> String
-                    }
-                    return categoryName.equalsIgnoreCase(cat);
-                })
+                .filter(d -> d.getCategory() != null && d.getCategory().equalsIgnoreCase(categoryName))
                 .toList();
-        String tmp = filtered + " items available";
-        availableDish.setText(tmp);
+
+        availableDish.setText(filtered.size() + " items available");
         for (Dish dish : filtered) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(AppConfig.PATH_DISH_ITEM_PANEL));
@@ -83,20 +79,17 @@ public class ChooseDishesController {
                 controller.setParentController(this);
 
                 contentArea.getChildren().add(dishNode);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-
-        availableDish.setText(filtered.size() + " items available");
     }
 
-    private List<Dish> loadDishesFromJson() {
-        try (InputStreamReader reader = new InputStreamReader(getClass().getResourceAsStream(AppConfig.PATH_DISHES_DATA), StandardCharsets.UTF_8)) {
-
-            Type listType = new TypeToken<List<Dish>>(){}.getType();
-            return new Gson().fromJson(reader, listType);
-
+    private List<Dish> loadDishesFromDatabase() {
+        try {
+            DishDAO dishDAO = new DishDAO();
+            return dishDAO.getAllDish(); // 🔹 Dùng DAO thay vì đọc JSON
         } catch (Exception e) {
             e.printStackTrace();
             return List.of();
@@ -108,4 +101,6 @@ public class ChooseDishesController {
         orderPanel.setManaged(true);
         orderSummaryController.addDish(dish, quantity);
     }
+
+
 }

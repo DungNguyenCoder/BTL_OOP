@@ -3,6 +3,7 @@ package com.btl_oop.Model.Entity;
 import com.btl_oop.Model.Enum.Category;
 
 public class Dish {
+    private int dishId;
     private String name;
     private double price;
     private String description;
@@ -23,6 +24,7 @@ public class Dish {
         this.isPopular = isPopular;
     }
 
+    public int getDishId() {return dishId;}
     public String getName() { return name; }
     public double getPrice() { return price; }
     public String getDescription() { return description; }
@@ -31,6 +33,7 @@ public class Dish {
     public String getImageUrl() { return imageUrl; }
     public boolean isPopular() { return isPopular; }
 
+    public void setDishId(int dishId) {this.dishId = dishId;}
     public void setName(String name) { this.name = name; }
     public void setPrice(double price) { this.price = price; }
     public void setDescription(String description) { this.description = description; }
