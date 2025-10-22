@@ -82,7 +82,7 @@ public class AddDishDialogController {
 
         int prepareTime = 0;
 
-        createdDish = new Dish(name, price, description, prepareTime, choice, selectedImageUrl, true);
+        createdDish = new Dish(name, price, description, prepareTime, choice, selectedImageUrl);
         closeSelf();
     }
 

@@ -12,34 +12,25 @@ module com.btl_oop {
     requires com.almasb.fxgl.all;
     requires java.desktop;
 
-
-    opens com.btl_oop.Model.Entity to com.google.gson, javafx.fxml;
-    opens com.btl_oop.Model.Store to com.google.gson, javafx.fxml;
+    opens com.btl_oop.Model.Entity to javafx.fxml;
     opens com.btl_oop.Utils to javafx.fxml;
-    opens com.btl_oop to javafx.fxml, com.google.gson;
 
+    opens com.btl_oop to javafx.fxml;
+    opens com.btl_oop.Controller.LoginController to javafx.fxml;
+    opens com.btl_oop.Controller.Admin to javafx.fxml;
+    opens com.btl_oop.Controller.Admin.ComponentController to javafx.fxml;
+    opens com.btl_oop.Controller.Admin.MainController to javafx.fxml;
+    opens com.btl_oop.Controller.Order to javafx.fxml;
 
     exports com.btl_oop;
     exports com.btl_oop.Model.Entity;
-    exports com.btl_oop.Model.Store;
-    exports com.btl_oop.Model.Data;
+    exports com.btl_oop.Controller.Order;
     exports com.btl_oop.Model.Enum;
 
-    exports com.btl_oop.Controller.Order;
-
-    exports com.btl_oop.Controller.Admin.MainController;
-    exports com.btl_oop.Controller.Admin.ComponentController;
-    exports com.btl_oop.Controller.Admin;
-
-    exports com.btl_oop.Controller.LoginController;
-
-
-    opens com.btl_oop.Controller.Order to com.google.gson, javafx.fxml;
-
-    opens com.btl_oop.Controller.Admin.MainController to com.google.gson, javafx.fxml;
-    opens com.btl_oop.Controller.Admin.ComponentController to com.google.gson, javafx.fxml;
-    opens com.btl_oop.Controller.Admin to com.google.gson, javafx.fxml;
-
-    opens com.btl_oop.Controller.LoginController to com.google.gson, javafx.fxml;
-
+    requires java.sql;
+    requires mysql.connector.j;
+    requires jbcrypt;
+    requires okhttp3;
+    requires org.json;
+    exports com.btl_oop.Model.DAO;
 }

@@ -1,5 +1,6 @@
 package com.btl_oop.Controller.Order;
 
+import com.btl_oop.Model.DAO.DishDAO;
 import com.btl_oop.Model.Entity.Dish;
 import com.btl_oop.Model.Enum.Category;
 import com.btl_oop.Utils.AppConfig;
@@ -26,7 +27,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+
 import java.util.HashMap;
+import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Map;
 import java.lang.reflect.Type;
@@ -185,6 +189,7 @@ public class ChooseDishesController {
 
         int row = 0;
         int col = 0;
+
         for (Dish dish : filtered) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(AppConfig.PATH_DISH_ITEM_PANEL));
@@ -201,11 +206,6 @@ public class ChooseDishesController {
                     col = 0;
                     row++;
                 }
-            } catch (IOException e) {
-                System.err.println("Error loading dish item: " + e.getMessage());
-                e.printStackTrace();
-            }
-        }
     }
 
     private void searchDishes(String searchText) {
@@ -304,7 +304,6 @@ public class ChooseDishesController {
                 e.printStackTrace();
                 return List.of();
             }
-
         } catch (Exception e) {
             System.err.println("ERROR loading dishes: " + e.getMessage());
             e.printStackTrace();
@@ -353,4 +352,6 @@ public class ChooseDishesController {
             this.countLabel = countLabel;
         }
     }
+
 }
+

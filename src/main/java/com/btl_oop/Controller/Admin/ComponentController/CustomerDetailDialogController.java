@@ -12,41 +12,18 @@ import javafx.stage.Stage;
 
 public class CustomerDetailDialogController {
 
-    @FXML
-    private Circle avatarCircle;
-
-    @FXML
-    private Label customerNameLabel;
-
-    @FXML
-    private Label customerEmailLabel;
-
-    @FXML
-    private Label statusBadge;
-
-    @FXML
-    private TextField fullNameField;
-
-    @FXML
-    private TextField nickNameField;
-
-    @FXML
-    private TextField genderField;
-
-    @FXML
-    private TextField languageField;
-
-    @FXML
-    private Label emailAddressLabel;
-
-    @FXML
-    private Label emailTimeLabel;
-
-    @FXML
-    private Button editButton;
-
-    @FXML
-    private Button saveButton;
+    @FXML private Circle avatarCircle;
+    @FXML private Label customerNameLabel;
+    @FXML private Label customerEmailLabel;
+    @FXML private Label statusBadge;
+    @FXML private TextField fullNameField;
+    @FXML private TextField nickNameField;
+    @FXML private TextField genderField;
+    @FXML private TextField languageField;
+    @FXML private Label emailAddressLabel;
+    @FXML private Label emailTimeLabel;
+    @FXML private Button editButton;
+    @FXML private Button saveButton;
 
     private Customer currentCustomer;
     private boolean isEditMode = false;
