@@ -11,6 +11,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -29,6 +30,8 @@ public class OrderSummaryController {
     @FXML private Label subtotalLabel;
     @FXML private Label taxLabel;
     @FXML private Label totalLabel;
+    @FXML private Button reviewOrderButton;
+    @FXML private ImageView closeButton;
 
     private final List<OrderItem> items = new ArrayList<>();
     private final Map<String, OrderItemUI> itemUIMap = new HashMap<>(); // Key = dish name
@@ -36,6 +39,22 @@ public class OrderSummaryController {
     private double subtotal = 0;
     private double tax = 0;
     private double total = 0;
+
+    private com.btl_oop.Controller.Order.ChooseDishesController parentController;
+
+    public void setParentController(com.btl_oop.Controller.Order.ChooseDishesController controller) {
+        this.parentController = controller;
+    }
+
+    @FXML
+    private void initialize() {
+        System.out.println("OrderSummaryController initialized");
+
+        if (closeButton != null) {
+            closeButton.setOnMouseEntered(e -> closeButton.setOpacity(0.7));
+            closeButton.setOnMouseExited(e -> closeButton.setOpacity(1.0));
+        }
+    }
 
     public void addDish(Dish dish, int quantity) {
         System.out.println("OrderSummaryController.addDish() called: " + dish.getName() + " x " + quantity);
@@ -209,6 +228,17 @@ public class OrderSummaryController {
                 ", Subtotal: $" + String.format("%.2f", subtotal) +
                 ", Tax: $" + String.format("%.2f", tax) +
                 ", Total: $" + String.format("%.2f", total));
+    }
+
+    @FXML
+    private void closeSummary() {
+        System.out.println("Closing Order Summary");
+
+        if (parentController != null) {
+            parentController.hideOrderSummary();
+        } else {
+            orderItemsList.getScene().getWindow().hide();
+        }
     }
 
     @FXML

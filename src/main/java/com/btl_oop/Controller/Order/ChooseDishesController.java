@@ -89,10 +89,18 @@ public class ChooseDishesController {
         });
 
         if (orderSummaryController != null) {
+            orderSummaryController.setParentController(this);
             System.out.println("OrderSummaryController successfully injected!");
         } else {
             System.err.println("WARNING: OrderSummaryController is NULL!");
         }
+    }
+
+    @FXML
+    public void hideOrderSummary() {
+        orderSummary.setVisible(false);
+        orderSummary.setManaged(false);
+        System.out.println("Order Summary hidden");
     }
 
     private void initializeCategoryMap() {
