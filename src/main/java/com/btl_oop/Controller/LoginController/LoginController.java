@@ -17,16 +17,16 @@ import java.util.List;
 
 public class LoginController {
     @FXML
-    private TextField _usernameField;
+    private TextField usernameField;
     @FXML
-    private PasswordField _password;
+    private PasswordField passwordField;
     @FXML private Label signUpTab;
     @FXML private Label logInTab;
 
     @FXML
     private void onLogin(ActionEvent event) throws IOException {
-        String user = _usernameField.getText();
-        String pass = _password.getText();
+        String user = usernameField.getText();
+        String pass = passwordField.getText();
 
         if (user.equals("admin") && pass.equals("admin")) {
             AlertUtils.showInfo("Đăng nhập quản trị viên thành công");
