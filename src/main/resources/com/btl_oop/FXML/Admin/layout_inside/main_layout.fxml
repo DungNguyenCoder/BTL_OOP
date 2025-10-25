@@ -116,6 +116,20 @@
                         </HBox>
                     </graphic>
                 </Button>
+
+                <Button fx:id="btnLogout" maxWidth="Infinity" styleClass="menu-button"
+                        onAction="#loadLogout">
+                    <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="12">
+                            <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
+                                <image>
+                                    <Image url="@../../../img/ic_item/ic_logout.png" />
+                                </image>
+                            </ImageView>
+                            <Label text="Logout" />
+                        </HBox>
+                    </graphic>
+                </Button>
             </children>
         </VBox>
     </left>
