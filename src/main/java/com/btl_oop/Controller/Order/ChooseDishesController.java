@@ -123,7 +123,7 @@ public class ChooseDishesController {
             long count = allDishes.stream()
                     .filter(d -> {
                         if (d.getCategory() == null) return false;
-                        return category.equalsIgnoreCase(d.getCategory().getDisplayName());
+                        return category.equalsIgnoreCase(d.getCategory());
                     })
                     .count();
 
@@ -179,7 +179,7 @@ public class ChooseDishesController {
         List<Dish> filtered = allDishes.stream()
                 .filter(d -> {
                     if (d.getCategory() == null) return false;
-                    return categoryName.equalsIgnoreCase(d.getCategory().getDisplayName());
+                    return categoryName.equalsIgnoreCase(d.getCategory());
                 })
                 .toList();
 
@@ -189,7 +189,6 @@ public class ChooseDishesController {
 
         int row = 0;
         int col = 0;
-
         for (Dish dish : filtered) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(AppConfig.PATH_DISH_ITEM_PANEL));
@@ -206,6 +205,11 @@ public class ChooseDishesController {
                     col = 0;
                     row++;
                 }
+            } catch (IOException e) {
+                System.err.println("Error loading dish item: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
     }
 
     private void searchDishes(String searchText) {
@@ -290,7 +294,7 @@ public class ChooseDishesController {
                     System.out.println(String.format("  %d. %s | %s | $%.2f | %dmin",
                             i + 1,
                             dish.getName(),
-                            dish.getCategory() != null ? dish.getCategory().getDisplayName() : "NULL",
+                            dish.getCategory() != null ? dish.getCategory() : "NULL",
                             dish.getPrice(),
                             dish.getPrepareTime()
                     ));

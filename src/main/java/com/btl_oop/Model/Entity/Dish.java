@@ -10,7 +10,6 @@ public class Dish {
     private int prepareTime;
     private String imageUrl;
     private String category;
-    private Category selectedCategory;
 
     public Dish() {}
 
@@ -21,15 +20,6 @@ public class Dish {
         this.description = description;
         this.prepareTime = prepareTime;
         this.category = category;
-        this.imageUrl = imageUrl;
-    }
-
-    public Dish(String name, double price, String description, int prepareTime, Category selectedCategory, String imageUrl) {
-        this.name = name;
-        this.price = price;
-        this.description = description;
-        this.prepareTime = prepareTime;
-        this.selectedCategory = selectedCategory;
         this.imageUrl = imageUrl;
     }
 

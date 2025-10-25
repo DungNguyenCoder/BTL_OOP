@@ -98,4 +98,6 @@ public class OrderItemDAO {
             throw new RuntimeException("Lỗi khi xóa OrderItem: " + orderItemId, e);
         }
     }
+
+    //thêm lấy món ăn từ order theo id
 }
