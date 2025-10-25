@@ -160,7 +160,7 @@ public class InventoryManagementController {
 //        filteredDishes.stream()
 //                .filter(Dish::isPopular)
 //                .forEach(dish -> addDishToPane(dish, popularPane));
-
+//
 //        filteredDishes.forEach(dish -> addDishToPane(dish, allFoodsPane));
     }
 
