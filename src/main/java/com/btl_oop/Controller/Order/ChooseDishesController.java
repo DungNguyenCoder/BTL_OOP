@@ -255,6 +255,7 @@ public class ChooseDishesController {
         }
     }
 
+    //Sua sang load from SQL
     private List<Dish> loadDishesFromJson() {
         System.out.println("=== LOADING DISHES ===");
         System.out.println("Path: " + AppConfig.PATH_DISHES_DATA);

@@ -44,7 +44,8 @@ public class DishDAO {
                             rs.getString("Description"),
                             rs.getInt("PrepareTime"),
                             rs.getString("Category"),
-                            rs.getString("ImageURL")
+                            rs.getString("ImageURL"),
+                            rs.getBoolean("isPopular")
                     );
                 }
                 return null;
@@ -73,7 +74,8 @@ public class DishDAO {
                         rs.getString("Description"),
                         rs.getInt("PrepareTime"),
                         rs.getString("Category"),
-                        rs.getString("ImageURL")
+                        rs.getString("ImageURL"),
+                        rs.getBoolean("isPopular")
                 );
                 dishes.add(a);
             }
@@ -102,7 +104,8 @@ public class DishDAO {
                         rs.getString("Description"),
                         rs.getInt("PreparedTime"),
                         rs.getString("Category"),
-                        rs.getString("ImageURL")
+                        rs.getString("ImageURL"),
+                        rs.getBoolean("isPopular")
                 );
                 dishes.add(dish);
             }

@@ -115,7 +115,8 @@ public class OrderItemDAO {
                             rs.getString("Description"),
                             rs.getInt("PrepareTime"),
                             rs.getString("Category"),
-                            rs.getString("ImageUrl")
+                            rs.getString("ImageUrl"),
+                            rs.getBoolean("isPopular")
                     );
                 }
             }

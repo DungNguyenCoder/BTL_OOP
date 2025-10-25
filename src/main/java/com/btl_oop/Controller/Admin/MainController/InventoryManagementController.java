@@ -46,35 +46,35 @@ public class InventoryManagementController {
 
         allDishes.add(new Dish("Chocolate Brownie", 15.00,
                 "Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.",
-                10, Category.DESSERT.getDisplayName(), "/com/btl_oop/img/img/product_brownie.png"));
+                10, Category.DESSERT.getDisplayName(), "/com/btl_oop/img/img/product_brownie.png", false));
 
         allDishes.add(new Dish("Burger", 10.00,
                 "Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.",
-                8, Category.MEAL.getDisplayName(), "/com/btl_oop/img/img/product_burger.png"));
+                8, Category.MEAL.getDisplayName(), "/com/btl_oop/img/img/product_burger.png", true));
 
         allDishes.add(new Dish("Macarons", 12.00,
                 "Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.",
-                5, Category.DESSERT.getDisplayName(), "/com/btl_oop/img/img/product_macarons.png"));
+                5, Category.DESSERT.getDisplayName(), "/com/btl_oop/img/img/product_macarons.png",true));
 
         allDishes.add(new Dish("Strawberry Cake", 15.00,
                 "Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.",
-                10, Category.DESSERT.getDisplayName(), "/com/btl_oop/img/img/product_brownie_pink.png"));
+                10, Category.DESSERT.getDisplayName(), "/com/btl_oop/img/img/product_brownie_pink.png",false));
 
         allDishes.add(new Dish("Chocolate Cake", 10.00,
                 "Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.",
-                12, Category.DESSERT.getDisplayName(), "/com/btl_oop/img/img/product_cake.png"));
+                12, Category.DESSERT.getDisplayName(), "/com/btl_oop/img/img/product_cake.png", false));
 
         allDishes.add(new Dish("Mojito", 12.00,
                 "Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.",
-                2, Category.DRINK.getDisplayName(), "/com/btl_oop/img/img/product_drink.png"));
+                2, Category.DRINK.getDisplayName(), "/com/btl_oop/img/img/product_drink.png",false));
 
         allDishes.add(new Dish("Nachos", 8.00,
                 "Crispy tortilla chips with cheese and salsa.",
-                5, Category.SNACK.getDisplayName(), "/com/btl_oop/img/img/product_brownie.png"));
+                5, Category.SNACK.getDisplayName(), "/com/btl_oop/img/img/product_brownie.png",true));
 
         allDishes.add(new Dish("Vegan Salad", 11.00,
                 "Fresh vegetable salad with olive oil.",
-                7, Category.VEGAN.getDisplayName(), "/com/btl_oop/img/img/product_burger.png"));
+                7, Category.VEGAN.getDisplayName(), "/com/btl_oop/img/img/product_burger.png",false));
     }
 
     private void initializeCategoryCards() {
@@ -152,16 +152,16 @@ public class InventoryManagementController {
         if (selectedCategory == null) {
             filteredDishes = allDishes;
         } else {
-//            filteredDishes = allDishes.stream()
-//                    .filter(dish -> dish.getCategory() == selectedCategory)
-//                    .collect(Collectors.toList());
+            filteredDishes = allDishes.stream()
+                    .filter(dish -> dish.getCategory() == selectedCategory.getDisplayName())
+                    .collect(Collectors.toList());
         }
 
-//        filteredDishes.stream()
-//                .filter(Dish::isPopular)
-//                .forEach(dish -> addDishToPane(dish, popularPane));
-//
-//        filteredDishes.forEach(dish -> addDishToPane(dish, allFoodsPane));
+        filteredDishes.stream()
+                .filter(dish -> dish.isPopular())
+                .forEach(dish -> addDishToPane(dish, popularPane));
+
+        filteredDishes.forEach(dish -> addDishToPane(dish, allFoodsPane));
     }
 
     @FXML
