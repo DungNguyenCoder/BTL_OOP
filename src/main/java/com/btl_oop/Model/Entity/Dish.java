@@ -23,6 +23,16 @@ public class Dish {
         this.imageUrl = imageUrl;
     }
 
+    public Dish(String name, double price, String description, int prepareTime, String category, String imageUrl) {
+        this.dishId = 0; // Auto Increament
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.prepareTime = prepareTime;
+        this.category = category;
+        this.imageUrl = imageUrl;
+    }
+
     public int getDishId() {return dishId;}
     public String getName() { return name; }
     public double getPrice() { return price; }

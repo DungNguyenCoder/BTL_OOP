@@ -46,35 +46,35 @@ public class InventoryManagementController {
 
         allDishes.add(new Dish("Chocolate Brownie", 15.00,
                 "Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.",
-                10, Category.DESSERT, "/com/btl_oop/img/img/product_brownie.png"));
+                10, Category.DESSERT.getDisplayName(), "/com/btl_oop/img/img/product_brownie.png"));
 
         allDishes.add(new Dish("Burger", 10.00,
                 "Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.",
-                8, Category.MEAL, "/com/btl_oop/img/img/product_burger.png"));
+                8, Category.MEAL.getDisplayName(), "/com/btl_oop/img/img/product_burger.png"));
 
         allDishes.add(new Dish("Macarons", 12.00,
                 "Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.",
-                5, Category.DESSERT, "/com/btl_oop/img/img/product_macarons.png"));
+                5, Category.DESSERT.getDisplayName(), "/com/btl_oop/img/img/product_macarons.png"));
 
         allDishes.add(new Dish("Strawberry Cake", 15.00,
                 "Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.",
-                10, Category.DESSERT, "/com/btl_oop/img/img/product_brownie_pink.png"));
+                10, Category.DESSERT.getDisplayName(), "/com/btl_oop/img/img/product_brownie_pink.png"));
 
         allDishes.add(new Dish("Chocolate Cake", 10.00,
                 "Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.",
-                12, Category.DESSERT, "/com/btl_oop/img/img/product_cake.png"));
+                12, Category.DESSERT.getDisplayName(), "/com/btl_oop/img/img/product_cake.png"));
 
         allDishes.add(new Dish("Mojito", 12.00,
                 "Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.",
-                2, Category.DRINK, "/com/btl_oop/img/img/product_drink.png"));
+                2, Category.DRINK.getDisplayName(), "/com/btl_oop/img/img/product_drink.png"));
 
         allDishes.add(new Dish("Nachos", 8.00,
                 "Crispy tortilla chips with cheese and salsa.",
-                5, Category.SNACK, "/com/btl_oop/img/img/product_brownie.png"));
+                5, Category.SNACK.getDisplayName(), "/com/btl_oop/img/img/product_brownie.png"));
 
         allDishes.add(new Dish("Vegan Salad", 11.00,
                 "Fresh vegetable salad with olive oil.",
-                7, Category.VEGAN, "/com/btl_oop/img/img/product_burger.png"));
+                7, Category.VEGAN.getDisplayName(), "/com/btl_oop/img/img/product_burger.png"));
     }
 
     private void initializeCategoryCards() {

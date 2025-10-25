@@ -19,6 +19,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,9 +29,7 @@ import java.util.Map;
 
 public class OrderSummaryController {
     @FXML private TextField tableNumberField;
-
     @FXML private VBox orderItemsList;
-
     @FXML private Label subtotalLabel;
     @FXML private Label taxLabel;
     @FXML private Label totalLabel;
@@ -36,7 +37,7 @@ public class OrderSummaryController {
     @FXML private ImageView closeButton;
 
     private final List<OrderItem> items = new ArrayList<>();
-    private final Map<String, OrderItemUI> itemUIMap = new HashMap<>(); // Key = dish name
+    private final Map<String, OrderItemUI> itemUIMap = new HashMap<>(); // Key = dishId (String)
 
     private double subtotal = 0;
     private double tax = 0;
@@ -55,6 +56,10 @@ public class OrderSummaryController {
         this.parentController = controller;
     }
 
+    private Dish getDishFromOrderItem(OrderItem item) {
+        return dishDAO.getDishById(item.getDishId());
+    }
+
     @FXML
     private void initialize() {
         System.out.println("OrderSummaryController initialized");
@@ -66,15 +71,11 @@ public class OrderSummaryController {
     }
 
     public void addDish(Dish dish, int quantity) {
-
         System.out.println("OrderSummaryController.addDish() called: " + dish.getName() + " x " + quantity);
 
-
-        // Find existing item by name
         OrderItem existingItem = null;
         for (OrderItem i : items) {
-
-            if (i.getDish().getName().equals(dish.getName())) { // So sánh bằng name
+            if (i.getDishId() == dish.getDishId()) {
                 existingItem = i;
                 break;
             }
@@ -86,7 +87,7 @@ public class OrderSummaryController {
             updateItemUI(existingItem);
         } else {
             System.out.println("New item, creating UI");
-            OrderItem newItem = new OrderItem(dish, quantity);
+            OrderItem newItem = new OrderItem(0, 0, dish.getDishId(), quantity);
             items.add(newItem);
             createItemUI(newItem);
         }
@@ -95,6 +96,13 @@ public class OrderSummaryController {
     }
 
     private void createItemUI(OrderItem item) {
+        // Lấy Dish từ database
+        Dish dish = getDishFromOrderItem(item);
+        if (dish == null) {
+            System.err.println("ERROR: Cannot create UI for item with invalid DishID: " + item.getDishId());
+            return;
+        }
+
         VBox itemBox = new VBox(5);
         itemBox.setStyle(
                 "-fx-background-color: #f8f8f8; " +
@@ -105,12 +113,12 @@ public class OrderSummaryController {
                         "-fx-border-width: 1;"
         );
 
-        Label nameLabel = new Label(item.getDish().getName());
+        Label nameLabel = new Label(dish.getName());
         nameLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #1a1a1a;");
         nameLabel.setWrapText(true);
 
         Label priceEachLabel = new Label(String.format("$%.2f × %d",
-                item.getDish().getPrice(),
+                dish.getPrice(),
                 item.getQuantity()
         ));
         priceEachLabel.setStyle("-fx-text-fill: #666; -fx-font-size: 12px;");
@@ -166,7 +174,7 @@ public class OrderSummaryController {
         });
 
         Label totalPriceLabel = new Label(String.format("$%.2f",
-                item.getDish().getPrice() * item.getQuantity()
+                dish.getPrice() * item.getQuantity()
         ));
         totalPriceLabel.setStyle(
                 "-fx-font-weight: bold; " +
@@ -178,48 +186,56 @@ public class OrderSummaryController {
         totalPriceLabel.setAlignment(Pos.CENTER_RIGHT);
 
         controlBox.getChildren().addAll(minusBtn, qtyLabel, plusBtn, totalPriceLabel);
-
         itemBox.getChildren().addAll(nameLabel, priceEachLabel, controlBox);
 
         OrderItemUI itemUI = new OrderItemUI(itemBox, qtyLabel, priceEachLabel, totalPriceLabel);
-        itemUIMap.put(item.getDish().getName(), itemUI); // Key = name
+        itemUIMap.put(String.valueOf(item.getDishId()), itemUI);
 
         orderItemsList.getChildren().add(itemBox);
 
-        System.out.println("Item UI created and added to orderList for: " + item.getDish().getName());
+        System.out.println("Item UI created and added to orderList for: " + dish.getName());
     }
 
     private void updateItemUI(OrderItem item) {
-        String dishName = item.getDish().getName();
-        OrderItemUI itemUI = itemUIMap.get(dishName);
+        // Lấy Dish từ database
+        Dish dish = getDishFromOrderItem(item);
+        if (dish == null) {
+            System.err.println("ERROR: Cannot update UI for item with invalid DishID: " + item.getDishId());
+            return;
+        }
+
+        String key = String.valueOf(item.getDishId());
+        OrderItemUI itemUI = itemUIMap.get(key);
 
         if (itemUI != null) {
             itemUI.quantityLabel.setText(String.valueOf(item.getQuantity()));
             itemUI.priceEachLabel.setText(String.format("$%.2f × %d",
-                    item.getDish().getPrice(),
+                    dish.getPrice(),
                     item.getQuantity()
             ));
             itemUI.totalPriceLabel.setText(String.format("$%.2f",
-                    item.getDish().getPrice() * item.getQuantity()
+                    dish.getPrice() * item.getQuantity()
             ));
-            System.out.println("Updated UI for: " + dishName + ", new quantity: " + item.getQuantity());
+            System.out.println("Updated UI for: " + dish.getName() + ", new quantity: " + item.getQuantity());
         } else {
-            System.err.println("WARNING: Could not find UI for dish: " + dishName);
+            System.err.println("WARNING: Could not find UI for dish ID: " + item.getDishId());
         }
     }
 
     private void removeItem(OrderItem item) {
-        String dishName = item.getDish().getName();
-        OrderItemUI itemUI = itemUIMap.get(dishName);
+        String key = String.valueOf(item.getDishId());
+        OrderItemUI itemUI = itemUIMap.get(key);
 
         if (itemUI != null) {
             orderItemsList.getChildren().remove(itemUI.itemBox);
-            itemUIMap.remove(dishName);
+            itemUIMap.remove(key);
         }
 
         items.remove(item);
         updateTotals();
 
+        Dish dish = getDishFromOrderItem(item);
+        String dishName = dish != null ? dish.getName() : "DishID " + item.getDishId();
         System.out.println("Item removed: " + dishName);
     }
 
@@ -227,9 +243,13 @@ public class OrderSummaryController {
         subtotal = 0;
 
         for (OrderItem item : items) {
-
-            subtotal += item.getDish().getPrice() * item.getQuantity();
-
+            // Lấy Dish từ database theo dishId
+            Dish dish = getDishFromOrderItem(item);
+            if (dish != null) {
+                subtotal += dish.getPrice() * item.getQuantity();
+            } else {
+                System.err.println("WARNING: Could not find dish with ID: " + item.getDishId());
+            }
         }
 
         tax = subtotal * 0.1;
@@ -268,34 +288,24 @@ public class OrderSummaryController {
     @FXML
     private void confirmOrder() {
         if (items.isEmpty()) {
-            System.out.println("No items in order!");
-            // TODO: Show alert to user
+            showAlert("Lỗi", "Vui lòng thêm ít nhất một món trước khi xác nhận!");
             return;
         }
 
         try {
-            if (items.isEmpty()) {
-                showAlert("Lỗi", "Vui lòng thêm ít nhất một món trước khi xác nhận!");
-                return;
-            }
-
             int tableNumber;
             try {
                 String tableText = tableNumberField.getText().trim();
                 if (tableText.isEmpty()) {
-                    System.out.println("Please enter a table number!");
-                    // TODO: Show alert to user
+                    showAlert("Lỗi nhập liệu", "Vui lòng nhập số bàn!");
                     return;
                 }
                 tableNumber = Integer.parseInt(tableText);
             } catch (NumberFormatException e) {
-
-                System.out.println("Please enter a valid table number!");
-                // TODO: Show alert to user
+                showAlert("Lỗi nhập liệu", "Số bàn phải là số nguyên!");
                 return;
             }
 
-//            String employeeInput = employeeNameField.getText().trim();
             String employeeInput = "1";
             if (employeeInput.isEmpty()) {
                 showAlert("Lỗi nhập liệu", "Vui lòng nhập tên hoặc ID nhân viên!");
@@ -305,14 +315,12 @@ public class OrderSummaryController {
             int employeeId;
             try {
                 employeeId = Integer.parseInt(employeeInput);
-                // Kiểm tra ID có tồn tại trong CSDL
                 employeeId = employeeDAO.getEmployeeIdById(employeeId);
                 if (employeeId == 0) {
                     showAlert("Nhân viên không hợp lệ", "ID nhân viên " + employeeInput + " không tồn tại!");
                     return;
                 }
             } catch (NumberFormatException e) {
-                // Nếu không phải số, tìm theo tên
                 employeeId = employeeDAO.getEmployeeIdByName(employeeInput);
                 if (employeeId == 0) {
                     showAlert("Nhân viên không hợp lệ", "Nhân viên " + employeeInput + " không tồn tại!");
@@ -327,14 +335,14 @@ public class OrderSummaryController {
             }
 
             Order order = new Order(
-                    0, // OrderID do CSDL gán
+                    0,
                     tableId,
                     employeeId,
-                    null, // CheckoutTime
+                    null,
                     "Serving",
-                    0, // Subtotal
-                    0, // Tax
-                    0  // Total
+                    0,
+                    0,
+                    0
             );
 
             boolean orderSaved = orderDAO.insertOrder(order);
@@ -355,14 +363,12 @@ public class OrderSummaryController {
             }
 
             currentOrderId = order.getOrderId();
-//            saveToJson(order, items);
             showAlert("Thành công", "Đơn hàng đã được lưu thành công!");
 
             clearAll();
             tableNumberField.clear();
 
             System.out.println("Order confirmed and cleared!");
-            // TODO: Show success alert to user
 
         } catch (Exception e) {
             System.err.println("Error confirming order: " + e.getMessage());
@@ -371,6 +377,7 @@ public class OrderSummaryController {
         }
     }
 
+    /*
     @FXML
     private void processPayment() {
         try {
@@ -400,6 +407,7 @@ public class OrderSummaryController {
             showAlert("Lỗi", "Có lỗi xảy ra khi xử lý thanh toán: " + e.getMessage());
         }
     }
+    */
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -418,7 +426,7 @@ public class OrderSummaryController {
             this.items = items;
         }
     }
-  
+
     private static class OrderItemUI {
         VBox itemBox;
         Label quantityLabel;

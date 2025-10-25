@@ -1,7 +1,7 @@
 package com.btl_oop.Controller.Admin.MainController;
 
 import com.btl_oop.Controller.Admin.ComponentController.FeedbackCardController;
-import com.btl_oop.Model.CustomerFeedback;
+import com.btl_oop.Model.Data.CustomerFeedback;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;

@@ -1,4 +1,4 @@
-package com.btl_oop.Model;
+package com.btl_oop.Model.Data;
 
 public class CustomerFeedback {
     private String customerName;

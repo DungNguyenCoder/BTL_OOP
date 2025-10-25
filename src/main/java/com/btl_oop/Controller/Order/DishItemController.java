@@ -40,10 +40,10 @@ public class DishItemController {
             dishPrepareTime.setText(String.format("%dmin", dish.getPrepareTime()));
 
             // Show popular tag if applicable
-            if (dish.isPopular()) {
-                popularTag.setVisible(true);
-                popularTag.setManaged(true);
-            }
+//            if (dish.isPopular()) {
+//                popularTag.setVisible(true);
+//                popularTag.setManaged(true);
+//            }
 
 //            // Show spicy level if applicable
 //            if (dish.getSpicyLevel() != null && !dish.getSpicyLevel().isEmpty()) {

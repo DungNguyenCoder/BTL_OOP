@@ -54,14 +54,14 @@ public class AddDishDialogController {
     private void handleUpload() {
         String name = nameField.getText() != null ? nameField.getText().trim() : "";
         String category = categoryField.getText() != null ? categoryField.getText().trim() : "";
-        Category choice;
+        String choice;
         switch (category.toLowerCase()){
-            case "snack" -> choice = Category.SNACK;
-            case "meal" -> choice = Category.MEAL;
-            case "vegan" -> choice = Category.VEGAN;
-            case "dessert" -> choice = Category.DESSERT;
-            case "drink" -> choice = Category.DRINK;
-            default -> choice = Category.SNACK;
+            case "snack" -> choice = Category.SNACK.getDisplayName();
+            case "meal" -> choice = Category.MEAL.getDisplayName();
+            case "vegan" -> choice = Category.VEGAN.getDisplayName();
+            case "dessert" -> choice = Category.DESSERT.getDisplayName();
+            case "drink" -> choice = Category.DRINK.getDisplayName();
+            default -> choice = Category.SNACK.getDisplayName();
         }
         String priceText = priceField.getText() != null ? priceField.getText().trim() : "";
         String description = descriptionArea.getText() != null ? descriptionArea.getText().trim() : "";

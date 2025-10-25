@@ -272,7 +272,6 @@ public class ChooseDishesController {
                     getClass().getResourceAsStream(AppConfig.PATH_DISHES_DATA),
                     StandardCharsets.UTF_8)) {
 
-                // Tạo Gson với CategoryDeserializer
                 Gson gson = new GsonBuilder()
                         .registerTypeAdapter(Category.class, new CategoryDeserializer())
                         .setPrettyPrinting()
