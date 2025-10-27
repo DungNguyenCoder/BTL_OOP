@@ -1,20 +1,34 @@
 package com.btl_oop.Controller.Admin.MainController;
 
 import com.btl_oop.Controller.Admin.ComponentController.OrderItemController;
+import com.btl_oop.Model.DAO.EmployeeDAO;
 import com.btl_oop.Model.DAO.OrderDAO;
+import com.btl_oop.Model.Entity.Employee;
 import com.btl_oop.Model.Entity.Order;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 public class OrderManagementController {
 
     @FXML
     private VBox orderContainer;
+
+    @FXML
+    private Label date;
+
+    @FXML
+    private Label welcomeText;
+
     private OrderDAO orderDAO ;
+    private EmployeeDAO employeeDAO = new EmployeeDAO();
     private List<Order> allOrders ;
     private final String img_account ="/com/btl_oop/img/img/account.png";
     @FXML
@@ -23,6 +37,15 @@ public class OrderManagementController {
         System.out.println("orderContainer is null? " + (orderContainer == null));
         orderDAO = new OrderDAO();
         loadSampleOrders();
+        setUpLabel();
+    }
+
+    private void setUpLabel() {
+        String formatDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ENGLISH));
+        date.setText(formatDate);
+        int employeeId = Employee.getEmployeeId();
+        Employee employee = employeeDAO.getEmployeeById(employeeId);
+        welcomeText.setText(String.format("Hi, %s. Welcome back to Sedap Admin!",employee.getFullName() ));
     }
 
     private void loadSampleOrders() {

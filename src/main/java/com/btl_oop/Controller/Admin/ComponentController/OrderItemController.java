@@ -34,11 +34,8 @@ public class OrderItemController {
 
     @FXML
     private Button detailsButton;
+
     private String orderIdValue;
-    private String statusValue;
-    private String customerNameValue;
-    private double totalPriceValue;
-    private String imagePathValue;
 
     public void setOrderData(String orderId, String status, String customName, double totalPrice, String imagePath) {
         orderIdLabel.setText("Order id: " + orderId);
@@ -53,6 +50,7 @@ public class OrderItemController {
         } catch (Exception e) {
             System.err.println("Could not load image: " + imagePath);
         }
+        orderIdValue = orderId;
     }
 
     public void setStatus(String status) {
@@ -114,7 +112,7 @@ public class OrderItemController {
                 com.btl_oop.Controller.Order.OrderSummaryController summaryController = loader.getController();
 
                 if (summaryController != null) {
-                    summaryController.loadFromOrderItem(orderIdValue, statusValue, customerNameValue, totalPriceValue);
+                    summaryController.loadFromOrderItem(orderIdValue);
                 }
 
                 // Mở cửa sổ mới

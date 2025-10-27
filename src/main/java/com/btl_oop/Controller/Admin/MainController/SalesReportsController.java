@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -25,6 +26,19 @@ public class SalesReportsController {
 
     @FXML
     private AreaChart<String, Number> claimsChart;
+
+    @FXML
+    private Label productSold;
+
+    @FXML
+    private Label totalProfit;
+
+    @FXML
+    private Label totalClaim;
+
+    @FXML
+    private Label newCustomer;
+
     public ReportDAO reportDAO;
 
     @FXML
@@ -33,6 +47,7 @@ public class SalesReportsController {
         setupOrderChart();
         setupClaimsChart();
         loadSalesRepresentatives();
+        changeLabel();
     }
 
     private void loadSalesRepresentatives() throws SQLException {
@@ -75,5 +90,11 @@ public class SalesReportsController {
         List<XYChart.Series<String, Number>> seriesList = reportDAO.getClaimsChartData();
         claimsChart.getData().addAll(seriesList);
         claimsChart.setCreateSymbols(true);
+    }
+
+    private void changeLabel() {
+        productSold.setText(String.valueOf(reportDAO.getTotalOrders()));
+        totalProfit.setText(String.valueOf(reportDAO.getTotalRevenue()) + "M");
+        totalClaim.setText(String.valueOf(reportDAO.getTotalRevenueClaimTop1()) + "M");
     }
 }

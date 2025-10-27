@@ -368,28 +368,15 @@ public class OrderSummaryController {
         }
     }
 
-    public void loadFromOrderItem(String orderId, String status, String customerName, double totalPrice) {
+    public void loadFromOrderItem(String orderId) {
         Platform.runLater(() -> {
             clearAll();
 
-            if (tableNumberField != null) {
-                tableNumberField.setText("");
+            List<OrderItem> orderItemArrayList;
+            orderItemArrayList = orderItemDAO.getOrderItemsByOrderId(Integer.parseInt(orderId));
+            for(OrderItem orderItem : orderItemArrayList) {
+                addDish(getDishFromOrderItem(orderItem), orderItem.getQuantity());
             }
-
-            this.subtotal = totalPrice;
-            this.tax = subtotal * 0.1;
-            this.total = subtotal + tax;
-
-            if (subtotalLabel != null) subtotalLabel.setText(String.format("$%.2f", subtotal));
-            if (taxLabel != null) taxLabel.setText(String.format("$%.2f", tax));
-            if (totalLabel != null) totalLabel.setText(String.format("$%.2f", total));
-
-            if (reviewOrderButton != null) {
-                reviewOrderButton.setText(String.format("Review Order (%d items)", items.size()));
-            }
-
-            System.out.println("Loaded Order Summary from OrderItem - orderId: " + orderId +
-                    ", status: " + status + ", customer: " + customerName + ", subtotal: $" + String.format("%.2f", subtotal));
         });
     }
 

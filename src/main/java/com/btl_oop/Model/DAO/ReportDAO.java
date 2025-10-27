@@ -200,6 +200,63 @@ public class ReportDAO {
 
         return result;
     }
+    public double getTotalRevenueClaimTop1() {
+        String sql = "SELECT \n" +
+                "    MAX(TotalRevenue) AS MaxTotalRevenue\n" +
+                "FROM v_yearly_claims;\n";
+
+        try (Connection conn = DBConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            if (rs.next()) {
+                return rs.getDouble("MaxTotalRevenue");
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Lỗi " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return 0.0;
+    }
+
+    public int getDeliveredOrders() {
+        String sql = "SELECT CompletedOrders FROM v_revenue_summary";
+
+        try (Connection conn = DBConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            if (rs.next()) {
+                return rs.getInt("CompletedOrders");
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Lỗi khi lấy TotalOrders từ v_revenue_summary: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+    public int getCancelledOrders() {
+        String sql = "SELECT CancelledOrders FROM v_revenue_summary";
+
+        try (Connection conn = DBConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            if (rs.next()) {
+                return rs.getInt("CancelledOrders");
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Lỗi khi lấy TotalOrders từ v_revenue_summary: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
 
 
     private String getColorByTier(String tier) {
