@@ -2,7 +2,8 @@ package com.btl_oop.Controller.Admin.MainController;
 
 import com.btl_oop.Controller.Admin.ComponentController.CustomerDetailDialogController;
 import com.btl_oop.Controller.Admin.ComponentController.CustomerListItemController;
-import com.btl_oop.Model.Entity.Customer;
+import com.btl_oop.Model.DAO.EmployeeDAO;
+import com.btl_oop.Model.Entity.Employee;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,7 +18,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,85 +44,92 @@ public class CustomerDetailController {
     @FXML
     private HBox paginationButtonsContainer;
 
-    private List<Customer> allCustomers = new ArrayList<>();
-    private List<Customer> filteredCustomers = new ArrayList<>();
-    private Customer selectedCustomer;
+    private List<Employee> allCustomers;
+    private List<Employee> filteredCustomers = new ArrayList<>();
+    private Employee selectedCustomer;
     private int currentPage = 1;
     private final int ITEMS_PER_PAGE = 8;
+    EmployeeDAO employeeDAO = new EmployeeDAO();
 
     @FXML
     public void initialize() {
-        loadCustomerData();
+        loadEmployeeData();
         updateStats();
         displayCustomers();
         setupSearchListener();
     }
-
-    private void loadCustomerData() {
-        // Sample data using your Customer class
-        allCustomers.add(new Customer(
-                1, "Jane Cooper", "Cooper", "jane@microsoft.com",
-                "Female",
-                true, LocalDateTime.now().minusMonths(1)
-        ));
-
-        allCustomers.add(new Customer(
-                2, "Floyd Miles", "Floyd", "floyd@yahoo.com",
-                "Male",
-                false, LocalDateTime.now().minusMonths(2)
-        ));
-
-        allCustomers.add(new Customer(
-                3, "Ronald Richards", "Ron", "ronald@adobe.com",
-                "Male",
-                false, LocalDateTime.now().minusWeeks(3)
-        ));
-
-        allCustomers.add(new Customer(
-                4, "Marvin McKinney", "Marvin", "marvin@tesla.com",
-                "Male",
-                true, LocalDateTime.now().minusDays(15)
-        ));
-
-        allCustomers.add(new Customer(
-                5, "Jerome Bell", "Jerry", "jerome@google.com",
-                "Male",
-                true, LocalDateTime.now().minusDays(10)
-        ));
-
-        allCustomers.add(new Customer(
-                6, "Kathryn Murphy", "Kathy", "kathryn@microsoft.com",
-                "Female",
-                true, LocalDateTime.now().minusWeeks(2)
-        ));
-
-        allCustomers.add(new Customer(
-                7, "Jacob Jones", "Jake", "jacob@yahoo.com",
-                "Male",
-                true, LocalDateTime.now().minusDays(5)
-        ));
-
-        allCustomers.add(new Customer(
-                8, "Kristin Watson", "Kris", "kristin@facebook.com",
-                "Female",
-                false, LocalDateTime.now().minusMonths(3)
-        ));
-
-        for (int i = 9; i <= 256; i++) {
-            allCustomers.add(new Customer(
-                    i, "Customer " + i, "Nick" + i, "customer" + i + "@example.com",
-                    i % 2 == 0 ? "Male" : "Female",
-                    i % 3 != 0, LocalDateTime.now().minusDays(i % 30)
-            ));
-        }
-
+    private void loadEmployeeData()
+    {
+        allCustomers = employeeDAO.getAllEmployees();
         filteredCustomers = new ArrayList<>(allCustomers);
+
     }
+
+//    private void loadCustomerData() {
+//        // Sample data using your Customer class
+//        allCustomers.add(new Customer(
+//                1, "Jane Cooper", "Cooper", "jane@microsoft.com",
+//                "Female",
+//                true, LocalDateTime.now().minusMonths(1)
+//        ));
+//
+//        allCustomers.add(new Customer(
+//                2, "Floyd Miles", "Floyd", "floyd@yahoo.com",
+//                "Male",
+//                false, LocalDateTime.now().minusMonths(2)
+//        ));
+//
+//        allCustomers.add(new Customer(
+//                3, "Ronald Richards", "Ron", "ronald@adobe.com",
+//                "Male",
+//                false, LocalDateTime.now().minusWeeks(3)
+//        ));
+//
+//        allCustomers.add(new Customer(
+//                4, "Marvin McKinney", "Marvin", "marvin@tesla.com",
+//                "Male",
+//                true, LocalDateTime.now().minusDays(15)
+//        ));
+//
+//        allCustomers.add(new Customer(
+//                5, "Jerome Bell", "Jerry", "jerome@google.com",
+//                "Male",
+//                true, LocalDateTime.now().minusDays(10)
+//        ));
+//
+//        allCustomers.add(new Customer(
+//                6, "Kathryn Murphy", "Kathy", "kathryn@microsoft.com",
+//                "Female",
+//                true, LocalDateTime.now().minusWeeks(2)
+//        ));
+//
+//        allCustomers.add(new Customer(
+//                7, "Jacob Jones", "Jake", "jacob@yahoo.com",
+//                "Male",
+//                true, LocalDateTime.now().minusDays(5)
+//        ));
+//
+//        allCustomers.add(new Customer(
+//                8, "Kristin Watson", "Kris", "kristin@facebook.com",
+//                "Female",
+//                false, LocalDateTime.now().minusMonths(3)
+//        ));
+//
+//        for (int i = 9; i <= 256; i++) {
+//            allCustomers.add(new Customer(
+//                    i, "Customer " + i, "Nick" + i, "customer" + i + "@example.com",
+//                    i % 2 == 0 ? "Male" : "Female",
+//                    i % 3 != 0, LocalDateTime.now().minusDays(i % 30)
+//            ));
+//        }
+//
+//        filteredCustomers = new ArrayList<>(allCustomers);
+//    }
 
     private void updateStats() {
         totalCustomersLabel.setText(String.valueOf(allCustomers.size()));
 
-        long activeCount = allCustomers.stream().filter(Customer::isActive).count();
+        long activeCount = allCustomers.stream().filter(e->"Activate".equals(e.getStatus())).count();
         membersLabel.setText(String.valueOf(activeCount));
 
         // Active now - random number for demo
@@ -136,15 +143,15 @@ public class CustomerDetailController {
         int endIndex = Math.min(startIndex + ITEMS_PER_PAGE, filteredCustomers.size());
 
         for (int i = startIndex; i < endIndex; i++) {
-            Customer customer = filteredCustomers.get(i);
-            addCustomerRow(customer);
+            Employee employee= filteredCustomers.get(i);
+            addCustomerRow(employee);
         }
 
         updatePaginationLabel();
         updatePaginationButtons();
     }
 
-    private void addCustomerRow(Customer customer) {
+    private void addCustomerRow(Employee employee) {
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/com/btl_oop/FXML/Admin/components/customer_list_item.fxml")
@@ -152,7 +159,7 @@ public class CustomerDetailController {
             HBox customerRow = loader.load();
 
             CustomerListItemController controller = loader.getController();
-            controller.setData(customer, () -> handleCustomerClick(customer));
+            controller.setData(employee, () -> handleCustomerClick(employee));
 
             customerListContainer.getChildren().add(customerRow);
 
@@ -162,15 +169,15 @@ public class CustomerDetailController {
         }
     }
 
-    private void handleCustomerClick(Customer customer) {
-        this.selectedCustomer = customer;
-        System.out.println("Customer selected: " + customer.getFullName());
+    private void handleCustomerClick(Employee employee) {
+        this.selectedCustomer = employee;
+        System.out.println("Customer selected: " + employee.getFullName());
 
         // Open customer detail dialog
-        showCustomerDetailDialog(customer);
+        showCustomerDetailDialog(employee);
     }
 
-    private void showCustomerDetailDialog(Customer customer) {
+    private void showCustomerDetailDialog(Employee customer) {
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/com/btl_oop/FXML/Admin/layout_inside/customer_detail_dialog.fxml")
@@ -195,18 +202,16 @@ public class CustomerDetailController {
         }
     }
 
-    private void showSimpleCustomerDetail(Customer customer) {
+    private void showSimpleCustomerDetail(Employee customer) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Customer Details");
         alert.setHeaderText(customer.getFullName());
         alert.setContentText(
                 "Full Name: " + customer.getFullName() + "\n" +
-                        "Nick Name: " + customer.getNickName() + "\n" +
+                        "User Name: " + customer.getUserName() + "\n" +
                         "Email: " + customer.getEmail() + "\n" +
-                        "Gender: " + customer.getGender() + "\n" +
-                        "Language: " + customer.getLanguage() + "\n" +
-                        "Status: " + (customer.isActive() ? "Active" : "Inactive") + "\n" +
-                        "Email Added: " + customer.getEmailTimeAgo()
+                        "Language: " + customer.getPhoneNumber()+ "\n" +
+                        "Status: " + (customer.getStatus()) + "\n"
         );
         alert.showAndWait();
     }
@@ -228,7 +233,7 @@ public class CustomerDetailController {
                     .filter(c ->
                             c.getFullName().toLowerCase().contains(searchLower) ||
                                     c.getEmail().toLowerCase().contains(searchLower) ||
-                                    c.getLanguage().toLowerCase().contains(searchLower)
+                                    c.getPhoneNumber().toLowerCase().contains(searchLower)
                     )
                     .toList();
         }
@@ -356,12 +361,12 @@ public class CustomerDetailController {
     }
 
     public void refreshCustomerList() {
-        loadCustomerData();
+        loadEmployeeData();
         updateStats();
         displayCustomers();
     }
 
-    public Customer getSelectedCustomer() {
+    public Employee getSelectedCustomer() {
         return selectedCustomer;
     }
 }
