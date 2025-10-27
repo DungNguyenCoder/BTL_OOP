@@ -1,37 +1,49 @@
 package com.btl_oop.Controller.Admin.MainController;
 
 import com.btl_oop.Controller.Admin.ComponentController.OrderItemController;
+import com.btl_oop.Model.DAO.OrderDAO;
+import com.btl_oop.Model.Entity.Order;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.util.List;
 
 public class OrderManagementController {
 
     @FXML
     private VBox orderContainer;
-
-
+    private OrderDAO orderDAO ;
+    private List<Order> allOrders ;
+    private final String img_account ="/com/btl_oop/img/img/account.png";
     @FXML
     public void initialize() {
         System.out.println("DashboardController initialized!");
         System.out.println("orderContainer is null? " + (orderContainer == null));
-
-        if (orderContainer != null) {
-            loadSampleOrders();
-        } else {
-            System.err.println("ERROR: orderContainer is null! Check fx:id in FXML");
-        }
+        orderDAO = new OrderDAO();
+        loadSampleOrders();
     }
 
     private void loadSampleOrders() {
-        addOrder("1001", "Delivered", "Doris Brown", 34.00, "/img/img_login.png");
-        addOrder("1002", "Delivered", "DJ Don", 18.00, "/img/img_login.png");
-        addOrder("1003", "In Progress", "Sara", 26.00, "/img/img_login.png");
-        addOrder("1004", "Delivered", "Yumiko", 39.00, "/img/img_login.png");
-        addOrder("1005", "In Progress", "Olivia", 21.00, "/img/img_login.png");
-        addOrder("1006", "In Progress", "Tony", 48.00, "/img/img_login.png");
+//        addOrder("1001", "Delivered", "Doris Brown", 34.00, "/img/img_login.png");
+//        addOrder("1002", "Delivered", "DJ Don", 18.00, "/img/img_login.png");
+//        addOrder("1003", "In Progress", "Sara", 26.00, "/img/img_login.png");
+//        addOrder("1004", "Delivered", "Yumiko", 39.00, "/img/img_login.png");
+//        addOrder("1005", "In Progress", "Olivia", 21.00, "/img/img_login.png");
+//        addOrder("1006", "In Progress", "Tony", 48.00, "/img/img_login.png");
+          try {
+              allOrders = orderDAO.getAllOrders();
+          }
+          catch (Exception e )
+          {
+              System.out.println("Fail upload()");
+          }
+          for(Order order : allOrders)
+          {
+              addOrder(String.valueOf(order.getTableId()), order.getStatus(),"CustomerName" ,order.getTotal() ,img_account );
+          }
+
     }
 
     public void addOrder(String orderId, String status, String customerName,
@@ -43,10 +55,7 @@ public class OrderManagementController {
             OrderItemController controller = loader.getController();
             controller.setOrderData(orderId, status, customerName, totalPrice, imagePath);
 
-            controller.setOnDetailsClick(() -> {
-                System.out.println("Details clicked for Order: " + orderId);
-                showOrderDetails(orderId);
-            });
+            controller.setDetailButtonClick();
 
             orderContainer.getChildren().add(orderItem);
 

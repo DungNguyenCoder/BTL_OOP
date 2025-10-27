@@ -9,6 +9,7 @@ import com.btl_oop.Model.Entity.Dish;
 import com.btl_oop.Model.Entity.Employee;
 import com.btl_oop.Model.Entity.Order;
 import com.btl_oop.Model.Entity.OrderItem;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -365,6 +366,31 @@ public class OrderSummaryController {
             e.printStackTrace();
             showAlert("Lỗi", "Có lỗi xảy ra khi lưu đơn hàng: " + e.getMessage());
         }
+    }
+
+    public void loadFromOrderItem(String orderId, String status, String customerName, double totalPrice) {
+        Platform.runLater(() -> {
+            clearAll();
+
+            if (tableNumberField != null) {
+                tableNumberField.setText("");
+            }
+
+            this.subtotal = totalPrice;
+            this.tax = subtotal * 0.1;
+            this.total = subtotal + tax;
+
+            if (subtotalLabel != null) subtotalLabel.setText(String.format("$%.2f", subtotal));
+            if (taxLabel != null) taxLabel.setText(String.format("$%.2f", tax));
+            if (totalLabel != null) totalLabel.setText(String.format("$%.2f", total));
+
+            if (reviewOrderButton != null) {
+                reviewOrderButton.setText(String.format("Review Order (%d items)", items.size()));
+            }
+
+            System.out.println("Loaded Order Summary from OrderItem - orderId: " + orderId +
+                    ", status: " + status + ", customer: " + customerName + ", subtotal: $" + String.format("%.2f", subtotal));
+        });
     }
 
     /*
