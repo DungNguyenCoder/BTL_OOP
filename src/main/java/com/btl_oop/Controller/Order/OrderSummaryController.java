@@ -6,6 +6,7 @@ import com.btl_oop.Model.DAO.RestaurantTableDAO;
 import com.btl_oop.Model.DAO.DishDAO;
 import com.btl_oop.Model.DAO.EmployeeDAO;
 import com.btl_oop.Model.Entity.Dish;
+import com.btl_oop.Model.Entity.Employee;
 import com.btl_oop.Model.Entity.Order;
 import com.btl_oop.Model.Entity.OrderItem;
 import javafx.fxml.FXML;
@@ -305,27 +306,16 @@ public class OrderSummaryController {
                 showAlert("Lỗi nhập liệu", "Số bàn phải là số nguyên!");
                 return;
             }
-
-            String employeeInput = "1";
-            if (employeeInput.isEmpty()) {
-                showAlert("Lỗi nhập liệu", "Vui lòng nhập tên hoặc ID nhân viên!");
+            int employeeId = Employee.getEmployeeId();
+            if (employeeId == 0) {
+                showAlert("Lỗi", "Không tìm thấy nhân viên hiện tại!");
                 return;
             }
 
-            int employeeId;
-            try {
-                employeeId = Integer.parseInt(employeeInput);
-                employeeId = employeeDAO.getEmployeeIdById(employeeId);
-                if (employeeId == 0) {
-                    showAlert("Nhân viên không hợp lệ", "ID nhân viên " + employeeInput + " không tồn tại!");
-                    return;
-                }
-            } catch (NumberFormatException e) {
-                employeeId = employeeDAO.getEmployeeIdByName(employeeInput);
-                if (employeeId == 0) {
-                    showAlert("Nhân viên không hợp lệ", "Nhân viên " + employeeInput + " không tồn tại!");
-                    return;
-                }
+            Employee employee = employeeDAO.getEmployeeById(employeeId);
+            if (employee == null) {
+                showAlert("Lỗi", "Nhân viên không tồn tại trong hệ thống!");
+                return;
             }
 
             int tableId = tableDAO.getTableIdByNumber(tableNumber);
@@ -340,9 +330,9 @@ public class OrderSummaryController {
                     employeeId,
                     null,
                     "Serving",
-                    0,
-                    0,
-                    0
+                    subtotal,
+                    tax,
+                    total
             );
 
             boolean orderSaved = orderDAO.insertOrder(order);

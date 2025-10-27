@@ -1,6 +1,7 @@
 package com.btl_oop.Controller.Admin.MainController;
 
 import com.btl_oop.Controller.Admin.ComponentController.ProductCardController;
+import com.btl_oop.Model.DAO.DishDAO;
 import com.btl_oop.Model.Entity.Dish;
 import com.btl_oop.Model.Enum.Category;
 import javafx.fxml.FXML;
@@ -16,7 +17,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,53 +28,26 @@ public class InventoryManagementController {
     @FXML private FlowPane allFoodsPane;
     @FXML private FlowPane categoriesPane;
 
+    private DishDAO dishDAO;
     private List<Dish> allDishes;
     private Category selectedCategory = null;
     private Map<Category, VBox> categoryCards = new HashMap<>();
 
     @FXML
     private void initialize() {
-        initializeDishes();
-
+        dishDAO = new DishDAO();
+        loadDishesFromDatabase();
         initializeCategoryCards();
-
         refreshDishDisplay();
     }
 
-    private void initializeDishes() {
-        allDishes = new ArrayList<>();
-
-        allDishes.add(new Dish("Chocolate Brownie", 15.00,
-                "Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.",
-                10, Category.DESSERT.getDisplayName(), "/com/btl_oop/img/img/product_brownie.png", false));
-
-        allDishes.add(new Dish("Burger", 10.00,
-                "Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.",
-                8, Category.MEAL.getDisplayName(), "/com/btl_oop/img/img/product_burger.png", true));
-
-        allDishes.add(new Dish("Macarons", 12.00,
-                "Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.",
-                5, Category.DESSERT.getDisplayName(), "/com/btl_oop/img/img/product_macarons.png",true));
-
-        allDishes.add(new Dish("Strawberry Cake", 15.00,
-                "Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.",
-                10, Category.DESSERT.getDisplayName(), "/com/btl_oop/img/img/product_brownie_pink.png",false));
-
-        allDishes.add(new Dish("Chocolate Cake", 10.00,
-                "Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.",
-                12, Category.DESSERT.getDisplayName(), "/com/btl_oop/img/img/product_cake.png", false));
-
-        allDishes.add(new Dish("Mojito", 12.00,
-                "Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.",
-                2, Category.DRINK.getDisplayName(), "/com/btl_oop/img/img/product_drink.png",false));
-
-        allDishes.add(new Dish("Nachos", 8.00,
-                "Crispy tortilla chips with cheese and salsa.",
-                5, Category.SNACK.getDisplayName(), "/com/btl_oop/img/img/product_brownie.png",true));
-
-        allDishes.add(new Dish("Vegan Salad", 11.00,
-                "Fresh vegetable salad with olive oil.",
-                7, Category.VEGAN.getDisplayName(), "/com/btl_oop/img/img/product_burger.png",false));
+    private void loadDishesFromDatabase() {
+        try {
+            allDishes = dishDAO.getAllDish();
+        } catch (Exception e) {
+            System.err.println("Failed to load dishes from database: " + e.getMessage());
+            allDishes = new java.util.ArrayList<>();
+        }
     }
 
     private void initializeCategoryCards() {
@@ -115,7 +88,6 @@ public class InventoryManagementController {
         label.getStyleClass().add("category-name");
 
         card.getChildren().addAll(imageView, label);
-
         card.setOnMouseClicked(event -> handleCategoryClick(category));
 
         return card;
@@ -153,9 +125,10 @@ public class InventoryManagementController {
             filteredDishes = allDishes;
         } else {
             filteredDishes = allDishes.stream()
-                    .filter(dish -> dish.getCategory() == selectedCategory.getDisplayName())
+                    .filter(dish -> dish.getCategory().equals(selectedCategory.getDisplayName()))
                     .collect(Collectors.toList());
         }
+
 
         filteredDishes.stream()
                 .filter(dish -> dish.isPopular())
@@ -180,8 +153,13 @@ public class InventoryManagementController {
 
             Dish created = controller.getCreatedDish();
             if (created != null) {
-                allDishes.add(created);
-                refreshDishDisplay();
+                try {
+                    dishDAO.insertDish(created);
+                    loadDishesFromDatabase();
+                    refreshDishDisplay();
+                } catch (Exception e) {
+                    System.err.println("Failed to save dish: " + e.getMessage());
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
