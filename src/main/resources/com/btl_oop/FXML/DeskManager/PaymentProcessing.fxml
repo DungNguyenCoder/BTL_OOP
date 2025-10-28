@@ -155,9 +155,14 @@
                             <Label styleClass="selected-badge" text="✓" />
                         </HBox>
                     </VBox>
-                    
+
+                    <Region VBox.vgrow="ALWAYS" />
+
                     <!-- Process Button -->
-                    <Button fx:id="processPaymentButton" onAction="#handleProcessPayment" styleClass="process-payment-btn" text="Process Payment" />
+                    <VBox alignment="CENTER" >
+                        <Button fx:id="processPaymentButton" onAction="#handleProcessPayment" styleClass="process-payment-btn" text="Process MOBILE Payment" maxWidth="Infinity" mnemonicParsing="false" />
+                    </VBox>
+
                 </VBox>
             </VBox>
                 </HBox>
