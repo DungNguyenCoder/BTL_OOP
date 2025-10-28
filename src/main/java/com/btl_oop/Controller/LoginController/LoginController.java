@@ -51,9 +51,14 @@ public class LoginController {
         if ("ADMIN".equalsIgnoreCase(emp.getRole())) {
             AlertUtils.showInfo("Đăng nhập quản trị viên thành công");
             SceneUtils.switchTo(event, AppConfig.PATH_ADMIN_SCREEN);
-        } else {
+        }
+        else if ("WAITER".equalsIgnoreCase(emp.getRole())) {
             AlertUtils.showInfo("Đăng nhập nhân viên thành công");
             SceneUtils.switchTo(event, AppConfig.PATH_ORDER_MENU_SCREEN);
+        }
+        else if ("MANAGER".equalsIgnoreCase(emp.getRole())) {
+            AlertUtils.showInfo("Đăng nhập nhân viên thành công");
+            SceneUtils.switchTo(event, AppConfig.PATH_TABLE_MAP);
         }
     }
 

@@ -108,6 +108,20 @@ public class OrderDAO {
         return orders;
     }
 
+    public int countPaidOrdersToday() {
+        String sql = "SELECT COUNT(*) AS cnt FROM `Order` WHERE Status = 'Paid' AND DATE(CheckoutTime) = CURDATE()";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt("cnt");
+            }
+            return 0;
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to count today's paid orders", e);
+        }
+    }
+
     public boolean insertOrder(Order order) {
         String sql = "INSERT INTO `Order` (TableID, EmployeeID, Status, Subtotal, Tax, Total) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = DBConnection.getConnection();

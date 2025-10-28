@@ -23,6 +23,7 @@
                     <Label styleClass="subtitle" text="Welcome, John Smith" />
             </VBox>
                 <Pane fx:id="headerHbox" HBox.hgrow="ALWAYS" />
+                <Button fx:id="logoutButton" text="🚪 Logout" onAction="#handleLogout" />
             </children>
         </HBox>
     </top>

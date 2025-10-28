@@ -1,6 +1,7 @@
 package com.btl_oop.Controller.DeskManager;
 
 import com.btl_oop.Model.Entity.RestaurantTable;
+import com.btl_oop.Model.DAO.OrderDAO;
 import com.btl_oop.Model.Enum.TableStatus;
 import com.btl_oop.Model.Service.TableManager;
 import com.btl_oop.Utils.AppConfig;
@@ -27,6 +28,7 @@ public class TableMapController {
 
     private TableManager tableManager;
     private List<RestaurantTable> tables;
+    private final OrderDAO orderDAO = new OrderDAO();
 
     @FXML
     private GridPane tableGridPane;
@@ -48,6 +50,9 @@ public class TableMapController {
 
     @FXML
     private Button refreshButton;
+
+    @FXML
+    private Button logoutButton;
 
     // Handle table action (main button click)
     @FXML
@@ -106,6 +111,25 @@ public class TableMapController {
     private void handleRefresh() {
         System.out.println("Refreshing table data...");
         refreshUI();
+    }
+
+    // Handle logout button
+    @FXML
+    private void handleLogout() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(AppConfig.PATH_LOGIN_SCREEN));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) tableGridPane.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Restaurant POS - Login");
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Failed to load Login screen: " + e.getMessage());
+            e.printStackTrace();
+            showErrorDialog("Error", "Failed to logout: " + e.getMessage());
+        }
     }
 
     // Show confirmation dialog
@@ -225,10 +249,21 @@ public class TableMapController {
             Parent root = loader.load();
             System.out.println("FXML loaded successfully");
 
-            // Get the controller and set table ID if needed
+            // Get the controller and set table/order context
             PaymentController controller = loader.getController();
             System.out.println("Controller loaded successfully: " + controller.getClass().getName());
-            controller.setTableId(tableId);
+            String orderIdStr = null;
+            if (tableManager != null) {
+                var table = tableManager.getTable(tableId);
+                if (table != null) {
+                    orderIdStr = table.getCurrentOrderId();
+                }
+            }
+            int orderId = 0;
+            if (orderIdStr != null && orderIdStr.startsWith("ORD")) {
+                try { orderId = Integer.parseInt(orderIdStr.replace("ORD", "")); } catch (Exception ignore) {}
+            }
+            controller.setOrderContext(tableId, orderId);
 
             Stage stage = (Stage) tableGridPane.getScene().getWindow();
             Scene scene = new Scene(root);
@@ -270,11 +305,14 @@ public class TableMapController {
         countCleaningTableLabel.setText(String.valueOf(counts.get(TableStatus.CLEANING)));
         countActivateOrdersTableLabel.setText(String.valueOf(counts.get(TableStatus.ACTIVE_ORDERS)));
 
-        // Calculate total orders (sum of occupied, active orders, ready to serve)
-        int totalOrders = counts.get(TableStatus.OCCUPIED) +
-                counts.get(TableStatus.ACTIVE_ORDERS) +
-                counts.get(TableStatus.READY_TO_SERVE);
-        countTotalOrdersTableLabel.setText(String.valueOf(totalOrders));
+        // Total orders today = số đơn đã hoàn thành trong ngày (Status = Paid, theo CheckoutTime)
+        try {
+            int paidToday = orderDAO.countPaidOrdersToday();
+            countTotalOrdersTableLabel.setText(String.valueOf(paidToday));
+        } catch (Exception ex) {
+            System.err.println("Failed to load today's orders count: " + ex.getMessage());
+            countTotalOrdersTableLabel.setText("-");
+        }
     }
 
     private void refreshTableGrid() {
