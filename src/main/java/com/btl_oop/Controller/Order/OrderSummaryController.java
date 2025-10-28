@@ -5,10 +5,12 @@ import com.btl_oop.Model.DAO.OrderItemDAO;
 import com.btl_oop.Model.DAO.RestaurantTableDAO;
 import com.btl_oop.Model.DAO.DishDAO;
 import com.btl_oop.Model.DAO.EmployeeDAO;
+import com.btl_oop.Model.Entity.RestaurantTable;
 import com.btl_oop.Model.Entity.Dish;
 import com.btl_oop.Model.Entity.Employee;
 import com.btl_oop.Model.Entity.Order;
 import com.btl_oop.Model.Entity.OrderItem;
+import com.btl_oop.Utils.AppConfig;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -20,6 +22,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -325,6 +328,18 @@ public class OrderSummaryController {
                 return;
             }
 
+            // Chỉ cho phép Order khi bàn đang OCCUPIED (đã có khách ngồi)
+            RestaurantTable table = tableDAO.getTableById(tableId);
+            if (table == null) {
+                showAlert("Lỗi", "Không tìm thấy thông tin bàn!");
+                return;
+            }
+            String status = table.getStatus().name();
+            if ("AVAILABLE".equals(status)) {
+                showAlert("Không thể tạo đơn", "Bàn đang ở trạng thái Available. Vui lòng seat guests trước.");
+                return;
+            }
+
             Order order = new Order(
                     0,
                     tableId,
@@ -354,12 +369,10 @@ public class OrderSummaryController {
             }
 
             currentOrderId = order.getOrderId();
-            showAlert("Thành công", "Đơn hàng đã được lưu thành công!");
+            showAlert("Đã gửi", "Đơn hàng đã được lưu và gửi tới Manager để xác nhận.");
 
             clearAll();
             tableNumberField.clear();
-
-            System.out.println("Order confirmed and cleared!");
 
         } catch (Exception e) {
             System.err.println("Error confirming order: " + e.getMessage());

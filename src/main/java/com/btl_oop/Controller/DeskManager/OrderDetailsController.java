@@ -9,6 +9,8 @@ import com.btl_oop.Model.DAO.OrderDAO;
 import com.btl_oop.Model.DAO.OrderItemDAO;
 import com.btl_oop.Model.DAO.DishDAO;
 import com.btl_oop.Model.DAO.RestaurantTableDAO;
+import com.btl_oop.Model.DAO.EmployeeDAO;
+import com.btl_oop.Model.Entity.Employee;
 import com.btl_oop.Model.Enum.TableStatus;
 import com.btl_oop.Utils.AppConfig;
 import javafx.fxml.FXML;
@@ -94,12 +96,7 @@ public class OrderDetailsController {
     private OrderItemDAO orderItemDAO;
     private DishDAO dishDAO;
     private RestaurantTableDAO tableDAO;
-
-    @FXML
-    private void handleBackHome() {
-        System.out.println("Back to home clicked");
-        navigateToTableMap();
-    }
+    private EmployeeDAO employeeDAO;
 
     @FXML
     private void handleBack() {
@@ -147,10 +144,7 @@ public class OrderDetailsController {
             return;
         }
 
-        if (currentOrderId > 0) {
-            showErrorDialog("Error", "Order already exists for this table!");
-            return;
-        }
+        // Nếu đã có orderId (được tạo từ OrderSummary), cho phép xác nhận để cập nhật trạng thái bàn
 
         Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
         confirmAlert.setTitle("Confirm Order");
@@ -164,15 +158,25 @@ public class OrderDetailsController {
                     tableManager = TableManager.getInstance();
                 }
 
+                // Nếu đã có currentOrderId, chỉ cập nhật trạng thái bàn
+                if (currentOrderId > 0) {
+                    boolean success = tableManager.startOrder(currentTableId, "ORD" + currentOrderId);
+                    if (success) {
+                        showSuccessDialog("Order Confirmed", "Order #" + currentOrderId + " has been sent to the kitchen!");
+                        navigateToTableMap();
+                    } else {
+                        showErrorDialog("Error", "Failed to update table status. Please try again.");
+                    }
+                    return;
+                }
+
+                // Trường hợp chưa có orderId (vào thẳng từ bản đồ bàn)
                 Order newOrder = createNewOrder(currentTableId);
                 if (newOrder != null) {
                     this.currentOrderId = newOrder.getOrderId();
-
                     boolean success = tableManager.startOrder(currentTableId, "ORD" + newOrder.getOrderId());
-
                     if (success) {
                         showSuccessDialog("Order Confirmed", "Order #" + newOrder.getOrderId() + " has been sent to the kitchen!");
-
                         navigateToTableMap();
                     } else {
                         showErrorDialog("Error", "Failed to update table status. Please try again.");
@@ -251,6 +255,7 @@ public class OrderDetailsController {
         orderItemDAO = new OrderItemDAO();
         dishDAO = new DishDAO();
         tableDAO = new RestaurantTableDAO();
+        employeeDAO = new EmployeeDAO();
 
         initializeNewOrderScreen();
     }
@@ -270,11 +275,31 @@ public class OrderDetailsController {
         TableStatus status = table.getStatus();
 
         if (status == TableStatus.OCCUPIED) {
-            System.out.println("Table is OCCUPIED. Preparing for new order.");
-            initializeNewOrderScreen(); // Dọn sạch các trường
-            orderIdLabel.setText("Order Id : [New Order]");
-            orderButton.setDisable(false); // Cho phép nhấn nút "Order"
-            this.currentOrderId = 0; // Đảm bảo chưa có order ID
+            // Bàn mới có khách (Order role chưa gửi), Manager không được tạo Order tại đây
+            System.out.println("Table is OCCUPIED. Waiting for order from Order role.");
+            initializeNewOrderScreen();
+            orderIdLabel.setText("Order Id : [Waiting for Order]");
+            this.currentOrderId = 0;
+
+            // Thử tải đơn mới nhất ở trạng thái Serving cho bàn này
+            List<Order> orders = orderDAO.getOrdersByTableId(tableId);
+            Order pending = null;
+            if (orders != null) {
+                for (Order o : orders) {
+                    if ("Serving".equals(o.getStatus())) {
+                        if (pending == null || o.getOrderId() > pending.getOrderId()) {
+                            pending = o;
+                        }
+                    }
+                }
+            }
+            if (pending != null) {
+                this.currentOrderId = pending.getOrderId();
+                loadOrderDataById(this.currentOrderId);
+                orderButton.setDisable(false); // Có đơn chờ, cho phép Manager xác nhận
+            } else {
+                orderButton.setDisable(true); // Chưa có đơn gửi tới
+            }
 
         } else if (status == TableStatus.ACTIVE_ORDERS || status == TableStatus.READY_TO_SERVE) {
             System.out.println("Table has active order. Loading order...");
@@ -306,6 +331,15 @@ public class OrderDetailsController {
         this.currentOrderId = orderId;
         System.out.println("OrderDetailsController: Order ID set to " + orderId);
 
+        loadOrderDataById(orderId);
+    }
+
+    // Khởi tạo khi được điều hướng từ OrderSummaryController
+    public void initWithOrder(int tableId, int orderId) {
+        this.currentTableId = tableId;
+        this.currentOrderId = orderId;
+        orderButton.setDisable(false);
+        orderIdLabel.setText("Order Id : " + orderId);
         loadOrderDataById(orderId);
     }
 
@@ -382,14 +416,29 @@ public class OrderDetailsController {
         try {
             Order order = orderDAO.getOrderById(orderId);
             if (order != null) {
+                String employeeName = "Unknown";
+                String employeePhone = "";
+                String employeeEmail = "";
+                try {
+                    if (order.getEmployeeId() > 0) {
+                        Employee emp = employeeDAO.getEmployeeById(order.getEmployeeId());
+                        if (emp != null) {
+                            employeeName = emp.getFullName();
+                            employeePhone = emp.getPhoneNumber() != null ? emp.getPhoneNumber() : "";
+                            employeeEmail = emp.getEmail() != null ? emp.getEmail() : "";
+                        }
+                    }
+                } catch (Exception ex) {
+                    System.err.println("Failed to load employee for order: " + ex.getMessage());
+                }
                 // Update order information
                 setOrderData(
                         String.valueOf(order.getOrderId()),
                         order.getCheckoutTime() != null ? order.getCheckoutTime().toString() : "No time set",
                         order.getStatus(),
-                        "Customer Name", // Cần lấy từ CSDL nếu có
-                        "Customer Phone", // Cần lấy từ CSDL nếu có
-                        "Customer Email", // Cần lấy từ CSDL nếu có
+                        employeeName,
+                        employeePhone,
+                        employeeEmail,
                         order.getSubtotal(),
                         order.getTax(),
                         order.getTotal()

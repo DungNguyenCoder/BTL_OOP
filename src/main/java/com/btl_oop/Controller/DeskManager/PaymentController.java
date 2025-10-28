@@ -1,6 +1,9 @@
 package com.btl_oop.Controller.DeskManager;
 
 import com.btl_oop.Model.Service.TableManager;
+import com.btl_oop.Model.DAO.OrderDAO;
+import com.btl_oop.Model.DAO.OrderItemDAO;
+import com.btl_oop.Model.Entity.Order;
 import com.btl_oop.Utils.AppConfig;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -86,6 +89,9 @@ public class PaymentController {
     private double paymentAmount = 0.0;
     private double cashReceived = 0.0;
     private int tableId = 0; // Track current table ID
+    private int orderId = 0; // Current order id
+    private final OrderDAO orderDAO = new OrderDAO();
+    private final OrderItemDAO orderItemDAO = new OrderItemDAO();
 
     @FXML
     private void handlePaymentMethod(javafx.event.ActionEvent event) {
@@ -145,15 +151,27 @@ public class PaymentController {
     }
 
     private void processPayment() {
-        // Simulate payment processing
-        System.out.println("Processing payment...");
+        // Update order totals and mark Paid
+        try {
+            if (orderId > 0) {
+                boolean ok = orderDAO.processPayment(orderId, 0.10);
+                if (!ok) {
+                    showError("Failed to finalize order totals. Please try again.");
+                    return;
+                }
+            }
+        } catch (Exception ex) {
+            System.err.println("Error processing order payment: " + ex.getMessage());
+            ex.printStackTrace();
+            showError("Payment failed: " + ex.getMessage());
+            return;
+        }
 
-        // Change table status to CLEANING
+        // Change table status to CLEANING and clear current order id
         if (tableId > 0) {
             try {
                 TableManager tableManager = TableManager.getInstance();
                 boolean success = tableManager.finishServing(tableId);
-
                 if (success) {
                     System.out.println("Table " + tableId + " marked for cleaning successfully");
                 } else {
@@ -283,7 +301,7 @@ public class PaymentController {
     public void initialize() {
         System.out.println("PaymentController initialized");
 
-        // Initialize with default values
+        // UI init but values will be set from context via setOrderContext
         initializeDefaultValues();
 
         // Initialize with default mobile pay selection
@@ -295,8 +313,8 @@ public class PaymentController {
     }
 
     private void initializeDefaultValues() {
-        // Set default payment amount
-        paymentAmount = 40.67;
+        // Defaults until setOrderContext is called
+        paymentAmount = 0.0;
         // amountValueLabel.setText("$40.67"); // Field not present in FXML
         subtotalLabel.setText("$0.0");
         taxLabel.setText("$0.0");
@@ -311,9 +329,9 @@ public class PaymentController {
         successTitleLabel.setText("Invoice Printed Successfully");
         successSubtitleLabel.setText("Customer has reviewed the order");
 
-        // Set default table info
-        tableNumberLabel.setText("#1");
-        billIdLabel.setText("[New]");
+        // Default placeholders
+        tableNumberLabel.setText("#-");
+        billIdLabel.setText("[--]");
 
     }
 
@@ -338,15 +356,58 @@ public class PaymentController {
         successSubtitleLabel.setText(subtitle);
     }
 
-    // Method to set table ID
-    public void setTableId(int tableId) {
+    // Set full context: table + order; compute and display real totals
+    public void setOrderContext(int tableId, int orderId) {
         this.tableId = tableId;
-        System.out.println("PaymentController: Table ID set to " + tableId);
+        this.orderId = orderId;
+        System.out.println("PaymentController: Context set table=" + tableId + ", order=" + orderId);
 
-        // Update table number display
         if (tableNumberLabel != null) {
             tableNumberLabel.setText("#" + tableId);
         }
+
+        if (orderId > 0) {
+            try {
+                Order order = orderDAO.getOrderById(orderId);
+                if (order != null) {
+                    billIdLabel.setText("ORD" + order.getOrderId());
+                    // If subtotal/tax/total not computed yet, compute from items
+                    double subtotal = order.getSubtotal();
+                    double tax = order.getTax();
+                    double total = order.getTotal();
+                    if (total <= 0.0001) {
+                        // compute using items
+                        String calcSqlNotice = "Calculating totals from items";
+                        System.out.println(calcSqlNotice);
+                        // Reuse DAO method by calling processPayment with 0 tax to get subtotal, then UI compute
+                        // But safer: mimic formula here
+                        var items = orderItemDAO.getOrderItemsByOrderId(orderId);
+                        subtotal = 0.0;
+                        for (var it : items) {
+                            var dish = new com.btl_oop.Model.DAO.DishDAO().getDishById(it.getDishId());
+                            if (dish != null) subtotal += dish.getPrice() * it.getQuantity();
+                        }
+                        tax = subtotal * 0.10;
+                        total = subtotal + tax;
+                    }
+                    this.paymentAmount = total;
+                    subtotalLabel.setText(String.format("$%.2f", subtotal));
+                    taxLabel.setText(String.format("$%.2f", tax));
+                    totalLabel.setText(String.format("$%.2f", total));
+                }
+            } catch (Exception ex) {
+                System.err.println("Failed to load order context: " + ex.getMessage());
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    private void showError(String msg) {
+        Alert a = new Alert(Alert.AlertType.ERROR);
+        a.setTitle("Error");
+        a.setHeaderText(null);
+        a.setContentText(msg);
+        a.showAndWait();
     }
 
     private void updatePaymentMethodLabel() {

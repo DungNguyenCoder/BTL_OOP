@@ -23,7 +23,6 @@
 
                 <VBox spacing="5">
                     <Label styleClass="title" text="Order Details" />
-                    <Label styleClass="back-link" text="Back Home" onMouseClicked="#handleBackHome" />
                 </VBox>
                 <Region HBox.hgrow="ALWAYS" />
 
