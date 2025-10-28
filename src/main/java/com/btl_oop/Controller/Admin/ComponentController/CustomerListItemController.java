@@ -1,6 +1,6 @@
 package com.btl_oop.Controller.Admin.ComponentController;
 
-import com.btl_oop.Model.Entity.Customer;
+import com.btl_oop.Model.Entity.Employee;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -25,7 +25,7 @@ public class CustomerListItemController {
     @FXML
     private Label statusLabel;
 
-    private Customer customer;
+    private Employee customer;
     private Runnable onClickCallback;
 
     @FXML
@@ -33,7 +33,7 @@ public class CustomerListItemController {
         // Will be set up after setData is called
     }
 
-    public void setData(Customer customer, Runnable onClickCallback) {
+    public void setData(Employee customer, Runnable onClickCallback) {
         this.customer = customer;
         this.onClickCallback = onClickCallback;
 
@@ -41,12 +41,12 @@ public class CustomerListItemController {
         nameLabel.setText(customer.getFullName());
         phoneLabel.setText(customer.getEmail()); // Using email as phone since Customer doesn't have phone
         emailLabel.setText(customer.getEmail());
-        languageLabel.setText(customer.getLanguage());
+       // languageLabel.setText(customer.getLanguage());
 
         // Set status
-        statusLabel.setText(customer.isActive() ? "Active" : "Inactive");
+        statusLabel.setText(customer.getStatus());
         statusLabel.getStyleClass().removeAll("active", "inactive");
-        if (customer.isActive()) {
+        if (customer.getStatus().equals("Active")) {
             statusLabel.getStyleClass().add("active");
         } else {
             statusLabel.getStyleClass().add("inactive");
@@ -66,7 +66,7 @@ public class CustomerListItemController {
         }
     }
 
-    public Customer getCustomer() {
+    public Employee getCustomer() {
         return customer;
     }
 }

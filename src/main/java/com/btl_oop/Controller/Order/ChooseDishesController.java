@@ -69,21 +69,20 @@ public class ChooseDishesController {
     private Button selectedButton = null;
     private List<Dish> allDishes;
     private Map<String, CategoryInfo> categoryMap = new HashMap<>();
+    private DishDAO dishDAO ;
 
     @FXML
     private void initialize() {
         System.out.println("ChooseDishesController initialized");
-
+        dishDAO = new DishDAO();
+        loadDishesFromDatabase();
         // Load hết dish từ Json
-        allDishes = loadDishesFromJson();
-        System.out.println("Loaded " + allDishes.size() + " dishes");
-
+       // allDishes = loadDishesFromJson();
+        //System.out.println("Loaded " + allDishes.size() + " dishes");
         // Init logo Category theo btn mình chuyển
         initializeCategoryMap();
-
         // Update số lượng món theo Category
         updateCategoryCounts();
-
         // Màn hình default khi vào order là Snack
         handleCategoryClick(btnSnack, "Snack", "/com/btl_oop/img/ic_item/ic_snack.png");
 
@@ -99,6 +98,15 @@ public class ChooseDishesController {
             System.err.println("WARNING: OrderSummaryController is NULL!");
         }
     }
+    private void loadDishesFromDatabase() {
+        try {
+            allDishes = dishDAO.getAllDish();
+        } catch (Exception e) {
+            System.err.println("Failed to load dishes from database: " + e.getMessage());
+            allDishes = new java.util.ArrayList<>();
+        }
+    }
+
 
     @FXML
     public void hideOrderSummary() {
@@ -252,66 +260,6 @@ public class ChooseDishesController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-    }
-
-    //Sua sang load from SQL
-    private List<Dish> loadDishesFromJson() {
-        System.out.println("=== LOADING DISHES ===");
-        System.out.println("Path: " + AppConfig.PATH_DISHES_DATA);
-
-        try {
-            java.net.URL resourceUrl = getClass().getResource(AppConfig.PATH_DISHES_DATA);
-            if (resourceUrl == null) {
-                System.err.println("ERROR: File not found at path: " + AppConfig.PATH_DISHES_DATA);
-                return List.of();
-            }
-
-            System.out.println("Resource URL found: " + resourceUrl);
-
-            try (InputStreamReader reader = new InputStreamReader(
-                    getClass().getResourceAsStream(AppConfig.PATH_DISHES_DATA),
-                    StandardCharsets.UTF_8)) {
-
-                Gson gson = new GsonBuilder()
-                        .registerTypeAdapter(Category.class, new CategoryDeserializer())
-                        .setPrettyPrinting()
-                        .create();
-
-                Type listType = new TypeToken<List<Dish>>(){}.getType();
-                List<Dish> dishes = gson.fromJson(reader, listType);
-
-                if (dishes == null || dishes.isEmpty()) {
-                    System.err.println("⚠WARNING: File loaded but contains no dishes");
-                    return List.of();
-                }
-
-                System.out.println("Successfully loaded " + dishes.size() + " dishes");
-
-                System.out.println("\n📋 Sample dishes:");
-                for (int i = 0; i < Math.min(5, dishes.size()); i++) {
-                    Dish dish = dishes.get(i);
-                    System.out.println(String.format("  %d. %s | %s | $%.2f | %dmin",
-                            i + 1,
-                            dish.getName(),
-                            dish.getCategory() != null ? dish.getCategory() : "NULL",
-                            dish.getPrice(),
-                            dish.getPrepareTime()
-                    ));
-                }
-                System.out.println();
-
-                return dishes;
-
-            } catch (JsonSyntaxException e) {
-                System.err.println("ERROR parsing JSON: " + e.getMessage());
-                e.printStackTrace();
-                return List.of();
-            }
-        } catch (Exception e) {
-            System.err.println("ERROR loading dishes: " + e.getMessage());
-            e.printStackTrace();
-            return List.of();
         }
     }
 

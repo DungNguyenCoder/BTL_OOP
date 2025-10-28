@@ -1,6 +1,6 @@
 package com.btl_oop.Controller.Admin.ComponentController;
 
-import com.btl_oop.Model.Entity.Customer;
+import com.btl_oop.Model.Entity.Employee;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -25,7 +25,7 @@ public class CustomerDetailDialogController {
     @FXML private Button editButton;
     @FXML private Button saveButton;
 
-    private Customer currentCustomer;
+    private Employee currentCustomer;
     private boolean isEditMode = false;
 
     @FXML
@@ -33,37 +33,36 @@ public class CustomerDetailDialogController {
         // Initial setup
     }
 
-    public void loadCustomer(Customer customer) {
+    public void loadCustomer(Employee customer) {
         this.currentCustomer = customer;
         displayCustomerData(customer);
     }
 
-    private void displayCustomerData(Customer customer) {
+    private void displayCustomerData(Employee employee) {
         // Set header info
-        customerNameLabel.setText(customer.getFullName());
-        customerEmailLabel.setText(customer.getEmail());
+        customerNameLabel.setText(employee.getFullName());
+        customerEmailLabel.setText(employee.getEmail());
 
         // Set status badge
-        statusBadge.setText(customer.isActive() ? "Active" : "Inactive");
+        statusBadge.setText(employee.getStatus());
         statusBadge.getStyleClass().removeAll("active", "inactive");
-        if (customer.isActive()) {
+        if (employee.getStatus().equals("Activate")) {
             statusBadge.getStyleClass().add("active");
         } else {
             statusBadge.getStyleClass().add("inactive");
         }
 
         // Set avatar color (random color based on name)
-        avatarCircle.setFill(getColorForName(customer.getFullName()));
+        avatarCircle.setFill(getColorForName(employee.getFullName()));
 
         // Set form fields
-        fullNameField.setText(customer.getFullName());
-        nickNameField.setText(customer.getNickName());
-        genderField.setText(customer.getGender());
-        languageField.setText(customer.getLanguage());
+        fullNameField.setText(employee.getFullName());
+        nickNameField.setText(employee.getUserName());
+        languageField.setText("Vietnamese");
 
         // Set email info
-        emailAddressLabel.setText(customer.getEmail());
-        emailTimeLabel.setText(customer.getEmailTimeAgo());
+        emailAddressLabel.setText(employee.getEmail());
+
     }
 
     private Color getColorForName(String name) {
@@ -99,9 +98,7 @@ public class CustomerDetailDialogController {
     private void handleSave() {
         // Update customer data
         currentCustomer.setFullName(fullNameField.getText());
-        currentCustomer.setNickName(nickNameField.getText());
-        currentCustomer.setGender(genderField.getText());
-        currentCustomer.setLanguage(languageField.getText());
+        currentCustomer.setUserName(nickNameField.getText());
 
         // Update display
         displayCustomerData(currentCustomer);
@@ -138,7 +135,7 @@ public class CustomerDetailDialogController {
         alert.showAndWait();
     }
 
-    public Customer getCurrentCustomer() {
+    public Employee getCurrentCustomer() {
         return currentCustomer;
     }
 }
