@@ -1,5 +1,6 @@
 package com.btl_oop.Model.DAO;
 
+import com.btl_oop.Model.Entity.Dish;
 import com.btl_oop.Model.Entity.OrderItem;
 import com.btl_oop.Utils.DBConnection;
 
@@ -97,5 +98,31 @@ public class OrderItemDAO {
         } catch (SQLException e) {
             throw new RuntimeException("Lỗi khi xóa OrderItem: " + orderItemId, e);
         }
+    }
+
+    //thêm lấy món ăn từ order theo id
+    public Dish getDishById(int dishId) {
+        String sql = "SELECT * FROM Dish WHERE DishID = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, dishId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return new Dish(
+                            rs.getInt("DishID"),
+                            rs.getString("Name"),
+                            rs.getDouble("Price"),
+                            rs.getString("Description"),
+                            rs.getInt("PrepareTime"),
+                            rs.getString("Category"),
+                            rs.getString("ImageUrl"),
+                            rs.getBoolean("isPopular")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Lỗi khi lấy Dish với ID: " + dishId, e);
+        }
+        return null;
     }
 }

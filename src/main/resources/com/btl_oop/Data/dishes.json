@@ -1,47 +1,333 @@
 [
   {
-    "name": "French Fries",
-    "price": 3.5,
-    "description": "Crispy fries",
-    "prepareTime": 5,
-    "category": "Snack",
-    "imageUrl": "fries.png",
-    "isPopular": true
-  },
-  {
-    "name": "Chicken Wings",
-    "price": 5.0,
-    "description": "Spicy chicken wings",
-    "prepareTime": 8,
-    "category": "Vegan",
-    "imageUrl": "wings.png",
-    "isPopular": true
-  },
-  {
-    "name": "Tomato Soup",
-    "price": 4.2,
-    "description": "Fresh tomato soup with herbs",
-    "prepareTime": 7,
-    "category": "Snack",
-    "imageUrl": "tomato_soup.png",
-    "isPopular": false
-  },
-  {
-    "name": "Caesar Salad",
-    "price": 6.5,
-    "description": "Classic caesar salad with dressing",
-    "prepareTime": 6,
-    "category": "Meal",
-    "imageUrl": "caesar_salad.png",
-    "isPopular": true
-  },
-  {
-    "name": "Grilled Steak",
-    "price": 15.0,
-    "description": "Juicy grilled steak cooked to perfection",
+    "name": "Buffalo Wings",
+    "price": 12.99,
+    "description": "Crispy chicken wings tossed in buffalo sauce with celery and blue cheese",
     "prepareTime": 15,
-    "category": "Snack",
-    "imageUrl": "steak.png",
+    "category": {
+      "name": "SNACK",
+      "displayName": "Snack"
+    },
+    "imageUrl": "/com/btl_oop/img/dishes/buffalo-wings.jpg",
+    "isAvailable": true,
+    "spicyLevel": "Medium",
+    "allergens": ["dairy", "gluten"],
     "isPopular": true
+  },
+  {
+    "name": "Mozzarella Sticks",
+    "price": 9.99,
+    "description": "Golden breaded mozzarella with marinara dipping sauce",
+    "prepareTime": 12,
+    "category": {
+      "name": "SNACK",
+      "displayName": "Snack"
+    },
+    "imageUrl": "/com/btl_oop/img/dishes/mozzarella-sticks.jpg",
+    "isAvailable": true,
+    "allergens": ["dairy", "gluten"]
+  },
+  {
+    "name": "Calamari Rings",
+    "price": 14.99,
+    "description": "Fresh squid rings with spicy marinara and lemon aioli",
+    "prepareTime": 10,
+    "category": {
+      "name": "SNACK",
+      "displayName": "Snack"
+    },
+    "imageUrl": "/com/btl_oop/img/dishes/calamari-rings.jpg",
+    "isAvailable": true,
+    "allergens": ["seafood", "gluten"]
+  },
+  {
+    "name": "Loaded Nachos",
+    "price": 13.99,
+    "description": "Tortilla chips loaded with cheese, jalapeños, sour cream, and guacamole",
+    "prepareTime": 8,
+    "category": {
+      "name": "SNACK",
+      "displayName": "Snack"
+    },
+    "imageUrl": "/com/btl_oop/img/dishes/loaded-nachos.jpg",
+    "isAvailable": true,
+    "spicyLevel": "Mild",
+    "allergens": ["dairy"]
+  },
+  {
+    "name": "Spinach Artichoke Dip",
+    "price": 11.99,
+    "description": "Creamy spinach and artichoke dip served with warm tortilla chips",
+    "prepareTime": 10,
+    "category": {
+      "name": "SNACK",
+      "displayName": "Snack"
+    },
+    "imageUrl": "/com/btl_oop/img/dishes/spinach-dip.jpg",
+    "isAvailable": true,
+    "allergens": ["dairy"]
+  },
+  {
+    "name": "Grilled Chicken Breast",
+    "price": 18.99,
+    "description": "Tender grilled chicken breast with roasted vegetables and mashed potatoes",
+    "prepareTime": 20,
+    "category": {
+      "name": "MEAL",
+      "displayName": "Meal"
+    },
+    "imageUrl": "/com/btl_oop/img/dishes/grilled-chicken.jpg",
+    "isAvailable": true,
+    "allergens": []
+  },
+  {
+    "name": "Beef Steak",
+    "price": 28.99,
+    "description": "Premium 8oz ribeye steak with garlic butter and seasonal vegetables",
+    "prepareTime": 25,
+    "category": {
+      "name": "MEAL",
+      "displayName": "Meal"
+    },
+    "imageUrl": "/com/btl_oop/img/dishes/beef-steak.jpg",
+    "isAvailable": true,
+    "allergens": ["dairy"]
+  },
+  {
+    "name": "Grilled Salmon",
+    "price": 24.99,
+    "description": "Atlantic salmon fillet with lemon butter sauce and wild rice",
+    "prepareTime": 18,
+    "category": {
+      "name": "MEAL",
+      "displayName": "Meal"
+    },
+    "imageUrl": "/com/btl_oop/img/dishes/grilled-salmon.jpg",
+    "isAvailable": true,
+    "allergens": ["fish"]
+  },
+  {
+    "name": "Chicken Parmesan",
+    "price": 19.99,
+    "description": "Breaded chicken breast topped with marinara and melted mozzarella, served with pasta",
+    "prepareTime": 22,
+    "category": {
+      "name": "MEAL",
+      "displayName": "Meal"
+    },
+    "imageUrl": "/com/btl_oop/img/dishes/chicken-parmesan.jpg",
+    "isAvailable": true,
+    "allergens": ["dairy", "gluten"]
+  },
+  {
+    "name": "BBQ Ribs",
+    "price": 26.99,
+    "description": "Fall-off-the-bone baby back ribs with BBQ sauce, coleslaw and fries",
+    "prepareTime": 30,
+    "category": {
+      "name": "MEAL",
+      "displayName": "Meal"
+    },
+    "imageUrl": "/com/btl_oop/img/dishes/bbq-ribs.jpg",
+    "isAvailable": true,
+    "allergens": ["gluten"]
+  },
+  {
+    "name": "Vegetable Stir Fry",
+    "price": 15.99,
+    "description": "Fresh seasonal vegetables stir-fried with tofu in teriyaki sauce",
+    "prepareTime": 12,
+    "category": {
+      "name": "VEGAN",
+      "displayName": "Vegan"
+    },
+    "imageUrl": "/com/btl_oop/img/dishes/veggie-stir-fry.jpg",
+    "isAvailable": true,
+    "isVegan": true,
+    "allergens": ["soy"]
+  },
+  {
+    "name": "Quinoa Buddha Bowl",
+    "price": 16.99,
+    "description": "Quinoa with roasted chickpeas, avocado, kale, and tahini dressing",
+    "prepareTime": 10,
+    "category": {
+      "name": "VEGAN",
+      "displayName": "Vegan"
+    },
+    "imageUrl": "/com/btl_oop/img/dishes/buddha-bowl.jpg",
+    "isAvailable": true,
+    "isVegan": true,
+    "allergens": []
+  },
+  {
+    "name": "Vegan Burger",
+    "price": 14.99,
+    "description": "Plant-based patty with lettuce, tomato, onion, and vegan mayo on whole wheat bun",
+    "prepareTime": 15,
+    "category": {
+      "name": "VEGAN",
+      "displayName": "Vegan"
+    },
+    "imageUrl": "/com/btl_oop/img/dishes/vegan-burger.jpg",
+    "isAvailable": true,
+    "isVegan": true,
+    "allergens": ["gluten", "soy"]
+  },
+  {
+    "name": "Mushroom Risotto",
+    "price": 17.99,
+    "description": "Creamy arborio rice with mixed mushrooms and truffle oil (can be made vegan)",
+    "prepareTime": 20,
+    "category": {
+      "name": "VEGAN",
+      "displayName": "Vegan"
+    },
+    "imageUrl": "/com/btl_oop/img/dishes/mushroom-risotto.jpg",
+    "isAvailable": true,
+    "allergens": []
+  },
+  {
+    "name": "Chocolate Lava Cake",
+    "price": 8.99,
+    "description": "Warm chocolate cake with molten center, served with vanilla ice cream",
+    "prepareTime": 8,
+    "category": {
+      "name": "DESSERT",
+      "displayName": "Dessert"
+    },
+    "imageUrl": "/com/btl_oop/img/dishes/lava-cake.jpg",
+    "isAvailable": true,
+    "allergens": ["dairy", "eggs", "gluten"]
+  },
+  {
+    "name": "New York Cheesecake",
+    "price": 7.99,
+    "description": "Classic creamy cheesecake with graham cracker crust and berry compote",
+    "prepareTime": 5,
+    "category": {
+      "name": "DESSERT",
+      "displayName": "Dessert"
+    },
+    "imageUrl": "/com/btl_oop/img/dishes/cheesecake.jpg",
+    "isAvailable": true,
+    "allergens": ["dairy", "eggs", "gluten"]
+  },
+  {
+    "name": "Tiramisu",
+    "price": 8.49,
+    "description": "Traditional Italian dessert with espresso-soaked ladyfingers and mascarpone",
+    "prepareTime": 5,
+    "category": {
+      "name": "DESSERT",
+      "displayName": "Dessert"
+    },
+    "imageUrl": "/com/btl_oop/img/dishes/tiramisu.jpg",
+    "isAvailable": true,
+    "allergens": ["dairy", "eggs", "gluten"]
+  },
+  {
+    "name": "Apple Pie",
+    "price": 6.99,
+    "description": "Homemade apple pie with cinnamon and vanilla ice cream",
+    "prepareTime": 10,
+    "category": {
+      "name": "DESSERT",
+      "displayName": "Dessert"
+    },
+    "imageUrl": "/com/btl_oop/img/img/food_asian_bowl.png",
+    "isAvailable": true,
+    "allergens": ["dairy", "gluten"]
+  },
+  {
+    "name": "Ice Cream Sundae",
+    "price": 5.99,
+    "description": "Three scoops of ice cream with chocolate sauce, whipped cream, and cherry",
+    "prepareTime": 3,
+    "category": {
+      "name": "DESSERT",
+      "displayName": "Dessert"
+    },
+    "imageUrl": "/com/btl_oop/img/img/food_asian_bowl.png",
+    "isAvailable": true,
+    "allergens": ["dairy"]
+  },
+  {
+    "name": "Coca Cola",
+    "price": 2.99,
+    "description": "Classic Coca-Cola, chilled",
+    "prepareTime": 1,
+    "category": {
+      "name": "DRINK",
+      "displayName": "Drink"
+    },
+    "imageUrl": "/com/btl_oop/img/img/food_asian_bowl.png",
+    "isAvailable": true,
+    "allergens": []
+  },
+  {
+    "name": "Orange Juice",
+    "price": 4.49,
+    "description": "Freshly squeezed orange juice",
+    "prepareTime": 2,
+    "category": {
+      "name": "DRINK",
+      "displayName": "Drink"
+    },
+    "imageUrl": "/com/btl_oop/img/img/food_asian_bowl.png",
+    "isAvailable": true,
+    "allergens": []
+  },
+  {
+    "name": "Iced Coffee",
+    "price": 3.99,
+    "description": "Cold brew coffee served over ice",
+    "prepareTime": 2,
+    "category": {
+      "name": "DRINK",
+      "displayName": "Drink"
+    },
+    "imageUrl": "/com/btl_oop/img/img/food_asian_bowl.png",
+    "isAvailable": true,
+    "allergens": []
+  },
+  {
+    "name": "Smoothie",
+    "price": 5.99,
+    "description": "Mixed berry smoothie with yogurt and honey",
+    "prepareTime": 3,
+    "category": {
+      "name": "DRINK",
+      "displayName": "Drink"
+    },
+    "imageUrl": "/com/btl_oop/img/img/food_asian_bowl.png",
+    "isAvailable": true,
+    "allergens": ["dairy"]
+  },
+  {
+    "name": "Lemonade",
+    "price": 3.49,
+    "description": "Homemade fresh lemonade",
+    "prepareTime": 2,
+    "category": {
+      "name": "DRINK",
+      "displayName": "Drink"
+    },
+    "imageUrl": "/com/btl_oop/img/img/food_asian_bowl.png",
+    "isAvailable": true,
+    "allergens": []
+  },
+  {
+    "name": "Mineral Water",
+    "price": 1.99,
+    "description": "Sparkling mineral water",
+    "prepareTime": 1,
+    "category": {
+      "name": "DRINK",
+      "displayName": "Drink"
+    },
+    "imageUrl": "/com/btl_oop/img/img/food_asian_bowl.png",
+    "isAvailable": true,
+    "allergens": []
   }
 ]

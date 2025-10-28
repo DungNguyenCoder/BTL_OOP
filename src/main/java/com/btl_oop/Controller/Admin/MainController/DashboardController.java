@@ -1,22 +1,49 @@
 package com.btl_oop.Controller.Admin.MainController;
 
 import com.btl_oop.Controller.Admin.ComponentController.FeedbackCardController;
-import com.btl_oop.Model.CustomerFeedback;
+import com.btl_oop.Model.DAO.EmployeeDAO;
+import com.btl_oop.Model.DAO.ReportDAO;
+import com.btl_oop.Model.Data.CustomerFeedback;
+import com.btl_oop.Model.Entity.Employee;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class DashboardController {
 
     @FXML
     private HBox reviewsContainer;
 
+    @FXML
+    private Label totalOrders;
+
+    @FXML
+    private Label totalDelivered;
+
+    @FXML
+    private Label totalCancelled;
+
+    @FXML
+    private Label totalRevenue;
+
+    @FXML
+    private Label date;
+
+    @FXML
+    private Label welcomeText;
+
     private List<CustomerFeedback> allFeedbacks = new ArrayList<>();
+    private ReportDAO reportDAO = new ReportDAO();
+    private EmployeeDAO employeeDAO = new EmployeeDAO();
     private int currentStartIndex = 0;
     private final int REVIEWS_PER_PAGE = 3;
 
@@ -25,8 +52,20 @@ public class DashboardController {
         System.out.println("DashboardController initialized!");
         loadFeedbackData();
         displayReviews();
+        setUpLabel();
     }
 
+    private void setUpLabel() {
+        totalOrders.setText(String.valueOf(reportDAO.getTotalOrders()));
+        totalRevenue.setText(String.valueOf(reportDAO.getTotalRevenue()));
+        totalDelivered.setText(String.valueOf(reportDAO.getDeliveredOrders()));
+        totalCancelled.setText(String.valueOf(reportDAO.getCancelledOrders()));
+        String formatDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ENGLISH));
+        date.setText(formatDate);
+        int employeeId = Employee.getEmployeeId();
+        Employee employee = employeeDAO.getEmployeeById(employeeId);
+        welcomeText.setText(String.format("Hi, %s. Welcome back to Sedap Admin!",employee.getFullName() ));
+    }
     private void loadFeedbackData() {
         // Sample feedback data
         allFeedbacks.add(new CustomerFeedback(

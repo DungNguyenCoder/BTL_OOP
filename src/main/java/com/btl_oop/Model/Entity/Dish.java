@@ -10,11 +10,11 @@ public class Dish {
     private int prepareTime;
     private String imageUrl;
     private String category;
-    private Category selectedCategory;
+    private boolean isPopular;
 
     public Dish() {}
 
-    public Dish(int dishId, String name, double price, String description, int prepareTime, String category, String imageUrl) {
+    public Dish(int dishId, String name, double price, String description, int prepareTime, String category, String imageUrl, boolean isPopular) {
         this.dishId = dishId;
         this.name = name;
         this.price = price;
@@ -22,15 +22,18 @@ public class Dish {
         this.prepareTime = prepareTime;
         this.category = category;
         this.imageUrl = imageUrl;
+        this.isPopular = isPopular;
     }
 
-    public Dish(String name, double price, String description, int prepareTime, Category selectedCategory, String imageUrl) {
+    public Dish(String name, double price, String description, int prepareTime, String category, String imageUrl, boolean isPopular) {
+        this.dishId = 0; // Auto Increament
         this.name = name;
         this.price = price;
         this.description = description;
         this.prepareTime = prepareTime;
-        this.selectedCategory = selectedCategory;
+        this.category = category;
         this.imageUrl = imageUrl;
+        this.isPopular = isPopular;
     }
 
     public int getDishId() {return dishId;}
@@ -40,6 +43,7 @@ public class Dish {
     public int getPrepareTime() { return prepareTime; }
     public String getCategory() { return category; }
     public String getImageUrl() { return imageUrl; }
+    public boolean isPopular() { return isPopular; }
 
     public void setDishId(int dishId) {this.dishId = dishId;}
     public void setName(String name) { this.name = name; }
@@ -48,4 +52,5 @@ public class Dish {
     public void setPrepareTime(int prepareTime) { this.prepareTime = prepareTime; }
     public void setCategory(String category) { this.category = category; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+    public void setPopular(boolean popular) { isPopular = popular; }
 }

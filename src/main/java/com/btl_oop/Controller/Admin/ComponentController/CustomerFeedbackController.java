@@ -1,6 +1,6 @@
 package com.btl_oop.Controller.Admin.ComponentController;
 
-import com.btl_oop.Model.CustomerFeedback;
+import com.btl_oop.Model.Data.CustomerFeedback;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.FlowPane;

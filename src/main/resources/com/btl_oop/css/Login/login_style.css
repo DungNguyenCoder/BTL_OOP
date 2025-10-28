@@ -1,0 +1,167 @@
+/* ============================================
+   ROOT & GENERAL STYLES
+   ============================================ */
+.root {
+    -fx-background-color: #e8eaed;
+    -fx-font-family: "Segoe UI", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ============================================
+   LOGIN CONTAINER (Left Side)
+   ============================================ */
+.login-container {
+    -fx-background-color: #e8eaed;
+}
+
+/* ============================================
+   LOGO STYLES
+   ============================================ */
+.logo-text {
+    -fx-fill: #2d3436;
+    -fx-font-weight: bold;
+    -fx-font-size: 42px;
+}
+
+.logo-dot {
+    -fx-fill: #ff6b35;
+    -fx-font-weight: bold;
+    -fx-font-size: 42px;
+}
+
+.subtitle {
+    -fx-text-fill: #636e72;
+    -fx-font-size: 13px;
+}
+
+/* ============================================
+   TOGGLE TABS (Sign up / Log in)
+   ============================================ */
+.toggle-container {
+    -fx-spacing: 30;
+}
+
+.toggle-inactive {
+    -fx-text-fill: #b2bec3;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+}
+
+.toggle-inactive:hover {
+    -fx-text-fill: #636e72;
+}
+
+.toggle-active {
+    -fx-text-fill: #2d3436;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+    -fx-border-color: #2d3436;
+    -fx-border-width: 0 0 2 0;
+    -fx-padding: 0 0 5 0;
+}
+
+/* ============================================
+   FORM TITLE
+   ============================================ */
+.form-title {
+    -fx-text-fill: #2d3436;
+    -fx-font-weight: bold;
+    -fx-font-size: 24px;
+}
+
+/* ============================================
+   INPUT FIELDS
+   ============================================ */
+.input-group {
+    -fx-spacing: 8;
+}
+
+.input-label {
+    -fx-text-fill: #636e72;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-letter-spacing: 0.5px;
+}
+
+.input-field {
+    -fx-background-color: white;
+    -fx-background-radius: 8;
+    -fx-border-color: #dfe6e9;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-padding: 14 16 14 16;
+    -fx-font-size: 14px;
+    -fx-text-fill: #2d3436;
+    -fx-prompt-text-fill: #b2bec3;
+}
+
+.input-field:focused {
+    -fx-border-color: #2d3436;
+    -fx-border-width: 2;
+    -fx-background-color: white;
+}
+
+.input-field:hover {
+    -fx-border-color: #636e72;
+}
+
+.eye-icon {
+    -fx-text-fill: #b2bec3;
+    -fx-cursor: hand;
+}
+
+/* ============================================
+   SIGN IN BUTTON
+   ============================================ */
+.signin-button {
+    -fx-background-color: #2d3436;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-padding: 16 0 16 0;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 2);
+}
+
+.signin-button:hover {
+    -fx-background-color: #1e272e;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0, 0, 4);
+}
+
+.signin-button:pressed {
+    -fx-background-color: #0d1317;
+    -fx-translate-y: 1;
+}
+
+/* ============================================
+   FOOTER TEXT & LINK
+   ============================================ */
+.footer-text {
+    -fx-text-fill: #636e72;
+    -fx-font-size: 13px;
+}
+
+.footer-link {
+    -fx-text-fill: #2d3436;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-underline: false;
+}
+
+.footer-link:hover {
+    -fx-text-fill: #ff6b35;
+    -fx-underline: true;
+}
+
+/* ============================================
+   IMAGE CONTAINER (Right Side)
+   ============================================ */
+.image-container {
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 20, 0, -5, 0);
+}
+
+.image-container ImageView {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 25, 0, 0, 5);
+}

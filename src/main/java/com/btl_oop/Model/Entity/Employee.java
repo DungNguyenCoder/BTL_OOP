@@ -3,7 +3,7 @@ package com.btl_oop.Model.Entity;
 import java.time.LocalDate;
 
 public class Employee {
-    private int employeeId;
+    private static int employeeId;
     private String userName;
     private String password;
     private String fullName;
@@ -12,6 +12,7 @@ public class Employee {
     private LocalDate dateOfBirth;
     private String role;
     private String status;
+
 
     public Employee(int employeeId, String userName, String password, String fullName, String email,
                     String phoneNumber, LocalDate dateOfBirth, String role, String status) {
@@ -26,8 +27,8 @@ public class Employee {
         this.status = status;
     }
 
-    public int getEmployeeId() { return employeeId; }
-    public void setEmployeeId(int employeeId) { this.employeeId = employeeId; }
+    public static int getEmployeeId() { return employeeId; }
+    public void setEmployeeId(int employeeId) { Employee.employeeId = employeeId; }
     public String getUserName() { return userName; }
     public void setUserName(String userName) { this.userName = userName; }
     public String getPassword() { return password; }

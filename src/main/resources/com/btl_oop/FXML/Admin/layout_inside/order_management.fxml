@@ -20,7 +20,7 @@
             <VBox>
                 <children>
                     <Label styleClass="title" text="Dashboard" />
-                    <Label styleClass="subtitle" text="Hi, Samantha. Welcome back to Sedap Admin!" />
+                    <Label fx:id= "welcomeText" styleClass="subtitle" text="Hi, Samantha. Welcome back to Sedap Admin!" />
                 </children>
             </VBox>
             <Region HBox.hgrow="ALWAYS" />
@@ -33,8 +33,8 @@
                     </ImageView>
                     <VBox alignment="CENTER_LEFT" spacing="2">
                         <children>
-                            <Label style="-fx-font-size: 11px; -fx-text-fill: #888;" text="Filter Period" />
-                            <Label style="-fx-font-size: 12px; -fx-font-weight: bold;" text="17 April 2020 - 21 May 2020" />
+                            <Label style="-fx-font-size: 11px; -fx-text-fill: #888;" text="Today" />
+                            <Label fx:id= "date" style="-fx-font-size: 12px; -fx-font-weight: bold;" text="17 April 2020 - 21 May 2020" />
                         </children>
                     </VBox>
                 </children>

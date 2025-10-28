@@ -1,37 +1,72 @@
 package com.btl_oop.Controller.Admin.MainController;
 
 import com.btl_oop.Controller.Admin.ComponentController.OrderItemController;
+import com.btl_oop.Model.DAO.EmployeeDAO;
+import com.btl_oop.Model.DAO.OrderDAO;
+import com.btl_oop.Model.Entity.Employee;
+import com.btl_oop.Model.Entity.Order;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Locale;
 
 public class OrderManagementController {
 
     @FXML
     private VBox orderContainer;
 
+    @FXML
+    private Label date;
 
+    @FXML
+    private Label welcomeText;
+
+    private OrderDAO orderDAO ;
+    private EmployeeDAO employeeDAO = new EmployeeDAO();
+    private List<Order> allOrders ;
+    private final String img_account ="/com/btl_oop/img/img/account.png";
     @FXML
     public void initialize() {
         System.out.println("DashboardController initialized!");
         System.out.println("orderContainer is null? " + (orderContainer == null));
+        orderDAO = new OrderDAO();
+        loadSampleOrders();
+        setUpLabel();
+    }
 
-        if (orderContainer != null) {
-            loadSampleOrders();
-        } else {
-            System.err.println("ERROR: orderContainer is null! Check fx:id in FXML");
-        }
+    private void setUpLabel() {
+        String formatDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ENGLISH));
+        date.setText(formatDate);
+        int employeeId = Employee.getEmployeeId();
+        Employee employee = employeeDAO.getEmployeeById(employeeId);
+        welcomeText.setText(String.format("Hi, %s. Welcome back to Sedap Admin!",employee.getFullName() ));
     }
 
     private void loadSampleOrders() {
-        addOrder("1001", "Delivered", "Doris Brown", 34.00, "/img/img_login.png");
-        addOrder("1002", "Delivered", "DJ Don", 18.00, "/img/img_login.png");
-        addOrder("1003", "In Progress", "Sara", 26.00, "/img/img_login.png");
-        addOrder("1004", "Delivered", "Yumiko", 39.00, "/img/img_login.png");
-        addOrder("1005", "In Progress", "Olivia", 21.00, "/img/img_login.png");
-        addOrder("1006", "In Progress", "Tony", 48.00, "/img/img_login.png");
+//        addOrder("1001", "Delivered", "Doris Brown", 34.00, "/img/img_login.png");
+//        addOrder("1002", "Delivered", "DJ Don", 18.00, "/img/img_login.png");
+//        addOrder("1003", "In Progress", "Sara", 26.00, "/img/img_login.png");
+//        addOrder("1004", "Delivered", "Yumiko", 39.00, "/img/img_login.png");
+//        addOrder("1005", "In Progress", "Olivia", 21.00, "/img/img_login.png");
+//        addOrder("1006", "In Progress", "Tony", 48.00, "/img/img_login.png");
+          try {
+              allOrders = orderDAO.getAllOrders();
+          }
+          catch (Exception e )
+          {
+              System.out.println("Fail upload()");
+          }
+          for(Order order : allOrders)
+          {
+              addOrder(String.valueOf(order.getTableId()), order.getStatus(),"CustomerName" ,order.getTotal() ,img_account );
+          }
+
     }
 
     public void addOrder(String orderId, String status, String customerName,
@@ -43,10 +78,7 @@ public class OrderManagementController {
             OrderItemController controller = loader.getController();
             controller.setOrderData(orderId, status, customerName, totalPrice, imagePath);
 
-            controller.setOnDetailsClick(() -> {
-                System.out.println("Details clicked for Order: " + orderId);
-                showOrderDetails(orderId);
-            });
+            controller.setDetailButtonClick();
 
             orderContainer.getChildren().add(orderItem);
 

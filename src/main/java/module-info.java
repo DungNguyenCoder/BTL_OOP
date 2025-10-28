@@ -10,6 +10,7 @@ module com.btl_oop {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.desktop;
 
     opens com.btl_oop.Model.Entity to javafx.fxml;
     opens com.btl_oop.Utils to javafx.fxml;
