@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../css/DeskManager/TableMap.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.btl_oop.Controller.DeskManager.TableMapController">
+    <top>
+        <HBox spacing="20" styleClass="header" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="20" left="20" right="20" top="20" />
+            </padding>
+            <children>
+                <VBox spacing="5">
+                    <Label styleClass="title" text="Restaurant POS" />
+                    <Label styleClass="subtitle" text="Welcome, John Smith" />
+            </VBox>
+                <Pane fx:id="headerHbox" HBox.hgrow="ALWAYS" />
+            </children>
+        </HBox>
+    </top>
+    <center>
+        <VBox spacing="20.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            <!-- Status row -->
+            <HBox spacing="15" HBox.hgrow="ALWAYS">
+                <children>
+                    <VBox fx:id="statusVBox" alignment="CENTER" styleClass="status-card" HBox.hgrow="ALWAYS">
+                        <Label styleClass="status-title" text="✔Available" />
+                        <Label fx:id="countAvailableTableLabel" styleClass="status-value-green" text="19" />
+                        <Label styleClass="status-desc" text="Ready for guests" />
+                </VBox>
+                    <VBox alignment="CENTER" styleClass="status-card" HBox.hgrow="ALWAYS">
+                        <Label styleClass="status-title" text="👤Occupied" />
+                        <Label fx:id="countOccupiedTableLabel" styleClass="status-value-blue" text="1" />
+                        <Label styleClass="status-desc" text="Active tables" />
+                </VBox>
+                    <VBox alignment="CENTER" styleClass="status-card" HBox.hgrow="ALWAYS">
+                        <Label styleClass="status-title" text="❗ Cleaning" />
+                        <Label fx:id="countCleaningTableLabel" styleClass="status-value-red" text="0" />
+                        <Label styleClass="status-desc" text="Need attention" />
+                </VBox>
+                    <VBox alignment="CENTER" styleClass="status-card" HBox.hgrow="ALWAYS">
+                        <Label styleClass="status-title" text="🍽 Active Orders" />
+                        <Label fx:id="countActivateOrdersTableLabel" styleClass="status-value-orange" text="0" />
+                        <Label styleClass="status-desc" text="In progress" />
+                </VBox>
+                    <VBox alignment="CENTER" styleClass="status-card" HBox.hgrow="ALWAYS">
+                        <Label styleClass="status-title" text="📊 Total Orders" />
+                        <Label fx:id="countTotalOrdersTableLabel" styleClass="status-value-purple" text="0" />
+                        <Label styleClass="status-desc" text="Today" />
+                </VBox>
+                </children>
+            </HBox>
+
+            <!-- Table grid -->
+            <GridPane fx:id="tableGridPane" hgap="15" vgap="15" VBox.vgrow="ALWAYS">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="25" />
+                    <ColumnConstraints percentWidth="25" />
+                    <ColumnConstraints percentWidth="25" />
+                    <ColumnConstraints percentWidth="25" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints percentHeight="50" />
+                    <RowConstraints percentHeight="50" />
+                </rowConstraints>
+            </GridPane>
+        </VBox>
+    </center>
+
+    <!-- Footer -->
+    <bottom>
+        <HBox alignment="CENTER" spacing="20" styleClass="footer">
+            <padding>
+                <Insets bottom="20" left="20" right="20" top="20" />
+            </padding>
+            <children>
+                <Button fx:id="refreshButton" onAction="#handleRefresh" text="🔄Refresh" />
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>

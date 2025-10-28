@@ -21,6 +21,8 @@ module com.btl_oop {
     opens com.btl_oop.Controller.Admin.ComponentController to javafx.fxml;
     opens com.btl_oop.Controller.Admin.MainController to javafx.fxml;
     opens com.btl_oop.Controller.Order to javafx.fxml;
+    opens com.btl_oop.Controller.DeskManager to javafx.fxml;
+
 
     exports com.btl_oop;
     exports com.btl_oop.Model.Entity;

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+
+<BorderPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../css/DeskManager/OrderDetails.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.btl_oop.Controller.DeskManager.OrderDetailsController">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="header" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="20" left="20" right="20" top="20" />
+            </padding>
+            <children>
+
+                <VBox spacing="5">
+                    <Label styleClass="title" text="Order Details" />
+                    <Label styleClass="back-link" text="Back Home" onMouseClicked="#handleBackHome" />
+                </VBox>
+                <Region HBox.hgrow="ALWAYS" />
+
+                <Label fx:id="orderIdLabel" styleClass="order-id" text="Order Id : " />
+            </children>
+        </HBox>
+    </top>
+
+    <center>
+        <HBox spacing="30" alignment="CENTER" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="20" left="20" right="20" top="20" />
+
+            </padding>
+
+            <VBox spacing="20" styleClass="left-panel">
+                <VBox styleClass="customer-section">
+
+                    <HBox spacing="15" alignment="CENTER_LEFT">
+                        <ImageView fx:id="customerAvatar" styleClass="customer-avatar" fitWidth="60" fitHeight="60" />
+                        <VBox spacing="5">
+                            <HBox spacing="10" alignment="CENTER_LEFT">
+
+                                <Label fx:id="orderTimeLabel" styleClass="order-time" text="29 Nov, 15:20 pm" />
+                                <Label fx:id="orderStatusLabel" styleClass="status-delivered" text="Delivered" />
+                            </HBox>
+
+                            <Label fx:id="customerNameLabel" styleClass="customer-name" text="John Smith" />
+                            <Label fx:id="customerPhoneLabel" styleClass="customer-info" text="+23 345 678" />
+                            <Label fx:id="customerEmailLabel" styleClass="customer-info" text="Loremipsum@email.com" />
+
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+                <VBox styleClass="order-items-section">
+                    <Label styleClass="section-title" text="Order Items" />
+
+                    <ScrollPane fitToWidth="true" hbarPolicy="NEVER"
+                                vbarPolicy="AS_NEEDED" styleClass="order-items-scroll">
+                        <content>
+                            <VBox fx:id="orderItemsContainer" styleClass="order-items-grid" spacing="15">
+
+                            </VBox>
+                        </content>
+                    </ScrollPane>
+
+                </VBox>
+            </VBox>
+
+            <VBox styleClass="right-panel">
+                <VBox styleClass="order-summary-card" spacing="20">
+
+                    <Label styleClass="summary-title" text="Order Summary" />
+
+                    <VBox spacing="15">
+                        <HBox spacing="20">
+
+                            <Label styleClass="summary-label" text="Subtotal:" />
+                            <Label fx:id="subtotalLabel" styleClass="summary-value" text="\$0.00" />
+                        </HBox>
+                        <HBox spacing="20">
+
+                            <Label fx:id="taxLabelText" styleClass="summary-label" text="Tax:" />
+                            <Label fx:id="taxLabel" styleClass="summary-value" text="\$0.00" />
+                        </HBox>
+
+                        <Line styleClass="summary-separator" />
+                        <HBox spacing="20">
+                            <Label styleClass="total-label" text="Total:" />
+                            <Label fx:id="totalLabel" styleClass="total-value" text="\$0.00" />
+
+                        </HBox>
+                    </VBox>
+
+                    <VBox styleClass="order-status-info" spacing="10">
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label styleClass="status-icon" text="⏱️" />
+                            <Label fx:id="prepTimeLabel" styleClass="status-text" text="Estimated prep time: N/A" />
+
+                        </HBox>
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label styleClass="status-icon" text="📋" />
+
+                            <Label fx:id="orderNumberInfoLabel" styleClass="status-text" text="Order #" />
+                        </HBox>
+                    </VBox>
+
+                    <VBox styleClass="special-instructions" spacing="10">
+                        <Label styleClass="instructions-label" text="Special Instructions" />
+                        <VBox styleClass="instructions-box" spacing="10">
+                            <Label fx:id="instructionsTextLabel" styleClass="instructions-text"
+                                   text="No special instructions." />
+                        </VBox>
+                    </VBox>
+                </VBox>
+            </VBox>
+        </HBox>
+    </center>
+
+
+    <bottom>
+        <HBox alignment="CENTER" spacing="20" styleClass="footer">
+            <padding>
+                <Insets bottom="20" left="20" right="20" top="20" />
+            </padding>
+            <children>
+                <Button fx:id="backButton" styleClass="btn-secondary" text="← Back" onAction="#handleBack" />
+
+                <Button fx:id="orderButton" styleClass="btn-success" text="📋 Order" onAction="#handleOrder" />
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>
