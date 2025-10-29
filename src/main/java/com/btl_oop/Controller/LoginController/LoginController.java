@@ -19,17 +19,13 @@ public class LoginController {
     private TextField usernameField;
     @FXML
     private PasswordField passwordField;
-    @FXML private Label signUpTab;
-    @FXML private Label logInTab;
+    @FXML
+    private Label signUpTab;
+    @FXML
+    private Label logInTab;
 
     private EmployeeDAO employeeDAO = new EmployeeDAO();
 
-//    @FXML
-//    private void initialize() {
-//        String plain = "admin";
-//        String hash = BCrypt.hashpw(plain, BCrypt.gensalt(12));
-//        System.out.println(hash);
-//    }
     @FXML
     private void onLogin(ActionEvent event) throws IOException {
         String user = usernameField.getText();
@@ -47,16 +43,16 @@ public class LoginController {
             AlertUtils.showWarning("Tài khoản đã bị vô hiệu hoá.");
             return;
         }
-
-        if ("ADMIN".equalsIgnoreCase(emp.getRole())) {
+        if (user.equals("kitchen123")) {
+            AlertUtils.showInfo("Đăng nhập beeps");
+            SceneUtils.switchTo(event, AppConfig.PATH_KITCHEN_SCREEN);
+        } else if ("ADMIN".equalsIgnoreCase(emp.getRole())) {
             AlertUtils.showInfo("Đăng nhập quản trị viên thành công");
             SceneUtils.switchTo(event, AppConfig.PATH_ADMIN_SCREEN);
-        }
-        else if ("WAITER".equalsIgnoreCase(emp.getRole())) {
+        } else if ("WAITER".equalsIgnoreCase(emp.getRole())) {
             AlertUtils.showInfo("Đăng nhập nhân viên thành công");
             SceneUtils.switchTo(event, AppConfig.PATH_ORDER_MENU_SCREEN);
-        }
-        else if ("MANAGER".equalsIgnoreCase(emp.getRole())) {
+        } else if ("MANAGER".equalsIgnoreCase(emp.getRole())) {
             AlertUtils.showInfo("Đăng nhập nhân viên thành công");
             SceneUtils.switchTo(event, AppConfig.PATH_TABLE_MAP);
         }
@@ -65,27 +61,5 @@ public class LoginController {
     @FXML
     private void onClickRegister(MouseEvent event) throws IOException {
         SceneUtils.switchTo(event, AppConfig.PATH_REGISTER_SCREEN);
-    }
-
-    @FXML
-    private void switchToSignUp(MouseEvent event) {
-//        signUpTab.getStyleClass().remove("toggle-inactive");
-//        signUpTab.getStyleClass().add("toggle-active");
-//
-//        logInTab.getStyleClass().remove("toggle-active");
-//        logInTab.getStyleClass().add("toggle-inactive");
-//
-//        System.out.println("Switched to Sign Up mode");
-    }
-
-    @FXML
-    private void switchToLogIn(MouseEvent event) {
-//        logInTab.getStyleClass().remove("toggle-inactive");
-//        logInTab.getStyleClass().add("toggle-active");
-//
-//        signUpTab.getStyleClass().remove("toggle-active");
-//        signUpTab.getStyleClass().add("toggle-inactive");
-//
-//        System.out.println("Switched to Log In mode");
     }
 }

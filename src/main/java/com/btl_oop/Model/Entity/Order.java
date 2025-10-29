@@ -24,6 +24,9 @@ public class Order {
         this.total = total;
     }
 
+    public Order() {
+    }
+
     public int getOrderId() { return orderId; }
     public void setOrderId(int orderId) { this.orderId = orderId; }
     public int getTableId() { return tableId; }

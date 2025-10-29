@@ -39,25 +39,6 @@ public class DishItemController {
             dishDescription.setText(dish.getDescription());
             dishPrepareTime.setText(String.format("%dmin", dish.getPrepareTime()));
 
-            // Show popular tag if applicable
-//            if (dish.isPopular()) {
-//                popularTag.setVisible(true);
-//                popularTag.setManaged(true);
-//            }
-
-//            // Show spicy level if applicable
-//            if (dish.getSpicyLevel() != null && !dish.getSpicyLevel().isEmpty()) {
-//                spicyLevel.setText(dish.getSpicyLevel());
-//                spicyBox.setVisible(true);
-//                spicyBox.setManaged(true);
-//            }
-//
-//            // Show allergens if applicable
-//            if (dish.getAllergens() != null && dish.getAllergens().length > 0) {
-//                allergyInfo.setText(String.join(", ", dish.getAllergens()));
-//                allergyBox.setVisible(true);
-//                allergyBox.setManaged(true);
-//            }
         }
     }
 

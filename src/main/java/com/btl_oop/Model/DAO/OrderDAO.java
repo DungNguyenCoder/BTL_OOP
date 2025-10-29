@@ -1,6 +1,7 @@
 package com.btl_oop.Model.DAO;
 
 import com.btl_oop.Model.Entity.Order;
+import com.btl_oop.Model.Entity.OrderItem;
 import com.btl_oop.Utils.DBConnection;
 
 import java.sql.*;
@@ -253,5 +254,64 @@ public class OrderDAO {
                 rs.getDouble("Tax"),
                 rs.getDouble("Total")
         );
+    }
+
+    public boolean updateOrderStatus(int orderId, String newStatus) {
+        String sql = "UPDATE `Order` SET Status = ? WHERE OrderID = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, newStatus);
+            ps.setInt(2, orderId);
+            int affectedRows = ps.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to update order status for OrderID: " + orderId + " to " + newStatus, e);
+        }
+    }
+    public List<Order> getServingOrdersWithActiveTables() {
+        List<Order> orders = new ArrayList<>();
+        String query = """
+            SELECT o.oderId , o.tableId, o.status
+            FROM orders o
+            INNER JOIN tables t ON o.table_id = t.table_id
+            WHERE o.status = 'Serving' 
+            AND t.status = 'ACTIVE_ORDERS'
+            ORDER BY o.CheckoutTime DESC
+        """;
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Order order = new Order();
+                order.setOrderId(rs.getInt("OrderId"));
+                order.setTableId(rs.getInt("TableId"));
+                order.setStatus(rs.getString("Status"));
+                orders.add(order);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error getting serving orders: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return orders;
+    }
+
+    public Order getOrderByTableId(int tableId) {
+        String sql = "SELECT * FROM `Order` WHERE TableID = ? AND Status IN ('Serving') ORDER BY OrderID DESC LIMIT 1";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, tableId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return mapResultSetToOrder(rs);
+                }
+                return null;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to fetch Order for TableID: " + tableId, e);
+        }
     }
 }
