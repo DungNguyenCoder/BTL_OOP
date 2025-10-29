@@ -279,6 +279,9 @@ public class PaymentController {
     private void updateProcessPaymentButton() {
         String buttonText = "Process " + selectedPaymentMethod.toUpperCase() + " Payment";
         processPaymentButton.setText(buttonText);
+        System.out.println("Button text updated to: " + buttonText);
+        System.out.println("Button visible: " + processPaymentButton.isVisible());
+        System.out.println("Button width: " + processPaymentButton.getWidth());
     }
 
     private void navigateToTableMap() {
@@ -300,6 +303,11 @@ public class PaymentController {
 
     public void initialize() {
         System.out.println("PaymentController initialized");
+
+        if (processPaymentButton == null) {
+            System.err.println("ERROR: processPaymentButton is null!");
+            return;
+        }
 
         // UI init but values will be set from context via setOrderContext
         initializeDefaultValues();
@@ -394,6 +402,7 @@ public class PaymentController {
                     subtotalLabel.setText(String.format("$%.2f", subtotal));
                     taxLabel.setText(String.format("$%.2f", tax));
                     totalLabel.setText(String.format("$%.2f", total));
+
                 }
             } catch (Exception ex) {
                 System.err.println("Failed to load order context: " + ex.getMessage());

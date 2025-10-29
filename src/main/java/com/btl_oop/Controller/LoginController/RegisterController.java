@@ -8,6 +8,7 @@ import com.btl_oop.Utils.SceneUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -22,7 +23,25 @@ public class RegisterController {
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
     @FXML private CheckBox checkOrderRole;
+    @FXML private CheckBox checkManagerRole;
     @FXML private CheckBox agreeCheck;
+
+    @FXML
+    public void initialize() {
+        checkManagerRole.setSelected(true);
+
+        checkOrderRole.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                checkManagerRole.setSelected(false);
+            }
+        });
+
+        checkManagerRole.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                checkOrderRole.setSelected(false);
+            }
+        });
+    }
 
     @FXML
     public void onRegisterButtonClicked(ActionEvent event) {
@@ -43,8 +62,10 @@ public class RegisterController {
         //Đang ki
         EmployeeDAO employeeDAO = new EmployeeDAO();
         String role = "Manager";
-        if(checkOrderRole.isSelected()) {
+        if (checkOrderRole.isSelected()) {
             role = "Waiter";
+        } else if (checkManagerRole.isSelected()) {
+            role = "Manager";
         }
 
         if (employeeDAO.isEmployeeExists(username)) {
@@ -66,7 +87,7 @@ public class RegisterController {
     }
 
     @FXML
-    public void onBackToLoginClicked(ActionEvent event) throws IOException {
+    public void onBackToLoginClicked(MouseEvent event) throws IOException {
         SceneUtils.switchTo(event, AppConfig.PATH_LOGIN_SCREEN);
     }
 

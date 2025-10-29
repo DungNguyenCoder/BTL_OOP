@@ -1,0 +1,281 @@
+/* ============================================
+   ROOT & GENERAL STYLES
+   ============================================ */
+.root {
+    -fx-background-color: #f5f5f5;
+    -fx-font-family: "Segoe UI", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ============================================
+   PIZZA BACKGROUND
+   ============================================ */
+.pizza-bg {
+    -fx-background-image: url("../../img/img/pizza_bg.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+/* Note: Bạn cần thêm ảnh pizza vào đường dẫn: src/main/resources/img/img/pizza_bg.jpg
+   Hoặc thay đổi đường dẫn phù hợp với project của bạn */
+
+/* Alternative: Nếu không có ảnh, dùng gradient tạm */
+.pizza-bg {
+    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* ============================================
+   FORM CONTAINER (White Card)
+   ============================================ */
+.form-container {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 30, 0, 0, 10);
+    -fx-spacing: 0;
+}
+
+/* ============================================
+   LOGO STYLES
+   ============================================ */
+.logo-text {
+    -fx-fill: #2d3436;
+    -fx-font-weight: bold;
+    -fx-font-size: 42px;
+}
+
+.logo-dot {
+    -fx-fill: #ff6b35;
+    -fx-font-weight: bold;
+    -fx-font-size: 42px;
+}
+
+.subtitle {
+    -fx-text-fill: #636e72;
+    -fx-font-size: 13px;
+}
+
+/* ============================================
+   FORM TITLE
+   ============================================ */
+.form-title {
+    -fx-text-fill: #2d3436;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+}
+
+/* ============================================
+   INPUT FIELDS
+   ============================================ */
+.input-group {
+    -fx-spacing: 6;
+}
+
+.input-label {
+    -fx-text-fill: #636e72;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-letter-spacing: 0.5px;
+}
+
+.input-field {
+    -fx-background-color: white;
+    -fx-background-radius: 6;
+    -fx-border-color: #dfe6e9;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-padding: 12 14 12 14;
+    -fx-font-size: 13px;
+    -fx-text-fill: #2d3436;
+    -fx-prompt-text-fill: #b2bec3;
+    -fx-pref-height: 42;
+}
+
+.input-field:focused {
+    -fx-border-color: #2d3436;
+    -fx-border-width: 2;
+    -fx-background-color: white;
+}
+
+.input-field:hover {
+    -fx-border-color: #636e72;
+}
+
+.eye-icon {
+    -fx-text-fill: #b2bec3;
+    -fx-cursor: hand;
+}
+
+/* ============================================
+   DATE PICKER
+   ============================================ */
+.date-picker {
+    -fx-background-color: white;
+    -fx-background-radius: 6;
+    -fx-border-color: #dfe6e9;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-pref-height: 42;
+}
+
+.date-picker .text-field {
+    -fx-background-color: transparent;
+    -fx-background-radius: 6;
+    -fx-border-width: 0;
+    -fx-padding: 12 14 12 14;
+    -fx-font-size: 13px;
+    -fx-text-fill: #2d3436;
+    -fx-prompt-text-fill: #b2bec3;
+}
+
+.date-picker:focused {
+    -fx-border-color: #2d3436;
+    -fx-border-width: 2;
+}
+
+.date-picker:hover {
+    -fx-border-color: #636e72;
+}
+
+.date-picker .arrow-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 8 0 0;
+}
+
+.date-picker .arrow-button .arrow {
+    -fx-background-color: #636e72;
+}
+
+/* ============================================
+   CHECKBOX
+   ============================================ */
+.checkbox {
+    -fx-text-fill: #636e72;
+    -fx-font-size: 12px;
+}
+
+.checkbox .box {
+    -fx-background-color: white;
+    -fx-border-color: #dfe6e9;
+    -fx-border-width: 1;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-padding: 2;
+}
+
+.checkbox:selected .box {
+    -fx-background-color: #2d3436;
+    -fx-border-color: #2d3436;
+}
+
+.checkbox:selected .mark {
+    -fx-background-color: white;
+}
+
+.checkbox:hover .box {
+    -fx-border-color: #636e72;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.signup-button {
+    -fx-background-color: #2d3436;
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+    -fx-padding: 14 0 14 0;
+    -fx-cursor: hand;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-pref-height: 46;
+}
+
+.signup-button:hover {
+    -fx-background-color: #1e272e;
+}
+
+.signup-button:pressed {
+    -fx-background-color: #0d1317;
+    -fx-translate-y: 1;
+}
+
+.back-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #636e72;
+    -fx-border-color: #dfe6e9;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 12 0 12 0;
+    -fx-cursor: hand;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-pref-height: 42;
+}
+
+.back-button:hover {
+    -fx-background-color: #f8f9fa;
+    -fx-text-fill: #2d3436;
+    -fx-border-color: #636e72;
+}
+
+.back-button:pressed {
+    -fx-background-color: #e9ecef;
+    -fx-translate-y: 1;
+}
+
+/* ============================================
+   SCROLLBAR (for scrollable content if needed)
+   ============================================ */
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #dfe6e9;
+    -fx-background-radius: 10;
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+
+/* ============================================
+   FOOTER TEXT & LINK
+   ============================================ */
+.footer-text {
+    -fx-text-fill: #636e72;
+    -fx-font-size: 13px;
+}
+
+.footer-link {
+    -fx-text-fill: #2d3436;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-underline: false;
+}
+
+.footer-link:hover {
+    -fx-text-fill: #ff6b35;
+    -fx-underline: true;
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+@media (max-width: 768px) {
+    .form-container {
+        -fx-padding: 30 40 30 40;
+    }
+
+    .logo-text, .logo-dot {
+        -fx-font-size: 24px;
+    }
+
+    .form-title {
+        -fx-font-size: 18px;
+    }
+}

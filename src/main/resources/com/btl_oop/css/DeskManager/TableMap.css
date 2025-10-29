@@ -46,6 +46,25 @@
     -fx-border-radius: 8;
 }
 
+/* Notification Button */
+#notificationButton {
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-padding: 8 16;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-cursor: hand;
+}
+
+#notificationButton:hover {
+    -fx-background-color: #0056b3;
+}
+
+#notificationButton:pressed {
+    -fx-background-color: #004085;
+}
+
 .title {
     -fx-font-size: 24px;
     -fx-font-weight: bold;
@@ -72,6 +91,38 @@
 }
 .btn-normal:hover {
     -fx-background-color: #e5e7eb;
+}
+
+/* Logout Button */
+#logoutButton {
+    -fx-background-color: #ef4444;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-padding: 10 20 10 20;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(239, 68, 68, 0.3), 8, 0, 0, 2);
+    -fx-border-color: transparent;
+}
+
+#logoutButton:hover {
+    -fx-background-color: #dc2626;
+    -fx-effect: dropshadow(gaussian, rgba(239, 68, 68, 0.5), 10, 0, 0, 3);
+    -fx-scale-y: 1.02;
+    -fx-scale-x: 1.02;
+}
+
+#logoutButton:pressed {
+    -fx-background-color: #b91c1c;
+    -fx-effect: dropshadow(gaussian, rgba(239, 68, 68, 0.2), 5, 0, 0, 1);
+    -fx-scale-y: 0.98;
+    -fx-scale-x: 0.98;
+}
+
+#logoutButton:focused {
+    -fx-border-color: #fca5a5;
+    -fx-border-width: 2px;
 }
 
 /* DASHBOARD CARDS (TOP STATS - Image 1) */

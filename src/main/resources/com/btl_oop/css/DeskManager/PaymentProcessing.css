@@ -212,14 +212,17 @@
 
 /* Process Payment Button */
 .process-payment-btn {
-    -fx-background-color: #111827;
+    -fx-background-color: #1f2937;
     -fx-text-fill: white;
     -fx-background-radius: 8;
     -fx-padding: 16 32 16 32;
-    -fx-font-size: 18px;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-cursor: hand;
-    -fx-min-width: 250;
+    -fx-min-width: 300px;
+    -fx-max-width: 100%;
+    -fx-alignment: center;
+    -fx-content-display: text-only;
 }
 
 .process-payment-btn:hover {
@@ -383,7 +386,7 @@
 .payment-summary-card {
     -fx-background-color: #ffffff;
     -fx-background-radius: 12;
-    -fx-padding: 20;
+    -fx-padding: 30;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 3);
     -fx-border-color: #e5e7eb;
     -fx-border-width: 1px;
@@ -391,9 +394,10 @@
 }
 
 .summary-title {
-    -fx-font-size: 20px;
+    -fx-font-size: 24px;
     -fx-font-weight: bold;
     -fx-text-fill: #111827;
+    -fx-alignment: center;
 }
 
 .summary-label {
@@ -403,8 +407,9 @@
 
 .summary-value {
     -fx-font-size: 14px;
-    -fx-font-weight: bold;
+    -fx-font-weight: 600;
     -fx-text-fill: #111827;
+    -fx-alignment: center-right;
 }
 
 .summary-separator {
@@ -419,9 +424,10 @@
 }
 
 .total-value {
-    -fx-font-size: 18px;
+    -fx-font-size: 20px;
     -fx-font-weight: bold;
     -fx-text-fill: #111827;
+    -fx-alignment: center-right;
 }
 
 /* Split Summary */
@@ -476,11 +482,11 @@
 }
 
 .selected-badge {
-    -fx-background-color: #22c55e;
+    -fx-background-color: #10b981;
     -fx-text-fill: white;
-    -fx-background-radius: 4;
-    -fx-padding: 2 8 2 8;
-    -fx-font-size: 12px;
+    -fx-background-radius: 8;
+    -fx-padding: 8 12 8 12;
+    -fx-font-size: 20px;
     -fx-font-weight: bold;
 }
 
@@ -502,13 +508,6 @@
     -fx-alignment: center;
 }
 
-.summary-title {
-    -fx-font-size: 24px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #111827;
-    -fx-alignment: center;
-}
-
 .summary-subtitle {
     -fx-font-size: 14px;
     -fx-text-fill: #6b7280;
@@ -520,25 +519,24 @@
     -fx-background-color: #f8fafc;
     -fx-background-radius: 8;
     -fx-border-radius: 8;
-    -fx-padding: 15;
+    -fx-padding: 20;
+    -fx-spacing: 15;
 }
 
 .info-icon {
-    -fx-font-size: 20px;
+    -fx-font-size: 24px;
 }
 
 .summary-value-large {
-    -fx-font-size: 18px;
+    -fx-font-size: 20px;
     -fx-font-weight: bold;
     -fx-text-fill: #111827;
 }
 
 /* Bill Breakdown */
 .bill-breakdown {
-    -fx-background-color: #f9fafb;
-    -fx-background-radius: 8;
-    -fx-border-radius: 8;
-    -fx-padding: 15;
+    -fx-background-color: transparent;
+    -fx-spacing: 15;
 }
 
 .breakdown-title {
@@ -569,7 +567,7 @@
 }
 
 .method-icon-large {
-    -fx-font-size: 24px;
+    -fx-font-size: 28px;
 }
 
 .method-text-large {
@@ -581,12 +579,6 @@
 .method-description {
     -fx-font-size: 12px;
     -fx-text-fill: #6b7280;
-}
-
-.selected-badge {
-    -fx-font-size: 16px;
-    -fx-text-fill: #10b981;
-    -fx-font-weight: bold;
 }
 
 .split-title {

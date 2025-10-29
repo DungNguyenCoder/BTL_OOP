@@ -172,9 +172,17 @@ public class InventoryManagementController {
             VBox cardRoot = loader.load();
             ProductCardController controller = loader.getController();
             controller.setData(dish);
+
+            controller.setOnDishUpdatedCallback(() -> {
+                System.out.println("✓ Dish updated, refreshing display...");
+                loadDishesFromDatabase();
+                refreshDishDisplay();
+            });
+
             targetPane.getChildren().add(cardRoot);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }

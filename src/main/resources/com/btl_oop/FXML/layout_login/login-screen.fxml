@@ -61,7 +61,7 @@
             <VBox.margin>
                 <Insets bottom="20" />
             </VBox.margin>
-            <Label styleClass="input-label" text="EMAIL">
+            <Label styleClass="input-label" text="USERNAME">
                 <font>
                     <Font size="11" />
                 </font>
