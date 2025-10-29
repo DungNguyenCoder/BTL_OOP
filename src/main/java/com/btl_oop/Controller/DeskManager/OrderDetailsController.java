@@ -160,6 +160,7 @@ public class OrderDetailsController {
 
                 // Nếu đã có currentOrderId, chỉ cập nhật trạng thái bàn
                 if (currentOrderId > 0) {
+                    try { orderDAO.updateOrderStatus(currentOrderId, "Preparing"); } catch (Exception ignore) {}
                     boolean success = tableManager.startOrder(currentTableId, "ORD" + currentOrderId);
                     if (success) {
                         showSuccessDialog("Order Confirmed", "Order #" + currentOrderId + " has been sent to the kitchen!");
@@ -206,7 +207,7 @@ public class OrderDetailsController {
                     tableId,
                     1,
                     null,
-                    "Serving",
+                    "Preparing",
                     0.0,
                     0.0,
                     0.0

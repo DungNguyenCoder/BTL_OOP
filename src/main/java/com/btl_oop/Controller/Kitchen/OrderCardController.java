@@ -13,6 +13,7 @@ import java.util.List;
 
 public class OrderCardController {
 
+    @FXML private javafx.scene.layout.VBox root;
     @FXML private Label tableNumberLabel;
     @FXML private Label orderIdLabel;
     @FXML private Label statusLabel;
@@ -29,7 +30,7 @@ public class OrderCardController {
     public enum OrderStatus {
         PENDING("Pending", "Prepare"),
         PREPARING("Preparing", "Done"),
-        READY("Ready", "Serve");
+        READY("Ready", "Done");
         private final String displayName;
         private final String buttonText;
         OrderStatus(String displayName, String buttonText) {
@@ -43,8 +44,13 @@ public class OrderCardController {
             return buttonText;
         }
         public static OrderStatus fromString(String status) {
+            if (status == null) return PENDING;
+            String key = status.toUpperCase().replace(" ", "_");
+            if ("SERVING".equals(key)) {
+                return PREPARING; // treat Serving as active in kitchen card
+            }
             try {
-                return OrderStatus.valueOf(status.toUpperCase().replace(" ", "_"));
+                return OrderStatus.valueOf(key);
             } catch (IllegalArgumentException e) {
                 return PENDING;
             }
@@ -100,16 +106,15 @@ public class OrderCardController {
                 break;
             case PREPARING:
                 if (parentController != null) {
-                    parentController.onDone(tableId, orderId);
+                    parentController.onDoneImmediate(root, tableId, orderId);
                 }
                 updateStatus("Ready");
                 break;
-
             case READY:
+                // Order đã sẵn sàng phục vụ; Kitchen xác nhận đã đưa ra quầy
                 if (parentController != null) {
-                    parentController.onServe(tableId, orderId);
+                    parentController.removeFromReady(root, tableId, orderId);
                 }
-                updateStatus("Served");
                 disableButton();
                 break;
         }

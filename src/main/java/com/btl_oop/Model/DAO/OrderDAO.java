@@ -18,12 +18,12 @@ public class OrderDAO {
     }
 
     private void ensureTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS `Order` (" +
+        String createSql = "CREATE TABLE IF NOT EXISTS `Order` (" +
                 "OrderID INT AUTO_INCREMENT PRIMARY KEY, " +
                 "TableID INT NOT NULL, " +
                 "EmployeeID INT, " +
                 "CheckoutTime DATETIME, " +
-                "Status ENUM('Serving','Paid','Cancelled') DEFAULT 'Serving', " +
+                "Status ENUM('Preparing','Ready','Serving','Paid','Cancelled') DEFAULT 'Preparing', " +
                 "Subtotal DECIMAL(10,2) DEFAULT 0, " +
                 "Tax DECIMAL(10,2) DEFAULT 0, " +
                 "Total DECIMAL(10,2) DEFAULT 0, " +
@@ -34,8 +34,16 @@ public class OrderDAO {
 
         try (Connection conn = DBConnection.getConnection();
              Statement stmt = conn.createStatement()) {
-            stmt.execute(sql);
-            System.out.println("Table 'Order' ensured successfully!");
+            stmt.execute(createSql);
+            // Attempt to upgrade enum if table already existed with older values
+            String alterSql = "ALTER TABLE `Order` MODIFY Status " +
+                    "ENUM('Preparing','Ready','Serving','Paid','Cancelled') DEFAULT 'Preparing'";
+            try {
+                stmt.execute(alterSql);
+            } catch (SQLException ignore) {
+                // Ignore if enum already matches
+            }
+            System.out.println("Table 'Order' ensured/updated successfully!");
         } catch (SQLException e) {
             throw new RuntimeException("Failed to ensure Order table", e);
         }
@@ -184,8 +192,12 @@ public class OrderDAO {
 
             // Validate order
             Order order = getOrderById(orderId);
-            if (order == null || !"Serving".equals(order.getStatus())) {
-                throw new IllegalStateException("Order not found or not in Serving status");
+            if (order == null) {
+                throw new IllegalStateException("Order not found");
+            }
+            // Cho phép thanh toán khi Kitchen đã báo Ready
+            if (!"Ready".equals(order.getStatus())) {
+                throw new IllegalStateException("Order is not Ready to be paid");
             }
 
             // Calculate Subtotal
@@ -300,7 +312,8 @@ public class OrderDAO {
     }
 
     public Order getOrderByTableId(int tableId) {
-        String sql = "SELECT * FROM `Order` WHERE TableID = ? AND Status IN ('Serving') ORDER BY OrderID DESC LIMIT 1";
+        String sql = "SELECT * FROM `Order` WHERE TableID = ? " +
+                "AND Status IN ('Preparing','Ready','Serving') ORDER BY OrderID DESC LIMIT 1";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, tableId);

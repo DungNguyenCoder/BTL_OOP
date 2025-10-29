@@ -2,6 +2,7 @@ package com.btl_oop.Controller.Kitchen;
 
 import com.btl_oop.Model.DAO.OrderDAO;
 import com.btl_oop.Model.DAO.RestaurantTableDAO;
+import com.btl_oop.Model.Service.TableManager;
 import com.btl_oop.Model.Entity.Order;
 import com.btl_oop.Model.Entity.RestaurantTable;
 import com.btl_oop.Utils.AppConfig;
@@ -46,7 +47,7 @@ public class KitchenMainController {
         } else {
             System.err.println("FXML fields not properly injected. Check fx:ids in kitchen-main.fxml");
         }
-        refreshTimeline = new Timeline(new KeyFrame(Duration.seconds(10), e -> refreshTables()));
+        refreshTimeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> refreshTables()));
         refreshTimeline.setCycleCount(Timeline.INDEFINITE);
         refreshTimeline.play();
     }
@@ -70,12 +71,18 @@ public class KitchenMainController {
 
             if (order != null) {
                 String orderStatus = order.getStatus();
-                if ("Serving".equalsIgnoreCase(orderStatus) || "Preparing".equalsIgnoreCase(orderStatus)) {
-                    addTableCard(activeOrdersContainer, table.getTableId(), table.getTableNumber(), order.getOrderId(), orderStatus);
-                    activeTableCount++;
-                } else if ("Paid".equalsIgnoreCase(orderStatus)) {
-                    addTableCard(readyOrdersContainer, table.getTableId(), table.getTableNumber(), order.getOrderId(), "Ready");
-                    readyTableCount++;
+                if (table.getStatus() == com.btl_oop.Model.Enum.TableStatus.ACTIVE_ORDERS) {
+                    if ("Preparing".equalsIgnoreCase(orderStatus) || "Serving".equalsIgnoreCase(orderStatus)) {
+                        addTableCard(activeOrdersContainer, table.getTableId(), table.getTableNumber(), order.getOrderId(), orderStatus);
+                        activeTableCount++;
+                    } else if ("Ready".equalsIgnoreCase(orderStatus)) {
+                        // Khi bàn vẫn ACTIVE_ORDERS và order đã Ready, hiển thị ở Ready to Serve
+                        addTableCard(readyOrdersContainer, table.getTableId(), table.getTableNumber(), order.getOrderId(), "Ready");
+                        readyTableCount++;
+                    }
+                } else if (table.getStatus() == com.btl_oop.Model.Enum.TableStatus.READY_TO_SERVE) {
+                    // Sau khi Kitchen bấm Done (Ready list), bàn chuyển READY_TO_SERVE, không còn hiển thị ở Kitchen
+                    // do Manager sẽ xử lý thanh toán ở màn khác
                 }
             }
         }
@@ -112,9 +119,65 @@ public class KitchenMainController {
     }
 
     public void onDone(int tableId, int orderId) {
-        orderDAO.updateOrderStatus(orderId, "Ready");
-        System.out.println("Table " + tableId + " Order " + orderId + " -> Ready");
+        boolean ok = false;
+        try {
+            ok = orderDAO.updateOrderStatus(orderId, "Ready");
+        } catch (Exception e) {
+            System.err.println("Failed to set order Ready: " + e.getMessage());
+        }
+        if (ok) {
+            System.out.println("Table " + tableId + " Order " + orderId + " -> Ready");
+            try {
+                TableManager.getInstance().finishCooking(tableId);
+            } catch (Exception e) {
+                System.err.println("Failed to update table status to READY_TO_SERVE: " + e.getMessage());
+            }
+        }
         refreshTables();
+    }
+
+    // Move card to Ready without requiring manual refresh
+    public void onDoneImmediate(javafx.scene.Node cardRoot, int tableId, int orderId) {
+        boolean ok = false;
+        try {
+            ok = orderDAO.updateOrderStatus(orderId, "Ready");
+        } catch (Exception e) {
+            System.err.println("Failed to set order Ready: " + e.getMessage());
+        }
+        if (ok) {
+            // Move UI node from active -> ready list
+            if (cardRoot != null && cardRoot.getParent() == activeOrdersContainer) {
+                activeOrdersContainer.getChildren().remove(cardRoot);
+                readyOrdersContainer.getChildren().add(cardRoot);
+                updateCounters();
+            } else {
+                // Fallback to refresh if parent not matched
+                refreshTables();
+            }
+        }
+    }
+
+    public void removeFromReady(javafx.scene.Node cardRoot, int tableId, int orderId) {
+        try {
+            // Cập nhật trực tiếp DB để tránh cache lỗi
+            tableDAO.updateTableStatus(tableId, com.btl_oop.Model.Enum.TableStatus.READY_TO_SERVE, "ORD" + orderId);
+        } catch (Exception e) {
+            System.err.println("Failed to update table status to READY_TO_SERVE: " + e.getMessage());
+        }
+        if (cardRoot != null && cardRoot.getParent() == readyOrdersContainer) {
+            readyOrdersContainer.getChildren().remove(cardRoot);
+            updateCounters();
+        } else {
+            refreshTables();
+        }
+    }
+
+    private void updateCounters() {
+        int activeTableCount = activeOrdersContainer.getChildren().size();
+        int readyTableCount = readyOrdersContainer.getChildren().size();
+        activeTitleLabel.setText("Active Orders (" + activeTableCount + ")");
+        readyTitleLabel.setText("Ready to Serve (" + readyTableCount + ")");
+        orderSummaryLabel.setText(activeTableCount + " active orders • " + readyTableCount + " ready to serve");
     }
 
     public void onServe(int tableId, int orderId) {
