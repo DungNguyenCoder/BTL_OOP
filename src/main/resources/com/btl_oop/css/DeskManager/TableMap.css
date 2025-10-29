@@ -46,6 +46,25 @@
     -fx-border-radius: 8;
 }
 
+/* Notification Button */
+#notificationButton {
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-padding: 8 16;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-cursor: hand;
+}
+
+#notificationButton:hover {
+    -fx-background-color: #0056b3;
+}
+
+#notificationButton:pressed {
+    -fx-background-color: #004085;
+}
+
 .title {
     -fx-font-size: 24px;
     -fx-font-weight: bold;

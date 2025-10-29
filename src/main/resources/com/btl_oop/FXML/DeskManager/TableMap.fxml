@@ -23,6 +23,7 @@
                     <Label styleClass="subtitle" text="Welcome, John Smith" />
             </VBox>
                 <Pane fx:id="headerHbox" HBox.hgrow="ALWAYS" />
+                <Button fx:id="notificationButton" text="🔔 Thông báo" onAction="#toggleNotificationPanel" />
                 <Button fx:id="logoutButton" text="🚪 Logout" onAction="#handleLogout" />
             </children>
         </HBox>
@@ -78,6 +79,18 @@
             </GridPane>
         </VBox>
     </center>
+
+    <!-- Notification Panel -->
+    <right>
+        <VBox alignment="TOP_CENTER" spacing="10.0" BorderPane.alignment="TOP_CENTER">
+            <padding>
+                <Insets bottom="20.0" left="10.0" right="20.0" top="20.0" />
+            </padding>
+            <children>
+                <fx:include fx:id="notificationPanel" source="notification-panel.fxml" />
+            </children>
+        </VBox>
+    </right>
 
     <!-- Footer -->
     <bottom>

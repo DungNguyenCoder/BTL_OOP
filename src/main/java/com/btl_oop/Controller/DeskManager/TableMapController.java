@@ -4,8 +4,11 @@ import com.btl_oop.Model.Entity.RestaurantTable;
 import com.btl_oop.Model.DAO.OrderDAO;
 import com.btl_oop.Model.Enum.TableStatus;
 import com.btl_oop.Model.Service.TableManager;
+import com.btl_oop.Model.Service.NotificationService;
+import com.btl_oop.Model.Entity.Notification;
 import com.btl_oop.Utils.AppConfig;
 import com.btl_oop.Utils.TableDataInitializer;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,6 +19,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import com.btl_oop.Utils.NotificationController;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -29,6 +33,7 @@ public class TableMapController {
     private TableManager tableManager;
     private List<RestaurantTable> tables;
     private final OrderDAO orderDAO = new OrderDAO();
+    private final NotificationService notificationService = NotificationService.getInstance();
 
     @FXML
     private GridPane tableGridPane;
@@ -53,6 +58,12 @@ public class TableMapController {
 
     @FXML
     private Button logoutButton;
+
+    @FXML
+    private Button notificationButton;
+
+    @FXML
+    private VBox notificationPanel;
 
     // Handle table action (main button click)
     @FXML
@@ -113,6 +124,16 @@ public class TableMapController {
         refreshUI();
     }
 
+    // Handle notification button
+    @FXML
+    private void toggleNotificationPanel() {
+        if (notificationPanel != null) {
+            boolean isVisible = notificationPanel.isVisible();
+            notificationPanel.setVisible(!isVisible);
+            notificationPanel.setManaged(!isVisible);
+        }
+    }
+
     // Handle logout button
     @FXML
     private void handleLogout() {
@@ -167,6 +188,8 @@ public class TableMapController {
     private void seatGuests(int tableId) {
         boolean success = tableManager.seatGuests(tableId);
         if (success) {
+            // Gửi thông báo khi bàn có khách
+            notificationService.sendTableOccupiedNotification(tableId);
             showSuccessDialog("Success", "Table " + tableId + " is now occupied");
             refreshUI();
         } else {
@@ -177,6 +200,22 @@ public class TableMapController {
     private void finishCooking(int tableId) {
         boolean success = tableManager.finishCooking(tableId);
         if (success) {
+            // Lấy orderId từ bàn để gửi thông báo
+            RestaurantTable table = tableManager.getTable(tableId);
+            int orderId = 0;
+            if (table != null && table.getCurrentOrderId() != null) {
+                try {
+                    orderId = Integer.parseInt(table.getCurrentOrderId().replace("ORD", ""));
+                } catch (Exception e) {
+                    System.err.println("Error parsing order ID: " + e.getMessage());
+                }
+            }
+            
+            // Gửi thông báo đơn hàng sẵn sàng
+            if (orderId > 0) {
+                notificationService.sendOrderReadyNotification(tableId, orderId);
+            }
+            
             showSuccessDialog("Success", "Table " + tableId + " order is ready to serve");
             refreshUI();
         } else {
@@ -398,6 +437,15 @@ public class TableMapController {
 
         try {
             tableManager = TableManager.getInstance();
+            // Register this Manager stage as anchor for notification popups
+            Platform.runLater(() -> {
+                try {
+                    Stage stage = (Stage) tableGridPane.getScene().getWindow();
+                    NotificationService.getInstance().setAnchorStage(stage);
+                } catch (Exception e) {
+                    System.err.println("Failed to set anchor stage for notifications: " + e.getMessage());
+                }
+            });
             // Lấy dữ liệu từ cache, không phải từ DB
             tables = tableManager.getAllCachedTables();
 

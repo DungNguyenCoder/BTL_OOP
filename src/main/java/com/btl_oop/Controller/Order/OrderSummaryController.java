@@ -11,6 +11,7 @@ import com.btl_oop.Model.Entity.Employee;
 import com.btl_oop.Model.Entity.Order;
 import com.btl_oop.Model.Entity.OrderItem;
 import com.btl_oop.Utils.AppConfig;
+import com.btl_oop.Model.Service.NotificationService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -54,6 +55,7 @@ public class OrderSummaryController {
     private final RestaurantTableDAO tableDAO = new RestaurantTableDAO();
     private final DishDAO dishDAO = new DishDAO();
     private final EmployeeDAO employeeDAO = new EmployeeDAO();
+    private final NotificationService notificationService = NotificationService.getInstance();
 
     private com.btl_oop.Controller.Order.ChooseDishesController parentController;
 
@@ -369,6 +371,10 @@ public class OrderSummaryController {
             }
 
             currentOrderId = order.getOrderId();
+            
+            // Gửi thông báo cho Manager
+            notificationService.sendNewOrderNotification(tableId, order.getOrderId());
+            
             showAlert("Đã gửi", "Đơn hàng đã được lưu và gửi tới Manager để xác nhận.");
 
             clearAll();
