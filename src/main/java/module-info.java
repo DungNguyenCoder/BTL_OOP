@@ -22,6 +22,7 @@ module com.btl_oop {
     opens com.btl_oop.Controller.Admin.MainController to javafx.fxml;
     opens com.btl_oop.Controller.Order to javafx.fxml;
     opens com.btl_oop.Controller.DeskManager to javafx.fxml;
+    // Root Controller package no longer contains classes; remove to avoid module error
 
 
     exports com.btl_oop;

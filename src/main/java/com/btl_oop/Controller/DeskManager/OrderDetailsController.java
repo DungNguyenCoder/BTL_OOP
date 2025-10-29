@@ -1,6 +1,7 @@
 package com.btl_oop.Controller.DeskManager;
 
 import com.btl_oop.Model.Service.TableManager;
+import com.btl_oop.Model.Service.NotificationService;
 import com.btl_oop.Model.Entity.RestaurantTable;
 import com.btl_oop.Model.Entity.Order;
 import com.btl_oop.Model.Entity.OrderItem;
@@ -90,6 +91,7 @@ public class OrderDetailsController {
     private int currentTableId;
     private int currentOrderId;
     private TableManager tableManager;
+    private final NotificationService notificationService = NotificationService.getInstance();
 
     // DAO instances
     private OrderDAO orderDAO;
@@ -162,6 +164,8 @@ public class OrderDetailsController {
                 if (currentOrderId > 0) {
                     boolean success = tableManager.startOrder(currentTableId, "ORD" + currentOrderId);
                     if (success) {
+                        // Gửi thông báo xác nhận đơn hàng
+                        notificationService.sendOrderConfirmedNotification(currentTableId, currentOrderId);
                         showSuccessDialog("Order Confirmed", "Order #" + currentOrderId + " has been sent to the kitchen!");
                         navigateToTableMap();
                     } else {
@@ -176,6 +180,8 @@ public class OrderDetailsController {
                     this.currentOrderId = newOrder.getOrderId();
                     boolean success = tableManager.startOrder(currentTableId, "ORD" + newOrder.getOrderId());
                     if (success) {
+                        // Gửi thông báo xác nhận đơn hàng
+                        notificationService.sendOrderConfirmedNotification(currentTableId, newOrder.getOrderId());
                         showSuccessDialog("Order Confirmed", "Order #" + newOrder.getOrderId() + " has been sent to the kitchen!");
                         navigateToTableMap();
                     } else {
