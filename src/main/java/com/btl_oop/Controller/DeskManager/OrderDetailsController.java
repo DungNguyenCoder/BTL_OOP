@@ -30,6 +30,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class OrderDetailsController {
@@ -370,7 +371,7 @@ public class OrderDetailsController {
         // Set default avatar or placeholder
         try {
             // Try to load a default avatar or placeholder
-            Image avatarImage = new Image(getClass().getResourceAsStream("../../../img/img/default_avatar.png"));
+            Image avatarImage = new Image(getClass().getResourceAsStream("/com/btl_oop/img/img/account.png"));
             customerAvatar.setImage(avatarImage);
         } catch (Exception e) {
             System.out.println("Could not load default avatar image");
@@ -516,20 +517,22 @@ public class OrderDetailsController {
         itemImage.setFitWidth(80);
         itemImage.setFitHeight(80);
 
+        System.out.println("Dish ImageUrl: " + dish.getImageUrl());
+
         // Try to load dish image
         try {
             if (dish.getImageUrl() != null && !dish.getImageUrl().isEmpty()) {
-                Image image = new Image(dish.getImageUrl());
+                Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(dish.getImageUrl())));
                 itemImage.setImage(image);
             } else {
                 // Load default image
-                Image defaultImage = new Image(getClass().getResourceAsStream("../../../img/img/default_dish.png"));
+                Image defaultImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/btl_oop/img/img/product_macarons.png")));
                 itemImage.setImage(defaultImage);
             }
         } catch (Exception e) {
             // Use default image if loading fails
             try {
-                Image defaultImage = new Image(getClass().getResourceAsStream("../../../img/img/default_dish.png"));
+                Image defaultImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/btl_oop/img/img/product_macarons.png")));
                 itemImage.setImage(defaultImage);
             } catch (Exception ex) {
                 System.out.println("Could not load default dish image");
