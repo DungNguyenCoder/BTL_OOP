@@ -24,10 +24,12 @@ public class RegisterController {
     @FXML private PasswordField confirmPasswordField;
     @FXML private CheckBox checkOrderRole;
     @FXML private CheckBox checkManagerRole;
+    @FXML private ComboBox<String> roleChoose;
     @FXML private CheckBox agreeCheck;
 
     @FXML
     public void initialize() {
+        roleChoose.getItems().addAll("Admin", "Manager", "Waiter", "Kitchen");
         checkManagerRole.setSelected(true);
 
         checkOrderRole.selectedProperty().addListener((observable, oldValue, newValue) -> {
@@ -61,12 +63,7 @@ public class RegisterController {
 
         //Đang ki
         EmployeeDAO employeeDAO = new EmployeeDAO();
-        String role = "Manager";
-        if (checkOrderRole.isSelected()) {
-            role = "Waiter";
-        } else if (checkManagerRole.isSelected()) {
-            role = "Manager";
-        }
+        String role = roleChoose.getSelectionModel().getSelectedItem();
 
         if (employeeDAO.isEmployeeExists(username)) {
             AlertUtils.showError("Tài khoản đã tồn tại!");

@@ -110,9 +110,6 @@ public class PaymentController {
         // Update process payment button text
         updateProcessPaymentButton();
 
-        // Show/hide cash payment details
-        updateCashPaymentVisibility();
-
         // Update payment method summary
         updatePaymentMethodSummary();
 
@@ -245,14 +242,6 @@ public class PaymentController {
                 break;
         }
     }
-
-    // Cash payment methods removed for cleaner UI
-    private void updateCashPaymentVisibility() {
-        // Since cash payment details were removed for cleaner UI,
-        // this method is kept for compatibility but does nothing
-        // In a full implementation, this would show/hide cash-specific UI elements
-    }
-
 
     private void updatePaymentMethodSummary() {
         String icon = getPaymentMethodIcon(selectedPaymentMethod);

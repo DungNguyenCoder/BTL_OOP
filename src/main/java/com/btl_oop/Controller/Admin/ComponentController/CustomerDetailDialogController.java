@@ -28,11 +28,6 @@ public class CustomerDetailDialogController {
     private Employee currentCustomer;
     private boolean isEditMode = false;
 
-    @FXML
-    public void initialize() {
-        // Initial setup
-    }
-
     public void loadCustomer(Employee customer) {
         this.currentCustomer = customer;
         displayCustomerData(customer);
@@ -52,7 +47,7 @@ public class CustomerDetailDialogController {
             statusBadge.getStyleClass().add("inactive");
         }
 
-        // Set avatar color (random color based on name)
+        // Set avatar color
         avatarCircle.setFill(getColorForName(employee.getFullName()));
 
         // Set form fields

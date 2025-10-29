@@ -9,6 +9,7 @@ public class AppConfig {
     public static String PATH_REGISTER_SCREEN = "/com/btl_oop/FXML/layout_login/register-screen.fxml";
     public static String PATH_ORDER_MENU_SCREEN = "/com/btl_oop/FXML/Order/choose-dishes.fxml";
     public static String PATH_DISH_ITEM_PANEL = "/com/btl_oop/FXML/Order/dish-item.fxml";
+    public static String PATH_ORDER_CARD = "/com/btl_oop/FXML/Kitchen/order-card.fxml";
     
     public static String PATH_TABLE_MAP = "/com/btl_oop/FXML/DeskManager/TableMap.fxml";
     public static String PATH_ORDER_DETAILS = "/com/btl_oop/FXML/DeskManager/OrderDetails.fxml";

@@ -49,12 +49,6 @@ public class OrderManagementController {
     }
 
     private void loadSampleOrders() {
-//        addOrder("1001", "Delivered", "Doris Brown", 34.00, "/img/img_login.png");
-//        addOrder("1002", "Delivered", "DJ Don", 18.00, "/img/img_login.png");
-//        addOrder("1003", "In Progress", "Sara", 26.00, "/img/img_login.png");
-//        addOrder("1004", "Delivered", "Yumiko", 39.00, "/img/img_login.png");
-//        addOrder("1005", "In Progress", "Olivia", 21.00, "/img/img_login.png");
-//        addOrder("1006", "In Progress", "Tony", 48.00, "/img/img_login.png");
           try {
               allOrders = orderDAO.getAllOrders();
           }

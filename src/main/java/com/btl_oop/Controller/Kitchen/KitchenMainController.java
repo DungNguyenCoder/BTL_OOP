@@ -100,7 +100,7 @@ public class KitchenMainController {
 
     private void addTableCard(VBox container, int tableId, int tableNumber, int orderId, String status) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/btl_oop/FXML/Kitchen/order-card.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(AppConfig.PATH_ORDER_CARD));
             Node tableNode = loader.load();
             OrderCardController cardController = loader.getController();
             cardController.setData(tableId, tableNumber, orderId, status);

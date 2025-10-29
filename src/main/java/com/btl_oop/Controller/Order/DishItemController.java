@@ -13,19 +13,12 @@ public class DishItemController {
     @FXML private Label dishPrice;
     @FXML private Label dishDescription;
     @FXML private Label dishPrepareTime;
-    @FXML private Label popularTag;
-    @FXML private Label spicyLevel;
-    @FXML private Label allergyInfo;
     @FXML private Label quantityLabel;
     @FXML private Label quantityPrice;
-
-    @FXML private Button addButton;
 
     @FXML private HBox addBox;
     @FXML private HBox quantityBox;
     @FXML private HBox confirmBox;
-    @FXML private HBox spicyBox;
-    @FXML private HBox allergyBox;
 
     private ChooseDishesController parentController;
     private Dish dish;

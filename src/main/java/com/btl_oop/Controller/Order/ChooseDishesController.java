@@ -76,17 +76,10 @@ public class ChooseDishesController {
         System.out.println("ChooseDishesController initialized");
         dishDAO = new DishDAO();
         loadDishesFromDatabase();
-        // Load hết dish từ Json
-       // allDishes = loadDishesFromJson();
-        //System.out.println("Loaded " + allDishes.size() + " dishes");
-        // Init logo Category theo btn mình chuyển
         initializeCategoryMap();
-        // Update số lượng món theo Category
         updateCategoryCounts();
-        // Màn hình default khi vào order là Snack
         handleCategoryClick(btnSnack, "Snack", "/com/btl_oop/img/ic_item/ic_snack.png");
 
-        // Thanh tìm kiếm
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             searchDishes(newValue);
         });

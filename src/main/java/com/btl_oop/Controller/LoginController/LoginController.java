@@ -38,23 +38,23 @@ public class LoginController {
             return;
         }
 
-        // Có thể kiểm tra trạng thái
         if ("Inactive".equalsIgnoreCase(emp.getStatus())) {
             AlertUtils.showWarning("Tài khoản đã bị vô hiệu hoá.");
             return;
         }
-        if (user.equals("kitchen123")) {
-            AlertUtils.showInfo("Đăng nhập beeps");
-            SceneUtils.switchTo(event, AppConfig.PATH_KITCHEN_SCREEN);
-        } else if ("ADMIN".equalsIgnoreCase(emp.getRole())) {
+        if ("ADMIN".equalsIgnoreCase(emp.getRole())) {
             AlertUtils.showInfo("Đăng nhập quản trị viên thành công");
             SceneUtils.switchTo(event, AppConfig.PATH_ADMIN_SCREEN);
-        } else if ("WAITER".equalsIgnoreCase(emp.getRole())) {
-            AlertUtils.showInfo("Đăng nhập nhân viên thành công");
-            SceneUtils.switchTo(event, AppConfig.PATH_ORDER_MENU_SCREEN);
         } else if ("MANAGER".equalsIgnoreCase(emp.getRole())) {
             AlertUtils.showInfo("Đăng nhập nhân viên thành công");
             SceneUtils.switchTo(event, AppConfig.PATH_TABLE_MAP);
+        } else if ("WAITER".equalsIgnoreCase(emp.getRole())) {
+            AlertUtils.showInfo("Đăng nhập nhân viên thành công");
+            SceneUtils.switchTo(event, AppConfig.PATH_ORDER_MENU_SCREEN);
+        }
+        else if ("KITCHEN".equalsIgnoreCase(emp.getRole())) {
+            AlertUtils.showInfo("Đăng nhập nhân viên nhà bếp thành công");
+            SceneUtils.switchTo(event, AppConfig.PATH_KITCHEN_SCREEN);
         }
     }
 

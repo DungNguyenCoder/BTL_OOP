@@ -98,9 +98,6 @@ public class OrderItemController {
         }
     }
 
-
-
-
     public void setDetailButtonClick() {
         detailsButton.setOnAction(e -> {
             try {

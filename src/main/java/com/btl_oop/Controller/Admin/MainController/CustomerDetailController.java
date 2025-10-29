@@ -65,67 +65,6 @@ public class CustomerDetailController {
 
     }
 
-//    private void loadCustomerData() {
-//        // Sample data using your Customer class
-//        allCustomers.add(new Customer(
-//                1, "Jane Cooper", "Cooper", "jane@microsoft.com",
-//                "Female",
-//                true, LocalDateTime.now().minusMonths(1)
-//        ));
-//
-//        allCustomers.add(new Customer(
-//                2, "Floyd Miles", "Floyd", "floyd@yahoo.com",
-//                "Male",
-//                false, LocalDateTime.now().minusMonths(2)
-//        ));
-//
-//        allCustomers.add(new Customer(
-//                3, "Ronald Richards", "Ron", "ronald@adobe.com",
-//                "Male",
-//                false, LocalDateTime.now().minusWeeks(3)
-//        ));
-//
-//        allCustomers.add(new Customer(
-//                4, "Marvin McKinney", "Marvin", "marvin@tesla.com",
-//                "Male",
-//                true, LocalDateTime.now().minusDays(15)
-//        ));
-//
-//        allCustomers.add(new Customer(
-//                5, "Jerome Bell", "Jerry", "jerome@google.com",
-//                "Male",
-//                true, LocalDateTime.now().minusDays(10)
-//        ));
-//
-//        allCustomers.add(new Customer(
-//                6, "Kathryn Murphy", "Kathy", "kathryn@microsoft.com",
-//                "Female",
-//                true, LocalDateTime.now().minusWeeks(2)
-//        ));
-//
-//        allCustomers.add(new Customer(
-//                7, "Jacob Jones", "Jake", "jacob@yahoo.com",
-//                "Male",
-//                true, LocalDateTime.now().minusDays(5)
-//        ));
-//
-//        allCustomers.add(new Customer(
-//                8, "Kristin Watson", "Kris", "kristin@facebook.com",
-//                "Female",
-//                false, LocalDateTime.now().minusMonths(3)
-//        ));
-//
-//        for (int i = 9; i <= 256; i++) {
-//            allCustomers.add(new Customer(
-//                    i, "Customer " + i, "Nick" + i, "customer" + i + "@example.com",
-//                    i % 2 == 0 ? "Male" : "Female",
-//                    i % 3 != 0, LocalDateTime.now().minusDays(i % 30)
-//            ));
-//        }
-//
-//        filteredCustomers = new ArrayList<>(allCustomers);
-//    }
-
     private void updateStats() {
         totalCustomersLabel.setText(String.valueOf(allCustomers.size()));
 

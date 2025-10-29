@@ -72,7 +72,6 @@ public class OrderDetailsController {
     @FXML
     private Button backButton;
 
-
     @FXML
     private Button orderButton;
 
