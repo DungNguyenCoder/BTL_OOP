@@ -8,6 +8,8 @@ import com.btl_oop.Model.Service.NotificationService;
 import com.btl_oop.Model.Entity.Notification;
 import com.btl_oop.Utils.AppConfig;
 import com.btl_oop.Utils.TableDataInitializer;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,6 +35,7 @@ public class TableMapController {
     private TableManager tableManager;
     private List<RestaurantTable> tables;
     private final OrderDAO orderDAO = new OrderDAO();
+    private Timeline refreshTimeline;
     private final NotificationService notificationService = NotificationService.getInstance();
 
     @FXML
@@ -99,9 +102,7 @@ public class TableMapController {
                 viewOrderDetails(table.getTableId());
                 break;
             case ACTIVE_ORDERS:
-                showConfirmationDialog("Confirm Order Ready",
-                        "Is the order for " + tableIdStr + " ready to serve?",
-                        () -> finishCooking(table.getTableId()));
+                showSuccessDialog("In Kitchen", "Order for " + tableIdStr + " is being prepared in the kitchen.");
                 break;
             case READY_TO_SERVE:
                 // Navigate to PaymentProcessing for ready to serve table
@@ -411,6 +412,11 @@ public class TableMapController {
         // Add action for all tables
         actionButton.setOnAction(this::handleTableAction);
 
+        // Disable action for ACTIVE_ORDERS to prevent manual ready marking
+        if (table.getStatus() == TableStatus.ACTIVE_ORDERS) {
+            actionButton.setDisable(true);
+        }
+
         tableBox.getChildren().addAll(tableTitle, tableIcon, actionButton);
 
         // Add additional buttons based on status
@@ -465,6 +471,17 @@ public class TableMapController {
             updateStatusCounts();
             refreshTableGrid();
 
+            // Auto refresh every 2 seconds to reflect Kitchen updates
+            refreshTimeline = new Timeline(new KeyFrame(javafx.util.Duration.seconds(2), e -> {
+                try {
+                    refreshUI();
+                } catch (Exception ex) {
+                    System.err.println("Auto-refresh failed: " + ex.getMessage());
+                }
+            }));
+            refreshTimeline.setCycleCount(Timeline.INDEFINITE);
+            refreshTimeline.play();
+
         } catch (Exception e) {
             System.err.println("Error initializing TableMapController: " + e.getMessage());
             e.printStackTrace();
@@ -475,6 +492,13 @@ public class TableMapController {
             errorAlert.setHeaderText("Failed to load table data");
             errorAlert.setContentText("Please check database connection and try again.");
             errorAlert.showAndWait();
+        }
+    }
+
+    // Optional: stop refresh when leaving screen
+    private void stopAutoRefresh() {
+        if (refreshTimeline != null) {
+            refreshTimeline.stop();
         }
     }
 }

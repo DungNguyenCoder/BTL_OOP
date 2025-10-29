@@ -41,32 +41,25 @@ public class OrderSummaryController {
     @FXML private Label totalLabel;
     @FXML private Button reviewOrderButton;
     @FXML private ImageView closeButton;
-
     private final List<OrderItem> items = new ArrayList<>();
     private final Map<String, OrderItemUI> itemUIMap = new HashMap<>(); // Key = dishId (String)
-
     private double subtotal = 0;
     private double tax = 0;
     private double total = 0;
     private int currentOrderId = 0;
-
     private final OrderDAO orderDAO = new OrderDAO();
     private final OrderItemDAO orderItemDAO = new OrderItemDAO();
     private final RestaurantTableDAO tableDAO = new RestaurantTableDAO();
     private final DishDAO dishDAO = new DishDAO();
     private final EmployeeDAO employeeDAO = new EmployeeDAO();
     private final NotificationService notificationService = NotificationService.getInstance();
-
     private com.btl_oop.Controller.Order.ChooseDishesController parentController;
-
     public void setParentController(com.btl_oop.Controller.Order.ChooseDishesController controller) {
         this.parentController = controller;
     }
-
     private Dish getDishFromOrderItem(OrderItem item) {
         return dishDAO.getDishById(item.getDishId());
     }
-
     @FXML
     private void initialize() {
         System.out.println("OrderSummaryController initialized");
@@ -76,7 +69,6 @@ public class OrderSummaryController {
             closeButton.setOnMouseExited(e -> closeButton.setOpacity(1.0));
         }
     }
-
     public void addDish(Dish dish, int quantity) {
         System.out.println("OrderSummaryController.addDish() called: " + dish.getName() + " x " + quantity);
 
@@ -87,7 +79,6 @@ public class OrderSummaryController {
                 break;
             }
         }
-
         if (existingItem != null) {
             System.out.println("Item exists, updating quantity from " + existingItem.getQuantity() + " to " + (existingItem.getQuantity() + quantity));
             existingItem.setQuantity(existingItem.getQuantity() + quantity);
@@ -202,7 +193,6 @@ public class OrderSummaryController {
 
         System.out.println("Item UI created and added to orderList for: " + dish.getName());
     }
-
     private void updateItemUI(OrderItem item) {
         // Lấy Dish từ database
         Dish dish = getDishFromOrderItem(item);
@@ -228,7 +218,6 @@ public class OrderSummaryController {
             System.err.println("WARNING: Could not find UI for dish ID: " + item.getDishId());
         }
     }
-
     private void removeItem(OrderItem item) {
         String key = String.valueOf(item.getDishId());
         OrderItemUI itemUI = itemUIMap.get(key);
@@ -245,7 +234,6 @@ public class OrderSummaryController {
         String dishName = dish != null ? dish.getName() : "DishID " + item.getDishId();
         System.out.println("Item removed: " + dishName);
     }
-
     private void updateTotals() {
         subtotal = 0;
 
@@ -258,7 +246,6 @@ public class OrderSummaryController {
                 System.err.println("WARNING: Could not find dish with ID: " + item.getDishId());
             }
         }
-
         tax = subtotal * 0.1;
         total = subtotal + tax;
 
@@ -282,7 +269,6 @@ public class OrderSummaryController {
             orderItemsList.getScene().getWindow().hide();
         }
     }
-
     @FXML
     public void clearAll() {
         items.clear();
@@ -399,54 +385,12 @@ public class OrderSummaryController {
         });
     }
 
-    /*
-    @FXML
-    private void processPayment() {
-        try {
-            File file = new File(AppConfig.PATH_ORDERS_DATA);
-
-            File parentDir = file.getParentFile();
-            if (parentDir != null && !parentDir.exists()) {
-                boolean created = parentDir.mkdirs();
-                System.out.println("Created directories: " + created);
-            }
-
-            if (!file.exists()) {
-                boolean created = file.createNewFile();
-                System.out.println("Created file: " + created);
-            }
-
-            FileWriter fw = new FileWriter(file, true);
-            fw.write(orderJson + "\n");
-            fw.write("---\n");
-            fw.close();
-
-            System.out.println("Order saved to: " + file.getAbsolutePath());
-        } catch (IOException e) {
-            System.err.println("Error saving order: " + e.getMessage());
-
-            e.printStackTrace();
-            showAlert("Lỗi", "Có lỗi xảy ra khi xử lý thanh toán: " + e.getMessage());
-        }
-    }
-    */
-
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
-
-    private static class OrderJsonWrapper {
-        private final Order order;
-        private final List<OrderItem> items;
-
-        public OrderJsonWrapper(Order order, List<OrderItem> items) {
-            this.order = order;
-            this.items = items;
-        }
     }
 
     private static class OrderItemUI {

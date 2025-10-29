@@ -11,6 +11,7 @@ module com.btl_oop {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.desktop;
+    opens com.btl_oop.Controller.Kitchen to javafx.fxml;
 
     opens com.btl_oop.Model.Entity to javafx.fxml;
     opens com.btl_oop.Utils to javafx.fxml;
@@ -36,4 +37,6 @@ module com.btl_oop {
     requires okhttp3;
     requires org.json;
     exports com.btl_oop.Model.DAO;
+    exports com.btl_oop.Controller.Kitchen;
+
 }

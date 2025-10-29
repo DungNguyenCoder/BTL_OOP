@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.btl_oop.Controller.Kitchen.OrderCardController"
+      fx:id="root"
+      styleClass="order-card" spacing="10" prefHeight="200.0">
+
+    <!-- Header: Table Number + Order ID + Status (THÊM tableNumberLabel) -->
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <padding>
+            <Insets left="10.0" top="10.0" />
+        </padding>
+        <Label fx:id="tableNumberLabel" text="Table #1" styleClass="table-number" />  <!-- FIXED: Thêm label này -->
+        <Label fx:id="orderIdLabel" text="Order #123" styleClass="order-id" HBox.hgrow="ALWAYS" />
+        <Label fx:id="statusLabel" text="Pending" styleClass="order-status" />
+    </HBox>
+
+    <!-- Items List với ScrollPane -->
+    <ScrollPane fitToWidth="true" prefHeight="100.0" styleClass="items-scroll">
+        <GridPane fx:id="itemsGrid" hgap="15.0" vgap="8.0" styleClass="items-grid">
+            <padding>
+                <Insets top="5.0" left="10.0" right="10.0" bottom="5.0" />
+            </padding>
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" percentWidth="70.0" />
+                <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
+            </columnConstraints>
+        </GridPane>
+    </ScrollPane>
+
+    <!-- Action Button -->
+    <HBox alignment="CENTER_RIGHT" spacing="10">
+        <padding>
+            <Insets right="10.0" bottom="10.0" />
+        </padding>
+        <Button fx:id="tickBtn" text="Prepare" onAction="#tickDone"
+                styleClass="tick-btn" prefWidth="100.0" />
+    </HBox>
+
+</VBox>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" stylesheets="@../../css/Kitchen/kitchen.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.btl_oop.Controller.Kitchen.KitchenMainController">
+
+    <VBox styleClass="kitchen-container" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <!-- Header Section (Màu accent cam cho title) -->
+        <HBox alignment="CENTER_LEFT" styleClass="header-section">
+            <padding>
+                <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            <VBox HBox.hgrow="ALWAYS">
+                <Label styleClass="header-title" text="Kitchen Orders" />  <!-- Màu #FF6B35 (cam sáng) -->
+                <Label fx:id="orderSummaryLabel" styleClass="header-subtitle" text="0 active orders • 0 ready to serve" />  <!-- Màu xám nhạt #666 -->
+            </VBox>
+            <!-- Nút user (màu xanh dương, active có background) -->
+            <HBox alignment="CENTER_RIGHT" spacing="10">
+                <Button fx:id="btn_quit" onAction="#quit" styleClass="user-btn" text="Log out " />
+            </HBox>
+        </HBox>
+
+        <!-- Main Content Area (Background xám nhạt cho sections) -->
+        <HBox spacing="20" styleClass="content-area" VBox.vgrow="ALWAYS">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" />
+            </padding>
+
+            <!-- Active Orders Section (Accent cam cho header) -->
+            <VBox styleClass="orders-section active-section" HBox.hgrow="ALWAYS">
+                <HBox alignment="CENTER_LEFT" spacing="10" styleClass="section-header">
+                    <Label styleClass="section-icon icon-active" text="⏱" />  <!-- Icon cam -->
+                    <Label fx:id="activeTitleLabel" styleClass="section-title" text="Active Orders (0)" />
+                </HBox>
+
+                <ScrollPane fx:id="activeOrdersPane" fitToHeight="true" fitToWidth="true" styleClass="orders-scroll-pane" VBox.vgrow="ALWAYS">
+                    <VBox fx:id="activeOrdersContainer" spacing="10" styleClass="orders-container" />
+                </ScrollPane>
+            </VBox>
+
+            <!-- Ready to Serve Section (Accent xanh lá cho header) -->
+            <VBox styleClass="orders-section ready-section" HBox.hgrow="ALWAYS">
+                <HBox alignment="CENTER_LEFT" spacing="10" styleClass="section-header">
+                    <Label styleClass="section-icon icon-ready" text="✓" />  <!-- Icon xanh -->
+                    <Label fx:id="readyTitleLabel" styleClass="section-title" text="Ready to Serve (0)" />
+                </HBox>
+
+                <ScrollPane fx:id="readyOrdersPane" fitToHeight="true" fitToWidth="true" styleClass="orders-scroll-pane" VBox.vgrow="ALWAYS">
+                    <VBox fx:id="readyOrdersContainer" spacing="10" styleClass="orders-container" />
+                </ScrollPane>
+            </VBox>
+        </HBox>
+    </VBox>
+
+</AnchorPane>
