@@ -1,6 +1,7 @@
 package com.btl_oop.Model.Entity;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 public class Employee {
     private static int employeeId;
@@ -45,6 +46,11 @@ public class Employee {
     public void setRole(String role) { this.role = role; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+
+    public boolean isAdult() {
+        if (dateOfBirth == null) return false;
+        return Period.between(dateOfBirth, LocalDate.now()).getYears() >= 18;
+    }
 
     @Override
     public String toString() {

@@ -1,4 +1,4 @@
-package com.btl_oop.Controller.DeskManager;
+package com.btl_oop.Controller.Manager;
 
 import com.btl_oop.Model.Service.TableManager;
 import com.btl_oop.Model.Service.NotificationService;
@@ -377,7 +377,7 @@ public class OrderDetailsController {
         // Set default avatar or placeholder
         try {
             // Try to load a default avatar or placeholder
-            Image avatarImage = new Image(getClass().getResourceAsStream("/com/btl_oop/img/img/account.png"));
+            Image avatarImage = new Image(getClass().getResourceAsStream("/com/btl_oop/img/ic_item/account.png"));
             customerAvatar.setImage(avatarImage);
         } catch (Exception e) {
             System.out.println("Could not load default avatar image");

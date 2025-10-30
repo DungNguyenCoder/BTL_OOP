@@ -1,11 +1,10 @@
-package com.btl_oop.Controller.DeskManager;
+package com.btl_oop.Controller.Manager;
 
 import com.btl_oop.Model.Entity.RestaurantTable;
 import com.btl_oop.Model.DAO.OrderDAO;
 import com.btl_oop.Model.Enum.TableStatus;
 import com.btl_oop.Model.Service.TableManager;
 import com.btl_oop.Model.Service.NotificationService;
-import com.btl_oop.Model.Entity.Notification;
 import com.btl_oop.Utils.AppConfig;
 import com.btl_oop.Utils.TableDataInitializer;
 import javafx.animation.KeyFrame;
@@ -21,8 +20,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import com.btl_oop.Utils.NotificationController;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;

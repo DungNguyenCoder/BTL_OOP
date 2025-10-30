@@ -1,9 +1,8 @@
-package com.btl_oop.Controller.Order;
+package com.btl_oop.Controller.Waiter;
 
 import com.btl_oop.Model.Entity.Dish;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
@@ -20,7 +19,7 @@ public class DishItemController {
     @FXML private HBox quantityBox;
     @FXML private HBox confirmBox;
 
-    private ChooseDishesController parentController;
+    private WaiterMainController parentController;
     private Dish dish;
     private int quantity = 1;
 
@@ -35,7 +34,7 @@ public class DishItemController {
         }
     }
 
-    public void setParentController(ChooseDishesController controller) {
+    public void setParentController(WaiterMainController controller) {
         this.parentController = controller;
     }
 

@@ -1,4 +1,4 @@
-package com.btl_oop.Controller.LoginController;
+package com.btl_oop.Controller.Login_Registration;
 
 import com.btl_oop.Model.DAO.EmployeeDAO;
 import com.btl_oop.Model.Entity.Employee;
@@ -22,27 +22,12 @@ public class RegisterController {
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
-    @FXML private CheckBox checkOrderRole;
-    @FXML private CheckBox checkManagerRole;
     @FXML private ComboBox<String> roleChoose;
     @FXML private CheckBox agreeCheck;
 
     @FXML
     public void initialize() {
-        roleChoose.getItems().addAll("Admin", "Manager", "Waiter", "Kitchen");
-        checkManagerRole.setSelected(true);
-
-        checkOrderRole.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-                checkManagerRole.setSelected(false);
-            }
-        });
-
-        checkManagerRole.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-                checkOrderRole.setSelected(false);
-            }
-        });
+        roleChoose.getItems().addAll("Manager", "Waiter", "Kitchen");
     }
 
     @FXML
@@ -61,25 +46,25 @@ public class RegisterController {
             return;
         }
 
-        //Đang ki
+        //Đăng kí
         EmployeeDAO employeeDAO = new EmployeeDAO();
         String role = roleChoose.getSelectionModel().getSelectedItem();
 
-        if (employeeDAO.isEmployeeExists(username)) {
-            AlertUtils.showError("Tài khoản đã tồn tại!");
+        if (employeeDAO.isEmployeeExists(username, email, phoneNumber)) {
+            AlertUtils.showError("Account already exists!");
             return;
         }
 
         Employee employee = new Employee(0, username, password, name, email, phoneNumber, birthday, role, "Active");
         employeeDAO.insertEmployee(employee);
 
-        AlertUtils.showInfo("Đăng ký thành công!");
+        AlertUtils.showInfo("Registration successful!");
 
         try {
             SceneUtils.switchTo(event, AppConfig.PATH_LOGIN_SCREEN);;
         } catch (IOException e) {
             e.printStackTrace();
-            AlertUtils.showError("Không thể chuyển về màn hình đăng nhập: ");
+            AlertUtils.showError("Unable to redirect to the login screen.");
         }
     }
 
@@ -92,28 +77,28 @@ public class RegisterController {
                                   String name, String numberphone, String email) {
         if (username.isEmpty() || password.isEmpty() || confirmpassword.isEmpty()
                 || name.isEmpty() || email.isEmpty() || numberphone.isEmpty()) {
-            return "Vui lòng nhập đầy đủ thông tin!";
+            return "Please fill in all required information!";
         }
         if (username.length() < 6) {
-            return "Tên đăng nhập phải có ít nhất 6 ký tự!";
+            return "Username must be at least 6 characters long!";
         }
         if (username.contains(" ")) {
-            return "Tên đăng nhập không được chứa khoảng trắng!";
+            return "Username must not contain spaces!";
         }
         if (password.length() < 6) {
-            return "Mật khẩu phải có ít nhất 6 ký tự!";
+            return "Password must be at least 6 characters long!";
         }
         if (!password.equals(confirmpassword)) {
-            return "Mật khẩu và xác nhận mật khẩu không khớp!";
+            return "Password and confirm password do not match!";
         }
         if (!agreeCheck.isSelected()) {
-            return "Bạn cần đồng ý với điều khoản để tiếp tục!";
+            return "You must agree to the terms to continue!";
         }
         if (!isValidEmail(email)) {
-            return "Email không hợp lệ!";
+            return "Invalid email address!";
         }
         if (!isValidPhone(numberphone)) {
-            return "Số điện thoại không hợp lệ!";
+            return "Invalid phone number!";
         }
         return null;
     }

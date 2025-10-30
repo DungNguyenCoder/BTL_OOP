@@ -36,7 +36,7 @@ public class ReportDAO {
         }
         catch (SQLException e)
         {
-            System.out.println("Không lấy đc dữ liệu");
+            System.out.println("Unable to retrieve data.");
             e.printStackTrace();
         }
 
@@ -87,7 +87,7 @@ public class ReportDAO {
             }
 
         } catch (SQLException e) {
-            System.err.println("Lỗi khi lấy dữ liệu từ v_yearly_claims: " + e.getMessage());
+            System.err.println("Error retrieving data from v_yearly_claims." + e.getMessage());
             e.printStackTrace();
         }
 
@@ -109,7 +109,7 @@ public class ReportDAO {
             }
 
         } catch (SQLException e) {
-            System.err.println("Lỗi khi lấy TotalRevenue từ v_revenue_summary: " + e.getMessage());
+            System.err.println("Error retrieving TotalRevenue from v_revenue_summary." + e.getMessage());
             e.printStackTrace();
         }
 
@@ -128,7 +128,7 @@ public class ReportDAO {
             }
 
         } catch (SQLException e) {
-            System.err.println("Lỗi khi lấy TotalOrders từ v_revenue_summary: " + e.getMessage());
+            System.err.println("Error retrieving TotalOrders from v_revenue_summary." + e.getMessage());
             e.printStackTrace();
         }
 
@@ -150,7 +150,7 @@ public class ReportDAO {
             }
 
         } catch (SQLException e) {
-            System.err.println("Lỗi " + e.getMessage());
+            System.err.println("Error." + e.getMessage());
             e.printStackTrace();
         }
 
@@ -169,7 +169,7 @@ public class ReportDAO {
             }
 
         } catch (SQLException e) {
-            System.err.println("Lỗi khi lấy TotalOrders từ v_revenue_summary: " + e.getMessage());
+            System.err.println("Error retrieving TotalOrders from v_revenue_summary." + e.getMessage());
             e.printStackTrace();
         }
 
@@ -187,7 +187,7 @@ public class ReportDAO {
             }
 
         } catch (SQLException e) {
-            System.err.println("Lỗi khi lấy TotalOrders từ v_revenue_summary: " + e.getMessage());
+            System.err.println("Error retrieving TotalOrders from v_revenue_summary." + e.getMessage());
             e.printStackTrace();
         }
 
@@ -208,7 +208,7 @@ public class ReportDAO {
             }
 
         } catch (SQLException e) {
-            System.err.println("Lỗi khi lấy Total Order Percentage: " + e.getMessage());
+            System.err.println("Error retrieving Total Order Percentage." + e.getMessage());
             e.printStackTrace();
         }
 
@@ -243,7 +243,7 @@ public class ReportDAO {
             }
 
         } catch (SQLException e) {
-            System.err.println("Lỗi khi lấy Customer Growth Percentage: " + e.getMessage());
+            System.err.println("Error retrieving Customer Growth Percentage." + e.getMessage());
             e.printStackTrace();
         }
 
@@ -277,7 +277,7 @@ public class ReportDAO {
             }
 
         } catch (SQLException e) {
-            System.err.println("Lỗi khi lấy Total Revenue Percentage: " + e.getMessage());
+            System.err.println("Error retrieving Total Revenue Percentage." + e.getMessage());
             e.printStackTrace();
         }
 

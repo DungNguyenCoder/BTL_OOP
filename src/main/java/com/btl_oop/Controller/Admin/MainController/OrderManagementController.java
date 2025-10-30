@@ -44,7 +44,7 @@ public class OrderManagementController {
     private EmployeeDAO employeeDAO = new EmployeeDAO();
     private ReportDAO reportDAO = new ReportDAO();
     private List<Order> allOrders ;
-    private final String img_account ="/com/btl_oop/img/img/account.png";
+    private final String img_account = "/com/btl_oop/img/ic_item/account.png";
     @FXML
     public void initialize() {
         System.out.println("DashboardController initialized!");

@@ -86,7 +86,7 @@ public class MainLayoutController {
     @FXML
     private void loadLogout() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/btl_oop/FXML/layout_login/login-screen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/btl_oop/FXML/Login_Registration/login-screen.fxml"));
             Parent loginScreen = loader.load();
 
             Stage currentStage = (Stage) btnLogout.getScene().getWindow();

@@ -53,7 +53,7 @@ public class DishDAO {
                 return null;
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Không thể lấy Dish với ID: " + dishId, e);
+            throw new RuntimeException("Unable to retrieve Dish with ID: " + dishId, e);
         }
     }
 

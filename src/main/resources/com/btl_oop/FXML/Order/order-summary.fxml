@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="900.0" prefWidth="250.0" styleClass="order-summary-container" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.btl_oop.Controller.Order.OrderSummaryController">
+<AnchorPane prefHeight="900.0" prefWidth="250.0" styleClass="order-summary-container" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.btl_oop.Controller.Waiter.OrderSummaryController">
 
     <HBox alignment="TOP_RIGHT" layoutX="0" layoutY="0" prefWidth="250" styleClass="summary-header-box" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
         <padding>

@@ -159,7 +159,7 @@ public class RestaurantTableDAO {
                 return 0;
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Không thể lấy TableID cho TableNumber: " + tableNumber, e);
+            throw new RuntimeException("Unable to retrieve TableID for TableNumber: " + tableNumber, e);
         }
     }
 

@@ -1,4 +1,4 @@
-package com.btl_oop.Controller.Order;
+package com.btl_oop.Controller.Waiter;
 
 import com.btl_oop.Model.DAO.OrderDAO;
 import com.btl_oop.Model.DAO.OrderItemDAO;
@@ -10,7 +10,6 @@ import com.btl_oop.Model.Entity.Dish;
 import com.btl_oop.Model.Entity.Employee;
 import com.btl_oop.Model.Entity.Order;
 import com.btl_oop.Model.Entity.OrderItem;
-import com.btl_oop.Utils.AppConfig;
 import com.btl_oop.Model.Service.NotificationService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -23,11 +22,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,8 +48,8 @@ public class OrderSummaryController {
     private final DishDAO dishDAO = new DishDAO();
     private final EmployeeDAO employeeDAO = new EmployeeDAO();
     private final NotificationService notificationService = NotificationService.getInstance();
-    private com.btl_oop.Controller.Order.ChooseDishesController parentController;
-    public void setParentController(com.btl_oop.Controller.Order.ChooseDishesController controller) {
+    private WaiterMainController parentController;
+    public void setParentController(WaiterMainController controller) {
         this.parentController = controller;
     }
     private Dish getDishFromOrderItem(OrderItem item) {

@@ -29,9 +29,9 @@ public class EmployeeDAO {
         try (Connection conn = DBConnection.getConnection();
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
-            System.out.println("Đã tạo hoặc kiểm tra bảng Employee!");
+            System.out.println("Employee table created or verified successfully!");
         } catch (SQLException e) {
-            throw new RuntimeException("Lỗi khi tạo bảng Employee", e);
+            throw new RuntimeException("Error creating Employee table.", e);
         }
     }
 
@@ -60,7 +60,7 @@ public class EmployeeDAO {
             }
             return true;
         } catch (SQLException e) {
-            throw new RuntimeException("Lỗi khi thêm nhân viên: " + employee.getUserName(), e);
+            throw new RuntimeException("Error adding employee: " + employee.getUserName(), e);
         }
     }
 
@@ -75,7 +75,7 @@ public class EmployeeDAO {
                 employees.add(mapResultSetToEmployee(rs));
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Lỗi khi lấy danh sách nhân viên", e);
+            throw new RuntimeException("Error retrieving employee list.", e);
         }
         return employees;
     }
@@ -92,7 +92,7 @@ public class EmployeeDAO {
                 return null;
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Lỗi khi lấy nhân viên với ID: " + employeeId, e);
+            throw new RuntimeException("Error retrieving employee with ID: " + employeeId, e);
         }
     }
     public int getEmployeeIdById(int employeeId) {
@@ -107,7 +107,7 @@ public class EmployeeDAO {
                 return 0; // Nhân viên không tồn tại
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Lỗi khi kiểm tra EmployeeID: " + employeeId, e);
+            throw new RuntimeException("Error checking EmployeeID: " + employeeId, e);
         }
     }
     public int getEmployeeIdByName(String fullName) {
@@ -122,7 +122,7 @@ public class EmployeeDAO {
                 return 0; // Nhân viên không tồn tại
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Lỗi khi lấy EmployeeID cho FullName: " + fullName, e);
+            throw new RuntimeException("Error retrieving EmployeeID for FullName: " + fullName, e);
         }
     }
 
@@ -145,7 +145,7 @@ public class EmployeeDAO {
             ps.setInt(9, employee.getEmployeeId());
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new RuntimeException("Lỗi khi cập nhật nhân viên: " + employee.getEmployeeId(), e);
+            throw new RuntimeException("Error updating employee: " + employee.getEmployeeId(), e);
         }
     }
 
@@ -156,7 +156,7 @@ public class EmployeeDAO {
             ps.setInt(1, employeeId);
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new RuntimeException("Lỗi khi xóa nhân viên: " + employeeId, e);
+            throw new RuntimeException("Error deleting employee: " + employeeId, e);
         }
     }
 
@@ -175,7 +175,7 @@ public class EmployeeDAO {
                 return null;
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Lỗi khi đăng nhập với UserName: " + userName, e);
+            throw new RuntimeException("Error logging in with Username: " + userName, e);
         }
     }
 
@@ -193,16 +193,19 @@ public class EmployeeDAO {
         );
     }
 
-    public boolean isEmployeeExists(String username) {
-        String sql = "SELECT COUNT(*) FROM employee WHERE Username = ?";
+    public boolean isEmployeeExists(String username, String email, String phoneNumber) {
+        String sql = """
+        SELECT COUNT(*) FROM employee
+        WHERE Username = ? OR Email = ? OR PhoneNumber = ?
+    """;
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-
             ps.setString(1, username);
+            ps.setString(2, email);
+            ps.setString(3, phoneNumber);;
             ResultSet rs = ps.executeQuery();
-
             if (rs.next()) {
-                return rs.getInt(1) > 0; // có ít nhất 1 bản ghi trùng username
+                return rs.getInt(1) > 0;
             }
         } catch (SQLException e) {
             e.printStackTrace();

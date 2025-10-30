@@ -27,9 +27,9 @@ public class OrderItemDAO {
         try (Connection conn = DBConnection.getConnection();
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
-            System.out.println("Đã tạo hoặc kiểm tra bảng OrderItem!");
+            System.out.println("OrderItem table created or verified successfully!");
         } catch (SQLException e) {
-            throw new RuntimeException("Lỗi khi tạo bảng OrderItem", e);
+            throw new RuntimeException("Error creating OrderItem table.", e);
         }
     }
 
@@ -50,7 +50,7 @@ public class OrderItemDAO {
             }
             return true;
         } catch (SQLException e) {
-            throw new RuntimeException("Lỗi khi thêm OrderItem cho OrderID: " + orderItem.getOrderId(), e);
+            throw new RuntimeException("Error adding OrderItem for OrderID: " + orderItem.getOrderId(), e);
         }
     }
 
@@ -72,7 +72,7 @@ public class OrderItemDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Lỗi khi lấy OrderItems cho OrderID: " + orderId, e);
+            throw new RuntimeException("Error retrieving OrderItems for OrderID: " + orderId, e);
         }
         return items;
     }
@@ -85,7 +85,7 @@ public class OrderItemDAO {
             ps.setInt(2, orderItem.getOrderItemId());
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new RuntimeException("Lỗi khi cập nhật OrderItem: " + orderItem.getOrderItemId(), e);
+            throw new RuntimeException("Error updating OrderItem: " + orderItem.getOrderItemId(), e);
         }
     }
 
@@ -96,7 +96,7 @@ public class OrderItemDAO {
             ps.setInt(1, orderItemId);
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new RuntimeException("Lỗi khi xóa OrderItem: " + orderItemId, e);
+            throw new RuntimeException("Error deleting OrderItem: " + orderItemId, e);
         }
     }
 
@@ -121,7 +121,7 @@ public class OrderItemDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Lỗi khi lấy Dish với ID: " + dishId, e);
+            throw new RuntimeException("Error retrieving Dish with ID: " + dishId, e);
         }
         return null;
     }

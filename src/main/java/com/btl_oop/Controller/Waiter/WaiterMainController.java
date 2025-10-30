@@ -1,14 +1,8 @@
-package com.btl_oop.Controller.Order;
+package com.btl_oop.Controller.Waiter;
 
 import com.btl_oop.Model.DAO.DishDAO;
 import com.btl_oop.Model.Entity.Dish;
-import com.btl_oop.Model.Enum.Category;
 import com.btl_oop.Utils.AppConfig;
-import com.btl_oop.Utils.CategoryDeserializer;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,17 +19,13 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 
 import java.util.HashMap;
-import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Map;
-import java.lang.reflect.Type;
 
-public class ChooseDishesController {
+public class WaiterMainController {
 
     // Header
     @FXML private Label tableLabel;
@@ -276,7 +266,7 @@ public class ChooseDishesController {
     @FXML
     private void goBack() throws IOException {
         System.out.println("Going back...");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/btl_oop/FXML/layout_login/login-screen.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/btl_oop/FXML/Login_Registration/login-screen.fxml"));
         Parent loginScreen = loader.load();
 
         Stage currentStage = (Stage)btnBack.getScene().getWindow();

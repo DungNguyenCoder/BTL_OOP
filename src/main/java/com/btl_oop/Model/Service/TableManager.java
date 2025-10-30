@@ -127,8 +127,6 @@ public class TableManager {
     }
 
     public boolean markCleaned(int tableId) {
-        // Không cần cập nhật cache thủ công ở đây
-        // Gọi hàm changeTableStatus với orderId = null
         // Hàm này sẽ tự động cập nhật cả DB và cache
         return changeTableStatus(tableId, TableStatus.AVAILABLE, null);
     }

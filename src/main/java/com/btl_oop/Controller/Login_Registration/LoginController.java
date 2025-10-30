@@ -1,4 +1,4 @@
-package com.btl_oop.Controller.LoginController;
+package com.btl_oop.Controller.Login_Registration;
 
 import com.btl_oop.Model.DAO.EmployeeDAO;
 import com.btl_oop.Model.Entity.Employee;
@@ -7,7 +7,6 @@ import com.btl_oop.Utils.AppConfig;
 import com.btl_oop.Utils.SceneUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -19,10 +18,6 @@ public class LoginController {
     private TextField usernameField;
     @FXML
     private PasswordField passwordField;
-    @FXML
-    private Label signUpTab;
-    @FXML
-    private Label logInTab;
 
     private EmployeeDAO employeeDAO = new EmployeeDAO();
 
@@ -34,26 +29,26 @@ public class LoginController {
         Employee emp = employeeDAO.login(user, pass);
 
         if (emp == null) {
-            AlertUtils.showError("Sai tên đăng nhập hoặc mật khẩu!");
+            AlertUtils.showError("Incorrect username or password!");
             return;
         }
 
         if ("Inactive".equalsIgnoreCase(emp.getStatus())) {
-            AlertUtils.showWarning("Tài khoản đã bị vô hiệu hoá.");
+            AlertUtils.showWarning("The account has been disabled.");
             return;
         }
         if ("ADMIN".equalsIgnoreCase(emp.getRole())) {
-            AlertUtils.showInfo("Đăng nhập quản trị viên thành công");
+            AlertUtils.showInfo("Admin login successful.");
             SceneUtils.switchTo(event, AppConfig.PATH_ADMIN_SCREEN);
         } else if ("MANAGER".equalsIgnoreCase(emp.getRole())) {
-            AlertUtils.showInfo("Đăng nhập nhân viên thành công");
+            AlertUtils.showInfo("Manager login successful.");
             SceneUtils.switchTo(event, AppConfig.PATH_TABLE_MAP);
         } else if ("WAITER".equalsIgnoreCase(emp.getRole())) {
-            AlertUtils.showInfo("Đăng nhập nhân viên thành công");
+            AlertUtils.showInfo("Waiter login successful.");
             SceneUtils.switchTo(event, AppConfig.PATH_ORDER_MENU_SCREEN);
         }
         else if ("KITCHEN".equalsIgnoreCase(emp.getRole())) {
-            AlertUtils.showInfo("Đăng nhập nhân viên nhà bếp thành công");
+            AlertUtils.showInfo("Kitchen staff login successful.");
             SceneUtils.switchTo(event, AppConfig.PATH_KITCHEN_SCREEN);
         }
     }

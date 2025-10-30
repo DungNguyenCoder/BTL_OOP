@@ -6,15 +6,15 @@ import javafx.scene.control.ButtonType;
 public class AlertUtils {
 
     public static void showInfo(String message) {
-        showAlert(Alert.AlertType.INFORMATION, "Thông báo", message);
+        showAlert(Alert.AlertType.INFORMATION, "Infomation", message);
     }
 
     public static void showWarning(String message) {
-        showAlert(Alert.AlertType.WARNING, "Cảnh báo", message);
+        showAlert(Alert.AlertType.WARNING, "Warning", message);
     }
 
     public static void showError(String message) {
-        showAlert(Alert.AlertType.ERROR, "Lỗi", message);
+        showAlert(Alert.AlertType.ERROR, "Error", message);
     }
 
     public static boolean showConfirm(String message) {

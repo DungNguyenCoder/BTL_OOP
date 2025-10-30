@@ -77,7 +77,7 @@ public class NotificationController {
         
         if (notificationButton != null) {
             String buttonText = unreadCount > 0 ? 
-                "Thông báo (" + unreadCount + ")" : "Thông báo";
+                "Notification (" + unreadCount + ")" : "Notification";
             notificationButton.setText(buttonText);
         }
     }
@@ -120,7 +120,7 @@ public class NotificationController {
         private final Label timeLabel = new Label();
         private final Label messageLabel = new Label();
         private final HBox actionBox = new HBox(5);
-        private final Button markReadButton = new Button("Đã đọc");
+        private final Button markReadButton = new Button("Read");
 
         public NotificationCell() {
             header.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
@@ -173,7 +173,7 @@ public class NotificationController {
 
             // Tooltip
             String tooltipText = String.format(
-                "Loại: %s\nBàn: %d\nĐơn hàng: %d\nThời gian: %s",
+                "Type: %s\nTable: %d\nOrder: %d\nTime: %s",
                 notification.getType().getDisplayName(),
                 notification.getTableId(),
                 notification.getOrderId(),

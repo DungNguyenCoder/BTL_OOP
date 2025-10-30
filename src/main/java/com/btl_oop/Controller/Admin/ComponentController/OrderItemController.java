@@ -1,6 +1,5 @@
 package com.btl_oop.Controller.Admin.ComponentController;
 
-import com.btl_oop.Controller.Order.OrderSummaryController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,9 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import kotlin.comparisons.UComparisonsKt;
 
-import javax.swing.*;
 import java.io.IOException;
 
 public class OrderItemController {
@@ -106,7 +103,7 @@ public class OrderItemController {
                 Parent root = loader.load();
 
                 // Lấy controller và truyền dữ liệu
-                com.btl_oop.Controller.Order.OrderSummaryController summaryController = loader.getController();
+                com.btl_oop.Controller.Waiter.OrderSummaryController summaryController = loader.getController();
 
                 if (summaryController != null) {
                     summaryController.loadFromOrderItem(orderIdValue);

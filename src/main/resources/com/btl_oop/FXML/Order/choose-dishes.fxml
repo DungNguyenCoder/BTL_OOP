@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="900.0" prefWidth="1600.0" styleClass="root" stylesheets="@../../css/Order/choose_dishes_style.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.btl_oop.Controller.Order.ChooseDishesController">
+<BorderPane prefHeight="900.0" prefWidth="1600.0" styleClass="root" stylesheets="@../../css/Waiter/choose_dishes_style.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.btl_oop.Controller.Waiter.WaiterMainController">
 
    <top>
       <VBox styleClass="header-container">

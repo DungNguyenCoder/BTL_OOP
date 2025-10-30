@@ -234,9 +234,9 @@
     -fx-background-color: #fafbfc;
 }
 
-.customer-row:last-child {
-    -fx-border-width: 0;
-}
+/*.customer-row:last-child {*/
+/*    -fx-border-width: 0;*/
+/*}*/
 
 .customer-cell {
     -fx-font-size: 13px;

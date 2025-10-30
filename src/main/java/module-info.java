@@ -17,18 +17,18 @@ module com.btl_oop {
     opens com.btl_oop.Utils to javafx.fxml;
 
     opens com.btl_oop to javafx.fxml;
-    opens com.btl_oop.Controller.LoginController to javafx.fxml;
+    opens com.btl_oop.Controller.Login_Registration to javafx.fxml;
     opens com.btl_oop.Controller.Admin to javafx.fxml;
     opens com.btl_oop.Controller.Admin.ComponentController to javafx.fxml;
     opens com.btl_oop.Controller.Admin.MainController to javafx.fxml;
-    opens com.btl_oop.Controller.Order to javafx.fxml;
-    opens com.btl_oop.Controller.DeskManager to javafx.fxml;
+    opens com.btl_oop.Controller.Waiter to javafx.fxml;
+    opens com.btl_oop.Controller.Manager to javafx.fxml;
     // Root Controller package no longer contains classes; remove to avoid module error
 
 
     exports com.btl_oop;
     exports com.btl_oop.Model.Entity;
-    exports com.btl_oop.Controller.Order;
+    exports com.btl_oop.Controller.Waiter;
     exports com.btl_oop.Model.Enum;
 
     requires java.sql;

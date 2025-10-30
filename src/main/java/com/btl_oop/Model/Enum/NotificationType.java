@@ -1,14 +1,14 @@
 package com.btl_oop.Model.Enum;
 
 public enum NotificationType {
-    NEW_ORDER("Đơn hàng mới", "🆕"),
-    ORDER_CONFIRMED("Đơn hàng đã xác nhận", "✅"),
-    ORDER_READY("Đơn hàng sẵn sàng", "🍽️"),
-    ORDER_PAID("Đơn hàng đã thanh toán", "💰"),
-    TABLE_OCCUPIED("Bàn có khách", "👥"),
-    TABLE_CLEANED("Bàn đã dọn dẹp", "🧹"),
-    SYSTEM_ALERT("Cảnh báo hệ thống", "⚠️"),
-    PAYMENT_ISSUE("Vấn đề thanh toán", "💳");
+    NEW_ORDER("New order", "🆕"),
+    ORDER_CONFIRMED("Confirmed order", "✅"),
+    ORDER_READY("Order ready", "🍽️"),
+    ORDER_PAID("Paid order", "💰"),
+    TABLE_OCCUPIED("Occupied table", "👥"),
+    TABLE_CLEANED("Cleaned table", "🧹"),
+    SYSTEM_ALERT("System alert", "⚠️"),
+    PAYMENT_ISSUE("Payment issue", "💳");
 
     private final String displayName;
     private final String icon;

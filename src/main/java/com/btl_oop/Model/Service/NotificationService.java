@@ -78,8 +78,8 @@ public class NotificationService {
 
     public void sendNewOrderNotification(int tableId, int orderId) {
         Notification notification = new Notification(
-            "Đơn hàng mới",
-            "Bàn " + tableId + " có đơn hàng mới #" + orderId,
+            "New order",
+            "Table " + tableId + " has a new order #" + orderId,
             NotificationType.NEW_ORDER,
             tableId,
             orderId,
@@ -90,8 +90,8 @@ public class NotificationService {
 
     public void sendOrderConfirmedNotification(int tableId, int orderId) {
         Notification notification = new Notification(
-            "Đơn hàng đã xác nhận",
-            "Đơn hàng #" + orderId + " tại bàn " + tableId + " đã được xác nhận",
+            "Confirmed order",
+            "Order #" + orderId + " at table " + tableId + " has been confirmed",
             NotificationType.ORDER_CONFIRMED,
             tableId,
             orderId,
@@ -102,8 +102,8 @@ public class NotificationService {
 
     public void sendOrderReadyNotification(int tableId, int orderId) {
         Notification notification = new Notification(
-            "Đơn hàng sẵn sàng",
-            "Đơn hàng #" + orderId + " tại bàn " + tableId + " đã sẵn sàng phục vụ",
+            "Order ready",
+            "Order #" + orderId + " at table " + tableId + " is ready to be served",
             NotificationType.ORDER_READY,
             tableId,
             orderId,
@@ -114,8 +114,8 @@ public class NotificationService {
 
     public void sendTableOccupiedNotification(int tableId) {
         Notification notification = new Notification(
-            "Bàn có khách",
-            "Bàn " + tableId + " đã có khách ngồi",
+            "Occupied table",
+            "Table " + tableId + " is now occupied",
             NotificationType.TABLE_OCCUPIED,
             tableId,
             0,

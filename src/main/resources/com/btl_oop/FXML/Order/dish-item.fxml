@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
 
-<VBox styleClass="dish-card" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.btl_oop.Controller.Order.DishItemController">
+<VBox styleClass="dish-card" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.btl_oop.Controller.Waiter.DishItemController">
     <padding>
         <Insets top="15" right="15" bottom="15" left="15" />
     </padding>
