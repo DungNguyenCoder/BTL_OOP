@@ -36,6 +36,7 @@ module com.btl_oop {
     requires jbcrypt;
     requires okhttp3;
     requires org.json;
+    requires javafx.media;
     exports com.btl_oop.Model.DAO;
     exports com.btl_oop.Controller.Kitchen;
 
