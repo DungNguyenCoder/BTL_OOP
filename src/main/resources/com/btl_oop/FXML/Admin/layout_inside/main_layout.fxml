@@ -102,9 +102,9 @@
                     </graphic>
                 </Button>
 
-                <!-- Customer Detail -->
-                <Button fx:id="btnCustomerDetail" maxWidth="Infinity" styleClass="menu-button"
-                        onAction="#loadCustomerDetail">
+                <!-- Employee Detail -->
+                <Button fx:id="btnEmployeeDetail" maxWidth="Infinity" styleClass="menu-button"
+                        onAction="#loadEmployeeDetail">
                     <graphic>
                         <HBox alignment="CENTER_LEFT" spacing="12">
                             <ImageView fitHeight="18.0" fitWidth="18.0" preserveRatio="true">
@@ -112,7 +112,7 @@
                                     <Image url="@../../../img/ic_item/ic_user.png" />
                                 </image>
                             </ImageView>
-                            <Label text="Customer Detail" />
+                            <Label text="Employee Detail" />
                         </HBox>
                     </graphic>
                 </Button>

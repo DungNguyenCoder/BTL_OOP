@@ -3,6 +3,7 @@ package com.btl_oop.Controller.Admin.MainController;
 import com.btl_oop.Controller.Admin.ComponentController.OrderItemController;
 import com.btl_oop.Model.DAO.EmployeeDAO;
 import com.btl_oop.Model.DAO.OrderDAO;
+import com.btl_oop.Model.DAO.ReportDAO;
 import com.btl_oop.Model.Entity.Employee;
 import com.btl_oop.Model.Entity.Order;
 import javafx.fxml.FXML;
@@ -27,8 +28,21 @@ public class OrderManagementController {
     @FXML
     private Label welcomeText;
 
+    @FXML
+    private Label totalOrders;
+
+    @FXML
+    private Label totalDelivered;
+
+    @FXML
+    private Label totalCancelled;
+
+    @FXML
+    private Label totalRevenue;
+
     private OrderDAO orderDAO ;
     private EmployeeDAO employeeDAO = new EmployeeDAO();
+    private ReportDAO reportDAO = new ReportDAO();
     private List<Order> allOrders ;
     private final String img_account ="/com/btl_oop/img/img/account.png";
     @FXML
@@ -41,6 +55,10 @@ public class OrderManagementController {
     }
 
     private void setUpLabel() {
+        totalOrders.setText(String.valueOf(reportDAO.getTotalOrders()));
+        totalRevenue.setText(String.valueOf(reportDAO.getTotalRevenue()));
+        totalDelivered.setText(String.valueOf(reportDAO.getDeliveredOrders()));
+        totalCancelled.setText(String.valueOf(reportDAO.getCancelledOrders()));
         String formatDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ENGLISH));
         date.setText(formatDate);
         int employeeId = Employee.getEmployeeId();
@@ -58,7 +76,7 @@ public class OrderManagementController {
           }
           for(Order order : allOrders)
           {
-              addOrder(String.valueOf(order.getTableId()), order.getStatus(),"CustomerName" ,order.getTotal() ,img_account );
+              addOrder(String.valueOf(order.getOrderId()), order.getStatus(),"CustomerName" ,order.getTotal() ,img_account );
           }
 
     }

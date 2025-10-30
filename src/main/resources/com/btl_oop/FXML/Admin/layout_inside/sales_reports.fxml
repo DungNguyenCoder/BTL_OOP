@@ -43,9 +43,6 @@
                                     <children>
                                         <Label text="Pie Chart" styleClass="card-title" />
                                         <Region HBox.hgrow="ALWAYS" />
-                                        <CheckBox text="Chart" styleClass="chart-option" />
-                                        <CheckBox text="Show Value" selected="true" styleClass="chart-option" />
-                                        <Button styleClass="menu-button" text="⋮" />
                                     </children>
                                     <VBox.margin>
                                         <Insets bottom="20" />
@@ -60,10 +57,10 @@
                                                 <StackPane prefHeight="120" prefWidth="120">
                                                     <children>
                                                         <Circle radius="60" styleClass="donut-bg" />
-                                                        <Circle radius="60" styleClass="donut-segment-red"
+                                                        <Circle fx:id="totalOrderCircle" radius="60" styleClass="donut-segment-red"
                                                                 strokeDashArray="377, 377" strokeDashOffset="94" />
                                                         <Circle radius="40" fill="WHITE" />
-                                                        <Label text="81%" styleClass="donut-percentage" />
+                                                        <Label fx:id="totalOrderPercentage" text="81%" styleClass="donut-percentage" />
                                                     </children>
                                                 </StackPane>
                                                 <Label text="Total Order" styleClass="chart-label" />
@@ -76,13 +73,13 @@
                                                 <StackPane prefHeight="120" prefWidth="120">
                                                     <children>
                                                         <Circle radius="60" styleClass="donut-bg" />
-                                                        <Circle radius="60" styleClass="donut-segment-green"
+                                                        <Circle fx:id="customerGrowthCircle" radius="60" styleClass="donut-segment-green"
                                                                 strokeDashArray="83, 377" strokeDashOffset="0" />
                                                         <Circle radius="40" fill="WHITE" />
                                                         <Label text="22%" styleClass="donut-percentage" />
                                                     </children>
                                                 </StackPane>
-                                                <Label text="Customer Growth" styleClass="chart-label" />
+                                                <Label fx:id="customerGrowthPercentage" text="Customer Growth" styleClass="chart-label" />
                                             </children>
                                         </VBox>
 
@@ -92,10 +89,10 @@
                                                 <StackPane prefHeight="120" prefWidth="120">
                                                     <children>
                                                         <Circle radius="60" styleClass="donut-bg" />
-                                                        <Circle radius="60" styleClass="donut-segment-blue"
+                                                        <Circle fx:id="totalRevenueCircle" radius="60" styleClass="donut-segment-blue"
                                                                 strokeDashArray="233, 377" strokeDashOffset="58" />
                                                         <Circle radius="40" fill="WHITE" />
-                                                        <Label text="62%" styleClass="donut-percentage" />
+                                                        <Label fx:id="totalRevenuePercentage" text="62%" styleClass="donut-percentage" />
                                                     </children>
                                                 </StackPane>
                                                 <Label text="Total Revenue" styleClass="chart-label" />
@@ -113,16 +110,6 @@
                                     <children>
                                         <Label text="Chart Order" styleClass="card-title" />
                                         <Region HBox.hgrow="ALWAYS" />
-                                        <Button styleClass="save-button">
-                                            <graphic>
-                                                <HBox spacing="6" alignment="CENTER">
-                                                    <children>
-                                                        <Label text="⬇" styleClass="save-icon" />
-                                                        <Label text="Save Report" styleClass="save-text" />
-                                                    </children>
-                                                </HBox>
-                                            </graphic>
-                                        </Button>
                                     </children>
                                     <VBox.margin>
                                         <Insets bottom="5" />

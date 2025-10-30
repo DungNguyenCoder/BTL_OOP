@@ -34,7 +34,7 @@ public class MainLayoutController {
     private Button btnCustomerFeedback;
 
     @FXML
-    private Button btnCustomerDetail;
+    private Button btnEmployeeDetail;
 
     @FXML
     private Button btnLogout;
@@ -78,9 +78,9 @@ public class MainLayoutController {
     }
 
     @FXML
-    private void loadCustomerDetail() {
-        loadContent("/com/btl_oop/FXML/Admin/layout_inside/customer_detail.fxml");
-        setActiveButton(btnCustomerDetail);
+    private void loadEmployeeDetail() {
+        loadContent("/com/btl_oop/FXML/Admin/layout_inside/employee_detail.fxml");
+        setActiveButton(btnEmployeeDetail);
     }
 
     @FXML

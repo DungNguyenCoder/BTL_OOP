@@ -115,7 +115,6 @@ public class ReportDAO {
 
         return 0.0;
     }
-   // Lấy tổng số đơn hàng từ VIEW
 
     public int getTotalOrders() {
         String sql = "SELECT TotalOrders FROM v_revenue_summary";
@@ -136,70 +135,7 @@ public class ReportDAO {
         return 0;
     }
 
-    /**
-     * Lấy thông tin hiệu suất nhân viên từ VIEW
-     */
-    public List<Object[]> getEmployeePerformance() {
-        List<Object[]> result = new ArrayList<>();
 
-        String sql = "SELECT FullName, Role, TotalOrders, WorkingDays, TotalRevenue, AverageOrderValue, CompletedOrders " +
-                "FROM v_employee_performance " +
-                "ORDER BY TotalRevenue DESC";
-
-        try (Connection conn = DBConnection.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-
-            while (rs.next()) {
-                Object[] row = new Object[]{
-                        rs.getString("FullName"),
-                        rs.getString("Role"),
-                        rs.getInt("TotalOrders"),
-                        rs.getInt("WorkingDays"),
-                        rs.getDouble("TotalRevenue"),
-                        rs.getDouble("AverageOrderValue"),
-                        rs.getInt("CompletedOrders")
-                };
-                result.add(row);
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Lỗi khi lấy dữ liệu từ v_employee_performance: " + e.getMessage());
-            e.printStackTrace();
-        }
-
-        return result;
-    }
-
-    //Lấy dữ liệu doanh số theo tháng từ VIEW
-    public List<Object[]> getMonthlySales() {
-        List<Object[]> result = new ArrayList<>();
-
-        String sql = "SELECT YearMonth, OrderCount, TotalRevenue, PaidOrders " +
-                "FROM v_monthly_sales " +
-                "LIMIT 12";
-
-        try (Connection conn = DBConnection.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-
-            while (rs.next()) {
-                Object[] row = new Object[]{
-                        rs.getString("YearMonth"),
-                        rs.getInt("OrderCount"),
-                        rs.getDouble("TotalRevenue"),
-                        rs.getInt("PaidOrders")
-                };
-                result.add(row);
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Lỗi khi lấy dữ liệu từ v_monthly_sales: " + e.getMessage());
-            e.printStackTrace();
-        }
-
-        return result;
-    }
     public double getTotalRevenueClaimTop1() {
         String sql = "SELECT \n" +
                 "    MAX(TotalRevenue) AS MaxTotalRevenue\n" +
@@ -257,6 +193,97 @@ public class ReportDAO {
 
         return 0;
     }
+    //biểu đồ tròn 1: Lấy ra tổng hàng được completed so với total
+    public double getTotalOrderPercentage() {
+        String sql = "SELECT " +
+                "CASE WHEN TotalOrders > 0 THEN (CompletedOrders * 100.0 / TotalOrders) ELSE 0 END AS Percentage " +
+                "FROM v_revenue_summary";
+
+        try (Connection conn = DBConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            if (rs.next()) {
+                return rs.getDouble("Percentage");
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Lỗi khi lấy Total Order Percentage: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return 0.0;
+    }
+    //biểu đồ tròn 2: so sánh số lượng khách đặt order trong tháng này với thàng trước
+    public double getCustomerGrowthPercentage() {
+        String sql = "SELECT " +
+                "CASE WHEN LastMonthCustomers > 0 " +
+                "THEN ((CurrentMonthCustomers - LastMonthCustomers) * 100.0 / LastMonthCustomers) " +
+                "ELSE 100.0 END AS GrowthPercentage " +
+                "FROM ( " +
+                "    SELECT " +
+                "        (SELECT COUNT(DISTINCT TableID) FROM `Order` " +
+                "         WHERE MONTH(CheckoutTime) = MONTH(CURRENT_DATE) " +
+                "         AND YEAR(CheckoutTime) = YEAR(CURRENT_DATE) " +
+                "         AND Status = 'Paid') AS CurrentMonthCustomers, " +
+                "        (SELECT COUNT(DISTINCT TableID) FROM `Order` " +
+                "         WHERE MONTH(CheckoutTime) = MONTH(DATE_SUB(CURRENT_DATE, INTERVAL 1 MONTH)) " +
+                "         AND YEAR(CheckoutTime) = YEAR(DATE_SUB(CURRENT_DATE, INTERVAL 1 MONTH)) " +
+                "         AND Status = 'Paid') AS LastMonthCustomers " +
+                ") AS CustomerCounts";
+
+        try (Connection conn = DBConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            if (rs.next()) {
+                double growth = rs.getDouble("GrowthPercentage");
+                // Giới hạn trong khoảng 0-100% để hiển thị
+                return Math.min(Math.max(Math.abs(growth), 0.0), 100.0);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Lỗi khi lấy Customer Growth Percentage: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return 0.0;
+    }
+    //biểu đồ tròn 2: so sánh doanh thu đặt order trong tháng này với thàng trước
+    public double getTotalRevenuePercentage() {
+        String sql = "SELECT " +
+                "CASE WHEN LastMonthRevenue > 0 " +
+                "THEN (CurrentMonthRevenue * 100.0 / (LastMonthRevenue * 1.2)) " +
+                "ELSE 50.0 END AS RevenuePercentage " +
+                "FROM ( " +
+                "    SELECT " +
+                "        (SELECT COALESCE(SUM(Total), 0) FROM `Order` " +
+                "         WHERE MONTH(CheckoutTime) = MONTH(CURRENT_DATE) " +
+                "         AND YEAR(CheckoutTime) = YEAR(CURRENT_DATE) " +
+                "         AND Status = 'Paid') AS CurrentMonthRevenue, " +
+                "        (SELECT COALESCE(SUM(Total), 1) FROM `Order` " +
+                "         WHERE MONTH(CheckoutTime) = MONTH(DATE_SUB(CURRENT_DATE, INTERVAL 1 MONTH)) " +
+                "         AND YEAR(CheckoutTime) = YEAR(DATE_SUB(CURRENT_DATE, INTERVAL 1 MONTH)) " +
+                "         AND Status = 'Paid') AS LastMonthRevenue " +
+                ") AS RevenueData";
+
+        try (Connection conn = DBConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            if (rs.next()) {
+                double percentage = rs.getDouble("RevenuePercentage");
+                return Math.min(Math.max(percentage, 0.0), 100.0);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Lỗi khi lấy Total Revenue Percentage: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return 0.0;
+    }
+
 
 
     private String getColorByTier(String tier) {
