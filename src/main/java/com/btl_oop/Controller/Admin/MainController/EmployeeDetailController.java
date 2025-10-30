@@ -1,6 +1,6 @@
 package com.btl_oop.Controller.Admin.MainController;
 
-import com.btl_oop.Controller.Admin.ComponentController.CustomerDetailDialogController;
+import com.btl_oop.Controller.Admin.ComponentController.EmployeeDetailDialogController;
 import com.btl_oop.Controller.Admin.ComponentController.CustomerListItemController;
 import com.btl_oop.Model.DAO.EmployeeDAO;
 import com.btl_oop.Model.Entity.Employee;
@@ -21,16 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerDetailController {
-
-    @FXML
-    private Label totalCustomersLabel;
-
-    @FXML
-    private Label membersLabel;
-
-    @FXML
-    private Label activeNowLabel;
+public class EmployeeDetailController {
 
     @FXML
     private TextField searchField;
@@ -54,7 +45,6 @@ public class CustomerDetailController {
     @FXML
     public void initialize() {
         loadEmployeeData();
-        updateStats();
         displayCustomers();
         setupSearchListener();
     }
@@ -65,15 +55,6 @@ public class CustomerDetailController {
 
     }
 
-    private void updateStats() {
-        totalCustomersLabel.setText(String.valueOf(allCustomers.size()));
-
-        long activeCount = allCustomers.stream().filter(e->"Activate".equals(e.getStatus())).count();
-        membersLabel.setText(String.valueOf(activeCount));
-
-        // Active now - random number for demo
-        activeNowLabel.setText(String.valueOf((int)(activeCount * 0.1)));
-    }
 
     private void displayCustomers() {
         customerListContainer.getChildren().clear();
@@ -119,12 +100,12 @@ public class CustomerDetailController {
     private void showCustomerDetailDialog(Employee customer) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/com/btl_oop/FXML/Admin/layout_inside/customer_detail_dialog.fxml")
+                    getClass().getResource("/com/btl_oop/FXML/Admin/layout_inside/employee_detail_dialog.fxml")
             );
             Parent root = loader.load();
 
-            CustomerDetailDialogController controller = loader.getController();
-            controller.loadCustomer(customer);
+            EmployeeDetailDialogController controller = loader.getController();
+            controller.loadEmployee(customer);
 
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Customer Details - " + customer.getFullName());
@@ -271,16 +252,6 @@ public class CustomerDetailController {
         }
     }
 
-    @FXML
-    private void handleAddCustomer() {
-        System.out.println("Add customer clicked");
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Add Customer");
-        alert.setHeaderText("Add New Customer");
-        alert.setContentText("This feature will allow you to add a new customer.");
-        alert.showAndWait();
-    }
 
     @FXML
     private void handlePreviousPage() {
@@ -299,13 +270,4 @@ public class CustomerDetailController {
         }
     }
 
-    public void refreshCustomerList() {
-        loadEmployeeData();
-        updateStats();
-        displayCustomers();
-    }
-
-    public Employee getSelectedCustomer() {
-        return selectedCustomer;
-    }
 }

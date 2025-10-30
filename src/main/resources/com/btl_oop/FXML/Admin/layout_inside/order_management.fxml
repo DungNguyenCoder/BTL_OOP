@@ -47,25 +47,25 @@
         <children>
             <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
                 <children>
-                    <Label styleClass="value" text="75" />
+                    <Label fx:id= "totalOrders" styleClass="value" text="75" />
                     <Label styleClass="label" text="Total Orders" />
                 </children>
             </VBox>
             <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
                 <children>
-                    <Label styleClass="value" text="357" />
+                    <Label fx:id="totalDelivered" styleClass="value" text="357" />
                     <Label styleClass="label" text="Total Delivered" />
                 </children>
             </VBox>
             <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
                 <children>
-                    <Label styleClass="value" text="65" />
+                    <Label fx:id ="totalCancelled" styleClass="value" text="65" />
                     <Label styleClass="label" text="Total Cancelled" />
                 </children>
             </VBox>
             <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
                 <children>
-                    <Label styleClass="value" text="128" />
+                    <Label fx:id= "totalRevenue" styleClass="value" text="128" />
                     <Label styleClass="label" text="Total Revenue" />
                 </children>
             </VBox>

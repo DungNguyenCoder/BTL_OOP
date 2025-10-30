@@ -14,7 +14,7 @@
 
 <VBox xmlns="http://javafx.com/javafx/24.0.1"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.btl_oop.Controller.Admin.ComponentController.CustomerDetailDialogController"
+      fx:controller="com.btl_oop.Controller.Admin.ComponentController.EmployeeDetailDialogController"
       stylesheets="@../../../css/Admin/customer_detail.css"
       styleClass="dialog-root"
       prefWidth="600"
@@ -28,7 +28,6 @@
         <children>
             <Label text="Customer Details" styleClass="dialog-title" />
             <Region HBox.hgrow="ALWAYS" />
-            <Button text="✕" styleClass="close-button" onAction="#handleClose" />
         </children>
     </HBox>
 
@@ -155,8 +154,6 @@
                                     </children>
                                 </HBox>
 
-                                <!-- Add Email Address Button -->
-                                <Button text="+ Add Email Address" styleClass="add-email-button" onAction="#handleAddEmail" />
                             </children>
                         </VBox>
                     </children>
@@ -171,7 +168,6 @@
             <Insets top="15" right="25" bottom="20" left="25" />
         </padding>
         <children>
-            <Button text="Cancel" styleClass="cancel-button" onAction="#handleClose" />
             <Button fx:id="saveButton" text="Save Changes" styleClass="save-button" onAction="#handleSave" visible="false" />
         </children>
     </HBox>

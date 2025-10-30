@@ -1,5 +1,6 @@
 package com.btl_oop.Controller.Admin.ComponentController;
 
+import com.btl_oop.Model.DAO.EmployeeDAO;
 import com.btl_oop.Model.Entity.Employee;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -10,7 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
-public class CustomerDetailDialogController {
+public class EmployeeDetailDialogController {
 
     @FXML private Circle avatarCircle;
     @FXML private Label customerNameLabel;
@@ -25,15 +26,16 @@ public class CustomerDetailDialogController {
     @FXML private Button editButton;
     @FXML private Button saveButton;
 
-    private Employee currentCustomer;
+    private Employee currentEmployee;
+    private EmployeeDAO employeeDAO = new EmployeeDAO();
     private boolean isEditMode = false;
 
-    public void loadCustomer(Employee customer) {
-        this.currentCustomer = customer;
-        displayCustomerData(customer);
+    public void loadEmployee(Employee customer) {
+        this.currentEmployee = customer;
+        displayEmployeeData(customer);
     }
 
-    private void displayCustomerData(Employee employee) {
+    private void displayEmployeeData(Employee employee) {
         // Set header info
         customerNameLabel.setText(employee.getFullName());
         customerEmailLabel.setText(employee.getEmail());
@@ -61,7 +63,6 @@ public class CustomerDetailDialogController {
     }
 
     private Color getColorForName(String name) {
-        // Generate color based on name hash
         int hash = name.hashCode();
         double hue = (hash % 360);
         return Color.hsb(hue, 0.6, 0.9);
@@ -70,57 +71,40 @@ public class CustomerDetailDialogController {
     @FXML
     private void handleEdit() {
         isEditMode = !isEditMode;
-
-        // Toggle editable state
         fullNameField.setEditable(isEditMode);
         nickNameField.setEditable(isEditMode);
         genderField.setEditable(isEditMode);
         languageField.setEditable(isEditMode);
 
-        // Toggle button visibility
         if (isEditMode) {
             editButton.setText("Cancel");
             saveButton.setVisible(true);
         } else {
             editButton.setText("Edit");
             saveButton.setVisible(false);
-            // Restore original data
-            displayCustomerData(currentCustomer);
+            displayEmployeeData(currentEmployee);
         }
     }
 
     @FXML
     private void handleSave() {
-        // Update customer data
-        currentCustomer.setFullName(fullNameField.getText());
-        currentCustomer.setUserName(nickNameField.getText());
+        currentEmployee.setFullName(fullNameField.getText());
+        currentEmployee.setUserName(nickNameField.getText());
 
-        // Update display
-        displayCustomerData(currentCustomer);
+        displayEmployeeData(currentEmployee);
 
-        // Exit edit mode
         isEditMode = false;
         editButton.setText("Edit");
         saveButton.setVisible(false);
 
-        // Show success message
         showAlert(Alert.AlertType.INFORMATION, "Success", "Customer data updated successfully!");
 
-        // TODO: Save to database
-        System.out.println("Customer data saved: " + currentCustomer.getFullName());
+        employeeDAO.updateEmployee(currentEmployee);
+        System.out.println("Customer data saved: " + currentEmployee.getFullName());
     }
 
-    @FXML
-    private void handleAddEmail() {
-        showAlert(Alert.AlertType.INFORMATION, "Add Email",
-                "Add email functionality will be implemented here.");
-    }
 
-    @FXML
-    private void handleClose() {
-        Stage stage = (Stage) customerNameLabel.getScene().getWindow();
-        stage.close();
-    }
+
 
     private void showAlert(Alert.AlertType type, String title, String content) {
         Alert alert = new Alert(type);
@@ -130,7 +114,4 @@ public class CustomerDetailDialogController {
         alert.showAndWait();
     }
 
-    public Employee getCurrentCustomer() {
-        return currentCustomer;
-    }
 }

@@ -10,6 +10,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -39,6 +40,24 @@ public class SalesReportsController {
     @FXML
     private Label newCustomer;
 
+    @FXML
+    private Circle totalOrderCircle;
+
+    @FXML
+    private Label totalOrderPercentage;
+
+    @FXML
+    private Circle customerGrowthCircle;
+
+    @FXML
+    private Label customerGrowthPercentage;
+
+    @FXML
+    private Circle totalRevenueCircle;
+
+    @FXML
+    private Label totalRevenuePercentage;
+
     public ReportDAO reportDAO;
 
     @FXML
@@ -46,6 +65,7 @@ public class SalesReportsController {
         reportDAO = new ReportDAO();
         setupOrderChart();
         setupClaimsChart();
+        setupPieCharts();
         loadSalesRepresentatives();
         changeLabel();
     }
@@ -96,5 +116,43 @@ public class SalesReportsController {
         productSold.setText(String.valueOf(reportDAO.getTotalOrders()));
         totalProfit.setText(String.valueOf(reportDAO.getTotalRevenue()) + "M");
         totalClaim.setText(String.valueOf(reportDAO.getTotalRevenueClaimTop1()) + "M");
+    }
+
+    private void setupPieCharts() {
+        double totalOrderPercentageValue = reportDAO.getTotalOrderPercentage();
+        double customerGrowthPercentageValue = reportDAO.getCustomerGrowthPercentage();
+        double totalRevenuePercentageValue = reportDAO.getTotalRevenuePercentage();
+
+        updateDonutChart(totalOrderCircle, totalOrderPercentage, totalOrderPercentageValue);
+
+        updateDonutChart(customerGrowthCircle, customerGrowthPercentage, customerGrowthPercentageValue);
+
+        updateDonutChart(totalRevenueCircle, totalRevenuePercentage, totalRevenuePercentageValue);
+    }
+
+    private void updateDonutChart(Circle circle, Label label, double percentage) {
+        if (circle == null || label == null) {
+            return;
+        }
+
+        label.setText(String.format("%.0f%%", percentage));
+
+        double circumference = 2 * Math.PI * 60;
+
+        double dashLength = (percentage / 100.0) * circumference;
+        double gapLength = circumference - dashLength;
+
+        circle.getStrokeDashArray().clear();
+        circle.getStrokeDashArray().addAll(dashLength, gapLength);
+
+        circle.setStrokeDashOffset(circumference / 4);
+    }
+
+    private String formatNumber(int number) {
+        if (number >= 1000) {
+            double value = number / 1000.0;
+            return String.format("%.1fk", value);
+        }
+        return String.valueOf(number);
     }
 }
