@@ -69,6 +69,7 @@ public class OrderManagementController {
     private void loadSampleOrders() {
           try {
               allOrders = orderDAO.getAllOrders();
+              allOrders = allOrders.reversed();
           }
           catch (Exception e )
           {

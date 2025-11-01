@@ -276,7 +276,7 @@ public class OrderSummaryController {
     @FXML
     private void confirmOrder() {
         if (items.isEmpty()) {
-            showAlert("Lỗi", "Vui lòng thêm ít nhất một món trước khi xác nhận!");
+            showAlert("Error", "Please add at least one item before confirming!");
             return;
         }
 
@@ -285,41 +285,41 @@ public class OrderSummaryController {
             try {
                 String tableText = tableNumberField.getText().trim();
                 if (tableText.isEmpty()) {
-                    showAlert("Lỗi nhập liệu", "Vui lòng nhập số bàn!");
+                    showAlert("Input error", "Please enter table number!");
                     return;
                 }
                 tableNumber = Integer.parseInt(tableText);
             } catch (NumberFormatException e) {
-                showAlert("Lỗi nhập liệu", "Số bàn phải là số nguyên!");
+                showAlert("Input error", "Table number must be an integer!");
                 return;
             }
             int employeeId = Employee.getEmployeeId();
             if (employeeId == 0) {
-                showAlert("Lỗi", "Không tìm thấy nhân viên hiện tại!");
+                showAlert("Error", "No current staff found!");
                 return;
             }
 
             Employee employee = employeeDAO.getEmployeeById(employeeId);
             if (employee == null) {
-                showAlert("Lỗi", "Nhân viên không tồn tại trong hệ thống!");
+                showAlert("Error", "Employee does not exist in the system!");
                 return;
             }
 
             int tableId = tableDAO.getTableIdByNumber(tableNumber);
             if (tableId == 0) {
-                showAlert("Bàn không hợp lệ", "Số bàn " + tableNumber + " không tồn tại!");
+                showAlert("Invalid table", "Table number " + tableNumber + " does not exist!");
                 return;
             }
 
             // Chỉ cho phép Order khi bàn đang OCCUPIED (đã có khách ngồi)
             RestaurantTable table = tableDAO.getTableById(tableId);
             if (table == null) {
-                showAlert("Lỗi", "Không tìm thấy thông tin bàn!");
+                showAlert("Error", "Table information not found!");
                 return;
             }
             String status = table.getStatus().name();
             if ("AVAILABLE".equals(status)) {
-                showAlert("Không thể tạo đơn", "Bàn đang ở trạng thái Available. Vui lòng seat guests trước.");
+                showAlert("Unable to create order", "Table is Available. Please seat guests first.");
                 return;
             }
 
@@ -336,7 +336,7 @@ public class OrderSummaryController {
 
             boolean orderSaved = orderDAO.insertOrder(order);
             if (!orderSaved || order.getOrderId() <= 0) {
-                showAlert("Lỗi", "Không thể lưu đơn hàng vào cơ sở dữ liệu!");
+                showAlert("Error", "Unable to save order to database!");
                 return;
             }
 
@@ -346,7 +346,7 @@ public class OrderSummaryController {
                 if (!itemSaved) {
                     Dish dish = dishDAO.getDishById(item.getDishId());
                     String dishName = dish != null ? dish.getName() : "ID " + item.getDishId();
-                    showAlert("Lỗi", "Không thể lưu món: " + dishName);
+                    showAlert("Error", "Unable to save item: " + dishName);
                     return;
                 }
             }
@@ -356,7 +356,7 @@ public class OrderSummaryController {
             // Gửi thông báo cho Manager
             notificationService.sendNewOrderNotification(tableId, order.getOrderId());
             
-            showAlert("Đã gửi", "Đơn hàng đã được lưu và gửi tới Manager để xác nhận.");
+            showAlert("Sent", "The order has been saved and sent to the Manager for confirmation.");
 
             clearAll();
             tableNumberField.clear();
@@ -364,7 +364,7 @@ public class OrderSummaryController {
         } catch (Exception e) {
             System.err.println("Error confirming order: " + e.getMessage());
             e.printStackTrace();
-            showAlert("Lỗi", "Có lỗi xảy ra khi lưu đơn hàng: " + e.getMessage());
+            showAlert("Error", "An error occurred while saving the order: " + e.getMessage());
         }
     }
 

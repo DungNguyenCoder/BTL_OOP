@@ -83,7 +83,7 @@ public class DashboardController {
                 "1 day ago",
                 "Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim.",
                 4.0,
-                "/com/btl_oop/img/img/food_asian_bowl.png"
+                "/com/btl_oop/img/img/food_macarons.png"
         ));
 
         allFeedbacks.add(new CustomerFeedback(
@@ -92,7 +92,7 @@ public class DashboardController {
                 "5 days ago",
                 "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed do eiusmod tempor incididunt.",
                 4.5,
-                "/com/btl_oop/img/img/food_asian_bowl.png"
+                "/com/btl_oop/img/img/food_noodles.png"
         ));
 
         allFeedbacks.add(new CustomerFeedback(
