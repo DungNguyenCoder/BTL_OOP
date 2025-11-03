@@ -125,7 +125,7 @@
             </Label>
         </HBox>
 
-        <Button fx:id="reviewOrderButton" maxWidth="Infinity" onAction="#confirmOrder" styleClass="review-order-button" text="Review Order (0 items)">
+        <Button fx:id="reviewOrderButton" maxWidth="Infinity" onAction="#confirmOrder" styleClass="review-order-button" text="Review Order">
             <font>
                 <Font name="System Bold" size="13" />
             </font>
