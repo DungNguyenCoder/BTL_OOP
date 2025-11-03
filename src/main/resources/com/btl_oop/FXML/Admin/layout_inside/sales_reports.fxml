@@ -41,7 +41,7 @@
                             <children>
                                 <HBox alignment="CENTER_LEFT" spacing="10">
                                     <children>
-                                        <Label text="Pie Chart" styleClass="card-title" />
+                                        <Label text="Performance Overview - Today" styleClass="card-title" />
                                         <Region HBox.hgrow="ALWAYS" />
                                     </children>
                                     <VBox.margin>
@@ -51,7 +51,6 @@
 
                                 <HBox spacing="20" alignment="CENTER">
                                     <children>
-                                        <!-- Total Order Chart (Red) -->
                                         <VBox alignment="CENTER" spacing="10" styleClass="pie-chart-container">
                                             <children>
                                                 <StackPane prefHeight="120" prefWidth="120">
@@ -67,23 +66,21 @@
                                             </children>
                                         </VBox>
 
-                                        <!-- Customer Growth Chart (Green) -->
                                         <VBox alignment="CENTER" spacing="10" styleClass="pie-chart-container">
                                             <children>
                                                 <StackPane prefHeight="120" prefWidth="120">
                                                     <children>
                                                         <Circle radius="60" styleClass="donut-bg" />
-                                                        <Circle fx:id="customerGrowthCircle" radius="60" styleClass="donut-segment-green"
+                                                        <Circle fx:id="orderGrowthCircle" radius="60" styleClass="donut-segment-green"
                                                                 strokeDashArray="83, 377" strokeDashOffset="0" />
                                                         <Circle radius="40" fill="WHITE" />
-                                                        <Label text="22%" styleClass="donut-percentage" />
+                                                        <Label fx:id="orderGrowthPercentage" text="22%" styleClass="donut-percentage" />
                                                     </children>
                                                 </StackPane>
-                                                <Label fx:id="customerGrowthPercentage" text="Customer Growth" styleClass="chart-label" />
+                                                <Label text="Order Growth" styleClass="chart-label" />
                                             </children>
                                         </VBox>
 
-                                        <!-- Total Revenue Chart (Blue) -->
                                         <VBox alignment="CENTER" spacing="10" styleClass="pie-chart-container">
                                             <children>
                                                 <StackPane prefHeight="120" prefWidth="120">
@@ -103,12 +100,12 @@
                             </children>
                         </VBox>
 
-                        <!-- Chart Order Card -->
+
                         <VBox styleClass="chart-card" HBox.hgrow="ALWAYS">
                             <children>
                                 <HBox alignment="CENTER_LEFT" spacing="10">
                                     <children>
-                                        <Label text="Chart Order" styleClass="card-title" />
+                                        <Label text="Chart Order - 7 Days" styleClass="card-title" />
                                         <Region HBox.hgrow="ALWAYS" />
                                     </children>
                                     <VBox.margin>
@@ -116,13 +113,12 @@
                                     </VBox.margin>
                                 </HBox>
 
-                                <Label text="Lorem ipsum dolor sit amet, consectetur adipiscing" styleClass="chart-description">
+                                <Label text="Order trends for the past 7 days (Mon - Sun)" styleClass="chart-description">
                                     <VBox.margin>
                                         <Insets bottom="10" />
                                     </VBox.margin>
                                 </Label>
 
-                                <!-- Area Chart with Tooltip -->
                                 <StackPane>
                                     <children>
                                         <AreaChart fx:id="orderChart" styleClass="area-chart" legendVisible="false"
@@ -135,7 +131,6 @@
                                             </yAxis>
                                         </AreaChart>
 
-                                        <!-- Tooltip on hover -->
                                         <VBox fx:id="chartTooltip" styleClass="chart-tooltip" visible="false"
                                               translateX="200" translateY="50">
                                             <children>
@@ -150,29 +145,27 @@
                     </children>
                 </HBox>
 
-                <!-- Top Sales Representative -->
                 <VBox styleClass="table-card">
                     <children>
-                        <Label text="Top Sales Representative" styleClass="section-title">
+                        <Label text="Top Sales Representative of this month" styleClass="section-title">
                             <VBox.margin>
                                 <Insets bottom="20" />
                             </VBox.margin>
                         </Label>
 
-                        <!-- Container để add các SalesItem động -->
                         <VBox fx:id="salesListContainer" spacing="15" />
                     </children>
                 </VBox>
 
-                <!-- Statistics Cards -->
+
                 <HBox spacing="15" styleClass="stats-row">
                     <children>
-                        <!-- Product Sold -->
+
                         <VBox styleClass="stat-card-modern" HBox.hgrow="ALWAYS">
                             <children>
                                 <HBox alignment="CENTER_LEFT" spacing="10">
                                     <children>
-                                        <Label text="Product sold" styleClass="stat-label-small" />
+                                        <Label text="Product Sold" styleClass="stat-label-small" />
                                         <Region HBox.hgrow="ALWAYS" />
                                         <ImageView fitHeight="20" fitWidth="20">
                                             <image>
@@ -181,16 +174,12 @@
                                         </ImageView>
                                     </children>
                                 </HBox>
-                                <Label fx:id= "productSold" text="25.1k" styleClass="stat-value-large" />
-                                <HBox alignment="CENTER_LEFT" spacing="10">
-                                    <children>
-                                        <Region HBox.hgrow="ALWAYS" />
-                                    </children>
-                                </HBox>
+                                <Label fx:id="productSold" text="49" styleClass="stat-value-large" />
+                                <Label text="This month" styleClass="stat-label-small" />
                             </children>
                         </VBox>
 
-                        <!-- Total Profit -->
+
                         <VBox styleClass="stat-card-modern" HBox.hgrow="ALWAYS">
                             <children>
                                 <HBox alignment="CENTER_LEFT" spacing="10">
@@ -204,21 +193,17 @@
                                         </ImageView>
                                     </children>
                                 </HBox>
-                                <Label fx:id= "totalProfit" text="2,435k" styleClass="stat-value-large" />
-                                <HBox alignment="CENTER_LEFT" spacing="10">
-                                    <children>
-                                        <Region HBox.hgrow="ALWAYS" />
-                                    </children>
-                                </HBox>
+                                <Label fx:id="totalProfit" text="1688.5$" styleClass="stat-value-large" />
+                                <Label text="This month" styleClass="stat-label-small" />
                             </children>
                         </VBox>
 
-                        <!-- Total No. of Claim -->
+
                         <VBox styleClass="stat-card-modern" HBox.hgrow="ALWAYS">
                             <children>
                                 <HBox alignment="CENTER_LEFT" spacing="10">
                                     <children>
-                                        <Label text="Total No. of Claim" styleClass="stat-label-small" />
+                                        <Label text="Highest Order" styleClass="stat-label-small" />
                                         <Region HBox.hgrow="ALWAYS" />
                                         <ImageView fitHeight="20" fitWidth="20">
                                             <image>
@@ -227,41 +212,14 @@
                                         </ImageView>
                                     </children>
                                 </HBox>
-                                <Label fx:id= "totalClaim" text="3.5M" styleClass="stat-value-large" />
-                                <HBox alignment="CENTER_LEFT" spacing="10">
-                                    <children>
-                                        <Region HBox.hgrow="ALWAYS" />
-                                    </children>
-                                </HBox>
+                                <Label fx:id="totalClaim" text="959.2$" styleClass="stat-value-large" />
+                                <Label text="This month" styleClass="stat-label-small" />
                             </children>
                         </VBox>
 
-                        <!-- New Customer -->
-                        <VBox styleClass="stat-card-modern" HBox.hgrow="ALWAYS">
-                            <children>
-                                <HBox alignment="CENTER_LEFT" spacing="10">
-                                    <children>
-                                        <Label text="New Customer" styleClass="stat-label-small" />
-                                        <Region HBox.hgrow="ALWAYS" />
-                                        <ImageView fitHeight="20" fitWidth="20">
-                                            <image>
-                                                <Image url="@../../../img/ic_item/ic_customer.png" />
-                                            </image>
-                                        </ImageView>
-                                    </children>
-                                </HBox>
-                                <Label fx:id ="newCustomers" text="43.5k" styleClass="stat-value-large" />
-                                <HBox alignment="CENTER_LEFT" spacing="10">
-                                    <children>
-                                        <Region HBox.hgrow="ALWAYS" />
-                                    </children>
-                                </HBox>
-                            </children>
-                        </VBox>
                     </children>
                 </HBox>
 
-                <!-- Claims Over the Years Chart -->
                 <VBox styleClass="chart-card">
                     <children>
                         <HBox alignment="CENTER_LEFT" spacing="15">
@@ -290,7 +248,6 @@
                             </VBox.margin>
                         </HBox>
 
-                        <!-- Area Chart with Tooltip -->
                         <StackPane>
                             <children>
                                 <AreaChart fx:id="claimsChart" styleClass="claims-chart"
@@ -302,8 +259,6 @@
                                         <NumberAxis side="LEFT" tickLabelFill="#999" />
                                     </yAxis>
                                 </AreaChart>
-
-
                             </children>
                         </StackPane>
                     </children>

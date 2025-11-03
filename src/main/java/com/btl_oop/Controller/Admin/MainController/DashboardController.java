@@ -58,8 +58,8 @@ public class DashboardController {
     private void setUpLabel() {
         totalOrders.setText(String.valueOf(reportDAO.getTotalOrders()));
         totalRevenue.setText(String.valueOf(reportDAO.getTotalRevenue()));
-        totalDelivered.setText(String.valueOf(reportDAO.getDeliveredOrders()));
-        totalCancelled.setText(String.valueOf(reportDAO.getCancelledOrders()));
+        totalDelivered.setText(String.valueOf(reportDAO.getCompletedOrdersToday()));
+        // totalCancelled.setText(String.valueOf(reportDAO.getCancelledOrders()));
         String formatDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ENGLISH));
         date.setText(formatDate);
         int employeeId = Employee.getEmployeeId();

@@ -57,28 +57,27 @@ public class OrderManagementController {
     private void setUpLabel() {
         totalOrders.setText(String.valueOf(reportDAO.getTotalOrders()));
         totalRevenue.setText(String.valueOf(reportDAO.getTotalRevenue()));
-        totalDelivered.setText(String.valueOf(reportDAO.getDeliveredOrders()));
-        totalCancelled.setText(String.valueOf(reportDAO.getCancelledOrders()));
+        totalDelivered.setText(String.valueOf(reportDAO.getCompletedOrdersToday()));
         String formatDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ENGLISH));
         date.setText(formatDate);
         int employeeId = Employee.getEmployeeId();
         Employee employee = employeeDAO.getEmployeeById(employeeId);
-        welcomeText.setText(String.format("Hi, %s. Welcome back to Sedap Admin!",employee.getFullName() ));
+        welcomeText.setText(String.format("Hi, %s. Welcome back to Admin!",employee.getFullName() ));
     }
 
     private void loadSampleOrders() {
-          try {
-              allOrders = orderDAO.getAllOrders();
-              allOrders = allOrders.reversed();
-          }
-          catch (Exception e )
-          {
-              System.out.println("Fail upload()");
-          }
-          for(Order order : allOrders)
-          {
-              addOrder(String.valueOf(order.getOrderId()), order.getStatus(),"CustomerName" ,order.getTotal() ,img_account );
-          }
+        try {
+            allOrders = orderDAO.getAllOrders();
+            allOrders = allOrders.reversed();
+        }
+        catch (Exception e )
+        {
+            System.out.println("Fail upload()");
+        }
+        for(Order order : allOrders)
+        {
+            addOrder(String.valueOf(order.getOrderId()), order.getStatus(),"CustomerName" ,order.getTotal() ,img_account );
+        }
 
     }
 

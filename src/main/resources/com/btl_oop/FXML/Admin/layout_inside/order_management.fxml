@@ -5,14 +5,11 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/24.0.1"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.btl_oop.Controller.Admin.MainController.OrderManagementController">
+<VBox xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.btl_oop.Controller.Admin.MainController.OrderManagementController">
 
     <!-- Header -->
     <HBox alignment="CENTER_LEFT" styleClass="header">
@@ -20,7 +17,7 @@
             <VBox>
                 <children>
                     <Label styleClass="title" text="Dashboard" />
-                    <Label fx:id= "welcomeText" styleClass="subtitle" text="Hi, Samantha. Welcome back to Sedap Admin!" />
+                    <Label fx:id="welcomeText" styleClass="subtitle" text="Hi, Samantha. Welcome back to Sedap Admin!" />
                 </children>
             </VBox>
             <Region HBox.hgrow="ALWAYS" />
@@ -34,7 +31,7 @@
                     <VBox alignment="CENTER_LEFT" spacing="2">
                         <children>
                             <Label style="-fx-font-size: 11px; -fx-text-fill: #888;" text="Today" />
-                            <Label fx:id= "date" style="-fx-font-size: 12px; -fx-font-weight: bold;" text="17 April 2020 - 21 May 2020" />
+                            <Label fx:id="date" style="-fx-font-size: 12px; -fx-font-weight: bold;" text="17 April 2020 - 21 May 2020" />
                         </children>
                     </VBox>
                 </children>
@@ -47,7 +44,7 @@
         <children>
             <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
                 <children>
-                    <Label fx:id= "totalOrders" styleClass="value" text="75" />
+                    <Label fx:id="totalOrders" styleClass="value" text="75" />
                     <Label styleClass="label" text="Total Orders" />
                 </children>
             </VBox>
@@ -59,13 +56,7 @@
             </VBox>
             <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
                 <children>
-                    <Label fx:id ="totalCancelled" styleClass="value" text="65" />
-                    <Label styleClass="label" text="Total Cancelled" />
-                </children>
-            </VBox>
-            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
-                <children>
-                    <Label fx:id= "totalRevenue" styleClass="value" text="128" />
+                    <Label fx:id="totalRevenue" styleClass="value" text="128" />
                     <Label styleClass="label" text="Total Revenue" />
                 </children>
             </VBox>
