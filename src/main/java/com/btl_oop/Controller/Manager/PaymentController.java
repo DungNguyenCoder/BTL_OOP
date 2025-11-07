@@ -1,5 +1,6 @@
 package com.btl_oop.Controller.Manager;
 
+import com.btl_oop.Model.Entity.OrderTotals;
 import com.btl_oop.Model.Service.TableManager;
 import com.btl_oop.Model.DAO.OrderDAO;
 import com.btl_oop.Model.DAO.OrderItemDAO;
@@ -90,6 +91,7 @@ public class PaymentController {
     private int orderId = 0; // Current order id
     private final OrderDAO orderDAO = new OrderDAO();
     private final OrderItemDAO orderItemDAO = new OrderItemDAO();
+
 
     @FXML
     private void handlePaymentMethod(javafx.event.ActionEvent event) {
@@ -364,12 +366,12 @@ public class PaymentController {
         if (orderId > 0) {
             try {
                 Order order = orderDAO.getOrderById(orderId);
+                OrderTotals orderTotals = orderDAO.getOrderTotalsById(orderId);
                 if (order != null) {
                     billIdLabel.setText("ORD" + order.getOrderId());
-                    // If subtotal/tax/total not computed yet, compute from items
-                    double subtotal = order.getSubtotal();
-                    double tax = order.getTax();
-                    double total = order.getTotal();
+                    double subtotal = orderTotals.getSubtotal();
+                    double tax = orderTotals.getTax();
+                    double total = orderTotals.getTotal();
                     if (total <= 0.0001) {
                         // compute using items
                         String calcSqlNotice = "Calculating totals from items";

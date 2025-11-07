@@ -8,20 +8,14 @@ public class Order {
     private int employeeId;
     private LocalDateTime checkoutTime;
     private String status; // Serving, Paid, Cancelled
-    private double subtotal;
-    private double tax;
-    private double total;
 
     public Order(int orderId, int tableId, int employeeId, LocalDateTime checkoutTime,
-                 String status, double subtotal, double tax, double total) {
+                 String status) {
         this.orderId = orderId;
         this.tableId = tableId;
         this.employeeId = employeeId;
         this.checkoutTime = checkoutTime;
         this.status = status;
-        this.subtotal = subtotal;
-        this.tax = tax;
-        this.total = total;
     }
 
     public Order() {
@@ -37,15 +31,9 @@ public class Order {
     public void setCheckoutTime(LocalDateTime checkoutTime) { this.checkoutTime = checkoutTime; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
-    public double getSubtotal() { return subtotal; }
-    public void setSubtotal(double subtotal) { this.subtotal = subtotal; }
-    public double getTax() { return tax; }
-    public void setTax(double tax) { this.tax = tax; }
-    public double getTotal() { return total; }
-    public void setTotal(double total) { this.total = total; }
 
     @Override
     public String toString() {
-        return "Order{orderId=" + orderId + ", tableId=" + tableId + ", status='" + status + "', total=" + total + "}";
+        return "Order{orderId=" + orderId + ", tableId=" + tableId + ", status='" + status + "' }";
     }
 }

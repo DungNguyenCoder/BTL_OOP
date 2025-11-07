@@ -1,17 +1,13 @@
 package com.btl_oop.Controller.Manager;
 
+import com.btl_oop.Model.Entity.*;
 import com.btl_oop.Model.Service.TableManager;
 import com.btl_oop.Model.Service.NotificationService;
-import com.btl_oop.Model.Entity.RestaurantTable;
-import com.btl_oop.Model.Entity.Order;
-import com.btl_oop.Model.Entity.OrderItem;
-import com.btl_oop.Model.Entity.Dish;
 import com.btl_oop.Model.DAO.OrderDAO;
 import com.btl_oop.Model.DAO.OrderItemDAO;
 import com.btl_oop.Model.DAO.DishDAO;
 import com.btl_oop.Model.DAO.RestaurantTableDAO;
 import com.btl_oop.Model.DAO.EmployeeDAO;
-import com.btl_oop.Model.Entity.Employee;
 import com.btl_oop.Model.Enum.TableStatus;
 import com.btl_oop.Utils.AppConfig;
 import javafx.fxml.FXML;
@@ -213,10 +209,7 @@ public class OrderDetailsController {
                     tableId,
                     1,
                     null,
-                    "Preparing",
-                    0.0,
-                    0.0,
-                    0.0
+                    "Preparing"
             );
 
             boolean success = orderDAO.insertOrder(newOrder);
@@ -422,6 +415,7 @@ public class OrderDetailsController {
     private void loadOrderDataById(int orderId) {
         try {
             Order order = orderDAO.getOrderById(orderId);
+            OrderTotals orderTotals = orderDAO.getOrderTotalsById(orderId);
             if (order != null) {
                 String employeeName = "Unknown";
                 String employeePhone = "";
@@ -446,9 +440,9 @@ public class OrderDetailsController {
                         employeeName,
                         employeePhone,
                         employeeEmail,
-                        order.getSubtotal(),
-                        order.getTax(),
-                        order.getTotal()
+                        orderTotals.getSubtotal(),
+                        orderTotals.getTax(),
+                        orderTotals.getTotal()
                 );
 
                 // Load order items

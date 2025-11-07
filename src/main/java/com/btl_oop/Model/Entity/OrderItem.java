@@ -5,12 +5,14 @@ public class OrderItem {
     private int orderId;
     private int dishId;
     private int quantity;
+    private double unitPrice;
 
-    public OrderItem(int orderItemId, int orderId, int dishId, int quantity) {
+    public OrderItem(int orderItemId, int orderId, int dishId, int quantity, double unitPrice) {
         this.orderItemId = orderItemId;
         this.orderId = orderId;
         this.dishId = dishId;
         this.quantity = quantity;
+        this.unitPrice = unitPrice;
     }
 
 
@@ -22,6 +24,8 @@ public class OrderItem {
     public void setDishId(int dishId) { this.dishId = dishId; }
     public int getQuantity() { return quantity; }
     public void setQuantity(int quantity) { this.quantity = quantity; }
+    public double getUnitPrice() {return unitPrice; }
+    public void setUnitPrice(double unitPrice) {this.unitPrice = unitPrice; }
 
     @Override
     public String toString() {

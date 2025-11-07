@@ -19,6 +19,7 @@ public class OrderItemDAO {
                 "OrderID INT NOT NULL, " +
                 "DishID INT NOT NULL, " +
                 "Quantity INT NOT NULL CHECK (Quantity > 0), " +
+                "UnitPrice DECIMAL(10,2) NOT NULL, " +
                 "FOREIGN KEY (OrderID) REFERENCES `Order`(OrderID) " +
                 "ON DELETE CASCADE ON UPDATE CASCADE, " +
                 "FOREIGN KEY (DishID) REFERENCES Dish(DishID) " +
@@ -34,12 +35,13 @@ public class OrderItemDAO {
     }
 
     public boolean insertOrderItem(OrderItem orderItem) {
-        String sql = "INSERT INTO OrderItem (OrderID, DishID, Quantity) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO OrderItem (OrderID, DishID, Quantity, UnitPrice) VALUES (?, ?, ?, ?)";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, orderItem.getOrderId());
             ps.setInt(2, orderItem.getDishId());
             ps.setInt(3, orderItem.getQuantity());
+            ps.setDouble(4, orderItem.getUnitPrice());
 
             int affected = ps.executeUpdate();
             if (affected == 0) return false;
@@ -67,7 +69,8 @@ public class OrderItemDAO {
                             rs.getInt("OrderItemID"),
                             rs.getInt("OrderID"),
                             rs.getInt("DishID"),
-                            rs.getInt("Quantity")
+                            rs.getInt("Quantity"),
+                            rs.getDouble("UnitPrice")
                     ));
                 }
             }

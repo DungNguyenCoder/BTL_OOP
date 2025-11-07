@@ -23,6 +23,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -80,7 +81,7 @@ public class OrderSummaryController {
             updateItemUI(existingItem);
         } else {
             System.out.println("New item, creating UI");
-            OrderItem newItem = new OrderItem(0, 0, dish.getDishId(), quantity);
+            OrderItem newItem = new OrderItem(0, 0, dish.getDishId(), quantity, dish.getPrice());
             items.add(newItem);
             createItemUI(newItem);
         }
@@ -328,10 +329,7 @@ public class OrderSummaryController {
                     tableId,
                     employeeId,
                     null,
-                    "Serving",
-                    subtotal,
-                    tax,
-                    total
+                    "Serving"
             );
 
             boolean orderSaved = orderDAO.insertOrder(order);
@@ -352,10 +350,10 @@ public class OrderSummaryController {
             }
 
             currentOrderId = order.getOrderId();
-            
+
             // Gửi thông báo cho Manager
             notificationService.sendNewOrderNotification(tableId, order.getOrderId());
-            
+
             showAlert("Sent", "The order has been saved and sent to the Manager for confirmation.");
 
             clearAll();
@@ -367,6 +365,7 @@ public class OrderSummaryController {
             showAlert("Error", "An error occurred while saving the order: " + e.getMessage());
         }
     }
+
 
     public void loadFromOrderItem(String orderId) {
         Platform.runLater(() -> {

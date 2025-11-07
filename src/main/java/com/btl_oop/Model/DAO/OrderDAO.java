@@ -2,6 +2,7 @@ package com.btl_oop.Model.DAO;
 
 import com.btl_oop.Model.Entity.Order;
 import com.btl_oop.Model.Entity.OrderItem;
+import com.btl_oop.Model.Entity.OrderTotals;
 import com.btl_oop.Utils.DBConnection;
 
 import java.sql.*;
@@ -15,6 +16,7 @@ public class OrderDAO {
     public OrderDAO() {
         this.tableDAO = new RestaurantTableDAO();
         ensureTable();
+        ensureView();
     }
 
     private void ensureTable() {
@@ -24,9 +26,6 @@ public class OrderDAO {
                 "EmployeeID INT, " +
                 "CheckoutTime DATETIME, " +
                 "Status ENUM('Preparing','Ready','Serving','Paid','Cancelled') DEFAULT 'Preparing', " +
-                "Subtotal DECIMAL(10,2) DEFAULT 0, " +
-                "Tax DECIMAL(10,2) DEFAULT 0, " +
-                "Total DECIMAL(10,2) DEFAULT 0, " +
                 "FOREIGN KEY (TableID) REFERENCES RestaurantTable(TableID) " +
                 "ON DELETE CASCADE ON UPDATE CASCADE, " +
                 "FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID) " +
@@ -46,6 +45,26 @@ public class OrderDAO {
             System.out.println("Table 'Order' ensured/updated successfully!");
         } catch (SQLException e) {
             throw new RuntimeException("Failed to ensure Order table", e);
+        }
+    }
+
+    private void ensureView() {
+        String createViewSql = "CREATE OR REPLACE VIEW v_order_totals AS " +
+                "SELECT " +
+                "    o.OrderID, " +
+                "    SUM(oi.Quantity * oi.UnitPrice) AS Subtotal, " +
+                "    SUM(oi.Quantity * oi.UnitPrice) * 0.10 AS Tax, " +
+                "    SUM(oi.Quantity * oi.UnitPrice) * 1.10 AS Total " +
+                "FROM `Order` o " +
+                "LEFT JOIN OrderItem oi ON o.OrderID = oi.OrderID " +
+                "GROUP BY o.OrderID";
+
+        try (Connection conn = DBConnection.getConnection();
+             Statement stmt = conn.createStatement()) {
+            stmt.execute(createViewSql);
+            System.out.println("View 'v_order_totals' ensured successfully!");
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to ensure v_order_totals view", e);
         }
     }
 
@@ -78,6 +97,28 @@ public class OrderDAO {
             }
         } catch (SQLException e) {
             throw new RuntimeException("Failed to fetch Order with ID: " + orderId, e);
+        }
+    }
+
+    public OrderTotals getOrderTotalsById(int orderId) {
+        String sql = "SELECT * FROM v_order_totals WHERE OrderID = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, orderId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return new OrderTotals(
+                            rs.getInt("OrderID"),
+                            rs.getDouble("Subtotal"),
+                            rs.getDouble("Tax"),
+                            rs.getDouble("Total")
+                    );
+                }
+                System.err.println("Warning: No totals found for Order #" + orderId);
+                return new OrderTotals(orderId, 0.0, 0.0, 0.0);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to fetch OrderTotals for ID: " + orderId, e);
         }
     }
 
@@ -132,15 +173,12 @@ public class OrderDAO {
     }
 
     public boolean insertOrder(Order order) {
-        String sql = "INSERT INTO `Order` (TableID, EmployeeID, Status, Subtotal, Tax, Total) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO `Order` (TableID, EmployeeID, Status) VALUES (?, ?, ?)";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, order.getTableId());
             ps.setInt(2, order.getEmployeeId());
             ps.setString(3, order.getStatus());
-            ps.setDouble(4, order.getSubtotal());
-            ps.setDouble(5, order.getTax());
-            ps.setDouble(6, order.getTotal());
 
             int affected = ps.executeUpdate();
             if (affected == 0) return false;
@@ -156,17 +194,14 @@ public class OrderDAO {
     }
 
     public boolean updateOrder(Order order) {
-        String sql = "UPDATE `Order` SET TableID = ?, EmployeeID = ?, CheckoutTime = ?, Status = ?, Subtotal = ?, Tax = ?, Total = ? WHERE OrderID = ?";
+        String sql = "UPDATE `Order` SET TableID = ?, EmployeeID = ?, CheckoutTime = ?, Status = ? WHERE OrderID = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, order.getTableId());
             ps.setInt(2, order.getEmployeeId());
             ps.setTimestamp(3, order.getCheckoutTime() != null ? Timestamp.valueOf(order.getCheckoutTime()) : null);
             ps.setString(4, order.getStatus());
-            ps.setDouble(5, order.getSubtotal());
-            ps.setDouble(6, order.getTax());
-            ps.setDouble(7, order.getTotal());
-            ps.setInt(8, order.getOrderId());
+            ps.setInt(5, order.getOrderId());
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new RuntimeException("Failed to update Order: " + order.getOrderId(), e);
@@ -190,42 +225,19 @@ public class OrderDAO {
             conn = DBConnection.getConnection();
             conn.setAutoCommit(false);
 
-            // Validate order
             Order order = getOrderById(orderId);
             if (order == null) {
                 throw new IllegalStateException("Order not found");
             }
-            // Cho phép thanh toán khi Kitchen đã báo Ready
             if (!"Ready".equals(order.getStatus())) {
                 throw new IllegalStateException("Order is not Ready to be paid");
             }
 
-            // Calculate Subtotal
-            String calcSql = "SELECT SUM(oi.Quantity * d.Price) AS Subtotal " +
-                    "FROM OrderItem oi JOIN Dish d ON oi.DishID = d.DishID " +
-                    "WHERE oi.OrderID = ?";
-            double subtotal = 0.0;
-            try (PreparedStatement ps = conn.prepareStatement(calcSql)) {
-                ps.setInt(1, orderId);
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        subtotal = rs.getDouble("Subtotal");
-                    }
-                }
-            }
-
-            double tax = subtotal * taxRate;
-            double total = subtotal + tax;
-
-            // Update Order
-            String updateOrderSql = "UPDATE `Order` SET Status = ?, CheckoutTime = ?, Subtotal = ?, Tax = ?, Total = ? WHERE OrderID = ?";
+            String updateOrderSql = "UPDATE `Order` SET Status = ?, CheckoutTime = ? WHERE OrderID = ?";
             try (PreparedStatement ps = conn.prepareStatement(updateOrderSql)) {
                 ps.setString(1, "Paid");
                 ps.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
-                ps.setDouble(3, subtotal);
-                ps.setDouble(4, tax);
-                ps.setDouble(5, total);
-                ps.setInt(6, orderId);
+                ps.setInt(3, orderId);
                 if (ps.executeUpdate() == 0) {
                     conn.rollback();
                     return false;
@@ -261,10 +273,7 @@ public class OrderDAO {
                 rs.getInt("TableID"),
                 rs.getInt("EmployeeID"),
                 checkoutTime != null ? checkoutTime.toLocalDateTime() : null,
-                rs.getString("Status"),
-                rs.getDouble("Subtotal"),
-                rs.getDouble("Tax"),
-                rs.getDouble("Total")
+                rs.getString("Status")
         );
     }
 

@@ -6,6 +6,7 @@ import com.btl_oop.Model.DAO.OrderDAO;
 import com.btl_oop.Model.DAO.ReportDAO;
 import com.btl_oop.Model.Entity.Employee;
 import com.btl_oop.Model.Entity.Order;
+import com.btl_oop.Model.Entity.OrderTotals;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -41,6 +42,7 @@ public class OrderManagementController {
     private Label totalRevenue;
 
     private OrderDAO orderDAO ;
+    private OrderTotals orderTotals;
     private EmployeeDAO employeeDAO = new EmployeeDAO();
     private ReportDAO reportDAO = new ReportDAO();
     private List<Order> allOrders ;
@@ -74,9 +76,22 @@ public class OrderManagementController {
         {
             System.out.println("Fail upload()");
         }
-        for(Order order : allOrders)
-        {
-            addOrder(String.valueOf(order.getOrderId()), order.getStatus(),"CustomerName" ,order.getTotal() ,img_account );
+        for (Order order : allOrders) {
+            try {
+                OrderTotals totals = orderDAO.getOrderTotalsById(order.getOrderId());
+
+                double total = (totals != null) ? totals.getTotal() : 0.0;
+
+                addOrder(
+                        String.valueOf(order.getOrderId()),
+                        order.getStatus(),
+                        "CustomerName",
+                        total,
+                        img_account
+                );
+            } catch (Exception e) {
+                System.err.println("Error loading order #" + order.getOrderId() + ": " + e.getMessage());
+            }
         }
 
     }
