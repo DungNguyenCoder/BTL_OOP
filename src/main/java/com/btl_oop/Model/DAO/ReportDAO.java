@@ -264,15 +264,16 @@ public class ReportDAO {
     {
         String sql = """
             SELECT 
-                (TodayRevenue * 100.0 / (1000)) AS RevenuePercentage 
+                (TodayRevenue * 100.0 / 1000) AS RevenuePercentage 
             FROM (
                 SELECT 
-                    (SELECT COALESCE(SUM(Total), 0) 
-                     FROM `Order` 
-                     WHERE DATE(CheckoutTime) = CURDATE() 
-                     AND Status = 'Paid' 
-                     AND CheckoutTime IS NOT NULL) AS TodayRevenue
-           ) AS RevenueData
+                    COALESCE(SUM(t.Total), 0) AS TodayRevenue
+                FROM v_order_totals t
+                JOIN `Order` o ON t.OrderID = o.OrderID
+                WHERE DATE(o.CheckoutTime) = CURDATE() 
+                  AND o.Status = 'Paid' 
+                  AND o.CheckoutTime IS NOT NULL
+            ) AS RevenueData
             """;
 
         try (Connection conn = DBConnection.getConnection();
