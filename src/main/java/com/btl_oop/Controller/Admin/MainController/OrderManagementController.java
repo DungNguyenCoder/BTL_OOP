@@ -1,9 +1,11 @@
 package com.btl_oop.Controller.Admin.MainController;
 
 import com.btl_oop.Controller.Admin.ComponentController.OrderItemController;
+import com.btl_oop.Model.DAO.AdminDAO;
 import com.btl_oop.Model.DAO.EmployeeDAO;
 import com.btl_oop.Model.DAO.OrderDAO;
 import com.btl_oop.Model.DAO.ReportDAO;
+import com.btl_oop.Model.Entity.Admin;
 import com.btl_oop.Model.Entity.Employee;
 import com.btl_oop.Model.Entity.Order;
 import com.btl_oop.Model.Entity.OrderTotals;
@@ -43,7 +45,7 @@ public class OrderManagementController {
 
     private OrderDAO orderDAO ;
     private OrderTotals orderTotals;
-    private EmployeeDAO employeeDAO = new EmployeeDAO();
+    private AdminDAO adminDAO = new AdminDAO();
     private ReportDAO reportDAO = new ReportDAO();
     private List<Order> allOrders ;
     private final String img_account = "/com/btl_oop/img/ic_item/account.png";
@@ -62,9 +64,9 @@ public class OrderManagementController {
         totalDelivered.setText(String.valueOf(reportDAO.getCompletedOrdersToday()));
         String formatDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ENGLISH));
         date.setText(formatDate);
-        int employeeId = Employee.getEmployeeId();
-        Employee employee = employeeDAO.getEmployeeById(employeeId);
-        welcomeText.setText(String.format("Hi, %s. Welcome back to Admin!",employee.getFullName() ));
+        int adminId = Admin.getAdminId();
+        Admin admin = adminDAO.getAdminById(adminId);
+        welcomeText.setText(String.format("Hi, %s. Welcome back to Admin!",admin.getFullName() ));
     }
 
     private void loadSampleOrders() {

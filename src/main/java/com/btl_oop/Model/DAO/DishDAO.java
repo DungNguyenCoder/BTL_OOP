@@ -8,8 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DishDAO {
+    private final AdminDAO adminDAO;
+
     public DishDAO() {
         ensureTable();
+        this.adminDAO = new AdminDAO();
     }
 
     private void ensureTable() {
@@ -31,6 +34,28 @@ public class DishDAO {
             throw new RuntimeException(" Failed to ensure Dish table", e);
         }
     }
+
+    private boolean isValidAdmin(int adminId) {
+        if (adminId <= 0) {
+            return false;
+        }
+
+        String sql = "SELECT AdminID FROM Admin WHERE AdminID = ? AND Status = 'Active'";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, adminId);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            System.err.println("Error validating admin: " + e.getMessage());
+            return false;
+        }
+    }
+
+    // =====================================================
+    // READ OPERATIONS (Không cần quyền Admin)
+    // =====================================================
 
     public Dish getDishById(int dishId) {
         String sql = "SELECT * FROM Dish WHERE DishID = ?";
@@ -113,7 +138,14 @@ public class DishDAO {
         return dishes;
     }
 
-    public boolean insertDish(Dish dish) throws SQLException {
+    // =====================================================
+    // WRITE OPERATIONS (Chỉ Admin)
+    // =====================================================
+
+    public boolean insertDish(Dish dish, int adminId) throws SQLException {
+        if (!isValidAdmin(adminId)) {
+            throw new SecurityException("Access denied. Only administrators can add dishes. Admin ID: " + adminId);
+        }
         String sql = "INSERT INTO Dish(Name,Price,Description,PrepareTime,Category,ImageURL,isPopular) VALUES (?,?,?,?,?,?,?)";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -139,7 +171,10 @@ public class DishDAO {
         }
     }
 
-    public boolean updateDish(Dish dish) {
+    public boolean updateDish(Dish dish, int adminId) {
+        if (!isValidAdmin(adminId)) {
+            throw new SecurityException("Access denied. Only administrators can update dishes. Admin ID: " + adminId);
+        }
         String sql = "UPDATE Dish SET Name = ?, Price = ?, Description = ?, PrepareTime = ?, Category = ?, ImageURL = ?, isPopular = ? WHERE DishID = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {

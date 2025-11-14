@@ -23,7 +23,7 @@ public class EmployeeDAO {
                 "Email VARCHAR(100), " +
                 "PhoneNumber VARCHAR(15), " +
                 "DateOfBirth DATE, " +
-                "Role ENUM('Admin','Manager','Waiter', 'Kitchen') DEFAULT 'Waiter', " +
+                "Role ENUM('Manager','Waiter', 'Kitchen') DEFAULT 'Waiter', " +
                 "Status ENUM('Active','Terminated') DEFAULT 'Active')";
 
         try (Connection conn = DBConnection.getConnection();

@@ -5,6 +5,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.mindrot.jbcrypt.BCrypt;
+
 import java.io.IOException;
 
 public class RestaurantManagement extends Application {
@@ -20,6 +22,7 @@ public class RestaurantManagement extends Application {
         stage.setResizable(true);
 
         stage.show();
+        System.out.println(BCrypt.hashpw("admin", BCrypt.gensalt()));
     }
 
     public static void main(String[] args) {

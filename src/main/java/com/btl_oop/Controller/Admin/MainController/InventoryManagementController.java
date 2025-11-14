@@ -4,6 +4,7 @@ import com.btl_oop.Controller.Admin.ComponentController.ProductCardController;
 import com.btl_oop.Model.DAO.DishDAO;
 import com.btl_oop.Model.Entity.Dish;
 import com.btl_oop.Model.Enum.Category;
+import com.btl_oop.Utils.SessionManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -140,6 +141,7 @@ public class InventoryManagementController {
     @FXML
     private void handleAddNew() {
         try {
+            SessionManager session = SessionManager.getInstance();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/btl_oop/FXML/Admin/layout_inside/add_dish_dialog.fxml"));
             Parent root = loader.load();
 
@@ -154,7 +156,8 @@ public class InventoryManagementController {
             Dish created = controller.getCreatedDish();
             if (created != null) {
                 try {
-                    dishDAO.insertDish(created);
+                    int adminId = session.getCurrentAdmin().getAdminId();
+                    dishDAO.insertDish(created, adminId);
                     loadDishesFromDatabase();
                     refreshDishDisplay();
                 } catch (Exception e) {

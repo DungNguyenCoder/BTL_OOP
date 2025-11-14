@@ -1,9 +1,11 @@
 package com.btl_oop.Controller.Admin.MainController;
 
 import com.btl_oop.Controller.Admin.ComponentController.FeedbackCardController;
+import com.btl_oop.Model.DAO.AdminDAO;
 import com.btl_oop.Model.DAO.EmployeeDAO;
 import com.btl_oop.Model.DAO.ReportDAO;
 import com.btl_oop.Model.Data.CustomerFeedback;
+import com.btl_oop.Model.Entity.Admin;
 import com.btl_oop.Model.Entity.Employee;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,7 +45,7 @@ public class DashboardController {
 
     private List<CustomerFeedback> allFeedbacks = new ArrayList<>();
     private ReportDAO reportDAO = new ReportDAO();
-    private EmployeeDAO employeeDAO = new EmployeeDAO();
+    private AdminDAO adminDAO = new AdminDAO();
     private int currentStartIndex = 0;
     private final int REVIEWS_PER_PAGE = 3;
 
@@ -62,9 +64,9 @@ public class DashboardController {
         // totalCancelled.setText(String.valueOf(reportDAO.getCancelledOrders()));
         String formatDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ENGLISH));
         date.setText(formatDate);
-        int employeeId = Employee.getEmployeeId();
-        Employee employee = employeeDAO.getEmployeeById(employeeId);
-        welcomeText.setText(String.format("Hi, %s. Welcome back to Sedap Admin!",employee.getFullName() ));
+        int adminId = Admin.getAdminId();
+        Admin admin = adminDAO.getAdminById(adminId);
+        welcomeText.setText(String.format("Hi, %s. Welcome back to Sedap Admin!",admin.getFullName() ));
     }
     private void loadFeedbackData() {
         // Sample feedback data

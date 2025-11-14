@@ -3,6 +3,7 @@ package com.btl_oop.Controller.Admin.ComponentController;
 import com.btl_oop.Controller.Admin.MainController.EditDishDialogController;
 import com.btl_oop.Model.DAO.DishDAO;
 import com.btl_oop.Model.Entity.Dish;
+import com.btl_oop.Utils.SessionManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -102,7 +103,9 @@ public class ProductCardController {
 
             Dish updatedDish = controller.getUpdatedDish();
             if (updatedDish != null) {
-                boolean success = dishDAO.updateDish(updatedDish);
+                SessionManager session = SessionManager.getInstance();
+                int adminId = session.getCurrentAdmin().getAdminId();
+                boolean success = dishDAO.updateDish(updatedDish, adminId);
                 if (success) {
                     System.out.println("✓ Dish updated successfully: " + updatedDish.getName());
 
